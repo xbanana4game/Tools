@@ -1,0 +1,3 @@
+﻿S_Replace('Version:(.*)', 'Version:$1 Practice', 52);	// 置換
+S_FileSaveAs(S_ExpandParameter('$g')+'_Practice.osu', 4 ,1 );
+S_ExitAllEditors();

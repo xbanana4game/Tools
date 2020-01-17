@@ -1,0 +1,17 @@
+﻿//キーボードマクロのファイル
+S_ReplaceAll('[Cache]', '', 24);	// すべて置換
+S_ReDraw(0);	// 再描画
+
+S_ReplaceAll('^', 'MOVE ', 28);	// すべて置換
+S_ReDraw(0);	// 再描画
+S_ReplaceAll('=', '.uxx ', 28);	// すべて置換
+S_ReDraw(0);	// 再描画
+
+S_ReplaceAll('MOVE \\r\\n', '', 28);	// すべて置換
+S_ReDraw(0);	// 再描画
+
+
+S_FileSaveAs('Cache.cmd', 4 ,1 );
+S_ExitAllEditors();
+
+
