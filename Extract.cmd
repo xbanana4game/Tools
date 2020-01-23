@@ -13,11 +13,23 @@ IF "%1"=="" (
 )
 IF "%YYYYMM%"=="" SET YYYYMM=%yyyy%%mm%
 
+REM ----------------------------------------------------------------------
+REM リスト作成
+REM ----------------------------------------------------------------------
+SET LIST_TXT=%ARCHIVE_DIR%\%yyyy%%mm%_%USERDOMAIN%.txt
+DEL %LIST_TXT%
 IF "%1"=="" (
-	FOR %%i IN ("%ARCHIVE_DIR%\%YYYYMM%\*.7z") DO 7z l -p%ARCHIVE_PASSWORD% %%i
+	FOR %%i IN ("%ARCHIVE_DIR%\%YYYYMM%\*.7z") DO 7z l -p%ARCHIVE_PASSWORD% %%i >>%LIST_TXT%
 ) ELSE (
-	FOR %%i in (%*) DO 7z l -p%ARCHIVE_PASSWORD% %%i
+	FOR %%i in (%*) DO 7z l -p%ARCHIVE_PASSWORD% %%i >>%LIST_TXT%
 )
+NOTEPAD %LIST_TXT%
+TYPE %LIST_TXT%
+DEL %LIST_TXT%
+
+REM ----------------------------------------------------------------------
+REM 展開
+REM ----------------------------------------------------------------------
 SET /P EXTRACT_EXT="展開する対象を指定してください(Default:*) -> "
 IF "%EXTRACT_EXT%"=="" SET EXTRACT_EXT=*
 

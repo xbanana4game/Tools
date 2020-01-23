@@ -10,7 +10,7 @@ REM
 REM                                Main
 REM
 REM ======================================================================
-SET RECORD_TXT=%DOWNLOADS_DIR%\Osu!_Record-%yyyy%%mm%%dd%.txt
+SET RECORD_TXT=%OSU_DIR%\Osu!-Record-%yyyy%%mm%.txt
 CALL :makeRecordTXT
 NOTEPAD %RECORD_TXT%
 EXIT

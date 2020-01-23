@@ -31,8 +31,9 @@ CALL :Archive_Downloads
 REM ----------------------------------------------------------------------
 REM ƒŠƒXƒgì¬
 REM ----------------------------------------------------------------------
-IF NOT "%ARCHIVE_PASSWORD%"=="" SET ARCHIVE_OPT_PW=-p%ARCHIVE_PASSWORD%
-7z l %ARCHIVE_OPT_PW% %DL_DIR%\*.7z >%ARCHIVE_DIR%\%yyyy%%mm%_%USERDOMAIN%.txt
+REM SET LIST_TXT=%ARCHIVE_DIR%\%yyyy%%mm%_%USERDOMAIN%.txt
+REM IF NOT "%ARCHIVE_PASSWORD%"=="" SET ARCHIVE_OPT_PW=-p%ARCHIVE_PASSWORD%
+REM 7z l %ARCHIVE_OPT_PW% %DL_DIR%\*.7z >%LIST_TXT%
 REM DEL %ARCHIVE_DIR%\%yyyy%%mm%_%USERDOMAIN%.txt.gpg
 REM CALL :makeGpg %GPG_USER_ID% %ARCHIVE_DIR%\%yyyy%%mm%_%USERDOMAIN%.txt.gpg %ARCHIVE_DIR%\%yyyy%%mm%_%USERDOMAIN%.txt
 
