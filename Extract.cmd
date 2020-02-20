@@ -16,7 +16,7 @@ IF "%YYYYMM%"=="" SET YYYYMM=%yyyy%%mm%
 REM ----------------------------------------------------------------------
 REM ƒŠƒXƒgì¬
 REM ----------------------------------------------------------------------
-SET LIST_TXT=%ARCHIVE_DIR%\%yyyy%%mm%_%USERDOMAIN%.txt
+SET LIST_TXT=%ARCHIVE_DIR%\%YYYYMM%_%USERDOMAIN%.txt
 DEL %LIST_TXT%
 IF "%1"=="" (
 	FOR %%i IN ("%ARCHIVE_DIR%\%YYYYMM%\*.7z") DO 7z l -p%ARCHIVE_PASSWORD% %%i >>%LIST_TXT%
