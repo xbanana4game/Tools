@@ -17,6 +17,7 @@ EXIT
 
 :makeRecordTXT
 	ECHO %yyyy%/%mm%/%dd% %hh%:%mn%>>%RECORD_TXT%
+	ECHO .>>%RECORD_TXT%
 	EXIT /B
 
 
