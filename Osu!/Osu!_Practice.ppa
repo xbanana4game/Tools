@@ -1,3 +1,11 @@
-﻿S_Replace('Version:(.*)', 'Version:$1 Practice', 52);	// 置換
+﻿S_FileReopenUTF8(1);
+
+S_Replace('HPDrainRate:.*', 'HPDrainRate:3', 52);	// HPDrainRate
+//S_Replace('CircleSize:.*', 'CircleSize:4', 52);	// CircleSize
+//S_Replace('OverallDifficulty:.*', 'OverallDifficulty:8', 52);	// OverallDifficulty
+//S_Replace('ApproachRate:.*', 'ApproachRate:9', 52);	// ApproachRate
+
+S_Replace('Version:(.*)', 'Version:$1 Practice', 52);	// Version
 S_FileSaveAs(S_ExpandParameter('$g')+'_Practice.osu', 4 ,1 );
+
 S_ExitAllEditors();

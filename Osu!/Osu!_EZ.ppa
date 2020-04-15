@@ -1,0 +1,7 @@
+﻿S_FileReopenUTF8(1);
+S_Replace('Version:(.*)', 'Version:$1 EZ', 52);	// 置換
+S_Replace('CircleSize:.*', 'CircleSize:2', 52);	// 置換
+S_Replace('ApproachRate:.*', 'ApproachRate:4', 52);	// 置換
+S_Replace('HPDrainRate:.*', 'HPDrainRate:3', 52);	// 置換
+S_FileSaveAs(S_ExpandParameter('$g')+'_EZ.osu', 4 ,1 );
+S_ExitAllEditors();

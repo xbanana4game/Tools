@@ -16,16 +16,19 @@ IF "%YYYYMM%"=="" SET YYYYMM=%yyyy%%mm%
 REM ----------------------------------------------------------------------
 REM ƒŠƒXƒgì¬
 REM ----------------------------------------------------------------------
-SET LIST_TXT=%ARCHIVE_DIR%\%YYYYMM%_%USERDOMAIN%.txt
-DEL %LIST_TXT%
 IF "%1"=="" (
-	FOR %%i IN ("%ARCHIVE_DIR%\%YYYYMM%\*.7z") DO 7z l -p%ARCHIVE_PASSWORD% %%i >>%LIST_TXT%
+	FOR %%i IN ("%ARCHIVE_DIR%\%YYYYMM%\*.7z") DO (
+		7z l -p%ARCHIVE_PASSWORD% %%i
+	)
 ) ELSE (
-	FOR %%i in (%*) DO 7z l -p%ARCHIVE_PASSWORD% %%i >>%LIST_TXT%
+	SET LIST_TXT=
+	FOR %%i IN (%*) DO (
+		DEL %%~dpi\%%~ni_%USERDOMAIN%.txt
+		7z l -p%ARCHIVE_PASSWORD% %%i >>%%~dpi\%%~ni_%USERDOMAIN%.txt
+		NOTEPAD %%~dpi\%%~ni_%USERDOMAIN%.txt
+		TYPE %%~dpi\%%~ni_%USERDOMAIN%.txt
+	)
 )
-NOTEPAD %LIST_TXT%
-TYPE %LIST_TXT%
-DEL %LIST_TXT%
 
 REM ----------------------------------------------------------------------
 REM “WŠJ

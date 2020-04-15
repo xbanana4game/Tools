@@ -1,0 +1,5 @@
+﻿S_FileReopenUTF8(1);
+S_Replace('Version:(.*)', 'Version:$1 CS5', 52);	// 置換
+S_Replace('CircleSize:.*', 'CircleSize:5', 52);	// 置換
+S_FileSaveAs(S_ExpandParameter('$g')+'_CS5.osu', 4 ,1 );
+S_ExitAllEditors();

@@ -14,6 +14,15 @@ REM ======================================================================
 REM ----------------------------------------------------------------------
 REM 
 REM ----------------------------------------------------------------------
+CALL :isEmptyDir  %DESKTOP_DIR%
+IF %ERRORLEVEL% EQU 1 (
+	ECHO Files not Exist.
+)
+CALL :Pause
+EXIT
+
+
+
 IF "%1"=="" (
 	REM ˆø”‚È‚µ
 	SET /P A="Archive7zŽÀs‚µ‚Ü‚·‚©? 1/0 -> "
@@ -118,4 +127,13 @@ REM ----------------------------------------------------------------------
 	SET IN_FILE=%3
 	gpg -e -r %USER_ID% -a -o %USERPROFILE%\Desktop\%OUT_FILE% %IN_FILE%
 	EXIT /B
+
+:isEmptyDir
+	DIR %1 /A:A-S /S /B
+	IF %ERRORLEVEL% EQU 0 (
+		ECHO Files Exist.
+		EXIT /B 0
+	)
+	EXIT /B 1
+
 

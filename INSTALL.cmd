@@ -1,7 +1,7 @@
 @ECHO OFF
 IF NOT EXIST "%USERPROFILE%\Settings.cmd" (
 	CALL :INSTALL_A
-	EXIST
+	EXIT
 )
 ECHO INSTALL
 ECHO   1:settings.cmd
@@ -17,10 +17,9 @@ EXIT
 
 
 :INSTALL_A
-	MOVE %USERPROFILE%\Settings.cmd %USERPROFILE%\Settings_OLD.cmd.txt
 	COPY Settings.cmd.txt %USERPROFILE%\Settings.cmd
 	NOTEPAD %USERPROFILE%\Settings.cmd
-	NOTEPAD %USERPROFILE%\SettingsOptions.cmd
+	NOTEPAD %USERPROFILE%\SettingsOptions@%USERDOMAIN%.cmd
 	EXPLORER %USERPROFILE%
 	EXIT /B
 

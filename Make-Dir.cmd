@@ -44,7 +44,7 @@ REM ----------------------------------------------------------------------
 IF NOT "%ARC_EXT%"==".dir" EXIT
 ECHO ディレクトリー(%ARC_PROFILE%)
 ECHO   1:ディレクトリ作成
-ECHO   2:空ディレクトリ削除
+ECHO   2:空ディレクトリ削除,リスト作成
 ECHO   3:アーカイブ
 SET /P A="-> "
 IF 1 EQU %A% (CALL :mk_download)

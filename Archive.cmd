@@ -15,17 +15,24 @@ REM
 REM ----------------------------------------------------------------------
 IF 1 EQU %SHUTDOWN_FLG% SET /P SHUTDOWN_FLG2="アーカイブ作成後シャットダウンしますか? 1:YES 0:NO -> "
 IF ""=="%SHUTDOWN_FLG2%" SET SHUTDOWN_FLG2=0
+
+REM ----------------------------------------------------------------------
+REM ARCHIVE_UPLOAD
+REM ----------------------------------------------------------------------
+CALL :isEmptyDir  %UPLOADS_DIR%
+IF %ERRORLEVEL% EQU 1 (
+	ECHO Files not Exist.
+	SET ARCHIVE_UPLOAD_FLG=0
+)
 IF 1 EQU %ARCHIVE_UPLOAD_FLG% SET /P ARCHIVE_UPLOAD_FLG2="アップロードフォルダをアーカイブしますか？ 1:YES 0:NO -> "
 IF ""=="%ARCHIVE_UPLOAD_FLG2%" SET ARCHIVE_UPLOAD_FLG2=0
 
-REM ----------------------------------------------------------------------
-REM アップロード
-REM ----------------------------------------------------------------------
 IF 1 EQU %ARCHIVE_UPLOAD_FLG2% (CALL :Archive_Upload)
 
 REM ----------------------------------------------------------------------
 REM ダウンロード
 REM ----------------------------------------------------------------------
+IF 1 EQU %MOVE_FILES_FLG% CALL :moveFiles
 CALL :Archive_Downloads
 
 REM ----------------------------------------------------------------------
@@ -58,6 +65,11 @@ REM ----------------------------------------------------------------------
 :Archive_Downloads
 	SET DOWNLOAD_FILENAME=DL_%yyyy%%mm%%dd%_%USERDOMAIN%
 	SET DL_DIR=%ARCHIVE_DIR%\%yyyy%%mm%
+	CALL :isEmptyDir  %DOWNLOADS_DIR%
+	IF %ERRORLEVEL% EQU 1 (
+		ECHO Files not Exist.
+		EXIT /B
+	)
 	IF NOT "%ARCHIVE_PASSWORD%"=="" SET ARCHIVE_OPT_PW=-p%ARCHIVE_PASSWORD% -mhe
 	7z a -t7z  -sdel %ARCHIVE_OPT_PW% %DL_DIR%\%DOWNLOAD_FILENAME%.7z %USERPROFILE%\Downloads\* -xr!desktop.ini -xr!アップロード -mx=%ARCHIVE_OPT_X%
 	EXIT /B
@@ -88,5 +100,15 @@ REM ----------------------------------------------------------------------
 	gpg -e -r %USER_ID% -a -o %OUT_FILE% %IN_FILE%
 	EXIT /B
 
+:isEmptyDir
+	DIR %1 /A:A-S /S /B
+	IF %ERRORLEVEL% EQU 0 (
+		ECHO Files Exist.
+		EXIT /B 0
+	)
+	EXIT /B 1
 
-
+:moveFiles
+	MOVE %DOWNLOADS_DIR%\*.mp4 %USERPROFILE%\Videos
+	MOVE %DOWNLOADS_DIR%\*Beatmap*.7z "%BEATMAP_DIR%"
+	EXIT /B

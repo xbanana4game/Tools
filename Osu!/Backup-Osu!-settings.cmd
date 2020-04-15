@@ -9,7 +9,7 @@ SET OSU_LISTFILE=osu!.list
 ECHO %OSU_DIR%\osu!.%USERNAME%.cfg>%OSU_LISTFILE%
 ECHO %OSU_DIR%\Settings>>%OSU_LISTFILE%
 ECHO %OSU_DIR%\Skins>>%OSU_LISTFILE%
-7z a -tzip %DOWNLOADS_DIR%\Osu!-Config-%yyyy%%mm%%dd%@%USERNAME%.zip @listfile.txt
+7z a -tzip %DOWNLOADS_DIR%\Osu!-Config-%yyyy%%mm%%dd%@%USERNAME%.zip @%OSU_LISTFILE%
 DEL %OSU_LISTFILE%
 EXPLORER %DOWNLOADS_DIR%
 
