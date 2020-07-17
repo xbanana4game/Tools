@@ -18,8 +18,10 @@ EXIT
 
 :INSTALL_A
 	COPY Settings.cmd.txt %USERPROFILE%\Settings.cmd
-	NOTEPAD %USERPROFILE%\Settings.cmd
+	IF EXIST "SettingsOptions.cmd.txt" (COPY SettingsOptions.cmd.txt %USERPROFILE%\SettingsOptions@%USERDOMAIN%.cmd)
 	NOTEPAD %USERPROFILE%\SettingsOptions@%USERDOMAIN%.cmd
+	IF EXIST "MoveFiles.cmd.txt" (COPY MoveFiles.cmd.txt %USERPROFILE%\MoveFiles@%USERDOMAIN%.cmd)
+	NOTEPAD %USERPROFILE%\MoveFiles@%USERDOMAIN%.cmd
 	EXPLORER %USERPROFILE%
 	EXIT /B
 

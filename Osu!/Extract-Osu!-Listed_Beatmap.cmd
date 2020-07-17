@@ -24,10 +24,10 @@ IF 1 EQU %CMD_EXECUTE% (
   FOR /D %%i IN ("%BEATMAP_DIR%\*") DO (
     CD /D "%%i"
     FOR %%j IN ("*rar") DO (
-      7z e "%%i\%%j" -o%OSU_SONGS_DIR%  -i@"%OSU_DIR%\Logs\listfile.txt"
+      7z e "%%i\%%j" -o%OSU_SONGS_DIR%  -i@"%OSU_DIR%\Logs\listfile.txt" -aoa
     )
     FOR %%j IN ("*7z") DO (
-      7z e "%%i\%%j" -o%OSU_SONGS_DIR%  -i@"%OSU_DIR%\Logs\listfile.txt"
+      7z e "%%i\%%j" -o%OSU_SONGS_DIR%  -i@"%OSU_DIR%\Logs\listfile.txt" -aoa
     )
   )
   EXPLORER %OSU_SONGS_DIR%

@@ -1,0 +1,8 @@
+@ECHO OFF
+
+SET IP123=192.168.10.
+SET PORT=5050
+SET /P IP4=http://%IP123%
+
+explorer http://%IP123%%IP4%:%PORT%/
+

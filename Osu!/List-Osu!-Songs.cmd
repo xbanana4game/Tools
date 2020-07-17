@@ -1,20 +1,20 @@
 @ECHO OFF
 REM ----------------------------------------------------------------------
-REM è¨­å®šãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿
+REM Ý’èƒtƒ@ƒCƒ‹“Ç‚Ýž‚Ý
 REM ----------------------------------------------------------------------
 IF NOT EXIST %USERPROFILE%\Settings.cmd (EXIT)
 CALL %USERPROFILE%\Settings.cmd
 
+
+REM ======================================================================
+REM
+REM                                Main
+REM
+REM ======================================================================
 REM ----------------------------------------------------------------------
 REM 
 REM ----------------------------------------------------------------------
-SET LOGNAME=ExtractBeatmap.log
-SET LOGNAME_DETAIL=ExtractBeatmapD.log
-FOR %%i in (%*) DO (
-	7z e %%i -o%OSU_SONGS_DIR% -aoa
-	ECHO %yyyy%/%mm%/%dd%:%%~nxi >>%OSU_DIR%\Logs\%LOGNAME%
-	7z l %%i >>%OSU_DIR%\Logs\%LOGNAME_DETAIL%
-)
-NOTEPAD %OSU_DIR%\Logs\%LOGNAME%
-EXIT
+DIR /B %OSU_SONGS_DIR% >%DOWNLOADS_DIR%\Osu!-Songs-%yyyy%%mm%%dd%.list
+EXPLORER %DOWNLOADS_DIR%
+
 

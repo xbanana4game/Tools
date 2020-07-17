@@ -21,9 +21,9 @@ REM CALL :CheckDirectory [ディレクトリー]
 REM ----------------------------------------------------------------------
 :CheckDirectory
 	IF EXIST %1 (
-		ECHO フォルダ%1が存在
+		ECHO Directory %1 is Exist.
 	) ELSE (
-		SET /P ERR=フォルダ%1が存在しません
+		SET /P ERR=Directory %1 is not Exist.
 		EXIT
 	)
 	EXIT /B 0

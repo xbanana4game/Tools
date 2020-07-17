@@ -16,10 +16,10 @@ REM
 REM ----------------------------------------------------------------------
 CALL :CheckDirectory %KILLINGFLOOR_DIR%\KF-SERVER
 IF %ERRORLEVEL% EQU 1 (EXIT)
-SET /P ARCHIVE_ZMT="KF-ZMT_SERVERをアーカイブしますか? 1/0 -> "
-SET /P ARCHIVE_ZMT_MAPS="KF-ZMT_SERVER_MAPSをアーカイブしますか? 1/0 -> "
+SET /P ARCHIVE_ZMT="Archive KF-ZMT_SERVER? 1/0 -> "
+SET /P ARCHIVE_ZMT_MAPS="Archive KF-ZMT_SERVER_MAPS? 1/0 -> "
 
-SET /P TREE_KF_FLG="TREEを実行しますか? 1/0 -> "
+SET /P TREE_KF_FLG="Execute TREE? 1/0 -> "
 IF 1 EQU %TREE_KF_FLG% (
   EXPLORER %KILLINGFLOOR_DIR%\KF-SERVER
   CALL :TREE_KF_SERVER

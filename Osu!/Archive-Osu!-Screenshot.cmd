@@ -6,7 +6,7 @@ REM Archive
 REM ----------------------------------------------------------------------
 SET GAME_NAME=Osu!
 %FLEXIBLE_RENAMER%
-SET /P SCREENSHOT_YYYYMM="YYYYMM‚ðŽw’è‚µ‚Ä‚­‚¾‚³‚¢ default:%yyyy%%mm%->"
+SET /P SCREENSHOT_YYYYMM="YYYYMM default:%yyyy%%mm%->"
 IF "%SCREENSHOT_YYYYMM%"=="" SET SCREENSHOT_YYYYMM=%yyyy%%mm%
 SET SCREENSHOTS_ARCHIVE_NAME=%GAME_NAME%-Screenshots-%SCREENSHOT_YYYYMM%
 

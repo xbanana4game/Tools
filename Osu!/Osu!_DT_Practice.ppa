@@ -4,7 +4,7 @@ S_Replace('CircleSize:.*', 'CircleSize:3', 52);	// CircleSize
 //S_Replace('OverallDifficulty:.*', 'OverallDifficulty:8', 52);	// OverallDifficulty
 S_Replace('ApproachRate:.*', 'ApproachRate:9.4', 52);	// ApproachRate
 
-S_Replace('Version:(.*)', 'Version:$1 DT Practice', 52);	// Version
-S_FileSaveAs(S_ExpandParameter('$g')+'_DT_Practice.osu', 4 ,1 );
+S_Replace('Version:(.*)', 'Version:$1 DT MyPractice', 52);	// Version
+S_FileSaveAs(S_ExpandParameter('$g')+'_DT_MyPractice.osu', 4 ,1 );
 
 S_ExitAllEditors();

@@ -13,7 +13,7 @@ IF NOT "%1"=="" (
 REM ----------------------------------------------------------------------
 REM 
 REM ----------------------------------------------------------------------
-IF 1 EQU %SHUTDOWN_FLG% SET /P SHUTDOWN_FLG2="アーカイブ作成後シャットダウンしますか? 1:YES 0:NO -> "
+IF 1 EQU %SHUTDOWN_FLG% SET /P SHUTDOWN_FLG2="Shutdown? 1:YES 0:NO -> "
 IF ""=="%SHUTDOWN_FLG2%" SET SHUTDOWN_FLG2=0
 
 REM ----------------------------------------------------------------------
@@ -22,9 +22,10 @@ REM ----------------------------------------------------------------------
 CALL :isEmptyDir  %UPLOADS_DIR%
 IF %ERRORLEVEL% EQU 1 (
 	ECHO Files not Exist.
+	MD %UPLOADS_DIR%
 	SET ARCHIVE_UPLOAD_FLG=0
 )
-IF 1 EQU %ARCHIVE_UPLOAD_FLG% SET /P ARCHIVE_UPLOAD_FLG2="アップロードフォルダをアーカイブしますか？ 1:YES 0:NO -> "
+IF 1 EQU %ARCHIVE_UPLOAD_FLG% SET /P ARCHIVE_UPLOAD_FLG2="Archive Upload Dir? 1:YES 0:NO -> "
 IF ""=="%ARCHIVE_UPLOAD_FLG2%" SET ARCHIVE_UPLOAD_FLG2=0
 
 IF 1 EQU %ARCHIVE_UPLOAD_FLG2% (CALL :Archive_Upload)
@@ -71,7 +72,7 @@ REM ----------------------------------------------------------------------
 		EXIT /B
 	)
 	IF NOT "%ARCHIVE_PASSWORD%"=="" SET ARCHIVE_OPT_PW=-p%ARCHIVE_PASSWORD% -mhe
-	7z a -t7z  -sdel %ARCHIVE_OPT_PW% %DL_DIR%\%DOWNLOAD_FILENAME%.7z %USERPROFILE%\Downloads\* -xr!desktop.ini -xr!アップロード -mx=%ARCHIVE_OPT_X%
+	7z a -t7z  -sdel %ARCHIVE_OPT_PW% %DL_DIR%\%DOWNLOAD_FILENAME%.7z %USERPROFILE%\Downloads\* -xr!desktop.ini -xr!*.crdownload -mx=%ARCHIVE_OPT_X%
 	EXIT /B
 
 REM ----------------------------------------------------------------------
@@ -109,6 +110,5 @@ REM ----------------------------------------------------------------------
 	EXIT /B 1
 
 :moveFiles
-	MOVE %DOWNLOADS_DIR%\*.mp4 %USERPROFILE%\Videos
-	MOVE %DOWNLOADS_DIR%\*Beatmap*.7z "%BEATMAP_DIR%"
+	IF EXIST %USERPROFILE%\MoveFiles@%USERDOMAIN%.cmd (CALL %USERPROFILE%\MoveFiles@%USERDOMAIN%.cmd)
 	EXIT /B

@@ -1,6 +1,6 @@
 @ECHO OFF
 REM ----------------------------------------------------------------------
-REM 設定ファイル読み込み
+REM Read Settings
 REM ----------------------------------------------------------------------
 IF NOT EXIST %USERPROFILE%\Settings.cmd (EXIT)
 CALL %USERPROFILE%\Settings.cmd
@@ -28,6 +28,7 @@ IF "%1"=="" (
 	SET /P A="Archive7z実行しますか? 1/0 -> "
 ) ELSE (
 	ECHO %0
+	ECHO %~dp0
 	for %%i in (%*) do (
 		ECHO %%i
 		ECHO NAME: %%~ni
@@ -58,7 +59,7 @@ REM CALL :CheckDirectory [directory]
 REM ----------------------------------------------------------------------
 :CheckDirectory
 	IF EXIST %1 (
-	ECHO Directory %1 is Exist.
+		ECHO Directory %1 is Exist.
 	) ELSE (
 		SET /P ERR=Directory %1 is not Exist.
 		EXIT
@@ -67,10 +68,10 @@ REM ----------------------------------------------------------------------
 	
 :ChangeDirectory
 	IF EXIST %1 (
-	  CD /D %1
+		CD /D %1
 	) ELSE (
-	  SET /P ERR=Directory %1 is not Exist.
-	  EXIT
+		SET /P ERR=Directory %1 is not Exist.
+		EXIT
 	)
 	EXIT /B 0
 	

@@ -6,7 +6,7 @@ REM ----------------------------------------------------------------------
 REM Archive
 REM ----------------------------------------------------------------------
 SET OSU_LISTFILE=osu!.list
-ECHO %OSU_DIR%\osu!.%USERNAME%.cfg>%OSU_LISTFILE%
+ECHO %OSU_DIR%\osu!.*.cfg>%OSU_LISTFILE%
 ECHO %OSU_DIR%\Settings>>%OSU_LISTFILE%
 ECHO %OSU_DIR%\Skins>>%OSU_LISTFILE%
 7z a -tzip %DOWNLOADS_DIR%\Osu!-Config-%yyyy%%mm%%dd%@%USERDOMAIN%.zip @%OSU_LISTFILE%

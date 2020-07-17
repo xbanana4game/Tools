@@ -1,6 +1,6 @@
 REM ======================================================================
 REM
-REM                                Tools-2.9
+REM                                Tools-3.0
 REM
 REM ======================================================================
 @ECHO OFF
@@ -20,8 +20,10 @@ REM Common
 REM ----------------------------------------------------------------------
 SET DOWNLOADS_DIR=%USERPROFILE%\Downloads
 SET DESKTOP_DIR=%USERPROFILE%\Desktop
-SET ARCHIVE_DIR=C:\Archive
-SET UPLOADS_DIR=%ARCHIVE_DIR%\アップロード
+SET PICTURES_DIR=%USERPROFILE%\Pictures
+SET VIDEOS_DIR=%USERPROFILE%\Videos
+SET ARCHIVE_DIR=C:\Archives
+SET UPLOADS_DIR=%ARCHIVE_DIR%\Uploads
 
 REM ----------------------------------------------------------------------
 REM Archive
@@ -47,11 +49,11 @@ SET PLANETSIDE2_DIR="%STEAM_LIBRARY%\PlanetSide 2"
 REM ----------------------------------------------------------------------
 REM Osu!
 REM ----------------------------------------------------------------------
-SET OSU_DIR=A:\Osu!
-SET BEATMAP_DIR=E:\Beatmap Packs\osu!
+SET OSU_DIR=%USERPROFILE%\Osu!
+SET BEATMAP_DIR=P:\Beatmap Packs\osu!
 SET BEATMAP_FAVORITE=%BEATMAP_DIR%\Beatmap Pack (Favorite)
-SET OSU_SONGS_DIR=%OSU_DIR%\Songs
-SET FLEXIBLE_RENAMER="%USERPROFILE%\Documents\FlexRena84\Flexible Renamer.exe"
+SET OSU_SONGS_DIR=A:\Osu!\Songs
+SET FLEXIBLE_RENAMER="%USERPROFILE%\Osu!\Settings\FlexRena84\Flexible Renamer.exe"
 
 REM ----------------------------------------------------------------------
 REM Options
