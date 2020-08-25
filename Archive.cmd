@@ -7,7 +7,7 @@ CALL %USERPROFILE%\Settings.cmd
 
 IF NOT "%1"=="" (
 	FOR %%i in (%*) DO (CALL :Archive_Directory %%~ni.7z %%i)
-	EXPLORER %USERPROFILE%\Desktop
+	CALL :Pause
 	EXIT
 )
 REM ----------------------------------------------------------------------
@@ -49,7 +49,7 @@ REM ----------------------------------------------------------------------
 REM シャットダウン処理
 REM ----------------------------------------------------------------------
 IF 1 EQU %SHUTDOWN_FLG2% (SHUTDOWN /S /T 30)
-EXPLORER %ARCHIVE_DIR%
+CALL :Msg Finished
 
 EXIT
 
@@ -64,7 +64,6 @@ REM ----------------------------------------------------------------------
 REM ダウンロード
 REM ----------------------------------------------------------------------
 :Archive_Downloads
-	SET DOWNLOAD_FILENAME=DL_%yyyy%%mm%%dd%_%USERDOMAIN%
 	SET DL_DIR=%ARCHIVE_DIR%\%yyyy%%mm%
 	CALL :isEmptyDir  %DOWNLOADS_DIR%
 	IF %ERRORLEVEL% EQU 1 (
@@ -73,6 +72,7 @@ REM ----------------------------------------------------------------------
 	)
 	IF NOT "%ARCHIVE_PASSWORD%"=="" SET ARCHIVE_OPT_PW=-p%ARCHIVE_PASSWORD% -mhe
 	7z a -t7z  -sdel %ARCHIVE_OPT_PW% %DL_DIR%\%DOWNLOAD_FILENAME%.7z %USERPROFILE%\Downloads\* -xr!desktop.ini -xr!*.crdownload -mx=%ARCHIVE_OPT_X%
+	7z l %ARCHIVE_OPT_PW% %DL_DIR%\%DOWNLOAD_FILENAME%.7z
 	EXIT /B
 
 REM ----------------------------------------------------------------------
@@ -84,6 +84,7 @@ REM ----------------------------------------------------------------------
 	SET UPLOAD_FILENAME=UL_%yyyy%%mm%_%USERDOMAIN%
 	IF NOT "%ARCHIVE_PASSWORD%"=="" SET ARCHIVE_OPT_PW=-p%ARCHIVE_PASSWORD% -mhe
 	7z a -t7z  -sdel %ARCHIVE_OPT_PW% %UL_DIR%\%UPLOAD_FILENAME%.7z %UPLOADS_DIR%\* -mx=%ARCHIVE_OPT_X%
+	7z l %ARCHIVE_OPT_PW% %UL_DIR%\%UPLOAD_FILENAME%.7z
 	MD %UPLOADS_DIR%
 	EXIT /B
 
@@ -92,6 +93,7 @@ REM ----------------------------------------------------------------------
 	SET IN=%2
 	IF NOT "%ARCHIVE_PASSWORD%"=="" SET ARCHIVE_OPT_PW=-p%ARCHIVE_PASSWORD% -mhe
 	7z a -t7z  %ARCHIVE_OPT_PW% %USERPROFILE%\Desktop\%OUT_NAME% %IN% -mx=%ARCHIVE_OPT_X%
+	7z l %ARCHIVE_OPT_PW% %USERPROFILE%\Desktop\%OUT_NAME%
 	EXIT /B
 
 :makeGpg
@@ -112,3 +114,9 @@ REM ----------------------------------------------------------------------
 :moveFiles
 	IF EXIST %USERPROFILE%\MoveFiles@%USERDOMAIN%.cmd (CALL %USERPROFILE%\MoveFiles@%USERDOMAIN%.cmd)
 	EXIT /B
+
+:Msg
+	SET MSG=%1
+	SET /P END=%MSG%
+	EXIT /B
+

@@ -1,8 +1,12 @@
 @ECHO OFF
+REM ----------------------------------------------------------------------
+REM Read Settings
+REM ----------------------------------------------------------------------
+IF NOT EXIST %USERPROFILE%\Settings.cmd (EXIT)
 CALL %USERPROFILE%\Settings.cmd
 
 REM ----------------------------------------------------------------------
-REM BEATMAP_FAVORITEディレクトリーチェック
+REM 
 REM ----------------------------------------------------------------------
 CALL :CheckDirectory "%BEATMAP_FAVORITE%"
 
@@ -17,7 +21,7 @@ EXPLORER "%BEATMAP_FAVORITE%"
 EXIT
 
 REM ----------------------------------------------------------------------
-REM CALL :CheckDirectory [ディレクトリー]
+REM 
 REM ----------------------------------------------------------------------
 :CheckDirectory
 	IF EXIST %1 (

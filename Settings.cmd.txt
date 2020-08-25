@@ -1,6 +1,6 @@
 REM ======================================================================
 REM
-REM                                Tools-3.0
+REM                                Tools-3.1
 REM
 REM ======================================================================
 @ECHO OFF
@@ -14,6 +14,9 @@ SET time2=%time: =0%
 SET hh=%time2:~0,2%
 SET mn=%time2:~3,2%
 SET ss=%time2:~6,2%
+IF %dd% GTR  0 SET week=1
+IF %dd% GTR 10 SET week=2
+IF %dd% GTR 20 SET week=3
 
 REM ----------------------------------------------------------------------
 REM Common
@@ -21,25 +24,30 @@ REM ----------------------------------------------------------------------
 SET DOWNLOADS_DIR=%USERPROFILE%\Downloads
 SET DESKTOP_DIR=%USERPROFILE%\Desktop
 SET PICTURES_DIR=%USERPROFILE%\Pictures
+SET DOCUMENTS_DIR=%USERPROFILE%\Documents
 SET VIDEOS_DIR=%USERPROFILE%\Videos
 SET ARCHIVE_DIR=C:\Archives
 SET UPLOADS_DIR=%ARCHIVE_DIR%\Uploads
+SET PATH=%PATH%;C:\Program Files\7-Zip;C:\Program Files (x86)\GnuPG\bin;
 
 REM ----------------------------------------------------------------------
 REM Archive
 REM ----------------------------------------------------------------------
 SET GPG_USER_ID=%USERDOMAIN%
-SET PATH=%PATH%;C:\Program Files\7-Zip;C:\Program Files (x86)\GnuPG\bin;
+SET DOWNLOAD_FILENAME=DL_%yyyy%%mm%%dd%_%USERDOMAIN%
+REM SET DOWNLOAD_FILENAME=DL_%yyyy%%mm%-%week%_%USERDOMAIN%
 SET SHUTDOWN_FLG=0
 SET ARCHIVE_UPLOAD_FLG=1
 SET MOVE_FILES_FLG=0
 SET ARCHIVE_PASSWORD=
+SET EXTRACT_TARGET_DIR=%DESKTOP_DIR%
 REM x=[0 | 1 | 3 | 5 | 7 | 9 ] 
 SET ARCHIVE_OPT_X=3
 
 REM ----------------------------------------------------------------------
 REM Games Settings
 REM ----------------------------------------------------------------------
+SET STEAM_USER_ID=00000000
 SET STEAM_DIR="C:\Progra~2\Steam"
 SET STEAM_LIBRARY=E:\SteamLibrary\steamapps\common
 SET FACTORIO_DIR=%USERPROFILE%\AppData\Roaming\Factorio
@@ -52,11 +60,15 @@ REM ----------------------------------------------------------------------
 SET OSU_DIR=%USERPROFILE%\Osu!
 SET BEATMAP_DIR=P:\Beatmap Packs\osu!
 SET BEATMAP_FAVORITE=%BEATMAP_DIR%\Beatmap Pack (Favorite)
-SET OSU_SONGS_DIR=A:\Osu!\Songs
+SET OSU_SONGS_DIR=D:\Osu!\Songs
 SET FLEXIBLE_RENAMER="%USERPROFILE%\Osu!\Settings\FlexRena84\Flexible Renamer.exe"
 
 REM ----------------------------------------------------------------------
 REM Options
 REM ----------------------------------------------------------------------
 IF EXIST %USERPROFILE%\SettingsOptions@%USERDOMAIN%.cmd (CALL %USERPROFILE%\SettingsOptions@%USERDOMAIN%.cmd)
+IF EXIST %USERPROFILE%\Desktop\SettingsOptions@%USERDOMAIN%.cmd (
+	SET /P MSG="CALL %USERPROFILE%\Desktop\SettingsOptions@%USERDOMAIN%.cmd"
+	CALL %USERPROFILE%\Desktop\SettingsOptions@%USERDOMAIN%.cmd
+)
 

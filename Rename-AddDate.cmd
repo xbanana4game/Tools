@@ -6,16 +6,22 @@ IF NOT EXIST %USERPROFILE%\Settings.cmd (EXIT)
 CALL %USERPROFILE%\Settings.cmd
 
 
+REM ======================================================================
+REM
+REM                                Main
+REM
+REM ======================================================================
 REM ----------------------------------------------------------------------
-REM Archive
+REM 
 REM ----------------------------------------------------------------------
-%FLEXIBLE_RENAMER%
+IF NOT "%1"=="" (
+	for %%i in (%*) do (
+		REM MOVE "%%i" "%%~dpi%%~ni@%yyyy%%mm%%dd%%%~xi"
+		REM COPY "%%i" "%%~dpi%%~ni@%yyyy%%mm%%dd%%%~xi"
+		MKLINK /H "%%~dpi%%~ni@%yyyy%%mm%%dd%%%~xi" "%%i"
+	)
+)
+EXIT
 
-SET /P SCREENSHOT_YYYYMM="YYYYMM default:%yyyy%%mm%->"
-IF "%SCREENSHOT_YYYYMM%"=="" SET SCREENSHOT_YYYYMM=%yyyy%%mm%
 
-SET SCREENSHOTS_ARCHIVE_NAME=Osu!-Screenshots-%SCREENSHOT_YYYYMM%
-7z a -tzip -sdel %DOCUMENTS_DIR%\%SCREENSHOTS_ARCHIVE_NAME%.zip %OSU_DIR%\Screenshots\%SCREENSHOT_YYYYMM%*
-
-EXPLORER %DOCUMENTS_DIR%
 

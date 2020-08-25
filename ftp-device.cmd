@@ -6,16 +6,17 @@ IF NOT EXIST %USERPROFILE%\Settings.cmd (EXIT)
 CALL %USERPROFILE%\Settings.cmd
 
 
+REM ======================================================================
+REM
+REM                                Main
+REM
+REM ======================================================================
 REM ----------------------------------------------------------------------
-REM Archive
+REM 
 REM ----------------------------------------------------------------------
-%FLEXIBLE_RENAMER%
+SET IP123=192.168.10.
+SET PORT=8001
+SET /P IP4=ftp://%IP123%
 
-SET /P SCREENSHOT_YYYYMM="YYYYMM default:%yyyy%%mm%->"
-IF "%SCREENSHOT_YYYYMM%"=="" SET SCREENSHOT_YYYYMM=%yyyy%%mm%
-
-SET SCREENSHOTS_ARCHIVE_NAME=Osu!-Screenshots-%SCREENSHOT_YYYYMM%
-7z a -tzip -sdel %DOCUMENTS_DIR%\%SCREENSHOTS_ARCHIVE_NAME%.zip %OSU_DIR%\Screenshots\%SCREENSHOT_YYYYMM%*
-
-EXPLORER %DOCUMENTS_DIR%
+explorer ftp://%IP123%%IP4%:%PORT%/
 

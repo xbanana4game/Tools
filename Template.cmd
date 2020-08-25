@@ -16,35 +16,25 @@ REM
 REM ----------------------------------------------------------------------
 CALL :isEmptyDir  %DESKTOP_DIR%
 IF %ERRORLEVEL% EQU 1 (
-	ECHO Files not Exist.
+	ECHO Files not Exist. %DESKTOP_DIR%
 )
-CALL :Pause
-EXIT
-
-
 
 IF "%1"=="" (
 	REM 引数なし
-	SET /P A="Archive7z実行しますか? 1/0 -> "
 ) ELSE (
 	ECHO %0
-	ECHO %~dp0
+	ECHO DIR: %~dp0
+	ECHO .
 	for %%i in (%*) do (
 		ECHO %%i
 		ECHO NAME: %%~ni
 		ECHO DIR: %%~dpi
 		ECHO CALL :makeGpg %GPG_USER_ID% %%~nxi.gpg %%i
+		ECHO .
 	)
-	SET /P B=""
-	EXIT
 )
-IF ""=="%A%" SET A=0
-CALL :CheckDirectory "%USERPROFILE%\Desktop"
-IF 1 EQU %A% (CALL :Archive7z "%USERPROFILE%\Desktop\Tools.git.7z" "C:\Archive\WIN10TOMAS\Tools.git")
-SET /P B="Tree実行しますか? 1/0 -> "
-IF ""=="%B%" SET B=0
-IF %B% EQU 1 CALL :TreeDir A:\Osu!\Songs
-EXPLORER %USERPROFILE%\Desktop
+
+CALL :Msg Finished
 EXIT
 
 
@@ -75,11 +65,9 @@ REM ----------------------------------------------------------------------
 	)
 	EXIT /B 0
 	
-REM ----------------------------------------------------------------------
-REM CALL :Pause
-REM ----------------------------------------------------------------------
-:Pause
-	SET /P END="Pause"
+:Msg
+	SET MSG=%1
+	SET /P END=%MSG%
 	EXIT /B
 
 REM ----------------------------------------------------------------------
@@ -101,17 +89,11 @@ REM ----------------------------------------------------------------------
 	7z a -t7z %ARCHIVE_OPT_PW% %OUT% %IN%
 	EXIT /B %ERRORLEVEL%
 
-REM ----------------------------------------------------------------------
-REM CALL :TreeDir
-REM ----------------------------------------------------------------------
 :TreeDir
 	SET TREE_DIR=%1
 	TREE /F %TREE_DIR% >%USERPROFILE%\Desktop\tree.txt
 	EXIT /B %ERRORLEVEL%
 
-REM ----------------------------------------------------------------------
-REM ディレクトリ作成
-REM ----------------------------------------------------------------------
 :makeYYYYMM
 	for /l %%i in (1,1,12) do (
 	  if %%i LSS 10 (

@@ -5,17 +5,19 @@ REM ----------------------------------------------------------------------
 IF NOT EXIST %USERPROFILE%\Settings.cmd (EXIT)
 CALL %USERPROFILE%\Settings.cmd
 
-
 REM ----------------------------------------------------------------------
-REM Archive
+REM Make list file
 REM ----------------------------------------------------------------------
-%FLEXIBLE_RENAMER%
+FOR /D %%j IN ("%ARCHIVE_DIR%\*") DO (
+	IF NOT EXIST %ARCHIVE_DIR%\%%~nj_%USERDOMAIN%.txt (
+		ECHO %%j
+		FOR %%i IN ("%%j\*.7z") DO (
+			ECHO %%i
+			7z l -p%ARCHIVE_PASSWORD% %%i >>%ARCHIVE_DIR%\%%~nj_%USERDOMAIN%.txt
+		)
+	)
+)
 
-SET /P SCREENSHOT_YYYYMM="YYYYMM default:%yyyy%%mm%->"
-IF "%SCREENSHOT_YYYYMM%"=="" SET SCREENSHOT_YYYYMM=%yyyy%%mm%
-
-SET SCREENSHOTS_ARCHIVE_NAME=Osu!-Screenshots-%SCREENSHOT_YYYYMM%
-7z a -tzip -sdel %DOCUMENTS_DIR%\%SCREENSHOTS_ARCHIVE_NAME%.zip %OSU_DIR%\Screenshots\%SCREENSHOT_YYYYMM%*
-
-EXPLORER %DOCUMENTS_DIR%
+SET /P END="Finished"
+EXPLORER %ARCHIVE_DIR%
 

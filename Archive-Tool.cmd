@@ -113,8 +113,10 @@ REM ----------------------------------------------------------------------
 REM CALL :archive_download
 REM ----------------------------------------------------------------------
 :archive_download
-	SET /P OUTPUT_DIR="èoóÕêÊ(ex.E:): "
-	SET /P PASSWORD="Password: "
+	SET /P OUTPUT_DIR="èoóÕêÊ(E:, C:\Archives): "
+	REM SET /P PASSWORD="Password: "
+	SET PASSWORD=%ARCHIVE_PASSWORD%
+
 	IF "%PASSWORD%"=="" (
 		7z a -t7z %OUTPUT_DIR%\%ARC_PROFILE%@%yyyy%%mm%%dd%.7z %ARC_PROFILE% -mx=5
 	) ELSE (

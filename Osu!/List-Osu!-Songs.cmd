@@ -1,6 +1,6 @@
 @ECHO OFF
 REM ----------------------------------------------------------------------
-REM Ý’èƒtƒ@ƒCƒ‹“Ç‚Ýž‚Ý
+REM Read Settings
 REM ----------------------------------------------------------------------
 IF NOT EXIST %USERPROFILE%\Settings.cmd (EXIT)
 CALL %USERPROFILE%\Settings.cmd
@@ -14,7 +14,7 @@ REM ======================================================================
 REM ----------------------------------------------------------------------
 REM 
 REM ----------------------------------------------------------------------
-DIR /B %OSU_SONGS_DIR% >%DOWNLOADS_DIR%\Osu!-Songs-%yyyy%%mm%%dd%.list
+DIR /B %OSU_SONGS_DIR% >%DOWNLOADS_DIR%\Osu!-Songs-%yyyy%%mm%%dd%.txt
 EXPLORER %DOWNLOADS_DIR%
 
 
