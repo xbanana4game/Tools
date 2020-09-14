@@ -16,3 +16,7 @@ Settings
 	ユーザーのSettingsOptions.cmd
 	DesktopにあるSettings.cmd
 	の順に読み込む
+	
+Archive-Extension.cmd
+	指定した拡張子のファイルをアーカイブする
+

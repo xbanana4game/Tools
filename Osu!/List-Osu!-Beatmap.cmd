@@ -11,7 +11,7 @@ REM ----------------------------------------------------------------------
 REM 
 REM ----------------------------------------------------------------------
 CALL :CheckDirectory "%BEATMAP_DIR%"
-SET BEATMAP_LIST_DIR=%OSU_DIR%\Logs\list
+SET BEATMAP_LIST_DIR=%BEATMAP_DIR%\list
 MD "%BEATMAP_LIST_DIR%"
 
 FOR /D %%i IN ("%BEATMAP_DIR%\*") DO (
@@ -29,9 +29,9 @@ FOR /D %%i IN ("%BEATMAP_DIR%\*") DO (
     )
   )
 )
-TYPE "%BEATMAP_LIST_DIR%\*" >"%OSU_DIR%\Logs\Beatmap Pack.txt"
+TYPE "%BEATMAP_LIST_DIR%\*" >"%BEATMAP_DIR%\Beatmap Pack.txt"
 
-EXPLORER %OSU_DIR%\Logs
+EXPLORER %BEATMAP_DIR%
 EXIT
 
 

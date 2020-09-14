@@ -34,10 +34,12 @@ SET /P EXTRACT_EXT="Enter Extract Target. (Default:*) -> "
 IF "%EXTRACT_EXT%"=="" SET EXTRACT_EXT=*
 
 IF "%1"=="" (
-	FOR %%i IN ("%ARCHIVE_DIR%\%YYYYMM%\*.7z") DO CALL :Extract7z %%i %EXTRACT_EXT%
+	FOR %%i IN ("%ARCHIVE_DIR%\%YYYYMM%\*.7z") DO CALL :Extract7zALL %%i %EXTRACT_EXT%
 ) ELSE (
 	FOR %%i in (%*) DO (CALL :Extract7z %%i %EXTRACT_EXT%)
 )
+EXPLORER %EXTRACT_TARGET_DIR%
+
 EXIT
 
 
@@ -56,4 +58,10 @@ REM ----------------------------------------------------------------------
 	7z x -p%ARCHIVE_PASSWORD% %EXTRACT_FILE% -o%EXTRACT_TARGET_DIR%\* %EXTRACT_EXT% -r
 	EXIT /B
 
+
+:Extract7zALL
+	SET EXTRACT_FILE=%1
+	SET EXTRACT_EXT=%2
+	7z x -p%ARCHIVE_PASSWORD% %EXTRACT_FILE% -o%EXTRACT_TARGET_DIR%\%YYYYMM% -aot %EXTRACT_EXT% -r
+	EXIT /B
 
