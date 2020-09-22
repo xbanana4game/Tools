@@ -1,0 +1,2 @@
+csgo\cfg\autoexec.cfg
+csgo\cfg\config.cfg

@@ -18,7 +18,7 @@ SET /P B="Save Steam Screanshots? 1/0 -> "
 IF ""=="%B%" SET B=0
 CALL :CheckDirectory %STEAM_DIR%\userdata
 FOR /F "tokens=1,2* delims=," %%i in (steam_screenshots.txt) do CALL :ArchiveScreenshots %%i %STEAM_DIR%\%%j
-IF %B% EQU 1 CALL :7zScreenshots "%DOWNLOADS_DIR%\Steam-Screenshsots-%yyyy%%mm%%dd%@%USERDOMAIN%.zip"
+IF %B% EQU 1 CALL :7zScreenshots "%DOWNLOADS_DIR%\Steam-Screenshots-%yyyy%%mm%%dd%@%USERDOMAIN%.zip"
 EXPLORER %DOWNLOADS_DIR%
 EXIT
 
@@ -57,7 +57,7 @@ REM ----------------------------------------------------------------------
 	SET GAME_NAME=%1%
 	SET SS_DIR=%2%
 	IF EXIST %SS_DIR% (
-		CALL :Archive7z "%DOWNLOADS_DIR%\%GAME_NAME%-Screenshsots-%yyyy%%mm%%dd%@%USERDOMAIN%.zip" %SS_DIR%
+		CALL :Archive7z "%DOWNLOADS_DIR%\%GAME_NAME%-Screenshots-%yyyy%%mm%%dd%@%USERDOMAIN%.zip" %SS_DIR%
 	)
 	EXIT /B
 

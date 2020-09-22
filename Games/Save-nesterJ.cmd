@@ -14,22 +14,20 @@ REM ======================================================================
 REM ----------------------------------------------------------------------
 REM 
 REM ----------------------------------------------------------------------
-CALL :CheckDirectory %OSU_DIR%\Screenshots
+IF NOT DEFINED NESTERJ_DIR SET NESTERJ_DIR=%USERPROFILE%\Documents\nj051b_ja
+
+CALL :CheckDirectory %NESTERJ_DIR%
 IF %ERRORLEVEL% EQU 1 (
 	ECHO Directory not Exist. %DESKTOP_DIR%
 	EXIT
 )
-CALL  :RENAME_ADD_DATE_OSU  %OSU_DIR%\Screenshots
-
-SET /P SCREENSHOT_YYYYMM="YYYYMM default:%yyyy%%mm%->"
-IF "%SCREENSHOT_YYYYMM%"=="" SET SCREENSHOT_YYYYMM=%yyyy%%mm%
-
-SET SCREENSHOTS_ARCHIVE_NAME=Osu!-Screenshots-%SCREENSHOT_YYYYMM%
-7z a -tzip -sdel %DOCUMENTS_DIR%\%SCREENSHOTS_ARCHIVE_NAME%.zip %OSU_DIR%\Screenshots\%SCREENSHOT_YYYYMM%*
-
-EXPLORER %DOCUMENTS_DIR%
+CD %NESTERJ_DIR%
+7z a %DOWNLOADS_DIR%\nesterJ-saves@%yyyy%%mm%%dd%.7z -spf2 state\* save\*
+CALL  :RENAME_ADD_DATE_NESTER  shot
+7z a -tzip -sdel %DOWNLOADS_DIR%\nesterJ-screenshots@%yyyy%%mm%%dd%.zip -spf2 shot\*
+PAUSE
+EXPLORER %DOWNLOADS_DIR%
 EXIT
-
 
 
 REM ======================================================================
@@ -37,25 +35,18 @@ REM
 REM                                Function
 REM
 REM ======================================================================
-:RENAME_ADD_DATE_OSU
+:RENAME_ADD_DATE_NESTER
 	SET TARGET_DIR_NAME=%1%
-	FOR %%i in (%TARGET_DIR_NAME%\screenshot*.jpg) DO (
+	FOR %%i in (%TARGET_DIR_NAME%\*) DO (
 		echo SET F_DATE=%%~ti>>a.cmd
 		echo SET F_YYYYMMDD_HHMM=%%F_DATE:~0,4%%%%F_DATE:~5,2%%%%F_DATE:~8,2%%-%%F_DATE:~11,2%%%%F_DATE:~14,2%%>>a.cmd
-		
-		echo SET FILE_COUNT=0 >>a.cmd
-		echo :"RENAME_%%~ni" >>a.cmd
-		echo SET /A FILE_COUNT=%%FILE_COUNT%%+1 >>a.cmd
-		
-		echo RENAME "%%~fi" "%%F_YYYYMMDD_HHMM%%-%%FILE_COUNT%%%%~xi" >>a.cmd
-		echo IF %%ERRORLEVEL%% EQU 1 GOTO :"RENAME_%%~ni" >>a.cmd
-		echo ECHO RENAME "%%~fi" "%%F_YYYYMMDD_HHMM%%-%%FILE_COUNT%%%%~xi" >>a.cmd
+		echo RENAME "%%~fi" "%%F_YYYYMMDD_HHMM%%_-_%%~ni%%~xi" >>a.cmd
+		echo ECHO RENAME "%%~fi" "%%F_YYYYMMDD_HHMM%%_-_%%~ni%%~xi" >>a.cmd
 	)
 	CALL a.cmd
 	DEL a.cmd
 	EXIT /B 0
 
-	
 :CheckDirectory
 	IF EXIST %1 (
 		ECHO Directory %1 is Exist.

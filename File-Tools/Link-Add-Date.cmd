@@ -15,12 +15,14 @@ REM ----------------------------------------------------------------------
 REM 
 REM ----------------------------------------------------------------------
 IF NOT "%1"=="" (
-	for %%i in (%*) do (
+	FOR %%i IN (%*) DO (
+		ECHO %%i
 		REM MOVE "%%i" "%%~dpi%%~ni@%yyyy%%mm%%dd%%%~xi"
-		REM COPY "%%i" "%%~dpi%%~ni@%yyyy%%mm%%dd%%%~xi"
-		MKLINK /H "%%~dpi%%~ni@%yyyy%%mm%%dd%%%~xi" "%%i"
+		RENAME "%%i" "%%~ni@%yyyy%%mm%%dd%%%~xi"
+		MKLINK /H "%%i" "%%~dpi%%~ni@%yyyy%%mm%%dd%%%~xi"
 	)
 )
+PAUSE
 EXIT
 
 

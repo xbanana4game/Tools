@@ -14,9 +14,17 @@ REM ======================================================================
 REM ----------------------------------------------------------------------
 REM 
 REM ----------------------------------------------------------------------
+ECHO %0
+ECHO %~dp0
 CALL :isEmptyDir  %DESKTOP_DIR%
 IF %ERRORLEVEL% EQU 1 (
 	ECHO Files not Exist. %DESKTOP_DIR%
+)
+
+CALL :CheckDirectory %DESKTOP_DIR%
+IF %ERRORLEVEL% EQU 1 (
+	ECHO Directory not Exist. %DESKTOP_DIR%
+	EXIT
 )
 
 IF "%1"=="" (
@@ -52,7 +60,7 @@ REM ----------------------------------------------------------------------
 		ECHO Directory %1 is Exist.
 	) ELSE (
 		SET /P ERR=Directory %1 is not Exist.
-		EXIT
+		EXIT /B 1
 	)
 	EXIT /B 0
 	
@@ -119,4 +127,7 @@ REM ----------------------------------------------------------------------
 	)
 	EXIT /B 1
 
-
+:reqYorN
+	SET /P YorN="YorN? 1/0 -> "
+	IF "%YorN%"=="" SET YorN=0
+	EXIT /B

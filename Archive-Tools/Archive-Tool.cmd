@@ -50,10 +50,13 @@ IF EXIST %ARCHIVE_PATH%\SettingsOptions@%ARCHIVE_PROFILE%.cmd (
 REM ----------------------------------------------------------------------
 REM 
 REM ----------------------------------------------------------------------
+ECHO ARCHIVE_PATH: %ARCHIVE_PATH%
 ECHO PROFILE: %ARCHIVE_PROFILE%
 ECHO   1:Make Directory
 ECHO   2:Remove empty Directory and Make Listfile
 ECHO   3:Archive
+ECHO   4:Update
+ECHO   5:Store Old Directory
 SET /P A="-> "
 IF 1 EQU %A% (CALL :MAKE_ARCHIVE_DIRECTORY)
 IF 2 EQU %A% (
@@ -65,6 +68,13 @@ IF 3 EQU %A% (
 	CALL :MAKE_LIST_FILE
 	CALL :MAKE_7Z_FILE
 )
+IF 4 EQU %A% (
+	CALL :FIND_BACKUPS
+	IF DEFINED BASE_ARCHIVE_FILE (
+		CALL :UPDATE_7Z_FILE
+	)
+)
+IF 5 EQU %A% (CALL :STORE_OLD_DIR)
 
 CALL :Msg Finished
 EXIT
@@ -86,7 +96,7 @@ REM ======================================================================
 :REMOVE_EMPTY_DIR
 	REM DIR /A:D /B > directory.list
 	CALL :CheckDirectory %ARCHIVE_ROOT_DIR_NAME%
-	CD %ARCHIVE_ROOT_DIR_NAME%
+	CALL :ChangeDirectory %ARCHIVE_ROOT_DIR_NAME%
 	FOR /F "tokens=1,2 delims= " %%C IN (%ARCHIVE_PROFILE_FILE%) DO (
 		IF EXIST "%%C" (
 			FOR /F "delims=" %%I IN ('DIR %%C /A:D/B/S ^| SORT /R') DO ( 
@@ -98,6 +108,15 @@ REM ======================================================================
 		)
 	)
 	cd ..
+	EXIT /B
+	
+:STORE_OLD_DIR
+	CALL :ChangeDirectory %ARCHIVE_ROOT_DIR_NAME%
+	SET STORE_FILE=Store\%ARCHIVE_PROFILE%-Store@%yyyy%%mm%
+	7z a -t7z -sdel %STORE_FILE%.7z -ir!_old\ -ir!_store\ -mx=0
+	7z l %STORE_FILE%.7z >%STORE_FILE%.txt
+	TYPE %STORE_FILE%.txt
+	EXIT /B
 
 :MAKE_LIST_FILE
 	TREE /F %ARCHIVE_ROOT_DIR_NAME% > %ARCHIVE_PROFILE%.txt
@@ -113,9 +132,33 @@ REM ======================================================================
 	REM SET /P ARCHIVE_PASSWORD="Password: "
 	IF "%OUTPUT_DIR%"=="" SET OUTPUT_DIR=%DESKTOP_DIR%
 	IF NOT "%ARCHIVE_PASSWORD%"=="" SET ARCHIVE_OPT_PW=-p%ARCHIVE_PASSWORD% -mhe
-	7z a -t%FILE_TYPE% %ARCHIVE_OPT_PW%  %OUTPUT_DIR%\%ARCHIVE_PROFILE%@%yyyy%%mm%%dd%.%FILE_TYPE% %ARCHIVE_ROOT_DIR_NAME% -mx=%ARCHIVE_OPT_X%
+	7z a -t%FILE_TYPE% %ARCHIVE_OPT_PW% %OUTPUT_DIR%\%ARCHIVE_PROFILE%@%yyyy%%mm%%dd%.%FILE_TYPE% %ARCHIVE_ROOT_DIR_NAME% -mx=%ARCHIVE_OPT_X% -xr!__Store
 	EXIT /B
 	
+:FIND_BACKUPS
+	CALL :CheckDirectory %BACKUPS_DIR%
+	FOR %%i IN ("%BACKUPS_DIR%\%ARCHIVE_PROFILE%@????????.%FILE_TYPE%") DO (
+		ECHO SET BASE_ARCHIVE_FILE=%%~ni>>a.cmd
+		ECHO SET BASE_ARCHIVE_PATH=%%~fi>>a.cmd
+	)
+	IF EXIST a.cmd (
+		NOTEPAD a.cmd
+		CALL a.cmd
+		DEL a.cmd
+	) ELSE (
+		CALL :Msg "Backups File not Exist."
+	)
+	EXIT /B
+
+:UPDATE_7Z_FILE
+	IF "%OUTPUT_DIR%"=="" SET OUTPUT_DIR=%DESKTOP_DIR%
+	IF NOT "%ARCHIVE_PASSWORD%"=="" SET ARCHIVE_OPT_PW=-p%ARCHIVE_PASSWORD% -mhe
+	IF NOT DEFINED BASE_ARCHIVE_FILE SET /P BASE_ARCHIVE_FILE="Base Archive File: "
+	SET UPDATE_7Z_FILE=%OUTPUT_DIR%\%BASE_ARCHIVE_FILE%_-_Update-%yyyy%%mm%%dd%.7z
+	7z u %ARCHIVE_OPT_PW% %BASE_ARCHIVE_PATH% -u- -up0q3x2z0!%UPDATE_7Z_FILE% %ARCHIVE_ROOT_DIR_NAME% -xr!__Store
+	7z l %ARCHIVE_OPT_PW% %UPDATE_7Z_FILE%
+	EXIT /B
+
 :ChangeDirectory
 	IF EXIST %1 (
 		CD /D %1

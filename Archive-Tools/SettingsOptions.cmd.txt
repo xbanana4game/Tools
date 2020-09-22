@@ -1,6 +1,10 @@
+REM ----------------------------------------------------------------------
+REM SettingsOptions
+REM ----------------------------------------------------------------------
 REM SET OUTPUT_DIR=%DESKTOP_DIR%
 REM SET ARCHIVE_ROOT_DIR_NAME=%ARCHIVE_PROFILE%
 REM SET FILE_TYPE=7z
 REM SET ARCHIVE_OPT_X=5
 REM SET ARCHIVE_PASSWORD=
-
+REM SET BACKUPS_DIR=
+REM ----------------------------------------------------------------------
