@@ -14,6 +14,8 @@ REM ======================================================================
 REM ----------------------------------------------------------------------
 REM 
 REM ----------------------------------------------------------------------
+ECHO %~dp0Games
+
 ECHO %0
 ECHO %~dp0
 CALL :isEmptyDir  %DESKTOP_DIR%
@@ -28,7 +30,7 @@ IF %ERRORLEVEL% EQU 1 (
 )
 
 IF "%1"=="" (
-	REM ˆø”‚È‚µ
+	ECHO no arg
 ) ELSE (
 	ECHO %0
 	ECHO DIR: %~dp0
@@ -127,7 +129,7 @@ REM ----------------------------------------------------------------------
 	)
 	EXIT /B 1
 
-:reqYorN
-	SET /P YorN="YorN? 1/0 -> "
+:INPUT_YorN
+	IF NOT DEFINED YorN SET /P YorN="YorN? 1/0 -> "
 	IF "%YorN%"=="" SET YorN=0
 	EXIT /B

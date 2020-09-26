@@ -15,18 +15,17 @@ REM ----------------------------------------------------------------------
 REM 
 REM ----------------------------------------------------------------------
 IF NOT DEFINED NESTERJ_DIR SET NESTERJ_DIR=%USERPROFILE%\Documents\nj051b_ja
+IF NOT DEFINED NESTERJ_SCREENSHOTS_DIR SET NESTERJ_SCREENSHOTS_DIR=%NESTERJ_DIR%\shot
 
-CALL :CheckDirectory %NESTERJ_DIR%
-IF %ERRORLEVEL% EQU 1 (
-	ECHO Directory not Exist. %DESKTOP_DIR%
-	EXIT
-)
-CD %NESTERJ_DIR%
-7z a %DOWNLOADS_DIR%\nesterJ-saves@%yyyy%%mm%%dd%.7z -spf2 state\* save\*
-CALL  :RENAME_ADD_DATE_NESTER  shot
-7z a -tzip -sdel %DOWNLOADS_DIR%\nesterJ-screenshots@%yyyy%%mm%%dd%.zip -spf2 shot\*
+CALL :ChangeDirectory %NESTERJ_DIR%
+7z a %DOCUMENTS_DIR%\nesterJ-saves@%yyyy%%mm%.7z -spf2 state\* save\*
+7z l %DOCUMENTS_DIR%\nesterJ-saves@%yyyy%%mm%.7z
+
+CALL  :RENAME_ADD_DATE_NESTER  %NESTERJ_SCREENSHOTS_DIR%
+7z a -tzip -sdel %DOCUMENTS_DIR%\nesterJ-screenshots@%yyyy%%mm%.zip %NESTERJ_SCREENSHOTS_DIR%\*
+7z l %DOCUMENTS_DIR%\nesterJ-screenshots@%yyyy%%mm%.zip
+
 PAUSE
-EXPLORER %DOWNLOADS_DIR%
 EXIT
 
 
@@ -43,16 +42,17 @@ REM ======================================================================
 		echo RENAME "%%~fi" "%%F_YYYYMMDD_HHMM%%_-_%%~ni%%~xi" >>a.cmd
 		echo ECHO RENAME "%%~fi" "%%F_YYYYMMDD_HHMM%%_-_%%~ni%%~xi" >>a.cmd
 	)
-	CALL a.cmd
-	DEL a.cmd
-	EXIT /B 0
-
-:CheckDirectory
-	IF EXIST %1 (
-		ECHO Directory %1 is Exist.
-	) ELSE (
-		SET /P ERR=Directory %1 is not Exist.
-		EXIT /B 1
+	IF EXIST a.cmd (
+		CALL a.cmd
+		DEL a.cmd
 	)
 	EXIT /B 0
-	
+
+:ChangeDirectory
+	IF EXIST %1 (
+		CD /D %1
+	) ELSE (
+		SET /P ERR=Directory %1 is not Exist.
+		EXIT
+	)
+	EXIT /B 0

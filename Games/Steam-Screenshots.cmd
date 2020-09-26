@@ -14,11 +14,12 @@ REM ======================================================================
 REM ----------------------------------------------------------------------
 REM Factorio
 REM ----------------------------------------------------------------------
-SET /P B="Save Steam Screanshots? 1/0 -> "
-IF ""=="%B%" SET B=0
+IF NOT DEFINED SAVE_STEAM_SS_FLG SET /P SAVE_STEAM_SS_FLG="Save Steam Screanshots? 1/0 -> "
+IF "%SAVE_STEAM_SS_FLG%"=="" SET SAVE_STEAM_SS_FLG=0
+
 CALL :CheckDirectory %STEAM_DIR%\userdata
 FOR /F "tokens=1,2* delims=," %%i in (steam_screenshots.txt) do CALL :ArchiveScreenshots %%i %STEAM_DIR%\%%j
-IF %B% EQU 1 CALL :7zScreenshots "%DOWNLOADS_DIR%\Steam-Screenshots-%yyyy%%mm%%dd%@%USERDOMAIN%.zip"
+IF %SAVE_STEAM_SS_FLG% EQU 1 CALL :7zScreenshots "%DOWNLOADS_DIR%\Steam-Screenshots-%yyyy%%mm%%dd%@%USERDOMAIN%.zip"
 EXPLORER %DOWNLOADS_DIR%
 EXIT
 

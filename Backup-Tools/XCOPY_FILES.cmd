@@ -32,6 +32,7 @@ EXIT
 	ECHO To: %COPY_TO%
 	ECHO XCOPY %COPY_FROM% %COPY_TO%
 	XCOPY %COPY_FROM% %COPY_TO% /Y /H /S /E /F /K /L >copy-list@%COPY_PROFILE%.txt
+	START copy-list@%COPY_PROFILE%.txt
 	EXIT /B
 
 :EXEC_XCOPY

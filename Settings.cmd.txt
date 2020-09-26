@@ -28,7 +28,7 @@ SET DOCUMENTS_DIR=%USERPROFILE%\Documents
 SET VIDEOS_DIR=%USERPROFILE%\Videos
 SET ARCHIVE_DIR=D:\Downloads
 SET UPLOADS_DIR=%ARCHIVE_DIR%\Uploads
-SET PATH=%PATH%;C:\Program Files\7-Zip;C:\Program Files (x86)\GnuPG\bin;
+SET PATH=%PATH%;C:\Program Files\7-Zip;C:\Program Files (x86)\GnuPG\bin
 
 REM ----------------------------------------------------------------------
 REM Archive-Tools

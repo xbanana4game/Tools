@@ -47,12 +47,15 @@ REM ======================================================================
 		echo :"RENAME_%%~ni" >>a.cmd
 		echo SET /A FILE_COUNT=%%FILE_COUNT%%+1 >>a.cmd
 		
-		echo RENAME "%%~fi" "%%F_YYYYMMDD_HHMM%%-%%FILE_COUNT%%%%~xi" >>a.cmd
-		echo IF %%ERRORLEVEL%% EQU 1 GOTO :"RENAME_%%~ni" >>a.cmd
+		REM %%F_YYYYMMDD_HHMM%%-%%FILE_COUNT%%%%~xi
+		echo IF EXIST "%%~dpi%%F_YYYYMMDD_HHMM%%-%%FILE_COUNT%%%%~xi" GOTO :"RENAME_%%~ni" >>a.cmd
 		echo ECHO RENAME "%%~fi" "%%F_YYYYMMDD_HHMM%%-%%FILE_COUNT%%%%~xi" >>a.cmd
+		echo RENAME "%%~fi" "%%F_YYYYMMDD_HHMM%%-%%FILE_COUNT%%%%~xi" >>a.cmd
 	)
-	CALL a.cmd
-	DEL a.cmd
+	IF EXIST a.cmd (
+		CALL a.cmd
+		DEL a.cmd
+	)
 	EXIT /B 0
 
 	

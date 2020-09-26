@@ -1,5 +1,7 @@
 # Tools
 
+memomoemomemomoemomemomoemomemomoemomemomoemomemomoemo
+
 INSTALL.cmd
 	Settings.cmd
 	SettingsOptions.cmd
@@ -19,4 +21,7 @@ Settings
 	
 Archive-Extension.cmd
 	指定した拡張子のファイルをアーカイブする
+
+
+.archiveファイルはArchive-Tool.cmdで開くように設定する
 

@@ -5,6 +5,12 @@ REM ----------------------------------------------------------------------
 IF NOT EXIST %USERPROFILE%\Settings.cmd (EXIT)
 CALL %USERPROFILE%\Settings.cmd
 
+
+REM ======================================================================
+REM
+REM                                Main
+REM
+REM ======================================================================
 REM ----------------------------------------------------------------------
 REM 
 REM ----------------------------------------------------------------------
@@ -18,7 +24,10 @@ REM ----------------------------------------------------------------------
 REM Make list file
 REM ----------------------------------------------------------------------
 IF "%1"=="" (
-	FOR %%i IN ("%ARCHIVE_DIR%\%YYYYMM%\*.7z") DO (
+	FOR %%i IN ("%ARCHIVE_DIR%\%YYYYMM%\DL_*.7z") DO (
+		7z l -p%ARCHIVE_PASSWORD% %%i
+	)
+	FOR %%i IN ("%ARCHIVE_DIR%\%YYYYMM%\UL_*.7z") DO (
 		7z l -p%ARCHIVE_PASSWORD% %%i
 	)
 ) ELSE (
@@ -34,9 +43,10 @@ SET /P EXTRACT_EXT="Enter Extract Target. (Default:*) -> "
 IF "%EXTRACT_EXT%"=="" SET EXTRACT_EXT=*
 
 IF "%1"=="" (
-	FOR %%i IN ("%ARCHIVE_DIR%\%YYYYMM%\*.7z") DO CALL :Extract7zALL %%i %EXTRACT_EXT%
+	FOR %%i IN ("%ARCHIVE_DIR%\%YYYYMM%\DL_*.7z") DO CALL :Extract7zALL %%i %EXTRACT_EXT%
+	FOR %%i IN ("%ARCHIVE_DIR%\%YYYYMM%\UL_*.7z") DO CALL :Extract7zALL %%i %EXTRACT_EXT%
 ) ELSE (
-	FOR %%i in (%*) DO (CALL :Extract7z %%i %EXTRACT_EXT%)
+	FOR %%i in (%*) DO CALL :Extract7z %%i %EXTRACT_EXT%
 )
 EXPLORER %EXTRACT_TARGET_DIR%
 
@@ -57,7 +67,6 @@ REM ----------------------------------------------------------------------
 	SET EXTRACT_EXT=%2
 	7z x -p%ARCHIVE_PASSWORD% %EXTRACT_FILE% -o%EXTRACT_TARGET_DIR%\* %EXTRACT_EXT% -r
 	EXIT /B
-
 
 :Extract7zALL
 	SET EXTRACT_FILE=%1
