@@ -136,8 +136,8 @@ REM ======================================================================
 	EXIT /B
 	
 :FIND_BACKUPS
-	CALL :CheckDirectory %BACKUPS_DIR%
-	FOR %%i IN ("%BACKUPS_DIR%\%ARCHIVE_PROFILE%@????????.%FILE_TYPE%") DO (
+	CALL :CheckDirectory %BACKUPS_DIR%\7z
+	FOR %%i IN ("%BACKUPS_DIR%\7z\%ARCHIVE_PROFILE%@????????.%FILE_TYPE%") DO (
 		ECHO SET BASE_ARCHIVE_FILE=%%~ni>>a.cmd
 		ECHO SET BASE_ARCHIVE_PATH=%%~fi>>a.cmd
 	)
@@ -151,11 +151,12 @@ REM ======================================================================
 	EXIT /B
 
 :UPDATE_7Z_FILE
+	SET UPDATE_SWITCH_OPT=p0q3x2z0
 	IF "%OUTPUT_DIR%"=="" SET OUTPUT_DIR=%DESKTOP_DIR%
 	IF NOT "%ARCHIVE_PASSWORD%"=="" SET ARCHIVE_OPT_PW=-p%ARCHIVE_PASSWORD% -mhe
 	IF NOT DEFINED BASE_ARCHIVE_FILE SET /P BASE_ARCHIVE_FILE="Base Archive File: "
 	SET UPDATE_7Z_FILE=%OUTPUT_DIR%\%BASE_ARCHIVE_FILE%_-_Update-%yyyy%%mm%%dd%.7z
-	7z u %ARCHIVE_OPT_PW% %BASE_ARCHIVE_PATH% -u- -up0q3x2z0!%UPDATE_7Z_FILE% %ARCHIVE_ROOT_DIR_NAME% -xr!__Store
+	7z u %ARCHIVE_OPT_PW% %BASE_ARCHIVE_PATH% -u- -u%UPDATE_SWITCH_OPT%!%UPDATE_7Z_FILE% %ARCHIVE_ROOT_DIR_NAME% -xr!__Store
 	7z l %ARCHIVE_OPT_PW% %UPDATE_7Z_FILE%
 	EXIT /B
 
