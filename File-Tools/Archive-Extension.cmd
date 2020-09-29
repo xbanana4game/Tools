@@ -14,21 +14,17 @@ REM ======================================================================
 REM ----------------------------------------------------------------------
 REM 
 REM ----------------------------------------------------------------------
+SET /P ARCHIVE_PREFIX="Enter PREFIX: "
 SET /P ARCHIVE_EXT="Enter EXT: "
-7z a -t7z -sdel %ARCHIVE_EXT%-files.7z  *.%ARCHIVE_EXT% -r
-7z l %ARCHIVE_EXT%-files.7z
+IF "%ARCHIVE_EXT%"=="" SET ARCHIVE_EXT=xxx
 
-CALL :Msg Finished
+SET OUTPUT_FILENAME=%ARCHIVE_PREFIX%_%ARCHIVE_EXT%-files
+IF "%ARCHIVE_PREFIX%"=="" SET OUTPUT_FILENAME=%ARCHIVE_EXT%-files
+
+7z a -t7z -sdel %OUTPUT_FILENAME%.7z  %ARCHIVE_PREFIX%*.%ARCHIVE_EXT% -r -xr!Archive-Extension.cmd
+7z l %OUTPUT_FILENAME%.7z >%OUTPUT_FILENAME%.txt
+TYPE %OUTPUT_FILENAME%.txt
+
+PAUSE
 EXIT
-
-
-REM ======================================================================
-REM
-REM                                Function
-REM
-REM ======================================================================
-:Msg
-	SET MSG=%1
-	SET /P END=%MSG%
-	EXIT /B
 

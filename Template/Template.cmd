@@ -2,8 +2,8 @@
 REM ----------------------------------------------------------------------
 REM Read Settings
 REM ----------------------------------------------------------------------
-IF NOT EXIST %USERPROFILE%\Settings.cmd (EXIT)
-CALL %USERPROFILE%\Settings.cmd
+IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
+CALL %USERPROFILE%\.Tools\Settings.cmd
 
 
 REM ======================================================================
@@ -14,8 +14,7 @@ REM ======================================================================
 REM ----------------------------------------------------------------------
 REM 
 REM ----------------------------------------------------------------------
-ECHO %~dp0Games
-
+ECHO %~dp0
 ECHO %0
 ECHO %~dp0
 CALL :isEmptyDir  %DESKTOP_DIR%
@@ -35,11 +34,10 @@ IF "%1"=="" (
 	ECHO %0
 	ECHO DIR: %~dp0
 	ECHO .
-	for %%i in (%*) do (
+	FOR %%i IN (%*) DO (
 		ECHO %%i
 		ECHO NAME: %%~ni
 		ECHO DIR: %%~dpi
-		ECHO CALL :makeGpg %GPG_USER_ID% %%~nxi.gpg %%i
 		ECHO .
 	)
 )

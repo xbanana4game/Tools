@@ -40,12 +40,11 @@ REM ----------------------------------------------------------------------
 SET FILE_TYPE=7z
 SET ARCHIVE_OPT_X=5
 SET ARCHIVE_ROOT_DIR_NAME=%ARCHIVE_PROFILE%
-ECHO SettingsOptions@%ARCHIVE_PROFILE%.cmd
-IF EXIST %ARCHIVE_PATH%\SettingsOptions@%ARCHIVE_PROFILE%.cmd (
-	TYPE %ARCHIVE_PATH%\SettingsOptions@%ARCHIVE_PROFILE%.cmd
-	CALL %ARCHIVE_PATH%\SettingsOptions@%ARCHIVE_PROFILE%.cmd
+SET REMOVE_EMPTY_DIR_FLG=1
+IF EXIST %ARCHIVE_PATH%\SettingsOptions.cmd (
+	TYPE %ARCHIVE_PATH%\SettingsOptions.cmd
+	CALL %ARCHIVE_PATH%\SettingsOptions.cmd
 )
-
 
 REM ----------------------------------------------------------------------
 REM 
@@ -60,11 +59,11 @@ ECHO   5:Store Old Directory
 SET /P A="-> "
 IF 1 EQU %A% (CALL :MAKE_ARCHIVE_DIRECTORY)
 IF 2 EQU %A% (
-	CALL :REMOVE_EMPTY_DIR
+	IF %REMOVE_EMPTY_DIR_FLG%==1 CALL :REMOVE_EMPTY_DIR
 	CALL :MAKE_LIST_FILE
 )
 IF 3 EQU %A% (
-	CALL :REMOVE_EMPTY_DIR
+	IF %REMOVE_EMPTY_DIR_FLG%==1 CALL :REMOVE_EMPTY_DIR
 	CALL :MAKE_LIST_FILE
 	CALL :MAKE_7Z_FILE
 )
@@ -94,8 +93,7 @@ REM ======================================================================
 	EXIT /B
 
 :REMOVE_EMPTY_DIR
-	REM DIR /A:D /B > directory.list
-	CALL :CheckDirectory %ARCHIVE_ROOT_DIR_NAME%
+	REM DIR /A:D /B > directory.txt
 	CALL :ChangeDirectory %ARCHIVE_ROOT_DIR_NAME%
 	FOR /F "tokens=1,2 delims= " %%C IN (%ARCHIVE_PROFILE_FILE%) DO (
 		IF EXIST "%%C" (
@@ -121,7 +119,7 @@ REM ======================================================================
 :MAKE_LIST_FILE
 	TREE /F %ARCHIVE_ROOT_DIR_NAME% > %ARCHIVE_PROFILE%.txt
 	COPY %ARCHIVE_PROFILE%.txt %ARCHIVE_PROFILE%@%yyyy%%mm%%dd%.txt
-	7z a -tzip  %ARCHIVE_ROOT_DIR_NAME%\Settings@%ARCHIVE_PROFILE%.zip  %ARCHIVE_PATH%\SettingsOptions@%ARCHIVE_PROFILE%.cmd  %ARCHIVE_PROFILE_FILE% %ARCHIVE_PROFILE%@%yyyy%%mm%%dd%.txt
+	7z a -tzip  %ARCHIVE_ROOT_DIR_NAME%\Settings@%ARCHIVE_PROFILE%.zip  %ARCHIVE_PATH%\SettingsOptions.cmd  %ARCHIVE_PROFILE_FILE% %ARCHIVE_PROFILE%@%yyyy%%mm%%dd%.txt
 	DEL %ARCHIVE_PROFILE%@%yyyy%%mm%%dd%.txt
 	EXIT /B
 
@@ -136,8 +134,8 @@ REM ======================================================================
 	EXIT /B
 	
 :FIND_BACKUPS
-	CALL :CheckDirectory %BACKUPS_DIR%\7z
-	FOR %%i IN ("%BACKUPS_DIR%\7z\%ARCHIVE_PROFILE%@????????.%FILE_TYPE%") DO (
+	CALL :CheckDirectory %BACKUPS_DIR%
+	FOR %%i IN ("%BACKUPS_DIR%\%ARCHIVE_PROFILE%@????????.%FILE_TYPE%") DO (
 		ECHO SET BASE_ARCHIVE_FILE=%%~ni>>a.cmd
 		ECHO SET BASE_ARCHIVE_PATH=%%~fi>>a.cmd
 	)

@@ -116,7 +116,7 @@ REM ----------------------------------------------------------------------
 	EXIT /B 1
 
 :moveFiles
-	IF EXIST %USERPROFILE%\MoveFiles@%USERDOMAIN%.cmd (CALL %USERPROFILE%\MoveFiles@%USERDOMAIN%.cmd)
+	IF EXIST %TOOLS_INSTALL_DIR%\MoveFiles.cmd (CALL %TOOLS_INSTALL_DIR%\MoveFiles.cmd)
 	EXIT /B
 
 :Msg

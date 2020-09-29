@@ -47,6 +47,7 @@ REM ======================================================================
 	)
 	IF EXIST a.cmd (
 		CALL a.cmd
+		TYPE a.cmd
 		DEL a.cmd
 	)
 	EXIT /B 0

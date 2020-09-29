@@ -1,6 +1,6 @@
 @ECHO OFF
 REM ----------------------------------------------------------------------
-REM Ý’èƒtƒ@ƒCƒ‹“Ç‚Ýž‚Ý
+REM Read Settings
 REM ----------------------------------------------------------------------
 IF NOT EXIST %USERPROFILE%\Settings.cmd (EXIT)
 CALL %USERPROFILE%\Settings.cmd
@@ -14,8 +14,24 @@ REM ======================================================================
 REM ----------------------------------------------------------------------
 REM 
 REM ----------------------------------------------------------------------
-REM SET LNK_DIR=%~p0
-SET LNK_DIR=%DESKTOP_DIR%
-for %%i in (%*) do (
-	MKLINK /H "%LNK_DIR%\%%~nxi" %%i
+IF NOT "%1"=="" (
+	FOR %%i IN (%*) DO (
+		ECHO REM ======================================================================>>a.cmd
+		ECHO REM %%i>>a.cmd
+		ECHO REM ======================================================================>>a.cmd
+		echo SET F_DATE=%%~ti>>a.cmd
+		echo SET F_YYYYMMDD=%%F_DATE:~0,4%%%%F_DATE:~5,2%%%%F_DATE:~8,2%%>>a.cmd
+		echo RENAME "%%i" "%%~ni@%%F_YYYYMMDD%%%%~xi">>a.cmd
+		echo MKLINK /H "%%i" "%%~dpi%%~ni@%%F_YYYYMMDD%%%%~xi">>a.cmd
+	)
+	IF EXIST a.cmd (
+		CALL a.cmd
+		TYPE a.cmd
+		DEL a.cmd
+	)
 )
+PAUSE
+EXIT
+
+
+

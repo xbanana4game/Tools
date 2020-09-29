@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TriggerCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Triggers>
+		<Trigger>
+			<Guid>Fs2/XC9JyUKyFMcsKnML8w==</Guid>
+			<Name>Archive-kdbx.cmd</Name>
+			<Events>
+				<Event>
+					<TypeGuid>lcGm/XJ8QMei+VsPoJljHA==</TypeGuid>
+					<Parameters>
+						<Parameter>0</Parameter>
+						<Parameter />
+					</Parameters>
+				</Event>
+			</Events>
+			<Conditions />
+			<Actions>
+				<Action>
+					<TypeGuid>2uX4OwcwTBOe7y66y27kxw==</TypeGuid>
+					<Parameters>
+						<Parameter>%USERPROFILE%\.Tools\bin\Archive-kdbx.cmd</Parameter>
+						<Parameter>{DB_PATH}</Parameter>
+						<Parameter>False</Parameter>
+						<Parameter>0</Parameter>
+						<Parameter />
+					</Parameters>
+				</Action>
+			</Actions>
+		</Trigger>
+	</Triggers>
+</TriggerCollection>
