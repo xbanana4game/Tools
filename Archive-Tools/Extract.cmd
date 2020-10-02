@@ -11,47 +11,13 @@ REM
 REM                                Main
 REM
 REM ======================================================================
-REM ----------------------------------------------------------------------
-REM 
-REM ----------------------------------------------------------------------
+REM SET ARCHIVE_DIR=%BACKUPS_DIR%\Downloads
 DIR /B %ARCHIVE_DIR%
-IF "%1"=="" (
-	SET /P YYYYMM="Select YYYYMM. default:%yyyy%%mm%->"
-)
-IF "%YYYYMM%"=="" SET YYYYMM=%yyyy%%mm%
-
-REM ----------------------------------------------------------------------
-REM Make list file
-REM ----------------------------------------------------------------------
-IF "%1"=="" (
-	FOR %%i IN ("%ARCHIVE_DIR%\%YYYYMM%\DL_*.7z") DO (
-		7z l -p%ARCHIVE_PASSWORD% %%i
-	)
-	FOR %%i IN ("%ARCHIVE_DIR%\%YYYYMM%\UL_*.7z") DO (
-		7z l -p%ARCHIVE_PASSWORD% %%i
-	)
-) ELSE (
-	FOR %%i IN (%*) DO (
-		7z l -p%ARCHIVE_PASSWORD% %%i
-	)
-)
-
-REM ----------------------------------------------------------------------
-REM Extract 
-REM ----------------------------------------------------------------------
-SET /P EXTRACT_EXT="Enter Extract Target. (Default:*) -> "
-IF "%EXTRACT_EXT%"=="" SET EXTRACT_EXT=*
-
-IF "%1"=="" (
-	FOR %%i IN ("%ARCHIVE_DIR%\%YYYYMM%\DL_*.7z") DO CALL :Extract7zALL %%i %EXTRACT_EXT%
-	FOR %%i IN ("%ARCHIVE_DIR%\%YYYYMM%\UL_*.7z") DO CALL :Extract7zALL %%i %EXTRACT_EXT%
-) ELSE (
-	FOR %%i in (%*) DO CALL :Extract7z %%i %EXTRACT_EXT%
-)
-EXPLORER %EXTRACT_TARGET_DIR%
-
+SET /P EXTRACT_YYYY="Enter Extract YYYY or YYYYMM. (Default:%yyyy%) -> "
+IF "%EXTRACT_YYYY%"=="" SET EXTRACT_YYYY=%yyyy%
+CALL :MAKE_LIST_FILE
+CALL :EXTRACT_YYYYMM_ALL
 EXIT
-
 
 
 REM ======================================================================
@@ -59,18 +25,29 @@ REM
 REM                                Function
 REM
 REM ======================================================================
-REM ----------------------------------------------------------------------
-REM CALL :Extract7z [TARGET] [EXT]
-REM ----------------------------------------------------------------------
-:Extract7z
-	SET EXTRACT_FILE=%1
-	SET EXTRACT_EXT=%2
-	7z x -p%ARCHIVE_PASSWORD% %EXTRACT_FILE% -o%EXTRACT_TARGET_DIR%\* %EXTRACT_EXT% -r
+:MAKE_LIST_FILE
+	FOR /D %%i IN ("%ARCHIVE_DIR%\%EXTRACT_YYYY%*") DO (
+		FOR %%j IN ("%ARCHIVE_DIR%\%%~ni\DL_*.7z") DO (
+			7z l -p%ARCHIVE_PASSWORD% %%j
+		)
+		FOR %%j IN ("%ARCHIVE_DIR%\%%~ni\UL_*.7z") DO (
+			7z l -p%ARCHIVE_PASSWORD% %%j
+		)
+	)
 	EXIT /B
 
-:Extract7zALL
-	SET EXTRACT_FILE=%1
-	SET EXTRACT_EXT=%2
-	7z x -p%ARCHIVE_PASSWORD% %EXTRACT_FILE% -o%EXTRACT_TARGET_DIR%\%YYYYMM% -aot %EXTRACT_EXT% -r
+:EXTRACT_YYYYMM_ALL
+	SET /P EXTRACT_EXT="Enter Extract Target. (Default:*) -> "
+	IF "%EXTRACT_EXT%"=="" SET EXTRACT_EXT=*
+	IF NOT DEFINED EXTRACT_TARGET_DIR SET /P EXTRACT_TARGET_DIR="SET EXTRACT_TARGET_DIR (Default:%DESKTOP_DIR%) -> "
+	IF "%EXTRACT_TARGET_DIR%"=="" SET EXTRACT_TARGET_DIR=%DESKTOP_DIR%
+	FOR /D %%i IN ("%ARCHIVE_DIR%\%EXTRACT_YYYY%*") DO (
+		FOR %%j IN ("%ARCHIVE_DIR%\%%~ni\DL_*.7z") DO (
+			7z x -p%ARCHIVE_PASSWORD% %%j -o%EXTRACT_TARGET_DIR%\%%~ni -aot %EXTRACT_EXT% -r
+		)
+		FOR %%j IN ("%ARCHIVE_DIR%\%%~ni\UL_*.7z") DO (
+			7z x -p%ARCHIVE_PASSWORD% %%j -o%EXTRACT_TARGET_DIR%\%%~ni -aot %EXTRACT_EXT% -r
+		)
+	)
 	EXIT /B
-
+	

@@ -11,12 +11,7 @@ REM
 REM                                Main
 REM
 REM ======================================================================
-REM ----------------------------------------------------------------------
-REM 
-REM ----------------------------------------------------------------------
-SET /P ARCHIVE_PREFIX="Enter PREFIX: "
-SET /P ARCHIVE_EXT="Enter EXT: "
-IF "%ARCHIVE_EXT%"=="" SET ARCHIVE_EXT=xxx
+CALL :INPUT_SETTINGS
 
 SET OUTPUT_FILENAME=%ARCHIVE_PREFIX%_%ARCHIVE_EXT%-files
 IF "%ARCHIVE_PREFIX%"=="" SET OUTPUT_FILENAME=%ARCHIVE_EXT%-files
@@ -27,4 +22,18 @@ TYPE %OUTPUT_FILENAME%.txt
 
 PAUSE
 EXIT
+
+
+REM ======================================================================
+REM
+REM                                Function
+REM
+REM ======================================================================
+:INPUT_SETTINGS
+	IF NOT DEFINED ARCHIVE_PREFIX (SET /P ARCHIVE_PREFIX="Enter PREFIX: ")
+	IF NOT DEFINED ARCHIVE_PREFIX (SET ARCHIVE_PREFIX=)
+	IF NOT DEFINED ARCHIVE_EXT (SET /P ARCHIVE_EXT="Enter EXT: ")
+	IF NOT DEFINED ARCHIVE_EXT (SET ARCHIVE_EXT=xxx)
+	EXIT /B
+
 

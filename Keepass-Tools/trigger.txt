@@ -6,7 +6,7 @@
 			<Name>Archive-kdbx.cmd</Name>
 			<Events>
 				<Event>
-					<TypeGuid>lcGm/XJ8QMei+VsPoJljHA==</TypeGuid>
+					<TypeGuid>s6j9/ngTSmqcXdW6hDqbjg==</TypeGuid>
 					<Parameters>
 						<Parameter>0</Parameter>
 						<Parameter />

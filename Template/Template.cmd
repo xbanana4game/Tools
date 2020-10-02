@@ -1,7 +1,9 @@
 @ECHO OFF
-REM ----------------------------------------------------------------------
-REM Read Settings
-REM ----------------------------------------------------------------------
+REM ======================================================================
+REM
+REM                                Settings
+REM
+REM ======================================================================
 IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
 
@@ -11,9 +13,7 @@ REM
 REM                                Main
 REM
 REM ======================================================================
-REM ----------------------------------------------------------------------
-REM 
-REM ----------------------------------------------------------------------
+CALL :INPUT_SETTINGS TEST "Set TEST : " 0
 ECHO %~dp0
 ECHO %0
 ECHO %~dp0
@@ -42,9 +42,8 @@ IF "%1"=="" (
 	)
 )
 
-CALL :Msg Finished
+PAUSE
 EXIT
-
 
 
 REM ======================================================================
@@ -52,9 +51,6 @@ REM
 REM                                Function
 REM
 REM ======================================================================
-REM ----------------------------------------------------------------------
-REM CALL :CheckDirectory [directory]
-REM ----------------------------------------------------------------------
 :CheckDirectory
 	IF EXIST %1 (
 		ECHO Directory %1 is Exist.
@@ -78,18 +74,12 @@ REM ----------------------------------------------------------------------
 	SET /P END=%MSG%
 	EXIT /B
 
-REM ----------------------------------------------------------------------
-REM CALL :ArchiveEXE [Output EXE FILE NAME] [INPUT FILE]
-REM ----------------------------------------------------------------------
 :ArchiveEXE
 	SET OUT=%1
 	SET IN=%2
 	7z a -sfx7z.sfx %OUT% %IN%
 	EXIT /B %ERRORLEVEL%
 
-REM ----------------------------------------------------------------------
-REM CALL :Archive7z [Output EXE FILE NAME] [INPUT FILE]
-REM ----------------------------------------------------------------------
 :Archive7z
 	SET OUT=%1
 	SET IN=%2
@@ -131,3 +121,21 @@ REM ----------------------------------------------------------------------
 	IF NOT DEFINED YorN SET /P YorN="YorN? 1/0 -> "
 	IF "%YorN%"=="" SET YorN=0
 	EXIT /B
+	
+:INPUT_SETTINGS
+	IF EXIST input.cmd DEL input.cmd
+	SET INPUT_ENV=%1
+	SET INPUT_COMMENT=%2
+	SET DEFAULT_VAL=%3
+	echo IF NOT DEFINED %INPUT_ENV% (SET /P %INPUT_ENV%=%INPUT_COMMENT%)>>input.cmd
+	echo IF NOT DEFINED %INPUT_ENV% (SET %INPUT_ENV%=%DEFAULT_VAL%)>>input.cmd
+	IF EXIST input.cmd (
+		CALL input.cmd
+		TYPE input.cmd >>%DESKTOP_DIR%\input.cmd.txt
+		DEL input.cmd
+	)
+	SET %INPUT_ENV%
+	EXIT /B
+
+
+

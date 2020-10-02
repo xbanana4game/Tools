@@ -1,9 +1,12 @@
 @ECHO OFF
-REM ----------------------------------------------------------------------
-REM Read Settings
-REM ----------------------------------------------------------------------
-IF NOT EXIST %USERPROFILE%\Settings.cmd (EXIT)
-CALL %USERPROFILE%\Settings.cmd
+REM ======================================================================
+REM
+REM                                Settings
+REM
+REM ======================================================================
+IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
+CALL %USERPROFILE%\.Tools\Settings.cmd
+
 
 REM ======================================================================
 REM
@@ -55,7 +58,7 @@ ECHO   1:Make Directory
 ECHO   2:Remove empty Directory and Make Listfile
 ECHO   3:Archive
 ECHO   4:Update
-ECHO   5:Store Old Directory
+ECHO   5:Store Old Directory (_store, _old)
 SET /P A="-> "
 IF 1 EQU %A% (CALL :MAKE_ARCHIVE_DIRECTORY)
 IF 2 EQU %A% (

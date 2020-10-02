@@ -37,10 +37,11 @@ REM ======================================================================
 :RENAME_ADD_DATE_NESTER
 	SET TARGET_DIR_NAME=%1%
 	FOR %%i in (%TARGET_DIR_NAME%\*) DO (
-		echo SET F_DATE=%%~ti>>a.cmd
-		echo SET F_YYYYMMDD_HHMM=%%F_DATE:~0,4%%%%F_DATE:~5,2%%%%F_DATE:~8,2%%-%%F_DATE:~11,2%%%%F_DATE:~14,2%%>>a.cmd
-		echo RENAME "%%~fi" "%%F_YYYYMMDD_HHMM%%_-_%%~ni%%~xi" >>a.cmd
-		echo ECHO RENAME "%%~fi" "%%F_YYYYMMDD_HHMM%%_-_%%~ni%%~xi" >>a.cmd
+		ECHO %%~nxi
+		ECHO SET F_DATE=%%~ti>>a.cmd
+		ECHO SET F_YYYYMMDD_HHMM=%%F_DATE:~0,4%%%%F_DATE:~5,2%%%%F_DATE:~8,2%%-%%F_DATE:~11,2%%%%F_DATE:~14,2%%>>a.cmd
+		ECHO RENAME "%%~fi" "%%F_YYYYMMDD_HHMM%%_-_%%~ni%%~xi" >>a.cmd
+		ECHO ECHO RENAME "%%~fi" "%%F_YYYYMMDD_HHMM%%_-_%%~ni%%~xi" >>a.cmd
 	)
 	IF EXIST a.cmd (
 		CALL a.cmd

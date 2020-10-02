@@ -31,7 +31,6 @@ EXPLORER %DOCUMENTS_DIR%
 EXIT
 
 
-
 REM ======================================================================
 REM
 REM                                Function
@@ -40,17 +39,18 @@ REM ======================================================================
 :RENAME_ADD_DATE_OSU
 	SET TARGET_DIR_NAME=%1%
 	FOR %%i in (%TARGET_DIR_NAME%\screenshot*.jpg) DO (
-		echo SET F_DATE=%%~ti>>a.cmd
-		echo SET F_YYYYMMDD_HHMM=%%F_DATE:~0,4%%%%F_DATE:~5,2%%%%F_DATE:~8,2%%-%%F_DATE:~11,2%%%%F_DATE:~14,2%%>>a.cmd
+		ECHO %%~nxi
+		ECHO SET F_DATE=%%~ti>>a.cmd
+		ECHO SET F_YYYYMMDD_HHMM=%%F_DATE:~0,4%%%%F_DATE:~5,2%%%%F_DATE:~8,2%%-%%F_DATE:~11,2%%%%F_DATE:~14,2%%>>a.cmd
 		
-		echo SET FILE_COUNT=0 >>a.cmd
-		echo :"RENAME_%%~ni" >>a.cmd
-		echo SET /A FILE_COUNT=%%FILE_COUNT%%+1 >>a.cmd
+		ECHO SET FILE_COUNT=0 >>a.cmd
+		ECHO :"RENAME_%%~ni" >>a.cmd
+		ECHO SET /A FILE_COUNT=%%FILE_COUNT%%+1 >>a.cmd
 		
 		REM %%F_YYYYMMDD_HHMM%%-%%FILE_COUNT%%%%~xi
-		echo IF EXIST "%%~dpi%%F_YYYYMMDD_HHMM%%-%%FILE_COUNT%%%%~xi" GOTO :"RENAME_%%~ni" >>a.cmd
-		echo ECHO RENAME "%%~fi" "%%F_YYYYMMDD_HHMM%%-%%FILE_COUNT%%%%~xi" >>a.cmd
-		echo RENAME "%%~fi" "%%F_YYYYMMDD_HHMM%%-%%FILE_COUNT%%%%~xi" >>a.cmd
+		ECHO IF EXIST "%%~dpi%%F_YYYYMMDD_HHMM%%-%%FILE_COUNT%%%%~xi" GOTO :"RENAME_%%~ni" >>a.cmd
+		ECHO ECHO RENAME "%%~fi" "%%F_YYYYMMDD_HHMM%%-%%FILE_COUNT%%%%~xi" >>a.cmd
+		ECHO RENAME "%%~fi" "%%F_YYYYMMDD_HHMM%%-%%FILE_COUNT%%%%~xi" >>a.cmd
 	)
 	IF EXIST a.cmd (
 		CALL a.cmd

@@ -1,9 +1,11 @@
 @ECHO OFF
-REM ----------------------------------------------------------------------
-REM 設定ファイル読み込み
-REM ----------------------------------------------------------------------
-IF NOT EXIST %USERPROFILE%\Settings.cmd (EXIT)
-CALL %USERPROFILE%\Settings.cmd
+REM ======================================================================
+REM
+REM                                Settings
+REM
+REM ======================================================================
+IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
+CALL %USERPROFILE%\.Tools\Settings.cmd
 
 
 REM ======================================================================
@@ -12,14 +14,16 @@ REM                                Main
 REM
 REM ======================================================================
 REM ----------------------------------------------------------------------
-REM Factorio
+REM 
 REM ----------------------------------------------------------------------
-IF NOT DEFINED SAVE_STEAM_SS_FLG SET /P SAVE_STEAM_SS_FLG="Save Steam Screanshots? 1/0 -> "
+IF NOT DEFINED SAVE_STEAM_SS_FLG SET /P SAVE_STEAM_SS_FLG="SAVE_STEAM_SS_FLG [1|0] -> "
 IF "%SAVE_STEAM_SS_FLG%"=="" SET SAVE_STEAM_SS_FLG=0
-
 CALL :CheckDirectory %STEAM_DIR%\userdata
-FOR /F "tokens=1,2* delims=," %%i in (steam_screenshots.txt) do CALL :ArchiveScreenshots %%i %STEAM_DIR%\%%j
-IF %SAVE_STEAM_SS_FLG% EQU 1 CALL :7zScreenshots "%DOWNLOADS_DIR%\Steam-Screenshots-%yyyy%%mm%%dd%@%USERDOMAIN%.zip"
+
+FOR /F "tokens=1,2* delims=," %%i IN (steam_screenshots.txt) DO CALL :ArchiveGameScreenshots %%i %%j
+IF %SAVE_STEAM_SS_FLG% EQU 1 CALL :ArchiveSteamScreenshots 
+
+PAUSE
 EXPLORER %DOWNLOADS_DIR%
 EXIT
 
@@ -29,9 +33,6 @@ REM
 REM                                Function
 REM
 REM ======================================================================
-REM ----------------------------------------------------------------------
-REM ディレクトリーチェック
-REM ----------------------------------------------------------------------
 :CheckDirectory
 	IF EXIST %1 (
 		ECHO Directory %1 is Exist.
@@ -41,34 +42,22 @@ REM ----------------------------------------------------------------------
 	)
 	EXIT /B 0
 
-REM ----------------------------------------------------------------------
-REM Archive7z [Output EXE FILE NAME] [INPUT FILE]
-REM ----------------------------------------------------------------------
-:Archive7z
-	SET OUT=%1%
-	SET IN=%2%
-	echo /P A="%OUT% %IN%"
-	7z a -tzip -sdel %OUT% %IN% -xr!thumbnails
-	EXIT /B
-
-REM ----------------------------------------------------------------------
-REM :ArchiveScreenshots [GameName] [Scrennshots_DIR]
-REM ----------------------------------------------------------------------
-:ArchiveScreenshots
+:ArchiveGameScreenshots
 	SET GAME_NAME=%1%
 	SET SS_DIR=%2%
+	SET OUT="%DOWNLOADS_DIR%\%GAME_NAME%-Screenshots-%yyyy%%mm%%dd%_%hh%%mn%@%USERDOMAIN%.zip"
 	IF EXIST %SS_DIR% (
-		CALL :Archive7z "%DOWNLOADS_DIR%\%GAME_NAME%-Screenshots-%yyyy%%mm%%dd%@%USERDOMAIN%.zip" %SS_DIR%
+		7z a -tzip -sdel %OUT% %SS_DIR%
+		7z d %OUT% thumbnails -r
+		7z l %OUT%
 	)
 	EXIT /B
 
-REM ----------------------------------------------------------------------
-REM :7zScreenshots [OUTPUT]
-REM ----------------------------------------------------------------------
-:7zScreenshots
-	SET OUT=%1%
+:ArchiveSteamScreenshots
+	SET OUT="%DOWNLOADS_DIR%\Steam-Screenshots-%yyyy%%mm%%dd%_%hh%%mn%@%USERDOMAIN%.zip"
 	CALL :CheckDirectory %STEAM_DIR%\userdata
 	CD %STEAM_DIR%
 	7z a -tzip %OUT% -ir!*\screenshots\*.jpg  -xr!thumbnails
+	7z l %OUT%
 	EXIT /B
 

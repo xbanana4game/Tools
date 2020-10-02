@@ -13,12 +13,20 @@ REM
 REM                                Main
 REM
 REM ======================================================================
-REM ----------------------------------------------------------------------
-REM 
-REM ----------------------------------------------------------------------
-CALL :REMOVE_OSU_REPLAY
+IF NOT DEFINED TARGET_YYYY (SET /P TARGET_YYYY="Set TARGET : ")
+IF NOT DEFINED TARGET_YYYY (SET TARGET_YYYY=2020)
+
+SET OUTPUT=Osu!-Record-%TARGET_YYYY%.txt
+IF EXIST %OUTPUT% DEL %OUTPUT%
+FOR %%i IN (Osu!-Record-%TARGET_YYYY%*.txt) DO (
+	ECHO %%i
+	ECHO ======================================================================>>%OUTPUT%
+	ECHO %%~ni>>%OUTPUT%
+	ECHO ======================================================================>>%OUTPUT%
+	TYPE %%i>>%OUTPUT%
+)
+
 PAUSE
-EXPLORER %DOCUMENTS_DIR%\Osu!-Replay@%yyyy%%mm%.7z
 EXIT
 
 
@@ -27,22 +35,3 @@ REM
 REM                                Function
 REM
 REM ======================================================================
-REM ----------------------------------------------------------------------
-REM 
-REM ----------------------------------------------------------------------		
-:REMOVE_OSU_REPLAY
-	CALL :ChangeDirectory %OSU_DIR%
-	ECHO Start Remove Replay %OSU_DIR%
-	PAUSE
-	7z a -t7z -sdel %DOCUMENTS_DIR%\Osu!-Replay@%yyyy%%mm%.7z -spf2 %OSU_DIR%\Data\r
-	EXIT /B
-
-:ChangeDirectory
-	IF EXIST %1 (
-		CD /D %1
-	) ELSE (
-		SET /P ERR=Directory %1 is not Exist.
-		EXIT
-	)
-	EXIT /B 0
-
