@@ -18,8 +18,8 @@ IF NOT DEFINED NESTERJ_DIR SET NESTERJ_DIR=%USERPROFILE%\Documents\nj051b_ja
 IF NOT DEFINED NESTERJ_SCREENSHOTS_DIR SET NESTERJ_SCREENSHOTS_DIR=%NESTERJ_DIR%\shot
 
 CALL :ChangeDirectory %NESTERJ_DIR%
-7z a %DOCUMENTS_DIR%\nesterJ-saves@%yyyy%%mm%.7z -spf2 state\* save\*
-7z l %DOCUMENTS_DIR%\nesterJ-saves@%yyyy%%mm%.7z
+7z a %DOWNLOADS_DIR%\nesterJ-saves@%yyyy%%mm%%dd%.7z -spf2 state\* save\*
+7z l %DOWNLOADS_DIR%\nesterJ-saves@%yyyy%%mm%%dd%.7z
 
 CALL  :RENAME_ADD_DATE_NESTER  %NESTERJ_SCREENSHOTS_DIR%
 7z a -tzip -sdel %DOCUMENTS_DIR%\nesterJ-screenshots@%yyyy%%mm%.zip %NESTERJ_SCREENSHOTS_DIR%\*

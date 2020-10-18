@@ -1,0 +1,2 @@
+ARCHIVE_FILENAME TARGET
+keepass-files.7z *.kdbx

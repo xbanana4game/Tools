@@ -13,7 +13,7 @@ REM
 REM                                Main
 REM
 REM ======================================================================
-CALL :INPUT_SETTINGS TEST "Set TEST : " 0
+REM CALL :INPUT_SETTINGS TEST "SET TEST(default:) =" 0
 ECHO %~dp0
 ECHO %0
 ECHO %~dp0
@@ -28,7 +28,7 @@ IF %ERRORLEVEL% EQU 1 (
 	EXIT
 )
 
-IF "%1"=="" (
+IF ""%1""=="""" (
 	ECHO no arg
 ) ELSE (
 	ECHO %0
@@ -137,5 +137,8 @@ REM ======================================================================
 	SET %INPUT_ENV%
 	EXIT /B
 
-
-
+:MAKE_PAGE_URL
+	FOR /L %%I IN (1,1,100) DO (
+		ECHO https://www/?c=1^&p=%%I
+	)
+	EXIT /B

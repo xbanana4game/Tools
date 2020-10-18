@@ -11,15 +11,11 @@ REM
 REM                                Main
 REM
 REM ======================================================================
-CALL :INPUT_SETTINGS
-
-SET OUTPUT_FILENAME=%ARCHIVE_PREFIX%_%ARCHIVE_EXT%-files
-IF "%ARCHIVE_PREFIX%"=="" SET OUTPUT_FILENAME=%ARCHIVE_EXT%-files
-
-7z a -t7z -sdel %OUTPUT_FILENAME%.7z  %ARCHIVE_PREFIX%*.%ARCHIVE_EXT% -r -xr!Archive-Extension.cmd
-7z l %OUTPUT_FILENAME%.7z >%OUTPUT_FILENAME%.txt
-TYPE %OUTPUT_FILENAME%.txt
-
+IF "%~n1" == "ext" (
+	CALL :EXECUTE_ARCHIVE_EXT_SETTINGS_FROM_FILE %1
+) ELSE (
+	CALL :EXECUTE_ARCHIVE_EXT
+)
 PAUSE
 EXIT
 
@@ -36,4 +32,24 @@ REM ======================================================================
 	IF NOT DEFINED ARCHIVE_EXT (SET ARCHIVE_EXT=xxx)
 	EXIT /B
 
+:EXECUTE_ARCHIVE_EXT
+	CALL :INPUT_SETTINGS
+
+	SET OUTPUT_FILENAME=%ARCHIVE_PREFIX%_%ARCHIVE_EXT%-files
+	IF "%ARCHIVE_PREFIX%"=="" SET OUTPUT_FILENAME=%ARCHIVE_EXT%-files
+
+	7z a -t7z -sdel %OUTPUT_FILENAME%.7z  %ARCHIVE_PREFIX%*.%ARCHIVE_EXT% -r -xr!Archive-Extension.cmd
+	7z l %OUTPUT_FILENAME%.7z >%OUTPUT_FILENAME%.txt
+	TYPE %OUTPUT_FILENAME%.txt
+	EXIT /B
+
+:EXECUTE_ARCHIVE_EXT_SETTINGS_FROM_FILE
+	SET EXT_LIST_FILE=%1
+	FOR /F "skip=1 tokens=1,2 delims= " %%C IN (%EXT_LIST_FILE%) DO (
+		ECHO 7z a -t7z -sdel %%C  %%D -r -xr!Archive-Extension.cmd
+		7z a -t7z -sdel %%C  %%D -r -xr!Archive-Extension.cmd
+		7z l %%C >%%C.txt
+		TYPE %%C.txt
+	)
+	EXIT /B
 

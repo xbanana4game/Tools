@@ -7,3 +7,4 @@ CAPTURE_NO:GAME_NAME:GAME_DIR
 11:Planetside2 - Outfit :Planetside2\videos
 12:Insurgency - COOPERATIVE :Insurgency\videos
 13:Factorio - :Factorio\videos
+99:Unknown - :Unknown\videos

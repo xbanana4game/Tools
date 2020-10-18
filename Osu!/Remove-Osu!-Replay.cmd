@@ -18,7 +18,7 @@ REM
 REM ----------------------------------------------------------------------
 CALL :REMOVE_OSU_REPLAY
 PAUSE
-EXPLORER %DOCUMENTS_DIR%\Osu!-Replay@%yyyy%%mm%.7z
+EXPLORER %DOCUMENTS_DIR%
 EXIT
 
 

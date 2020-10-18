@@ -11,6 +11,9 @@ REM
 REM                                Main
 REM
 REM ======================================================================
+IF NOT DEFINED DOWNLOADS_PASSWORD (SET /P DOWNLOADS_PASSWORD="SET DOWNLOADS_PASSWORD(%ARCHIVE_PASSWORD%)=")
+IF NOT DEFINED DOWNLOADS_PASSWORD (SET DOWNLOADS_PASSWORD=%ARCHIVE_PASSWORD%)
+
 REM SET ARCHIVE_DIR=%BACKUPS_DIR%\Downloads
 DIR /B %ARCHIVE_DIR%
 SET /P EXTRACT_YYYY="Enter Extract YYYY or YYYYMM. (Default:%yyyy%) -> "
@@ -28,10 +31,10 @@ REM ======================================================================
 :MAKE_LIST_FILE
 	FOR /D %%i IN ("%ARCHIVE_DIR%\%EXTRACT_YYYY%*") DO (
 		FOR %%j IN ("%ARCHIVE_DIR%\%%~ni\DL_*.7z") DO (
-			7z l -p%ARCHIVE_PASSWORD% %%j
+			7z l -p%DOWNLOADS_PASSWORD% %%j
 		)
 		FOR %%j IN ("%ARCHIVE_DIR%\%%~ni\UL_*.7z") DO (
-			7z l -p%ARCHIVE_PASSWORD% %%j
+			7z l -p%DOWNLOADS_PASSWORD% %%j
 		)
 	)
 	EXIT /B
@@ -43,10 +46,10 @@ REM ======================================================================
 	IF "%EXTRACT_TARGET_DIR%"=="" SET EXTRACT_TARGET_DIR=%DESKTOP_DIR%
 	FOR /D %%i IN ("%ARCHIVE_DIR%\%EXTRACT_YYYY%*") DO (
 		FOR %%j IN ("%ARCHIVE_DIR%\%%~ni\DL_*.7z") DO (
-			7z x -p%ARCHIVE_PASSWORD% %%j -o%EXTRACT_TARGET_DIR%\%%~ni -aot %EXTRACT_EXT% -r
+			7z x -p%DOWNLOADS_PASSWORD% %%j -o%EXTRACT_TARGET_DIR%\%%~ni -aot %EXTRACT_EXT% -r
 		)
 		FOR %%j IN ("%ARCHIVE_DIR%\%%~ni\UL_*.7z") DO (
-			7z x -p%ARCHIVE_PASSWORD% %%j -o%EXTRACT_TARGET_DIR%\%%~ni -aot %EXTRACT_EXT% -r
+			7z x -p%DOWNLOADS_PASSWORD% %%j -o%EXTRACT_TARGET_DIR%\%%~ni -aot %EXTRACT_EXT% -r
 		)
 	)
 	EXIT /B

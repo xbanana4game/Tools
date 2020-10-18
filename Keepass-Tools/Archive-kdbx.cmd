@@ -14,33 +14,34 @@ REM ======================================================================
 REM ----------------------------------------------------------------------
 REM 
 REM ----------------------------------------------------------------------
-CD %USERPROFILE%\.Tools\a.cmd
+SET CMD_FILE=%USERPROFILE%\.Tools\a.cmd
+CD %USERPROFILE%\.Tools\%CMD_FILE%
 IF "%1"=="" (
 	IF NOT DEFINED KDBX_TARGET_DIR SET /P KDBX_TARGET_DIR="KDBX_TARGET_DIR (default. %DESKTOP_DIR%) -> "
 	IF "%KDBX_TARGET_DIR%"=="" SET KDBX_TARGET_DIR=%DESKTOP_DIR%
 )
 IF "%1"=="" (
 	FOR %%i IN (%KDBX_TARGET_DIR%\*.kdbx) DO (
-		ECHO REM ======================================================================>>a.cmd
-		ECHO REM %%i>>a.cmd
-		ECHO REM ======================================================================>>a.cmd
-		echo SET F_DATE=%%~ti>>a.cmd
-		echo SET F_YYYYMMDD=%%F_DATE:~0,4%%%%F_DATE:~5,2%%%%F_DATE:~8,2%%>>a.cmd
-		echo 7z a "%DOWNLOADS_DIR%\keepass-%%~ni@%%F_YYYYMMDD%%.7z" "%%i">>a.cmd
+		ECHO REM ======================================================================>>%CMD_FILE%
+		ECHO REM %%i>>%CMD_FILE%
+		ECHO REM ======================================================================>>%CMD_FILE%
+		echo SET F_DATE=%%~ti>>%CMD_FILE%
+		echo SET F_YYYYMMDD=%%F_DATE:~0,4%%%%F_DATE:~5,2%%%%F_DATE:~8,2%%>>%CMD_FILE%
+		echo 7z a "%DOWNLOADS_DIR%\keepass-%%~ni@%%F_YYYYMMDD%%.7z" "%%i">>%CMD_FILE%
 	)
 ) ELSE (
-	ECHO REM ======================================================================>>a.cmd
-	ECHO REM %%i>>a.cmd
-	ECHO REM ======================================================================>>a.cmd
-	echo SET F_DATE=%~t1>>a.cmd
-	echo SET F_YYYYMMDD=%%F_DATE:~0,4%%%%F_DATE:~5,2%%%%F_DATE:~8,2%%>>a.cmd
-	echo 7z a "%DOWNLOADS_DIR%\keepass-%~n1@%%F_YYYYMMDD%%.7z" "%1">>a.cmd
-	echo 7z l "%DOWNLOADS_DIR%\keepass-%~n1@%%F_YYYYMMDD%%.7z">>a.cmd
+	ECHO REM ======================================================================>>%CMD_FILE%
+	ECHO REM %%i>>%CMD_FILE%
+	ECHO REM ======================================================================>>%CMD_FILE%
+	echo SET F_DATE=%~t1>>%CMD_FILE%
+	echo SET F_YYYYMMDD=%%F_DATE:~0,4%%%%F_DATE:~5,2%%%%F_DATE:~8,2%%>>%CMD_FILE%
+	echo 7z a "%DOWNLOADS_DIR%\keepass-%~n1@%%F_YYYYMMDD%%.7z" "%1">>%CMD_FILE%
+	echo 7z l "%DOWNLOADS_DIR%\keepass-%~n1@%%F_YYYYMMDD%%.7z">>%CMD_FILE%
 )
 
-IF EXIST a.cmd (
-	CALL a.cmd
-	DEL a.cmd
+IF EXIST %CMD_FILE% (
+	CALL %CMD_FILE%
+	DEL %CMD_FILE%
 )
 
 PAUSE
