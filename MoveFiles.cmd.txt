@@ -1,0 +1,40 @@
+@ECHO OFF
+REM ======================================================================
+REM
+REM                                Settings
+REM
+REM ======================================================================
+IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
+CALL %USERPROFILE%\.Tools\Settings.cmd
+
+
+REM ======================================================================
+REM
+REM                                Main
+REM
+REM ======================================================================
+REM CALL :MOVE_BEATMAP_PACKS
+REM CALL :MOVE_VIDEOS
+
+
+REM ======================================================================
+REM
+REM                                Function
+REM
+REM ======================================================================
+:MOVE_BEATMAP_PACKS
+	SET TARGET_DIR=%DOWNLOADS_DIR%\Beatmap_Pack
+	MD %TARGET_DIR%
+	MOVE %DOWNLOADS_DIR%\*Beatmap*.7z %TARGET_DIR%\
+	RMDIR %TARGET_DIR%
+	EXIT /B
+	
+:MOVE_VIDEOS
+	SET TARGET_DIR=%DOWNLOADS_DIR%\Videos
+	MD %TARGET_DIR%
+	MOVE %DOWNLOADS_DIR%\*.mp4 %TARGET_DIR%\
+	REM 7z a -t7z  %DESKTOP_DIR%\Videos_%yyyy%%mm%%dd%.7z %TARGET_DIR% -mx=0
+	RMDIR %TARGET_DIR%
+	EXIT /B
+	
+	

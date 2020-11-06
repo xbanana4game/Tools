@@ -44,6 +44,7 @@ REM ======================================================================
 	MD %TOOLS_INSTALL_DIR%\bin
 	COPY Archive-Tools\Archive-Tool.cmd %TOOLS_INSTALL_DIR%\bin
 	COPY Keepass-Tools\Archive-kdbx.cmd %TOOLS_INSTALL_DIR%\bin
+	COPY File-Tools\Archive-Extension.cmd %TOOLS_INSTALL_DIR%\bin
 	
 	COPY Archive-Tools\Archive.cmd %USERPROFILE%\Desktop
 	EXIT /B

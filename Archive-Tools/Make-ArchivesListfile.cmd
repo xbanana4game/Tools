@@ -18,6 +18,6 @@ FOR /D %%j IN ("%ARCHIVE_DIR%\*") DO (
 	)
 )
 
-SET /P END="Finished"
+PAUSE
 EXPLORER %ARCHIVE_DIR%
 

@@ -44,10 +44,14 @@ SET FILE_TYPE=7z
 SET ARCHIVE_OPT_X=5
 SET ARCHIVE_ROOT_DIR_NAME=%ARCHIVE_PROFILE%
 SET REMOVE_EMPTY_DIR_FLG=1
-IF EXIST %ARCHIVE_PATH%\SettingsOptions.cmd (
-	TYPE %ARCHIVE_PATH%\SettingsOptions.cmd
-	CALL %ARCHIVE_PATH%\SettingsOptions.cmd
+IF EXIST %ARCHIVE_PATH%\ArchiveOptions.cmd (
+	TYPE %ARCHIVE_PATH%\ArchiveOptions.cmd
+	CALL %ARCHIVE_PATH%\ArchiveOptions.cmd
 )
+
+IF NOT DEFINED BACKUPS_DIR (SET /P BACKUPS_DIR="SET BACKUPS_DIR(C:\Backups\7z)=")
+IF NOT DEFINED BACKUPS_DIR (SET BACKUPS_DIR=C:\Backups\7z)
+
 
 REM ----------------------------------------------------------------------
 REM 
@@ -122,7 +126,7 @@ REM ======================================================================
 :MAKE_LIST_FILE
 	TREE /F %ARCHIVE_ROOT_DIR_NAME% > %ARCHIVE_PROFILE%.txt
 	COPY %ARCHIVE_PROFILE%.txt %ARCHIVE_PROFILE%@%yyyy%%mm%%dd%.txt
-	7z a -tzip  %ARCHIVE_ROOT_DIR_NAME%\Settings@%ARCHIVE_PROFILE%.zip  %ARCHIVE_PATH%\SettingsOptions.cmd  %ARCHIVE_PROFILE_FILE% %ARCHIVE_PROFILE%@%yyyy%%mm%%dd%.txt
+	7z a -tzip  %ARCHIVE_ROOT_DIR_NAME%\Settings@%ARCHIVE_PROFILE%.zip  %ARCHIVE_PATH%\ArchiveOptions.cmd  %ARCHIVE_PROFILE_FILE% %ARCHIVE_PROFILE%@%yyyy%%mm%%dd%.txt
 	DEL %ARCHIVE_PROFILE%@%yyyy%%mm%%dd%.txt
 	EXIT /B
 

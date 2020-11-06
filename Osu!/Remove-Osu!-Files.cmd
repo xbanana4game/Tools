@@ -75,10 +75,10 @@ REM ----------------------------------------------------------------------
 	IF NOT EXIST "%FORFILES_CMD_FILE%" EXIT /B
 	TYPE %~dp0\skin.txt >>%FORFILES_CMD_FILE%
 	NOTEPAD %FORFILES_CMD_FILE%
-	7z a -t7z -sdel %DOWNLOADS_DIR%\SongsFiles@%yyyy%%mm%%dd%%hh%%mn%.7z -spf2 @%FORFILES_CMD_FILE%
+	7z a -t7z -sdel %OSU_SONGS_DIR%\..\SongsFiles@%yyyy%%mm%%dd%%hh%%mn%.7z -spf2 @%FORFILES_CMD_FILE%
 	MOVE %FORFILES_CMD_FILE% %FORFILES_CMD_FILE%.log
-	7z l %DOWNLOADS_DIR%\SongsFiles@%yyyy%%mm%%dd%%hh%%mn%.7z >>%FORFILES_CMD_FILE%.log
-	EXPLORER %DOWNLOADS_DIR%
+	7z l %OSU_SONGS_DIR%\..\SongsFiles@%yyyy%%mm%%dd%%hh%%mn%.7z >>%FORFILES_CMD_FILE%.log
+	EXPLORER %OSU_SONGS_DIR%\..
 	EXIT /B
 	
 	

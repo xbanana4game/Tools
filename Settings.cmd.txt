@@ -1,6 +1,6 @@
 REM ======================================================================
 REM
-REM                                Tools-3.4.1
+REM                                Tools-3.5.0
 REM
 REM ======================================================================
 @ECHO OFF
@@ -43,7 +43,6 @@ SET MOVE_FILES_FLG=1
 SET ARCHIVE_PASSWORD=
 REM x=[0 | 1 | 3 | 5 | 7 | 9 ] 
 SET ARCHIVE_OPT_X=3
-SET BACKUPS_DIR=C:\Backups
 
 REM ----------------------------------------------------------------------
 REM Games Settings

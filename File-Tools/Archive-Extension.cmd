@@ -11,8 +11,8 @@ REM
 REM                                Main
 REM
 REM ======================================================================
-IF "%~n1" == "ext" (
-	CALL :EXECUTE_ARCHIVE_EXT_SETTINGS_FROM_FILE %1
+IF "%~x1" == ".7zext" (
+	CALL :EXECUTE_ARCHIVE_EXT_SETTINGS_FROM_FILE %~1
 ) ELSE (
 	CALL :EXECUTE_ARCHIVE_EXT
 )
@@ -46,8 +46,8 @@ REM ======================================================================
 :EXECUTE_ARCHIVE_EXT_SETTINGS_FROM_FILE
 	SET EXT_LIST_FILE=%1
 	FOR /F "skip=1 tokens=1,2 delims= " %%C IN (%EXT_LIST_FILE%) DO (
-		ECHO 7z a -t7z -sdel %%C  %%D -r -xr!Archive-Extension.cmd
-		7z a -t7z -sdel %%C  %%D -r -xr!Archive-Extension.cmd
+		ECHO 7z a -t7z -sdel %%C  %%D -r -xr!Archive-Extension.cmd -xr!%%C -xr!%%C.txt
+		7z a -t7z -sdel %%C  %%D -r -xr!Archive-Extension.cmd -xr!%%C -xr!%%C.txt
 		7z l %%C >%%C.txt
 		TYPE %%C.txt
 	)

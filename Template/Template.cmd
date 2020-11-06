@@ -138,7 +138,9 @@ REM ======================================================================
 	EXIT /B
 
 :MAKE_PAGE_URL
+	DEL a.txt
 	FOR /L %%I IN (1,1,100) DO (
-		ECHO https://www/?c=1^&p=%%I
+		ECHO https://www/?c=1^&p=%%I >>a.txt
 	)
+	TYPE a.txt
 	EXIT /B

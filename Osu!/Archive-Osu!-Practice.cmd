@@ -16,6 +16,7 @@ REM
 REM ----------------------------------------------------------------------
 CALL :ChangeDirectory %OSU_SONGS_DIR%
 7z a -t7z %DESKTOP_DIR%\Osu!-Practice-Maps@%yyyy%%mm%%dd%.7z -ir!*MyPractice*.osu
+7z a -t7z ..\Osu!-Practice-Maps.7z -ir!*MyPractice*.osu
 
 
 :ChangeDirectory

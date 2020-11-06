@@ -13,11 +13,14 @@ REM
 REM                                Main
 REM
 REM ======================================================================
-FOR %%i in (%*) DO (
-	ECHO %%i
-	7z a -tzip -sdel "%%~nxi.zip" ""%%i"" -mx=0
-	7z l "%%~nxi.zip"
+PATH=%PATH%;%USERPROFILE%\AppData\Local\MEGAcmd
+
+CD %DOWNLOADS_DIR%
+SET GET_LINK_LIST=Mega-links-%yyyy%%mm%%dd%.txt
+NOTEPAD %GET_LINK_LIST%
+FOR /F %%i IN (%GET_LINK_LIST%) DO (
+	mega-get "%%i"
 )
+
 PAUSE
-EXIT
 
