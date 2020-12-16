@@ -108,6 +108,7 @@ REM ======================================================================
 	EXIT /B 1
 
 :moveFiles
+	SET ARCHIVE_FLG=1
 	IF EXIST %TOOLS_INSTALL_DIR%\MoveFiles.cmd (CALL %TOOLS_INSTALL_DIR%\MoveFiles.cmd)
 	EXIT /B
 

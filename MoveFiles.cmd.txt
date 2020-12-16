@@ -6,6 +6,7 @@ REM
 REM ======================================================================
 IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
+IF NOT DEFINED ARCHIVE_FLG (SET ARCHIVE_FLG=0)
 
 
 REM ======================================================================
@@ -27,14 +28,20 @@ REM ======================================================================
 	MD %TARGET_DIR%
 	MOVE %DOWNLOADS_DIR%\*Beatmap*.7z %TARGET_DIR%\
 	RMDIR %TARGET_DIR%
+	IF NOT EXIST %TARGET_DIR% EXIT /B
+	MD %DOWNLOADS_DIR%\Games\Osu!
+	MOVE %TARGET_DIR% %DOWNLOADS_DIR%\Games\Osu!\
 	EXIT /B
 	
 :MOVE_VIDEOS
 	SET TARGET_DIR=%DOWNLOADS_DIR%\Videos
 	MD %TARGET_DIR%
 	MOVE %DOWNLOADS_DIR%\*.mp4 %TARGET_DIR%\
-	REM 7z a -t7z  %DESKTOP_DIR%\Videos_%yyyy%%mm%%dd%.7z %TARGET_DIR% -mx=0
 	RMDIR %TARGET_DIR%
+	IF NOT EXIST %TARGET_DIR% EXIT /B
+	IF 1 EQU %ARCHIVE_FLG% (
+		7z a -t7z -sdel %ARCHIVE_DIR%\VD_%yyyy%%mm%%dd%.7z %TARGET_DIR% -mx=0
+	)
 	EXIT /B
 	
 	

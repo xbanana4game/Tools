@@ -39,7 +39,7 @@ REM ======================================================================
 	EXIT /B
 
 :EXTRACT_YYYYMM_ALL
-	SET /P EXTRACT_EXT="Enter Extract Target. (Default:*) -> "
+	IF NOT DEFINED EXTRACT_EXT SET /P EXTRACT_EXT="SET EXTRACT_EXT (Default:*) -> "
 	IF "%EXTRACT_EXT%"=="" SET EXTRACT_EXT=*
 	IF NOT DEFINED EXTRACT_TARGET_DIR SET /P EXTRACT_TARGET_DIR="SET EXTRACT_TARGET_DIR (Default:%DESKTOP_DIR%) -> "
 	IF "%EXTRACT_TARGET_DIR%"=="" SET EXTRACT_TARGET_DIR=%DESKTOP_DIR%

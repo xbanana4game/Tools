@@ -13,8 +13,8 @@ REM
 REM                                Main
 REM
 REM ======================================================================
-IF NOT DEFINED TARGET_YYYY (SET /P TARGET_YYYY="Set TARGET : ")
-IF NOT DEFINED TARGET_YYYY (SET TARGET_YYYY=2020)
+IF NOT DEFINED TARGET_YYYY (SET /P TARGET_YYYY="SET TARGET_YYYY : ")
+IF NOT DEFINED TARGET_YYYY (SET TARGET_YYYY=%yyyy%)
 
 SET OUTPUT=Osu!-Record-%TARGET_YYYY%.txt
 IF EXIST %OUTPUT% DEL %OUTPUT%
