@@ -1,15 +1,28 @@
 @ECHO OFF
-IF NOT EXIST %USERPROFILE%\Settings.cmd (EXIT)
-CALL %USERPROFILE%\Settings.cmd
+REM ======================================================================
+REM
+REM                                Settings
+REM
+REM ======================================================================
+IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
+CALL %USERPROFILE%\.Tools\Settings.cmd
 
-REM ----------------------------------------------------------------------
-REM Archive
-REM ----------------------------------------------------------------------
-SET OSU_LISTFILE=osu!.list
+
+REM ======================================================================
+REM
+REM                                Main
+REM
+REM ======================================================================
+IF NOT DEFINED BACKUPS_DIR (SET /P BACKUPS_DIR="SET BACKUPS_DIR(C:\Backups\7z)=")
+IF NOT DEFINED BACKUPS_DIR (SET BACKUPS_DIR=C:\Backups\7z)
+
+SET OSU_LISTFILE=%USERPROFILE%\.Tools\osu!.list
 ECHO %OSU_DIR%\osu!.*.cfg>%OSU_LISTFILE%
 ECHO %OSU_DIR%\Settings>>%OSU_LISTFILE%
 ECHO %OSU_DIR%\Skins>>%OSU_LISTFILE%
 ECHO %OSU_DIR%\*.db>>%OSU_LISTFILE%
+ECHO %OSU_DIR%\Exports>>%OSU_LISTFILE%
+
 IF NOT "%ARCHIVE_PASSWORD%"=="" SET ARCHIVE_OPT_PW=-p%ARCHIVE_PASSWORD% -mhe
 CALL :FIND_BACKUPS
 IF DEFINED BASE_ARCHIVE_FILE (
@@ -24,22 +37,28 @@ PAUSE
 EXPLORER %DOWNLOADS_DIR%
 EXIT
 
+
+REM ======================================================================
+REM
+REM                                Function
+REM
+REM ======================================================================
 :FIND_BACKUPS
-	FOR %%i IN ("%DOWNLOADS_DIR%\Osu!-Config-*@%USERDOMAIN%.7z") DO (
-		ECHO SET BASE_ARCHIVE_FILE=%%~ni>a.cmd
-		ECHO SET BASE_ARCHIVE_PATH=%%~fi>>a.cmd
+	SET CMD_FILE=%USERPROFILE%\.Tools\a.cmd
+	FOR %%i IN ("%BACKUPS_DIR%\Osu!-Config-*@%USERDOMAIN%.7z") DO (
+		ECHO SET BASE_ARCHIVE_FILE=%%~ni>%CMD_FILE%
+		ECHO SET BASE_ARCHIVE_PATH=%%~fi>>%CMD_FILE%
 	)
-	IF EXIST a.cmd (
-		CALL a.cmd
-		DEL a.cmd
+	IF EXIST %CMD_FILE% (
+		CALL %CMD_FILE%
+		DEL %CMD_FILE%
 	)
 	EXIT /B
-
+	
 :UPDATE_7Z_FILE
-	IF "%OUTPUT_DIR%"=="" SET OUTPUT_DIR=%DESKTOP_DIR%
 	IF NOT "%ARCHIVE_PASSWORD%"=="" SET ARCHIVE_OPT_PW=-p%ARCHIVE_PASSWORD% -mhe
 	IF NOT DEFINED BASE_ARCHIVE_FILE SET /P BASE_ARCHIVE_FILE="Base Archive File: "
-	SET UPDATE_7Z_FILE=%OUTPUT_DIR%\%BASE_ARCHIVE_FILE%_-_Update-%yyyy%%mm%%dd%.7z
+	SET UPDATE_7Z_FILE=%DOWNLOADS_DIR%\%BASE_ARCHIVE_FILE%_-_Update-%yyyy%%mm%%dd%.7z
 	7z u %ARCHIVE_OPT_PW% %BASE_ARCHIVE_PATH% -u- -up0q3x2z0!%UPDATE_7Z_FILE% @%OSU_LISTFILE%
 	7z l %ARCHIVE_OPT_PW% %UPDATE_7Z_FILE%
 	EXIT /B

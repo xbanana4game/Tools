@@ -20,12 +20,12 @@ IF NOT DEFINED SAVE_STEAM_SS_FLG SET /P SAVE_STEAM_SS_FLG="SAVE_STEAM_SS_FLG [1|
 IF "%SAVE_STEAM_SS_FLG%"=="" SET SAVE_STEAM_SS_FLG=0
 CALL :CheckDirectory %STEAM_DIR%\userdata
 
-FOR /F "tokens=1,2* delims=," %%i IN (steam_screenshots.txt) DO CALL :ArchiveGameScreenshots %%i %%j
+FOR /F "tokens=1,2* delims=," %%i IN (%TOOLS_DIR%\Games\steam_screenshots.txt) DO CALL :ArchiveGameScreenshots %%i %%j
 IF %SAVE_STEAM_SS_FLG% EQU 1 CALL :ArchiveSteamScreenshots 
 
-PAUSE
-EXPLORER %DOWNLOADS_DIR%
-EXIT
+//If not called MoveFiles.cmd pause.
+IF NOT DEFINED ARCHIVE_FLG PAUSE
+EXIT /B
 
 
 REM ======================================================================

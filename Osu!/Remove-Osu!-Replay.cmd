@@ -18,7 +18,6 @@ REM
 REM ----------------------------------------------------------------------
 CALL :REMOVE_OSU_REPLAY
 PAUSE
-EXPLORER %DOCUMENTS_DIR%
 EXIT
 
 
@@ -34,7 +33,7 @@ REM ----------------------------------------------------------------------
 	CALL :ChangeDirectory %OSU_DIR%
 	ECHO Start Remove Replay %OSU_DIR%
 	PAUSE
-	7z a -t7z -sdel %DOCUMENTS_DIR%\Osu!-Replay@%yyyy%%mm%.7z -spf2 %OSU_DIR%\Data\r
+	7z a -t7z -sdel %OSU_DIR%\Exports\Osu!-Replay@%yyyy%%mm%.7z -spf2 %OSU_DIR%\Data\r
 	EXIT /B
 
 :ChangeDirectory

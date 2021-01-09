@@ -14,8 +14,10 @@ REM
 REM                                Main
 REM
 REM ======================================================================
+REM CALL :SAVE_STEAM_SS
 REM CALL :MOVE_BEATMAP_PACKS
 REM CALL :MOVE_VIDEOS
+EXIT /B
 
 
 REM ======================================================================
@@ -40,8 +42,12 @@ REM ======================================================================
 	RMDIR %TARGET_DIR%
 	IF NOT EXIST %TARGET_DIR% EXIT /B
 	IF 1 EQU %ARCHIVE_FLG% (
-		7z a -t7z -sdel %ARCHIVE_DIR%\VD_%yyyy%%mm%%dd%.7z %TARGET_DIR% -mx=0
+		7z a -t7z -sdel %ARCHIVE_DIR%\VD_%yyyy%%mm%%dd%_%hh%%mn%.7z %TARGET_DIR% -mx=0
 	)
 	EXIT /B
 	
-	
+:SAVE_STEAM_SS
+	SET SAVE_STEAM_SS_FLG=0
+	CALL Steam-Screenshots.cmd
+	EXIT /B
+

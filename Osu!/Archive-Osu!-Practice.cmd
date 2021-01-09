@@ -16,8 +16,11 @@ REM
 REM ----------------------------------------------------------------------
 CALL :ChangeDirectory %OSU_SONGS_DIR%
 SET UPDATE_SWITCH_OPT=p0q0r2x0y2z0
-7z u ..\Osu!-Practice-Maps.7z -u- -u%UPDATE_SWITCH_OPT%!%DOWNLOADS_DIR%\Osu!-Practice-Maps@Update%yyyy%%mm%%dd%.7z -ir!*MyPractice*.osu
+7z u ..\Osu!-Practice-Maps.7z -u- -u%UPDATE_SWITCH_OPT%!%OSU_DIR%\Exports\Osu!-Practice-Maps@Update%yyyy%%mm%%dd%.7z -ir!*MyPractice*.osu
+7z l %OSU_DIR%\Exports\Osu!-Practice-Maps@Update%yyyy%%mm%%dd%.7z
 7z a -t7z ..\Osu!-Practice-Maps.7z -ir!*MyPractice*.osu
+
+PAUSE
 EXIT
 
 

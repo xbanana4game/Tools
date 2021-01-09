@@ -1,2 +1,2 @@
-ARCHIVE_FILENAME TARGET
-keepass-files.7z *.kdbx
+ARCHIVE_FILENAME;TARGET
+keepass-files.7z;*.kdbx
