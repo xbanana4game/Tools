@@ -28,26 +28,34 @@ REM ======================================================================
 :MOVE_BEATMAP_PACKS
 	SET TARGET_DIR=%DOWNLOADS_DIR%\Beatmap_Pack
 	MD %TARGET_DIR%
-	MOVE %DOWNLOADS_DIR%\*Beatmap*.7z %TARGET_DIR%\
-	RMDIR %TARGET_DIR%
-	IF NOT EXIST %TARGET_DIR% EXIT /B
-	MD %DOWNLOADS_DIR%\Games\Osu!
-	MOVE %TARGET_DIR% %DOWNLOADS_DIR%\Games\Osu!\
-	EXIT /B
-	
-:MOVE_VIDEOS
-	SET TARGET_DIR=%DOWNLOADS_DIR%\Videos
-	MD %TARGET_DIR%
-	MOVE %DOWNLOADS_DIR%\*.mp4 %TARGET_DIR%\
+	MOVE /Y %DOWNLOADS_DIR%\*Beatmap*.7z %TARGET_DIR%\
 	RMDIR %TARGET_DIR%
 	IF NOT EXIST %TARGET_DIR% EXIT /B
 	IF 1 EQU %ARCHIVE_FLG% (
-		7z a -t7z -sdel %ARCHIVE_DIR%\VD_%yyyy%%mm%%dd%_%hh%%mn%.7z %TARGET_DIR% -mx=0
+		MD %DOWNLOADS_DIR%\Games\Osu!
+		MOVE /Y %TARGET_DIR% %DOWNLOADS_DIR%\Games\Osu!\
+		7z a -t7z -sdel %ARCHIVE_DIR%\BP_%yyyy%%mm%%dd%.7z %DOWNLOADS_DIR%\Games -mx=0
+	)
+	EXIT /B
+	
+:MOVE_VIDEOS
+	SET TARGET_DIR=%ARCHIVE_DIR%\VD_%yyyy%%mm%%dd%
+	REM SET TARGET_DIR=%DOWNLOADS_DIR%\Videos
+	MD %TARGET_DIR%
+	MOVE /Y %DOWNLOADS_DIR%\*.mp4 %TARGET_DIR%\
+	RMDIR %TARGET_DIR%
+	IF NOT EXIST %TARGET_DIR% EXIT /B
+	IF 1 EQU %ARCHIVE_FLG% (
+		REM 7z a -t7z -sdel %ARCHIVE_DIR%\VD_%yyyy%%mm%%dd%.7z %TARGET_DIR% -mx=0
+		REM MD %TARGET_DIR%\youtube.com
+		REM MD %TARGET_DIR%\Captures
 	)
 	EXIT /B
 	
 :SAVE_STEAM_SS
-	SET SAVE_STEAM_SS_FLG=0
-	CALL Steam-Screenshots.cmd
+	IF 1 EQU %ARCHIVE_FLG% (
+		SET SAVE_STEAM_SS_FLG=0
+		CALL Steam-Screenshots.cmd
+	)
 	EXIT /B
 

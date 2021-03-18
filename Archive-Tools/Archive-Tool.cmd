@@ -132,7 +132,7 @@ REM ======================================================================
 
 :MAKE_7Z_FILE
 	IF NOT DEFINED OUTPUT_DIR (
-		SET /P OUTPUT_DIR="Enter Output (E:, C:\Archives): "
+		SET /P OUTPUT_DIR="Enter Output (E:, C:\Archives, default:%DESKTOP_DIR%): "
 	)
 	REM SET /P ARCHIVE_PASSWORD="Password: "
 	IF "%OUTPUT_DIR%"=="" SET OUTPUT_DIR=%DESKTOP_DIR%

@@ -13,6 +13,10 @@ REM
 REM                                Main
 REM
 REM ======================================================================
+
+REM ----------------------------------------------------------------------
+REM 
+REM ----------------------------------------------------------------------
 IF NOT DEFINED DOWNLOADS_PASSWORD (SET /P DOWNLOADS_PASSWORD="SET DOWNLOADS_PASSWORD(%ARCHIVE_PASSWORD%)=")
 IF NOT DEFINED DOWNLOADS_PASSWORD (SET DOWNLOADS_PASSWORD=%ARCHIVE_PASSWORD%)
 
@@ -24,6 +28,13 @@ echo ""%1""
 		7z l "%DOWNLOADS_DIR%\%%~nxi@%yyyy%%mm%%dd%.7z"
 	)
 	PAUSE
+	EXIT
+)
+
+IF NOT DEFINED MOVEFILES_ONLY (SET /P MOVEFILES_ONLY="SET MOVEFILES_ONLY(1)=")
+IF ""=="%MOVEFILES_ONLY%" SET MOVEFILES_ONLY=1
+IF 1 EQU %MOVEFILES_ONLY% (
+	CALL :moveFiles
 	EXIT
 )
 
@@ -53,7 +64,10 @@ IF 1 EQU %ARCHIVE_UPLOAD_FLG2% CALL :Archive_Upload
 REM ----------------------------------------------------------------------
 REM DOWNLOAD
 REM ----------------------------------------------------------------------
-IF 1 EQU %MOVE_FILES_FLG% CALL :moveFiles
+IF 1 EQU %MOVE_FILES_FLG% (
+	SET ARCHIVE_FLG=1
+	CALL :moveFiles
+)
 CALL :Archive_Downloads
 
 REM ----------------------------------------------------------------------
@@ -108,7 +122,6 @@ REM ======================================================================
 	EXIT /B 1
 
 :moveFiles
-	SET ARCHIVE_FLG=1
 	IF EXIST %TOOLS_INSTALL_DIR%\MoveFiles.cmd (CALL %TOOLS_INSTALL_DIR%\MoveFiles.cmd)
 	EXIT /B
 
