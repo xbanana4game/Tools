@@ -1,9 +1,12 @@
 @ECHO OFF
-REM ----------------------------------------------------------------------
-REM Read Settings
-REM ----------------------------------------------------------------------
-IF NOT EXIST %USERPROFILE%\Settings.cmd (EXIT)
-CALL %USERPROFILE%\Settings.cmd
+REM ======================================================================
+REM
+REM                                Settings
+REM
+REM ======================================================================
+IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
+CALL %USERPROFILE%\.Tools\Settings.cmd
+
 
 REM ======================================================================
 REM
@@ -69,6 +72,9 @@ REM ======================================================================
 		EXIT /B
 	)
 	CALL :ChangeDirectory %GAME_ROOT_DIR%
+	IF EXIST "%~dp0\%GAME_NAME%_settings.txt.cmd" (
+		CALL "%~dp0\%GAME_NAME%_settings.txt.cmd"
+	)
 	IF NOT EXIST "%~dp0\%GAME_NAME%_settings.txt" (
 		EXPLORER %GAME_ROOT_DIR%
 		REM FORFILES /s /m *.txt /c "cmd /c ECHO @path >>\"%~dp0\%GAME_NAME%_settings.txt\""

@@ -26,6 +26,8 @@ IF "%SCREENSHOT_YYYYMM%"=="" SET SCREENSHOT_YYYYMM=%yyyy%%mm%
 
 SET SCREENSHOTS_ARCHIVE_NAME=Osu!-Screenshots-%SCREENSHOT_YYYYMM%
 7z a -tzip -sdel %DOCUMENTS_DIR%\%SCREENSHOTS_ARCHIVE_NAME%.zip %OSU_DIR%\Screenshots\%SCREENSHOT_YYYYMM%*  -mx=0
+REM SET SCREENSHOTS_ARCHIVE_NAME=Osu!-Screenshots-%yyyy%%mm%%dd%_%hh%%mn%
+REM 7z a -tzip -sdel %DOWNLOADS_DIR%\%SCREENSHOTS_ARCHIVE_NAME%.zip %OSU_DIR%\Screenshots\*  -mx=0
 
 EXPLORER %DOCUMENTS_DIR%
 EXIT
@@ -37,7 +39,7 @@ REM                                Function
 REM
 REM ======================================================================
 :RENAME_ADD_DATE_OSU
-	SET CMD_FILE=%USERPROFILE%\.Tools\a.cmd
+	SET CMD_FILE=%USERPROFILE%\.Tools\%yyyy%%mm%%dd%%hh%%mn%.cmd
 	SET TARGET_DIR_NAME=%1%
 	FOR %%i in (%TARGET_DIR_NAME%\screenshot*.jpg) DO (
 		ECHO %%~nxi

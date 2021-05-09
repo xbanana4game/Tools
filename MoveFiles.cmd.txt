@@ -14,9 +14,9 @@ REM
 REM                                Main
 REM
 REM ======================================================================
-REM CALL :SAVE_STEAM_SS
-REM CALL :MOVE_BEATMAP_PACKS
-REM CALL :MOVE_VIDEOS
+CALL :SAVE_STEAM_SS
+CALL :MOVE_BEATMAP_PACKS
+CALL :MOVE_VIDEOS
 EXIT /B
 
 
@@ -31,10 +31,10 @@ REM ======================================================================
 	MOVE /Y %DOWNLOADS_DIR%\*Beatmap*.7z %TARGET_DIR%\
 	RMDIR %TARGET_DIR%
 	IF NOT EXIST %TARGET_DIR% EXIT /B
+	MD %DOWNLOADS_DIR%\Games\Osu!
+	MOVE /Y %TARGET_DIR% %DOWNLOADS_DIR%\Games\Osu!\
 	IF 1 EQU %ARCHIVE_FLG% (
-		MD %DOWNLOADS_DIR%\Games\Osu!
-		MOVE /Y %TARGET_DIR% %DOWNLOADS_DIR%\Games\Osu!\
-		7z a -t7z -sdel %ARCHIVE_DIR%\BP_%yyyy%%mm%%dd%.7z %DOWNLOADS_DIR%\Games -mx=0
+		REM 7z a -t7z -sdel %ARCHIVE_DIR%\BP_%yyyy%%mm%%dd%.7z %DOWNLOADS_DIR%\Games -mx=0
 	)
 	EXIT /B
 	
@@ -46,7 +46,7 @@ REM ======================================================================
 	RMDIR %TARGET_DIR%
 	IF NOT EXIST %TARGET_DIR% EXIT /B
 	IF 1 EQU %ARCHIVE_FLG% (
-		REM 7z a -t7z -sdel %ARCHIVE_DIR%\VD_%yyyy%%mm%%dd%.7z %TARGET_DIR% -mx=0
+		REM 7z a -t7z -sdel %TARGET_DIR%.7z %TARGET_DIR% -mx=0
 		REM MD %TARGET_DIR%\youtube.com
 		REM MD %TARGET_DIR%\Captures
 	)

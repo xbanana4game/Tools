@@ -7,6 +7,7 @@ REM
 REM                                INSTALL
 REM
 REM ======================================================================
+CALL :INSTALL_7Z
 CALL :INSTALL_SETTINGS
 CALL :INSTALL_SAKURA_MACRO
 CALL :BACKUP_SETTINGS
@@ -22,6 +23,13 @@ REM
 REM                                Function
 REM
 REM ======================================================================
+:INSTALL_7Z
+	IF EXIST "C:\Program Files\7-Zip\7z.exe" EXIT /B
+	IF EXIST "7z1805-x64.exe" (
+		START 7z1805-x64.exe
+	)
+	EXIT /B
+
 :INSTALL_SETTINGS
 	MD %TOOLS_INSTALL_DIR%
 	COPY /Y Settings.cmd.txt %USERPROFILE%\Settings.cmd

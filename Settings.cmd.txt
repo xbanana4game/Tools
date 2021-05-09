@@ -1,6 +1,6 @@
 REM ======================================================================
 REM
-REM                                Tools-3.6.1
+REM                                Tools-3.6.2
 REM
 REM ======================================================================
 @ECHO OFF
@@ -36,6 +36,7 @@ REM Archive-Tools
 REM ----------------------------------------------------------------------
 SET GPG_USER_ID=%USERDOMAIN%
 SET DOWNLOAD_FILENAME=DL_%yyyy%%mm%%dd%_%USERDOMAIN%
+REM SET DOWNLOAD_FILENAME=DL_%yyyy%%mm%%dd%_%hh%%mn%_%USERDOMAIN%
 REM SET DOWNLOAD_FILENAME=DL_%yyyy%%mm%-%week%_%USERDOMAIN%
 SET SHUTDOWN_FLG=0
 SET ARCHIVE_UPLOAD_FLG=0
@@ -47,7 +48,7 @@ SET ARCHIVE_OPT_X=3
 REM ----------------------------------------------------------------------
 REM Games Settings
 REM ----------------------------------------------------------------------
-SET STEAM_USER_ID=67461314
+SET STEAM_USER_ID=0123456789
 SET STEAM_DIR=C:\Progra~2\Steam
 SET STEAM_LIBRARY=%STEAM_DIR%\steamapps\common
 REM SET STEAM_LIBRARY_2=
