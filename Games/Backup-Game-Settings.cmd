@@ -58,7 +58,7 @@ REM ======================================================================
 	IF EXIST %1 (
 		ECHO Directory %1 is Exist.
 	) ELSE (
-		SET /P ERR=Directory %1 is not Exist.
+		ECHO Directory %1 is not Exist.
 		EXIT /B 1
 	)
 	EXIT /B 0

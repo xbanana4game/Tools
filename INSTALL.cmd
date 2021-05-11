@@ -2,6 +2,7 @@
 
 SET TOOLS_INSTALL_DIR=%USERPROFILE%\.Tools
 SET SAKURA_SETTINGS_DIR=%USERPROFILE%\AppData\Roaming\sakura
+SET FILE_7Z_INSTALLER=7z1805-x64.exe
 REM ======================================================================
 REM
 REM                                INSTALL
@@ -25,8 +26,9 @@ REM
 REM ======================================================================
 :INSTALL_7Z
 	IF EXIST "C:\Program Files\7-Zip\7z.exe" EXIT /B
-	IF EXIST "7z1805-x64.exe" (
-		START 7z1805-x64.exe
+	IF EXIST "%FILE_7Z_INSTALLER%" (
+		START %FILE_7Z_INSTALLER%
+		PAUSE
 	)
 	EXIT /B
 

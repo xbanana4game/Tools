@@ -29,6 +29,7 @@ md Skye
 md Talus
 md Vora
 md Zhin
+md Vatu
 cd ..
 
 md Frontline
