@@ -24,8 +24,8 @@ IF NOT ""%1""=="""" (
 echo ""%1""
 	FOR %%i in (%*) DO (
 		ECHO "%%fi"
-		7z a -t7z  "%DOWNLOADS_DIR%\%%~nxi@%yyyy%%mm%%dd%.7z" ""%%i""
-		7z l "%DOWNLOADS_DIR%\%%~nxi@%yyyy%%mm%%dd%.7z"
+		7z a -t7z  "%DOWNLOADS_DIR%\%%~nxi@%yyyy%%mm%%dd%_%USERDOMAIN%.7z" ""%%i""
+		7z l "%DOWNLOADS_DIR%\%%~nxi@%yyyy%%mm%%dd%_%USERDOMAIN%.7z"
 	)
 	PAUSE
 	EXIT

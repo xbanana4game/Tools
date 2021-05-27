@@ -1,6 +1,6 @@
 REM ======================================================================
 REM
-REM                                Tools-3.6.3a
+REM                                Tools-3.7.0
 REM
 REM ======================================================================
 @ECHO OFF
@@ -29,38 +29,25 @@ SET DOCUMENTS_DIR=%USERPROFILE%\Documents
 SET VIDEOS_DIR=%USERPROFILE%\Videos
 SET ARCHIVE_DIR=%USERPROFILE%\Archives
 SET UPLOADS_DIR=%ARCHIVE_DIR%\Uploads
-SET PATH=%PATH%;C:\Program Files\7-Zip;C:\Program Files (x86)\GnuPG\bin
+SET PATH=%PATH%;C:\Program Files\7-Zip
 
 REM ----------------------------------------------------------------------
 REM Archive-Tools
 REM ----------------------------------------------------------------------
-SET GPG_USER_ID=%USERDOMAIN%
 SET DOWNLOAD_FILENAME=DL_%yyyy%%mm%%dd%_%USERDOMAIN%
 REM SET DOWNLOAD_FILENAME=DL_%yyyy%%mm%%dd%_%hh%%mn%_%USERDOMAIN%
 REM SET DOWNLOAD_FILENAME=DL_%yyyy%%mm%-%week%_%USERDOMAIN%
 SET SHUTDOWN_FLG=0
 SET ARCHIVE_UPLOAD_FLG=0
 SET MOVE_FILES_FLG=1
-SET ARCHIVE_PASSWORD=
 REM x=[0 | 1 | 3 | 5 | 7 | 9 ] 
 SET ARCHIVE_OPT_X=3
 
 REM ----------------------------------------------------------------------
 REM Games Settings
 REM ----------------------------------------------------------------------
-SET STEAM_USER_ID=0123456789
 SET STEAM_DIR=C:\Progra~2\Steam
 SET STEAM_LIBRARY=%STEAM_DIR%\steamapps\common
-REM SET STEAM_LIBRARY_2=
-REM SET STEAM_LIBRARY_3=
-
-REM ----------------------------------------------------------------------
-REM Osu!
-REM ----------------------------------------------------------------------
-SET OSU_DIR=%USERPROFILE%\Osu!
-SET BEATMAP_DIR=G:\GAMES001\Games\Osu!\Beatmap Packs\osu!
-SET BEATMAP_FAVORITE=%BEATMAP_DIR%\Beatmap Pack (Favorite)
-SET OSU_SONGS_DIR=D:\Osu!\Songs
 
 REM ----------------------------------------------------------------------
 REM Options

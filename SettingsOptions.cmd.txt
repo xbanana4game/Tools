@@ -1,0 +1,20 @@
+REM ----------------------------------------------------------------------
+REM Archive Settings
+REM ----------------------------------------------------------------------
+SET ARCHIVE_PASSWORD=
+
+REM ----------------------------------------------------------------------
+REM Games Settings
+REM ----------------------------------------------------------------------
+SET STEAM_USER_ID=0123456789
+REM SET STEAM_LIBRARY_2=
+REM SET STEAM_LIBRARY_3=
+
+REM ----------------------------------------------------------------------
+REM Osu!
+REM ----------------------------------------------------------------------
+SET OSU_DIR=%USERPROFILE%\Osu!
+SET BEATMAP_DIR=G:\GAMES001\Games\Osu!\Beatmap Packs\osu!
+SET BEATMAP_FAVORITE=%BEATMAP_DIR%\Beatmap Pack (Favorite)
+SET OSU_SONGS_DIR=D:\Osu!\Songs
+

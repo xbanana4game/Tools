@@ -24,6 +24,7 @@ SET /P EXTRACT_YYYY="Enter Extract YYYY or YYYYMM. (Default:%yyyy%%mm%) -> "
 IF "%EXTRACT_YYYY%"=="" SET EXTRACT_YYYY=%yyyy%%mm%
 CALL :MAKE_LIST_FILE
 CALL :EXTRACT_YYYYMM
+PAUSE
 EXIT
 
 

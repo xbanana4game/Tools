@@ -49,6 +49,7 @@ REM ======================================================================
 		REM 7z a -t7z -sdel %TARGET_DIR%.7z %TARGET_DIR% -mx=0
 		REM MD %TARGET_DIR%\youtube.com
 		REM MD %TARGET_DIR%\Captures
+		REM MD %TARGET_DIR%\Videos
 	)
 	EXIT /B
 	
