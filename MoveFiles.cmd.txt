@@ -6,6 +6,7 @@ REM
 REM ======================================================================
 IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
+REM if  called this batch from Archive.cmd ARCHIVE_FLG is 1. 
 IF NOT DEFINED ARCHIVE_FLG (SET ARCHIVE_FLG=0)
 
 
@@ -14,9 +15,9 @@ REM
 REM                                Main
 REM
 REM ======================================================================
-CALL :SAVE_STEAM_SS
-CALL :MOVE_BEATMAP_PACKS
+CALL :MOVE_TARGET_FILES  %DOWNLOADS_DIR%\Games\Osu!\Beatmap_Pack *Beatmap*.7z
 CALL :MOVE_VIDEOS
+CALL :SAVE_STEAM_SS
 EXIT /B
 
 
@@ -25,32 +26,32 @@ REM
 REM                                Function
 REM
 REM ======================================================================
-:MOVE_BEATMAP_PACKS
-	SET TARGET_DIR=%DOWNLOADS_DIR%\Beatmap_Pack
+:MOVE_TARGET_FILES
+	SET TARGET_DIR=%1
+	SET TARGET_FILE=%2
+	IF NOT EXIST %DOWNLOADS_DIR%\%TARGET_FILE% EXIT /B
 	MD %TARGET_DIR%
-	MOVE /Y %DOWNLOADS_DIR%\*Beatmap*.7z %TARGET_DIR%\
-	RMDIR %TARGET_DIR%
-	IF NOT EXIST %TARGET_DIR% EXIT /B
-	MD %DOWNLOADS_DIR%\Games\Osu!
-	MOVE /Y %TARGET_DIR% %DOWNLOADS_DIR%\Games\Osu!\
+	MOVE %DOWNLOADS_DIR%\%TARGET_FILE% %TARGET_DIR%\
 	IF 1 EQU %ARCHIVE_FLG% (
-		REM 7z a -t7z -sdel %ARCHIVE_DIR%\BP_%yyyy%%mm%%dd%.7z %DOWNLOADS_DIR%\Games -mx=0
+		REM 7z a -t7z -sdel %ARCHIVE_DIR%\VD_%yyyy%%mm%%dd%.7z %TARGET_DIR% -mx=0
 	)
 	EXIT /B
-	
+
 :MOVE_VIDEOS
 	SET TARGET_DIR=%ARCHIVE_DIR%\VD_%yyyy%%mm%%dd%
 	REM SET TARGET_DIR=%DOWNLOADS_DIR%\Videos
+	IF NOT EXIST %DOWNLOADS_DIR%\*.mp4 EXIT /B
 	MD %TARGET_DIR%
 	MOVE /Y %DOWNLOADS_DIR%\*.mp4 %TARGET_DIR%\
 	RMDIR %TARGET_DIR%
-	IF NOT EXIST %TARGET_DIR% EXIT /B
 	IF 1 EQU %ARCHIVE_FLG% (
 		REM 7z a -t7z -sdel %TARGET_DIR%.7z %TARGET_DIR% -mx=0
-		REM MD %TARGET_DIR%\youtube.com
-		REM MD %TARGET_DIR%\Captures
-		REM MD %TARGET_DIR%\Videos
 	)
+	7z x %ARCHIVE_DIR%\youtube.com.zip -o%TARGET_DIR%
+	REM MD %TARGET_DIR%\Captures
+	REM MD %TARGET_DIR%\Videos
+	REM MD %TARGET_DIR%\Movies
+	ECHO youtube.com 1 >%TARGET_DIR%.archive
 	EXIT /B
 	
 :SAVE_STEAM_SS

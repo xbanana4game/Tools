@@ -2,7 +2,7 @@
 
 SET TOOLS_INSTALL_DIR=%USERPROFILE%\.Tools
 SET SAKURA_SETTINGS_DIR=%USERPROFILE%\AppData\Roaming\sakura
-SET FILE_7Z_INSTALLER=7z1805-x64.exe
+SET FILE_7Z_INSTALLER=7z1900-x64.exe
 REM ======================================================================
 REM
 REM                                INSTALL
@@ -12,10 +12,11 @@ CALL :INSTALL_7Z
 CALL :INSTALL_SETTINGS
 CALL :INSTALL_SAKURA_MACRO
 CALL :BACKUP_SETTINGS
-PAUSE
-EXPLORER %TOOLS_INSTALL_DIR%
+REM PAUSE
+REM EXPLORER %TOOLS_INSTALL_DIR%
 COPY /Y %TOOLS_INSTALL_DIR%\Tools-Settings@%USERDOMAIN%_%yyyy%%mm%%dd%.7z %DOWNLOADS_DIR%
 REM IF EXIST "%SAKURA_SETTINGS_DIR%" EXPLORER %SAKURA_SETTINGS_DIR%
+PAUSE
 EXIT
 
 
@@ -29,6 +30,8 @@ REM ======================================================================
 	IF EXIST "%FILE_7Z_INSTALLER%" (
 		START %FILE_7Z_INSTALLER%
 		PAUSE
+	) ELSE (
+		ECHO https://ja.osdn.net/dl/sevenzip/7z1900-x64.exe/
 	)
 	EXIT /B
 

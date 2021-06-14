@@ -13,7 +13,7 @@ REM
 REM ======================================================================
 SET RECORD_TXT=%DOCUMENTS_DIR%\Osu!-Record-%yyyy%%mm%.txt
 CALL :makeRecordTXT
-NOTEPAD %RECORD_TXT%
+START NOTEPAD %RECORD_TXT%
 EXIT
 
 :makeRecordTXT

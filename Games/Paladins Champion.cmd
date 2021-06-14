@@ -1,3 +1,22 @@
+@ECHO OFF
+REM ======================================================================
+REM
+REM                                Settings
+REM
+REM ======================================================================
+IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
+CALL %USERPROFILE%\.Tools\Settings.cmd
+
+
+REM ======================================================================
+REM
+REM                                Main
+REM
+REM ======================================================================
+CD %DESKTOP_DIR%
+MD Paladins
+CD Paladins
+
 md Damage
 cd Damage
 md Bomb_King

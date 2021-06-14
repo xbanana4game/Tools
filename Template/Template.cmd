@@ -13,7 +13,7 @@ REM
 REM                                Main
 REM
 REM ======================================================================
-REM CALL :INPUT_SETTINGS TEST "SET TEST(default:) =" 0
+REM CALL :INPUT_SETTINGS TEST "SET TEST=0 : " 0
 ECHO %~dp0
 ECHO %0
 ECHO %~dp0
