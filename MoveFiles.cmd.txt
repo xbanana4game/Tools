@@ -52,6 +52,7 @@ REM ======================================================================
 	REM MD %TARGET_DIR%\Videos
 	REM MD %TARGET_DIR%\Movies
 	ECHO youtube.com 1 >%TARGET_DIR%.archive
+	REM ECHO Captures 1 >%TARGET_DIR%.archive
 	EXIT /B
 	
 :SAVE_STEAM_SS

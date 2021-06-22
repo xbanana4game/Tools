@@ -61,6 +61,7 @@ REM ======================================================================
 	COPY /Y File-Tools\Archive-Extension.cmd %TOOLS_INSTALL_DIR%\bin
 	
 	COPY /Y Archive-Tools\Archive.cmd %USERPROFILE%\Desktop
+	REM COPY /Y File-Tools\Archive_Directory.cmd %USERPROFILE%\Desktop
 	EXIT /B
 	
 :INSTALL_SAKURA_MACRO

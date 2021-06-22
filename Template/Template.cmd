@@ -15,6 +15,7 @@ REM
 REM ======================================================================
 REM CALL :INPUT_SETTINGS TEST "SET TEST=0 : " 0
 ECHO %~dp0
+ECHO %~n0
 ECHO %0
 ECHO %~dp0
 CALL :isEmptyDir  %DESKTOP_DIR%

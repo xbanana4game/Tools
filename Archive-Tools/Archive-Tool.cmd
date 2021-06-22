@@ -60,7 +60,7 @@ ECHO ARCHIVE_PATH: %ARCHIVE_PATH%
 ECHO PROFILE: %ARCHIVE_PROFILE%
 ECHO   1:Make Directory
 ECHO   2:Remove empty Directory and Make Listfile
-ECHO   3:Archive
+ECHO   3:Archive(exclude __Store)
 ECHO   4:Update
 ECHO   5:Store Old Directory (_store, _old)
 SET /P A="-> "
@@ -82,7 +82,7 @@ IF 4 EQU %A% (
 )
 IF 5 EQU %A% (CALL :STORE_OLD_DIR)
 
-CALL :Msg Finished
+PAUSE
 EXIT
 
 
@@ -132,10 +132,10 @@ REM ======================================================================
 
 :MAKE_7Z_FILE
 	IF NOT DEFINED OUTPUT_DIR (
-		SET /P OUTPUT_DIR="Enter Output (E:, C:\Archives, default:%DESKTOP_DIR%): "
+		SET /P OUTPUT_DIR="Enter Output (E:, C:\Archives, default:%BACKUPS_DIR%): "
 	)
 	REM SET /P ARCHIVE_PASSWORD="Password: "
-	IF "%OUTPUT_DIR%"=="" SET OUTPUT_DIR=%DESKTOP_DIR%
+	IF "%OUTPUT_DIR%"=="" SET OUTPUT_DIR=%BACKUPS_DIR%
 	IF NOT "%ARCHIVE_PASSWORD%"=="" SET ARCHIVE_OPT_PW=-p%ARCHIVE_PASSWORD% -mhe
 	7z a -t%FILE_TYPE% %ARCHIVE_OPT_PW% %OUTPUT_DIR%\%ARCHIVE_PROFILE%@%yyyy%%mm%%dd%.%FILE_TYPE% %ARCHIVE_ROOT_DIR_NAME% -mx=%ARCHIVE_OPT_X% -xr!__Store
 	EXIT /B
@@ -151,13 +151,14 @@ REM ======================================================================
 		CALL a.cmd
 		DEL a.cmd
 	) ELSE (
-		CALL :Msg "Backups File not Exist."
+		ECHO "Backups File not Exist."
+		PAUSE
 	)
 	EXIT /B
 
 :UPDATE_7Z_FILE
 	SET UPDATE_SWITCH_OPT=p0q3x2z0
-	IF "%OUTPUT_DIR%"=="" SET OUTPUT_DIR=%DESKTOP_DIR%
+	IF "%OUTPUT_DIR%"=="" SET OUTPUT_DIR=%BACKUPS_DIR%
 	IF NOT "%ARCHIVE_PASSWORD%"=="" SET ARCHIVE_OPT_PW=-p%ARCHIVE_PASSWORD% -mhe
 	IF NOT DEFINED BASE_ARCHIVE_FILE SET /P BASE_ARCHIVE_FILE="Base Archive File: "
 	SET UPDATE_7Z_FILE=%OUTPUT_DIR%\%BASE_ARCHIVE_FILE%_-_Update-%yyyy%%mm%%dd%.7z
@@ -183,9 +184,5 @@ REM ======================================================================
 	)
 	EXIT /B 0
 
-:Msg
-	SET MSG=%1
-	SET /P END=%MSG%
-	EXIT /B
 
 	
