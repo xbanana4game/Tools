@@ -25,9 +25,9 @@ REM                                Function
 REM
 REM ======================================================================
 :RENAME_ADD_DATE
-	SET CMD_FILE=%USERPROFILE%\.Tools\%yyyy%%mm%%dd%%hh%%mn%.cmd
+	SET CMD_FILE=%USERPROFILE%\.Tools\%yyyy%%mm%%dd%%hh%%mn%%ss%.cmd
 	SET TARGET_DIR_NAME=%1%
-	ECHO SET NUMBER=1 >>%CMD_FILE%
+	ECHO SET NUMBER=0 >>%CMD_FILE%
 	FOR %%i in (%TARGET_DIR_NAME%\*.png) DO (
 		ECHO %%~nxi
 		ECHO SET /A NUMBER=%%NUMBER%%+1 >>%CMD_FILE%

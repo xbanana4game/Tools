@@ -1,6 +1,6 @@
 REM ======================================================================
 REM
-REM                                Tools-3.7.2
+REM                                Tools-3.7.3
 REM
 REM ======================================================================
 @ECHO OFF
@@ -54,8 +54,9 @@ REM Options
 REM ----------------------------------------------------------------------
 IF EXIST %USERPROFILE%\.Tools\SettingsOptions.cmd (CALL %USERPROFILE%\.Tools\SettingsOptions.cmd)
 IF EXIST %USERPROFILE%\Desktop\SettingsOptions.cmd (
-	ECHO %USERPROFILE%\Desktop\SettingsOptions.cmd
-	TYPE %USERPROFILE%\Desktop\SettingsOptions.cmd
+	REM ECHO %USERPROFILE%\Desktop\SettingsOptions.cmd
+	REM TYPE %USERPROFILE%\Desktop\SettingsOptions.cmd
+	NOTEPAD %USERPROFILE%\Desktop\SettingsOptions.cmd
 	CALL %USERPROFILE%\Desktop\SettingsOptions.cmd
 )
 

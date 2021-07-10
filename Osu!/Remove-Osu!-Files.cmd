@@ -15,7 +15,6 @@ REM ----------------------------------------------------------------------
 REM 
 REM ----------------------------------------------------------------------
 CALL :ChangeDirectory %OSU_SONGS_DIR%
-SET /P MSG="%OSU_SONGS_DIR% Start Archive Files. Press Enter"
 CALL :F_OSU_ARCHIVE_FILES
 EXIT
 
@@ -88,8 +87,10 @@ REM ----------------------------------------------------------------------
 :ChangeDirectory
 	IF EXIST %1 (
 		CD /D %1
+		ECHO %1
 	) ELSE (
-		SET /P ERR=Directory %1 is not Exist.
+		ECHO Directory %1 is not Exist.
+		PAUSE
 		EXIT
 	)
 	EXIT /B 0

@@ -39,7 +39,7 @@ REM                                Function
 REM
 REM ======================================================================
 :RENAME_ADD_DATE_OSU
-	SET CMD_FILE=%USERPROFILE%\.Tools\%yyyy%%mm%%dd%%hh%%mn%.cmd
+	SET CMD_FILE=%USERPROFILE%\.Tools\%yyyy%%mm%%dd%%hh%%mn%%ss%.cmd
 	SET TARGET_DIR_NAME=%1%
 	FOR %%i in (%TARGET_DIR_NAME%\screenshot*.jpg) DO (
 		ECHO %%~nxi
