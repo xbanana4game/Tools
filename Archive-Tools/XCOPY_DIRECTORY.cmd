@@ -15,8 +15,8 @@ REM
 REM ======================================================================
 SET /P XCOPY_DIR_NAME="XCOPY_DIR_NAME default:youtube.com->"
 IF "%XCOPY_DIR_NAME%"=="" SET XCOPY_DIR_NAME=youtube.com
-SET /P XCOPY_DIR_FROM="XCOPY_DIR_FROM default:M:%XCOPY_DIR_NAME%->"
-IF "%XCOPY_DIR_FROM%"=="" SET XCOPY_DIR_FROM=M:%XCOPY_DIR_NAME%
+SET /P XCOPY_DIR_FROM="XCOPY_DIR_FROM default:M:\Videos\%XCOPY_DIR_NAME%->"
+IF "%XCOPY_DIR_FROM%"=="" SET XCOPY_DIR_FROM=M:\Videos\%XCOPY_DIR_NAME%
 
 MD %XCOPY_DIR_NAME%
 CD %XCOPY_DIR_NAME%

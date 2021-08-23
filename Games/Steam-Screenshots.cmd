@@ -23,7 +23,7 @@ CALL :CheckDirectory %STEAM_DIR%\userdata
 FOR /F "tokens=1,2* delims=," %%i IN (%TOOLS_DIR%\Games\steam_screenshots.txt) DO CALL :ArchiveGameScreenshots %%i %%j
 IF %SAVE_STEAM_SS_FLG% EQU 1 CALL :ArchiveSteamScreenshots 
 
-//If not called MoveFiles.cmd pause.
+REM If not called MoveFiles.cmd pause.
 IF NOT DEFINED ARCHIVE_FLG PAUSE
 EXIT /B
 

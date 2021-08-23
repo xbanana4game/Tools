@@ -16,8 +16,10 @@ REM                                Main
 REM
 REM ======================================================================
 CALL :MOVE_TARGET_FILES  %DOWNLOADS_DIR%\Games\Osu!\Beatmap_Pack *Beatmap*.7z
+REM CALL :MOVE_TARGET_FILES  %VIDEOS_DIR%\VD_%yyyy%%mm%%dd% *.mp4
 CALL :MOVE_VIDEOS
 CALL :SAVE_STEAM_SS
+CALL :SAVE_OSU_SS
 EXIT /B
 
 
@@ -38,16 +40,20 @@ REM ======================================================================
 	EXIT /B
 
 :MOVE_VIDEOS
-	SET TARGET_DIR=%ARCHIVE_DIR%\VD_%yyyy%%mm%%dd%
+	SET TARGET_DIR=%VIDEOS_DIR%\VD_%yyyy%%mm%%dd%
 	REM SET TARGET_DIR=%DOWNLOADS_DIR%\Videos
-	IF NOT EXIST %DOWNLOADS_DIR%\*.mp4 EXIT /B
+	MOVE /Y %DOWNLOADS_DIR%\*.mp4 %VIDEOS_DIR%\
+	MOVE /Y %DOWNLOADS_DIR%\*.mkv %VIDEOS_DIR%\
+	IF NOT EXIST %VIDEOS_DIR%\*.mp4 EXIT /B
 	MD %TARGET_DIR%
-	MOVE /Y %DOWNLOADS_DIR%\*.mp4 %TARGET_DIR%\
+	MOVE /Y %VIDEOS_DIR%\*.mp4 %TARGET_DIR%\
+	MOVE /Y %VIDEOS_DIR%\*.mkv %TARGET_DIR%\
 	RMDIR %TARGET_DIR%
+	IF NOT EXIST %TARGET_DIR% EXIT /B
 	IF 1 EQU %ARCHIVE_FLG% (
 		REM 7z a -t7z -sdel %TARGET_DIR%.7z %TARGET_DIR% -mx=0
 	)
-	7z x %ARCHIVE_DIR%\youtube.com.zip -o%TARGET_DIR%
+	7z x %TOOLS_DIR%\youtube.com.zip -o%TARGET_DIR%
 	REM MD %TARGET_DIR%\Captures
 	REM MD %TARGET_DIR%\Videos
 	REM MD %TARGET_DIR%\Movies
@@ -59,6 +65,12 @@ REM ======================================================================
 	IF 1 EQU %ARCHIVE_FLG% (
 		SET SAVE_STEAM_SS_FLG=0
 		CALL Steam-Screenshots.cmd
+	)
+	EXIT /B
+
+:SAVE_OSU_SS
+	IF 1 EQU %ARCHIVE_FLG% (
+		CALL %TOOLS_DIR%\Osu!\Archive-Osu!-Screenshot.cmd
 	)
 	EXIT /B
 

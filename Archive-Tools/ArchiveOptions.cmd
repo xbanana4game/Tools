@@ -7,5 +7,5 @@ REM SET FILE_TYPE=7z
 REM SET ARCHIVE_OPT_X=5
 REM SET ARCHIVE_PASSWORD=
 REM SET REMOVE_EMPTY_DIR_FLG=1
-SET BACKUPS_DIR=C:\Backups\7z
+REM SET BACKUPS_DIR=C:\Backups\7z
 REM ----------------------------------------------------------------------

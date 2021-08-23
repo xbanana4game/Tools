@@ -30,7 +30,7 @@ REM EXPLORER %DOCUMENTS_DIR%
 SET SCREENSHOTS_ARCHIVE_NAME=Osu!-Screenshots-%yyyy%%mm%%dd%_%hh%%mn%
 7z a -tzip -sdel %DOWNLOADS_DIR%\%SCREENSHOTS_ARCHIVE_NAME%.zip %OSU_DIR%\Screenshots\*  -mx=0
 
-EXIT
+EXIT /B 0
 
 
 REM ======================================================================

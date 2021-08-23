@@ -16,7 +16,7 @@ REM ======================================================================
 FOR %%i in (%*) DO (
 	ECHO %%i
 	REM CALL  :RENAME_ADD_DATE  %%i
-	7z a -tzip -sdel "%%~nxi.zip" ""%%i\*"" -mx=0 -mtc=off
+	7z a -tzip -sdel "%%~nxi.zip" ""%%i\*"" -xr!*.db -mx=0 -mtc=off
 	REM 7z a -tzip -sdel "%%~nxi.zip" ""%%i"" -mx=0 -mtc=off
 	7z l "%%~nxi.zip">"%%~nxi.zip.txt"
 )

@@ -87,7 +87,6 @@ REM ----------------------------------------------------------------------
 :ChangeDirectory
 	IF EXIST %1 (
 		CD /D %1
-		ECHO %1
 	) ELSE (
 		ECHO Directory %1 is not Exist.
 		PAUSE
