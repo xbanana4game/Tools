@@ -14,7 +14,6 @@ CALL :INSTALL_SAKURA_MACRO
 CALL :BACKUP_SETTINGS
 REM PAUSE
 REM EXPLORER %TOOLS_INSTALL_DIR%
-COPY /Y %TOOLS_INSTALL_DIR%\Tools-Settings@%USERDOMAIN%_%yyyy%%mm%%dd%.7z %DOWNLOADS_DIR%
 REM IF EXIST "%SAKURA_SETTINGS_DIR%" EXPLORER %SAKURA_SETTINGS_DIR%
 PAUSE
 EXIT
@@ -31,7 +30,8 @@ REM ======================================================================
 		START %FILE_7Z_INSTALLER%
 		PAUSE
 	) ELSE (
-		ECHO https://ja.osdn.net/dl/sevenzip/7z1900-x64.exe/
+		ECHO Please Install https://ja.osdn.net/dl/sevenzip/7z1900-x64.exe/
+		PAUSE
 	)
 	EXIT /B
 
@@ -80,6 +80,8 @@ REM ======================================================================
 	CALL %USERPROFILE%\Settings.cmd
 	REM IF NOT "%ARCHIVE_PASSWORD%"=="" SET ARCHIVE_OPT_PW=-p%ARCHIVE_PASSWORD% -mhe
 	7z a -t7z  %ARCHIVE_OPT_PW% %TOOLS_INSTALL_DIR%\Tools-Settings@%USERDOMAIN%_%yyyy%%mm%%dd%.7z %TOOLS_INSTALL_DIR% -xr!*bin -xr!*.7z
+	COPY /Y %TOOLS_INSTALL_DIR%\Tools-Settings@%USERDOMAIN%_%yyyy%%mm%%dd%.7z %DOWNLOADS_DIR%
+	7z a -t7z  %ARCHIVE_OPT_PW% %TOOLS_INSTALL_DIR%\Tools-Settings@%USERDOMAIN%_%yyyy%%mm%%dd%.7z @.gitignore
 	EXIT /B
 
 	

@@ -1,3 +1,4 @@
-/MoveFiles.cmd
-/SettingsOptions.cmd
-/*.exe
+MoveFiles.cmd
+SettingsOptions.cmd
+*.exe
+*.zip

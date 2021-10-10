@@ -35,6 +35,7 @@ REM ======================================================================
 	MD %TARGET_DIR%
 	MOVE %DOWNLOADS_DIR%\%TARGET_FILE% %TARGET_DIR%\
 	IF 1 EQU %ARCHIVE_FLG% (
+		ECHO DO NOTHING
 		REM 7z a -t7z -sdel %ARCHIVE_DIR%\VD_%yyyy%%mm%%dd%.7z %TARGET_DIR% -mx=0
 	)
 	EXIT /B
@@ -51,6 +52,7 @@ REM ======================================================================
 	RMDIR %TARGET_DIR%
 	IF NOT EXIST %TARGET_DIR% EXIT /B
 	IF 1 EQU %ARCHIVE_FLG% (
+		ECHO DO NOTHING
 		REM 7z a -t7z -sdel %TARGET_DIR%.7z %TARGET_DIR% -mx=0
 	)
 	7z x %TOOLS_DIR%\youtube.com.zip -o%TARGET_DIR%
@@ -62,14 +64,24 @@ REM ======================================================================
 	EXIT /B
 	
 :SAVE_STEAM_SS
-	IF 1 EQU %ARCHIVE_FLG% (
+	IF 0 EQU %ARCHIVE_FLG% (
+		EXIT /B
+	)
+	IF NOT DEFINED SAVE_STEAM_SS_EXECUTE (SET /P SAVE_STEAM_SS_EXECUTE="SET SAVE_STEAM_SS_EXECUTE(0)=")
+	IF NOT DEFINED SAVE_STEAM_SS_EXECUTE (SET SAVE_STEAM_SS_EXECUTE=0)
+	IF 1 EQU %SAVE_STEAM_SS_EXECUTE% (
 		SET SAVE_STEAM_SS_FLG=0
 		CALL Steam-Screenshots.cmd
 	)
 	EXIT /B
 
 :SAVE_OSU_SS
-	IF 1 EQU %ARCHIVE_FLG% (
+	IF 0 EQU %ARCHIVE_FLG% (
+		EXIT /B
+	)
+	IF NOT DEFINED SAVE_OSU_SS_EXECUTE (SET /P SAVE_OSU_SS_EXECUTE="SET SAVE_OSU_SS_EXECUTE(0)=")
+	IF NOT DEFINED SAVE_OSU_SS_EXECUTE (SET SAVE_OSU_SS_EXECUTE=0)
+	IF 1 EQU %SAVE_OSU_SS_EXECUTE% (
 		CALL %TOOLS_DIR%\Osu!\Archive-Osu!-Screenshot.cmd
 	)
 	EXIT /B

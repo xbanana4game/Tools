@@ -48,6 +48,7 @@ REM ----------------------------------------------------------------------
 :F_FORFILES_EXT_ARCHIVE
 	SET TARGET_EXT=%1
 	IF NOT DEFINED FORFILES_CMD_FILE EXIT /B
+	ECHO SEARCH %TARGET_EXT% ...
 	FORFILES /s /m *.%TARGET_EXT% /c "cmd /c ECHO @path >>%FORFILES_CMD_FILE%"
 	EXIT /B
 	
@@ -60,6 +61,7 @@ REM ----------------------------------------------------------------------
 
 :F_FORDIR_ARCHIVE
 	IF NOT DEFINED FORFILES_CMD_FILE EXIT /B
+	ECHO Check SB Directory ...
 	FOR /D %%i IN ("%OSU_SONGS_DIR%\*") DO (
 	  CD /D "%%i"
 	  FOR /D %%j IN ("*") DO (

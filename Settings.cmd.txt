@@ -1,6 +1,6 @@
 REM ======================================================================
 REM
-REM                                Tools-3.7.4a
+REM                                Tools-3.7.5
 REM
 REM ======================================================================
 @ECHO OFF
@@ -29,6 +29,7 @@ SET DOCUMENTS_DIR=%USERPROFILE%\Documents
 SET VIDEOS_DIR=%USERPROFILE%\Videos
 SET ARCHIVE_DIR=%USERPROFILE%\Archives
 SET UPLOADS_DIR=%ARCHIVE_DIR%\Uploads
+SET STORE_DIR=%USERPROFILE%\Store
 SET PATH=%PATH%;C:\Program Files\7-Zip
 
 REM ----------------------------------------------------------------------

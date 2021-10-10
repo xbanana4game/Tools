@@ -118,7 +118,7 @@ REM ======================================================================
 	
 :STORE_OLD_DIR
 	CALL :ChangeDirectory %ARCHIVE_ROOT_DIR_NAME%
-	SET STORE_FILE=Store\%ARCHIVE_PROFILE%-Store@%yyyy%%mm%
+	SET STORE_FILE=Store\%ARCHIVE_PROFILE%-Store@%yyyy%%mm%%dd%
 	7z a -t7z -sdel %STORE_FILE%.7z -ir!_old\ -ir!_store\ -mx=0
 	7z l %STORE_FILE%.7z >%STORE_FILE%.txt
 	TYPE %STORE_FILE%.txt
