@@ -24,7 +24,7 @@ IF NOT ""%1""=="""" (
 echo ""%1""
 	FOR %%i in (%*) DO (
 		ECHO "%%fi"
-		7z a -t7z  "%DOWNLOADS_DIR%\%%~nxi@%yyyy%%mm%%dd%_%USERDOMAIN%.7z" ""%%i""
+		7z a -t7z -sdel "%DOWNLOADS_DIR%\%%~nxi@%yyyy%%mm%%dd%_%USERDOMAIN%.7z" ""%%i""
 		7z l "%DOWNLOADS_DIR%\%%~nxi@%yyyy%%mm%%dd%_%USERDOMAIN%.7z"
 		7z l "%DOWNLOADS_DIR%\%%~nxi@%yyyy%%mm%%dd%_%USERDOMAIN%.7z">"%DOWNLOADS_DIR%\%%~nxi@%yyyy%%mm%%dd%_%USERDOMAIN%.7z.txt"
 	)
@@ -93,7 +93,7 @@ REM ======================================================================
 		EXIT /B
 	)
 	IF NOT "%DOWNLOADS_PASSWORD%"=="" SET ARCHIVE_OPT_PW=-p%DOWNLOADS_PASSWORD% -mhe
-	7z a -t7z  -sdel %ARCHIVE_OPT_PW% %DL_DIR%\%DOWNLOAD_FILENAME%.7z %USERPROFILE%\Downloads\* -xr!desktop.ini -xr!*.part -xr!*.mega -xr!*.crdownload -xr!*.downloading -mx=%ARCHIVE_OPT_X%
+	7z a -t7z -sdel %ARCHIVE_OPT_PW% %DL_DIR%\%DOWNLOAD_FILENAME%.7z %USERPROFILE%\Downloads\* -xr!desktop.ini -xr!*.part -xr!*.mega -xr!*.crdownload -xr!*.downloading -mx=%ARCHIVE_OPT_X%
 	7z l %ARCHIVE_OPT_PW% %DL_DIR%\%DOWNLOAD_FILENAME%.7z
 	EXIT /B
 
@@ -110,7 +110,7 @@ REM ======================================================================
 	SET OUT_NAME=%1
 	SET IN=%2
 	IF NOT "%DOWNLOADS_PASSWORD%"=="" SET ARCHIVE_OPT_PW=-p%DOWNLOADS_PASSWORD% -mhe
-	7z a -t7z  %ARCHIVE_OPT_PW% %ARCHIVE_DIR%\%OUT_NAME% %IN% -mx=%ARCHIVE_OPT_X%
+	7z a -t7z -sdel %ARCHIVE_OPT_PW% %ARCHIVE_DIR%\%OUT_NAME% %IN% -mx=%ARCHIVE_OPT_X%
 	7z l %ARCHIVE_OPT_PW% %ARCHIVE_DIR%\%OUT_NAME%
 	EXIT /B
 

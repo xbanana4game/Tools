@@ -15,8 +15,8 @@ REM
 REM                                Main
 REM
 REM ======================================================================
-CALL :MOVE_TARGET_FILES  %DOWNLOADS_DIR%\Games\Osu!\Beatmap_Pack *Beatmap*.7z
-REM CALL :MOVE_TARGET_FILES  %VIDEOS_DIR%\VD_%yyyy%%mm%%dd% *.mp4
+CALL :MOVE_TARGET_FILES  %DOWNLOADS_DIR%\Games\Osu!\Beatmap_Pack %DOWNLOADS_DIR%\*Beatmap*.7z
+REM CALL :MOVE_TARGET_FILES  %DOWNLOADS_DIR%\VD_%yyyy%%mm%%dd% %DOWNLOADS_DIR%\*.mp4
 CALL :MOVE_VIDEOS
 CALL :SAVE_STEAM_SS
 CALL :SAVE_OSU_SS
@@ -31,18 +31,23 @@ REM ======================================================================
 :MOVE_TARGET_FILES
 	SET TARGET_DIR=%1
 	SET TARGET_FILE=%2
-	IF NOT EXIST %DOWNLOADS_DIR%\%TARGET_FILE% EXIT /B
+	IF NOT EXIST %TARGET_FILE% EXIT /B
 	MD %TARGET_DIR%
-	MOVE %DOWNLOADS_DIR%\%TARGET_FILE% %TARGET_DIR%\
-	IF 1 EQU %ARCHIVE_FLG% (
-		ECHO DO NOTHING
-		REM 7z a -t7z -sdel %ARCHIVE_DIR%\VD_%yyyy%%mm%%dd%.7z %TARGET_DIR% -mx=0
-	)
+	MOVE %TARGET_FILE% %TARGET_DIR%\
 	EXIT /B
 
 :MOVE_VIDEOS
-	SET TARGET_DIR=%VIDEOS_DIR%\VD_%yyyy%%mm%%dd%
-	REM SET TARGET_DIR=%DOWNLOADS_DIR%\Videos
+	IF 1 EQU %ARCHIVE_FLG% (
+		MD %VIDEOS_DIR%\Store
+		FOR /D %%i IN (%DOWNLOADS_DIR%\VD_*) DO (
+			MOVE %%i %VIDEOS_DIR%\Store
+		)
+		FOR %%i IN (%DOWNLOADS_DIR%\VD_*) DO (
+			MOVE %%i %VIDEOS_DIR%\Store
+		)
+		EXIT /B
+	)
+	SET TARGET_DIR=%DOWNLOADS_DIR%\VD_%yyyy%%mm%%dd%
 	MOVE /Y %DOWNLOADS_DIR%\*.mp4 %VIDEOS_DIR%\
 	MOVE /Y %DOWNLOADS_DIR%\*.mkv %VIDEOS_DIR%\
 	IF NOT EXIST %VIDEOS_DIR%\*.mp4 EXIT /B
@@ -55,7 +60,7 @@ REM ======================================================================
 		ECHO DO NOTHING
 		REM 7z a -t7z -sdel %TARGET_DIR%.7z %TARGET_DIR% -mx=0
 	)
-	7z x %TOOLS_DIR%\youtube.com.zip -o%TARGET_DIR%
+	7z x %TOOLS_DIR%\videos.zip -o%TARGET_DIR%
 	REM MD %TARGET_DIR%\Captures
 	REM MD %TARGET_DIR%\Videos
 	REM MD %TARGET_DIR%\Movies

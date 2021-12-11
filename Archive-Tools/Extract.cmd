@@ -21,7 +21,7 @@ IF NOT "%1"=="" (
 )
 
 DIR /B %ARCHIVE_DIR%
-SET /P EXTRACT_YYYY="Enter Extract YYYY or YYYYMM. (Default:%yyyy%%mm%) -> "
+SET /P EXTRACT_YYYY="Enter Extract YYYY* or YYYYMM. (Default:%yyyy%%mm%) -> "
 IF "%EXTRACT_YYYY%"=="" SET EXTRACT_YYYY=%yyyy%%mm%
 CALL :MAKE_LIST_FILE
 CALL :EXTRACT_YYYYMM
@@ -35,7 +35,7 @@ REM                                Function
 REM
 REM ======================================================================
 :MAKE_LIST_FILE
-	FOR /D %%i IN ("%ARCHIVE_DIR%\%EXTRACT_YYYY%*") DO (
+	FOR /D %%i IN ("%ARCHIVE_DIR%\%EXTRACT_YYYY%") DO (
 		FOR %%j IN ("%ARCHIVE_DIR%\%%~ni\DL_*.7z") DO (
 			7z l -p%DOWNLOADS_PASSWORD% %%j
 		)
@@ -51,7 +51,7 @@ REM ======================================================================
 	IF NOT DEFINED EXTRACT_TARGET_DIR SET /P EXTRACT_TARGET_DIR="SET EXTRACT_TARGET_DIR (Default:%DESKTOP_DIR%) -> "
 	IF "%EXTRACT_TARGET_DIR%"=="" SET EXTRACT_TARGET_DIR=%DESKTOP_DIR%
 	IF %MOVE_STORE_FLG%==1 MD %STORE_DIR%\%EXTRACT_YYYY%
-	FOR /D %%i IN ("%ARCHIVE_DIR%\%EXTRACT_YYYY%*") DO (
+	FOR /D %%i IN ("%ARCHIVE_DIR%\%EXTRACT_YYYY%") DO (
 		FOR %%j IN ("%ARCHIVE_DIR%\%%~ni\DL_*.7z") DO (
 			7z x -p%DOWNLOADS_PASSWORD% %%j -o%EXTRACT_TARGET_DIR%\%%~ni -aot %EXTRACT_EXT% -r
 		)

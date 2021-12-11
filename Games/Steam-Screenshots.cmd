@@ -47,7 +47,7 @@ REM ======================================================================
 	SET SS_DIR=%2%
 	SET OUT="%DOWNLOADS_DIR%\%GAME_NAME%-Screenshots-%yyyy%%mm%%dd%_%hh%%mn%@%USERDOMAIN%.zip"
 	IF EXIST %SS_DIR% (
-		7z a -tzip -sdel %OUT% %SS_DIR%  -mx=0
+		7z a -tzip -sdel %OUT% %SS_DIR% -ir!%yyyy%*  -mx=0
 		7z d %OUT% thumbnails -r
 		7z l %OUT%
 	)
@@ -57,7 +57,7 @@ REM ======================================================================
 	SET OUT="%DOWNLOADS_DIR%\Steam-Screenshots-%yyyy%%mm%%dd%_%hh%%mn%@%USERDOMAIN%.zip"
 	CALL :CheckDirectory %STEAM_DIR%\userdata
 	CD %STEAM_DIR%
-	7z a -tzip %OUT% -ir!*\screenshots\*.jpg  -xr!thumbnails  -mx=0
+	7z a -tzip %OUT% -ir!*\screenshots\%yyyy%*.jpg  -xr!thumbnails  -mx=0
 	7z l %OUT%
 	EXIT /B
 
