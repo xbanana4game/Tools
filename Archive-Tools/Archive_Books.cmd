@@ -19,7 +19,7 @@ FOR %%i in (%*) DO (
 	7z a -tzip -sdel "%%~nxi.zip" ""%%i\*"" -xr!*.db -xr!*.dat -xr!*.url -mx=0 -mtc=off
 	REM 7z a -tzip -sdel "%%~nxi.zip" ""%%i"" -mx=0 -mtc=off
 	7z l "%%~nxi.zip">"%%~nxi.zip.txt"
-	7z l "%%~nxi.zip">>"%DESKTOP_DIR%\books.txt"
+	7z l "%%~nxi.zip">>"%DOWNLOADS_DIR%\books-%yyyy%%mm%%dd%.log"
 )
 EXIT
 

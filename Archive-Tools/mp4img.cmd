@@ -29,6 +29,7 @@ echo %MP4_FILES_DIR%
 CALL :ChangeDirectory %MP4_FILES_DIR%
 FORFILES /s /m *.m?? /c ^
 "cmd /c IF NOT EXIST %MP4_IMG_DIR%\\@file.jpg ffmpeg -y -i @path -ss %FFMPGE_OPT_SS% -vframes 1 -f image2 -vf scale=640:-1 %MP4_IMG_DIR%_%FFMPGE_OPT_SS%\\@file.jpg"
+REM "cmd /c IF NOT EXIST @path.jpg ffmpeg -y -i @path -ss %FFMPGE_OPT_SS% -vframes 1 -f image2 -vf scale=640:-1 @path.jpg"
 
 ECHO mp3tag Action Import Cover %MP4_IMG_DIR%\%%_filename_ext%%.jpg
 PAUSE
