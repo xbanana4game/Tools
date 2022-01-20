@@ -27,7 +27,7 @@ IF "%1"=="" (
 		ECHO REM ======================================================================>>%CMD_FILE%
 		echo SET F_DATE=%%~ti>>%CMD_FILE%
 		echo SET F_YYYYMMDD=%%F_DATE:~0,4%%%%F_DATE:~5,2%%%%F_DATE:~8,2%%>>%CMD_FILE%
-		echo 7z a "%DOWNLOADS_DIR%\keepass-%%~ni@%%F_YYYYMMDD%%.zip" "%%i">>%CMD_FILE%
+		echo 7z a "%DOWNLOADS_DIR%\kp-%%~ni@%%F_YYYYMMDD%%.zip" "%%i">>%CMD_FILE%
 	)
 ) ELSE (
 	ECHO REM ======================================================================>>%CMD_FILE%
@@ -35,8 +35,8 @@ IF "%1"=="" (
 	ECHO REM ======================================================================>>%CMD_FILE%
 	echo SET F_DATE=%~t1>>%CMD_FILE%
 	echo SET F_YYYYMMDD=%%F_DATE:~0,4%%%%F_DATE:~5,2%%%%F_DATE:~8,2%%>>%CMD_FILE%
-	echo 7z a "%DOWNLOADS_DIR%\keepass-%~n1@%%F_YYYYMMDD%%.zip" "%1">>%CMD_FILE%
-	echo 7z l "%DOWNLOADS_DIR%\keepass-%~n1@%%F_YYYYMMDD%%.zip">>%CMD_FILE%
+	echo 7z a "%DOWNLOADS_DIR%\kp-%~n1@%%F_YYYYMMDD%%.zip" "%1">>%CMD_FILE%
+	echo 7z l "%DOWNLOADS_DIR%\kp-%~n1@%%F_YYYYMMDD%%.zip">>%CMD_FILE%
 )
 
 IF EXIST %CMD_FILE% (
