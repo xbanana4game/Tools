@@ -4,9 +4,14 @@
 *3D* *360* *VIDEO_NAME* (*H*p_*FPS*fps_*VIDEO_CODEC*-*AUDIO_BITRATE*kbit_*AUDIO_CODEC*).*EXT*
 *VIDEO_NAME* [*CATEGORY*][*USER*][*ID*][*DATE[yyyy-MM-dd]*].*EXT*
 
-\%title% [%genre%][%artist%][%comment%][%year%]
+%title% [%genre%][%artist%][%comment%][%year%]
 
 
 ==========================================================================
 
 ==========================================================================
+:File_BaseName: [:Hash_CRC32:] [:File_DateCreated:]
+
+%genre%\%album%\%title% [%comment%] [%year%]
+
+C:\Users\USERNAME\Downloads\%genre%\%album%\%comment%

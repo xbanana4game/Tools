@@ -72,7 +72,7 @@ REM ======================================================================
 	SET SERVER_NAME=%1
 	CALL :CheckDirectory %KILLINGFLOOR_DIR%\KF-SERVER\%SERVER_NAME%
 	CD /D %KILLINGFLOOR_DIR%\KF-SERVER
-	TREE /F %SERVER_NAME% >%SERVER_NAME%\%SERVER_NAME%.txt
+	TREE /F /A %SERVER_NAME% >%SERVER_NAME%\%SERVER_NAME%.txt
 	NOTEPAD %SERVER_NAME%\%SERVER_NAME%.txt
 	EXIT /B
 

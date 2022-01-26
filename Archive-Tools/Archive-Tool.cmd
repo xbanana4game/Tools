@@ -125,7 +125,7 @@ REM ======================================================================
 	EXIT /B
 
 :MAKE_LIST_FILE
-	TREE /F %ARCHIVE_ROOT_DIR_NAME% > %ARCHIVE_PROFILE%.txt
+	TREE /F /A %ARCHIVE_ROOT_DIR_NAME% > %ARCHIVE_PROFILE%.txt
 	COPY %ARCHIVE_PROFILE%.txt %ARCHIVE_PROFILE%@%yyyy%%mm%%dd%.txt
 	7z a -tzip  %ARCHIVE_ROOT_DIR_NAME%\Settings@%ARCHIVE_PROFILE%.zip  %ARCHIVE_PATH%\ArchiveOptions.cmd  %ARCHIVE_PROFILE_FILE% %ARCHIVE_PROFILE%@%yyyy%%mm%%dd%.txt
 	DEL %ARCHIVE_PROFILE%@%yyyy%%mm%%dd%.txt
