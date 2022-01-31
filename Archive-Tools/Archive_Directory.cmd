@@ -16,6 +16,7 @@ REM ======================================================================
 FOR %%i in (%*) DO (
 	ECHO %%i
 	7z a -tzip -sdel "%%~nxi.zip" ""%%i"" -mx=0
+	7z l "%%~nxi.zip" >"%%~nxi.zip.txt"
 	7z l "%%~nxi.zip"
 )
 PAUSE
