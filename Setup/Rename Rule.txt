@@ -6,12 +6,15 @@
 
 %title% [%genre%][%artist%][%comment%][%year%]
 
+youtube.com\Genre\%genre%\%artist%\%year% %comment%
+
 
 ==========================================================================
-
+								videos
 ==========================================================================
 :File_BaseName: [:Hash_CRC32:] [:File_DateCreated:]
 
 %genre%\%album%\%title% [%comment%] [%year%]
 
 C:\Users\USERNAME\Downloads\%genre%\%album%\%comment%
+

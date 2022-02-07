@@ -8,14 +8,15 @@ REM
 REM                                INSTALL
 REM
 REM ======================================================================
+CD ..
 CALL :INSTALL_7Z
+CALL :INSTALL_FFMPEG
 CALL :INSTALL_SETTINGS
 CALL :INSTALL_SAKURA_MACRO
 CALL :BACKUP_SETTINGS
 REM PAUSE
 REM EXPLORER %TOOLS_INSTALL_DIR%
 REM IF EXIST "%SAKURA_SETTINGS_DIR%" EXPLORER %SAKURA_SETTINGS_DIR%
-PAUSE
 EXIT
 
 
@@ -35,12 +36,22 @@ REM ======================================================================
 	)
 	EXIT /B
 
+:INSTALL_FFMPEG
+	IF EXIST %TOOLS_INSTALL_DIR%\bin\ffmpeg.exe EXIT /B
+	IF EXIST ffmpeg.exe (
+		COPY ffmpeg.exe %TOOLS_INSTALL_DIR%\bin\ffmpeg.exe
+	) ELSE (
+		ECHO Please Download https://www.ffmpeg.org/
+		PAUSE
+	)
+	EXIT /B
+
 :INSTALL_SETTINGS
 	MD %TOOLS_INSTALL_DIR%
-	COPY /Y Settings.cmd.txt %USERPROFILE%\Settings.cmd
+	COPY /Y Setup\Settings.cmd.txt %USERPROFILE%\Settings.cmd
 	ECHO SET TOOLS_DIR=%~dp0>>%USERPROFILE%\Settings.cmd
 	
-	COPY /Y Settings.cmd.txt %TOOLS_INSTALL_DIR%\Settings.cmd
+	COPY /Y Setup\Settings.cmd.txt %TOOLS_INSTALL_DIR%\Settings.cmd
 	ECHO SET TOOLS_DIR=%~dp0>>%TOOLS_INSTALL_DIR%\Settings.cmd
 	ECHO SET PATH=%%PATH%%;%~dp0Games>>%TOOLS_INSTALL_DIR%\Settings.cmd
 	ECHO SET PATH=%%PATH%%;%~dp0File-Tools>>%TOOLS_INSTALL_DIR%\Settings.cmd
@@ -79,9 +90,14 @@ REM ======================================================================
 	IF NOT EXIST %USERPROFILE%\Settings.cmd (EXIT /B)
 	CALL %USERPROFILE%\Settings.cmd
 	REM IF NOT "%ARCHIVE_PASSWORD%"=="" SET ARCHIVE_OPT_PW=-p%ARCHIVE_PASSWORD% -mhe
+	DEL %TOOLS_INSTALL_DIR%\Tools-Settings@%USERDOMAIN%_%yyyy%%mm%%dd%.7z
 	7z a -t7z  %ARCHIVE_OPT_PW% %TOOLS_INSTALL_DIR%\Tools-Settings@%USERDOMAIN%_%yyyy%%mm%%dd%.7z %TOOLS_INSTALL_DIR% -xr!*bin -xr!*.7z
 	COPY /Y %TOOLS_INSTALL_DIR%\Tools-Settings@%USERDOMAIN%_%yyyy%%mm%%dd%.7z %DOWNLOADS_DIR%
+	ECHO 7z Add .gitignore list?
+	TYPE .gitignore
+	PAUSE
 	7z a -t7z  %ARCHIVE_OPT_PW% %TOOLS_INSTALL_DIR%\Tools-Settings@%USERDOMAIN%_%yyyy%%mm%%dd%.7z @.gitignore
+	COPY /Y %TOOLS_INSTALL_DIR%\Tools-Settings@%USERDOMAIN%_%yyyy%%mm%%dd%.7z %DOWNLOADS_DIR%
 	EXIT /B
 
 	

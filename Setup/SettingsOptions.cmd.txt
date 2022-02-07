@@ -3,6 +3,7 @@ REM Archive Settings
 REM ----------------------------------------------------------------------
 SET ARCHIVE_PASSWORD=
 SET DOWNLOADS_PASSWORD=
+SET IGNORE_FILE=thumbsnail.db
 
 REM ----------------------------------------------------------------------
 REM Games Settings
