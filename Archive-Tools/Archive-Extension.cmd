@@ -11,6 +11,9 @@ REM
 REM                                Main
 REM
 REM ======================================================================
+IF NOT DEFINED SDEL_FLG (SET /P SDEL_FLG="Enter SDEL_FLG 1(default)/0: ")
+IF SDEL_FLG==1 (SET SDEL_OPT=-sdel)
+
 IF "%~x1" == ".7zext" (
 	SET OUTPUT_DIR_NAME=%~n1-files
 	CALL :EXECUTE_ARCHIVE_EXT_SETTINGS_FROM_FILE %~1
@@ -41,7 +44,7 @@ REM ======================================================================
 	IF "%ARCHIVE_PREFIX%"=="" SET OUTPUT_FILENAME=%ARCHIVE_EXT%-files
 
 	MD %OUTPUT_DIR_NAME%
-	7z a -tzip -sdel %OUTPUT_DIR_NAME%\%OUTPUT_FILENAME%.zip  %ARCHIVE_PREFIX%*.%ARCHIVE_EXT% -r -xr!Archive-Extension.cmd -xr!%OUTPUT_FILENAME%.zip -xr!%OUTPUT_FILENAME%.zip.txt -mx=0
+	7z a -tzip %SDEL_OPT% %OUTPUT_DIR_NAME%\%OUTPUT_FILENAME%.zip  %ARCHIVE_PREFIX%*.%ARCHIVE_EXT% -r -xr!Archive-Extension.cmd -xr!%OUTPUT_FILENAME%.zip -xr!%OUTPUT_FILENAME%.zip.txt -mx=0
 	7z l %OUTPUT_DIR_NAME%\%OUTPUT_FILENAME%.zip >%OUTPUT_DIR_NAME%\%OUTPUT_FILENAME%.zip.txt
 	TYPE %OUTPUT_DIR_NAME%\%OUTPUT_FILENAME%.zip.txt
 	EXIT /B
@@ -50,7 +53,7 @@ REM ======================================================================
 	SET EXT_LIST_FILE=%1
 	FOR /F "skip=1 tokens=1,2 delims=;" %%C IN (%EXT_LIST_FILE%) DO (
 		MD %OUTPUT_DIR_NAME%
-		7z a -tzip -sdel %OUTPUT_DIR_NAME%\%%C  %%D -r -xr!Archive-Extension.cmd -xr!%%C -xr!%%C.txt -mx=0
+		7z a -tzip %SDEL_OPT% %OUTPUT_DIR_NAME%\%%C  %%D -r -xr!Archive-Extension.cmd -xr!%%C -xr!%%C.txt -mx=0
 		7z l %OUTPUT_DIR_NAME%\%%C >%OUTPUT_DIR_NAME%\%%C.txt
 		TYPE %OUTPUT_DIR_NAME%\%%C.txt
 	)

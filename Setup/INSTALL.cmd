@@ -69,7 +69,7 @@ REM ======================================================================
 	MD %TOOLS_INSTALL_DIR%\bin
 	COPY /Y Archive-Tools\Archive-Tool.cmd %TOOLS_INSTALL_DIR%\bin
 	COPY /Y Keepass-Tools\Archive-kdbx.cmd %TOOLS_INSTALL_DIR%\bin
-	COPY /Y File-Tools\Archive-Extension.cmd %TOOLS_INSTALL_DIR%\bin
+	COPY /Y Archive-Tools\Archive-Extension.cmd %TOOLS_INSTALL_DIR%\bin
 	
 	COPY /Y Archive-Tools\Archive.cmd %USERPROFILE%\Desktop
 	REM COPY /Y File-Tools\Archive_Directory.cmd %USERPROFILE%\Desktop

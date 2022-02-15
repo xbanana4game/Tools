@@ -13,7 +13,7 @@ REM
 REM                                Main
 REM
 REM ======================================================================
-
+	
 REM ----------------------------------------------------------------------
 REM 
 REM ----------------------------------------------------------------------
@@ -21,9 +21,9 @@ IF NOT DEFINED DOWNLOADS_PASSWORD (SET /P DOWNLOADS_PASSWORD="SET DOWNLOADS_PASS
 IF NOT DEFINED DOWNLOADS_PASSWORD (SET DOWNLOADS_PASSWORD=%ARCHIVE_PASSWORD%)
 
 IF NOT ""%1""=="""" (
-echo ""%1""
+	echo ""%1""
 	FOR %%i in (%*) DO (
-		ECHO "%%fi"
+		ECHO "%%~fi"
 		7z a -t7z -sdel "%DOWNLOADS_DIR%\%%~nxi@%yyyy%%mm%%dd%_%USERDOMAIN%.7z" ""%%i""
 		7z l "%DOWNLOADS_DIR%\%%~nxi@%yyyy%%mm%%dd%_%USERDOMAIN%.7z"
 		7z l "%DOWNLOADS_DIR%\%%~nxi@%yyyy%%mm%%dd%_%USERDOMAIN%.7z">"%DOWNLOADS_DIR%\%%~nxi@%yyyy%%mm%%dd%_%USERDOMAIN%.7z.txt"
