@@ -8,7 +8,6 @@ REM
 REM                                INSTALL
 REM
 REM ======================================================================
-CD ..
 CALL :INSTALL_7Z
 CALL :INSTALL_FFMPEG
 CALL :INSTALL_SETTINGS
