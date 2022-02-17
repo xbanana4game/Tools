@@ -12,7 +12,7 @@ REM                                Main
 REM
 REM ======================================================================
 IF NOT DEFINED SDEL_FLG (SET /P SDEL_FLG="Enter SDEL_FLG 1/0(default): ")
-IF %SDEL_FLG%==1 (SET SDEL_OPT=-sdel)
+IF "%SDEL_FLG%"=="1" (SET SDEL_OPT=-sdel)
 
 IF "%~x1" == ".7zext" (
 	SET OUTPUT_DIR_NAME=%~n1-files

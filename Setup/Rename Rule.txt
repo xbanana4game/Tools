@@ -13,9 +13,9 @@ youtube.com\Playlist\%album%\%artist%\%year% %comment%
 ==========================================================================
 								videos
 ==========================================================================
-:File_BaseName: [:Hash_CRC32:] [:File_DateCreated:]
+:File_BaseName: - [:Hash_CRC32:] [:File_DateCreated:]
 
-%genre%\%album%\%title% [%comment%] [%year%]
+%genre%\%album%\%title% - [%comment%] [%year%]
 
 C:\Users\USERNAME\Downloads\%genre%\%album%\%comment%
 
