@@ -6,7 +6,7 @@
 
 %title% - [%genre%][%artist%][%comment%][%year%]
 
-youtube.com\Genre\%genre%\%album%\%artist%\%year% %comment%
+youtube.com\Genre\%genre%\%artist%\%year% %comment%
 youtube.com\Playlist\%album%\%artist%\%year% %comment%
 
 
