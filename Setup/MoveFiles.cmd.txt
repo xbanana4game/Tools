@@ -74,9 +74,10 @@ REM ======================================================================
 	)
 	IF NOT DEFINED SAVE_STEAM_SS_EXECUTE (SET /P SAVE_STEAM_SS_EXECUTE="SET SAVE_STEAM_SS_EXECUTE(0)=")
 	IF NOT DEFINED SAVE_STEAM_SS_EXECUTE (SET SAVE_STEAM_SS_EXECUTE=0)
+	IF NOT DEFINED SAVE_STEAM_SS_FLG (SET SAVE_STEAM_SS_FLG=0)
 	IF 1 EQU %SAVE_STEAM_SS_EXECUTE% (
-		SET SAVE_STEAM_SS_FLG=0
 		CALL Steam-Screenshots.cmd
+		PAUSE
 	)
 	EXIT /B
 
@@ -88,6 +89,7 @@ REM ======================================================================
 	IF NOT DEFINED SAVE_OSU_SS_EXECUTE (SET SAVE_OSU_SS_EXECUTE=0)
 	IF 1 EQU %SAVE_OSU_SS_EXECUTE% (
 		CALL %TOOLS_DIR%\Osu!\Archive-Osu!-Screenshot.cmd
+		PAUSE
 	)
 	EXIT /B
 
