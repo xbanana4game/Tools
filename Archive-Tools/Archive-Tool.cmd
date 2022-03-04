@@ -165,7 +165,7 @@ REM ======================================================================
 	IF NOT DEFINED BASE_ARCHIVE_FILE SET /P BASE_ARCHIVE_FILE="Base Archive File: "
 	SET UPDATE_7Z_FILE=%OUTPUT_DIR%\%BASE_ARCHIVE_FILE%_-_Update-%yyyy%%mm%%dd%.7z
 	7z u %ARCHIVE_OPT_PW% %BASE_ARCHIVE_PATH% -u- -u%UPDATE_SWITCH_OPT%!%UPDATE_7Z_FILE% %ARCHIVE_ROOT_DIR_NAME% -xr!__Store
-	7z l %ARCHIVE_OPT_PW% %UPDATE_7Z_FILE%
+	7z l %ARCHIVE_OPT_PW% %UPDATE_7Z_FILE% >%UPDATE_7Z_FILE%.txt
 	EXIT /B
 
 :ChangeDirectory
