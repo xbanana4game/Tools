@@ -6,3 +6,5 @@
 "Paladins","%STEAM_DIR%\userdata\%STEAM_USER_ID%\760\remote\444090\screenshots"
 "BloonsTD6","%STEAM_DIR%\userdata\%STEAM_USER_ID%\760\remote\960090\screenshots"
 "7_Days_to_Die","%STEAM_DIR%\userdata\%STEAM_USER_ID%\760\remote\251570\screenshots"
+"Just_Cause_3","%STEAM_DIR%\userdata\%STEAM_USER_ID%\760\remote\225540\screenshots"
+"Deep_Rock_Galactic","%STEAM_DIR%\userdata\%STEAM_USER_ID%\760\remote\548430\screenshots"
