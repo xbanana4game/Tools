@@ -60,9 +60,11 @@ REM ======================================================================
 		NOTEPAD SettingsOptions.cmd
 		COPY /Y SettingsOptions.cmd %TOOLS_INSTALL_DIR%\SettingsOptions.cmd
 	)
-	IF EXIST "MoveFiles.cmd" (
-		NOTEPAD MoveFiles.cmd
-		COPY /Y MoveFiles.cmd %TOOLS_INSTALL_DIR%\MoveFiles.cmd
+	
+	COPY /Y Setup\MoveFiles.cmd.txt %TOOLS_INSTALL_DIR%\MoveFiles.cmd
+	IF EXIST "MoveFiles-user.cmd" (
+		NOTEPAD MoveFiles-user.cmd
+		COPY /Y MoveFiles-user.cmd %TOOLS_INSTALL_DIR%\MoveFiles-user.cmd
 	)
 	
 	MD %TOOLS_INSTALL_DIR%\bin
