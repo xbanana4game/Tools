@@ -5,6 +5,9 @@ SET ARCHIVE_PASSWORD=
 SET DOWNLOADS_PASSWORD=
 REM SET STORE_PASSWORD=%DOWNLOADS_PASSWORD%
 SET IGNORE_FILE=thumbsnail.db
+REM SET MOVE_VIDEOS=ON
+REM SET SAVE_STEAM_SS=ON
+REM SET SAVE_OSU_SS=ON
 
 REM ----------------------------------------------------------------------
 REM Games Settings

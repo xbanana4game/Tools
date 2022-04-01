@@ -70,7 +70,7 @@ REM ======================================================================
 	REM MD %TARGET_DIR%\Captures
 	REM MD %TARGET_DIR%\Videos
 	REM MD %TARGET_DIR%\Movies
-	ECHO youtube.com 1 >%TARGET_DIR%.archive
+	ECHO Playlist 1 >%TARGET_DIR%.archive
 	REM ECHO Captures 1 >%TARGET_DIR%.archive
 	EXIT /B
 	

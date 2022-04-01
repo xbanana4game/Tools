@@ -65,6 +65,8 @@ REM ======================================================================
 	IF EXIST "MoveFiles-user.cmd" (
 		NOTEPAD MoveFiles-user.cmd
 		COPY /Y MoveFiles-user.cmd %TOOLS_INSTALL_DIR%\MoveFiles-user.cmd
+	) ELSE (
+		ECHO REM MoveFiles-user.cmd >MoveFiles-user.cmd
 	)
 	
 	MD %TOOLS_INSTALL_DIR%\bin
