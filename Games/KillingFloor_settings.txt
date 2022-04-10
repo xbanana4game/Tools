@@ -1,3 +1,0 @@
-System\KillingFloor.ini
-System\User.ini
-System\ServerPerksClient.ini

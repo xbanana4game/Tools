@@ -1,0 +1,1 @@
+ECHO "%USERPROFILE%\Documents\Square Enix\Just Cause 3"

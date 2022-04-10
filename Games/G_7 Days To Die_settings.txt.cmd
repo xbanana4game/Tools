@@ -1,0 +1,1 @@
+ECHO "%AppData%\7DaysToDie"

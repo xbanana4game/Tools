@@ -1,2 +1,0 @@
-InputProfile_User.xml
-UserOptions.ini

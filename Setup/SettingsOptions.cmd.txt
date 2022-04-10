@@ -13,7 +13,7 @@ REM ----------------------------------------------------------------------
 REM Games Settings
 REM ----------------------------------------------------------------------
 SET STEAM_USER_ID=0123456789
-REM SET STEAM_LIBRARY_2=
+REM SET STEAM_LIBRARY_2=D:\SteamLibrary\steamapps\common
 REM SET STEAM_LIBRARY_3=
 
 REM ----------------------------------------------------------------------

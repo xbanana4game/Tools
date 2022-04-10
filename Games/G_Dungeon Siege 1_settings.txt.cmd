@@ -1,0 +1,1 @@
+ECHO "%USERPROFILE%\Documents\Dungeon Siege"

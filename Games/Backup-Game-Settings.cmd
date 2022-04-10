@@ -20,19 +20,21 @@ IF DEFINED STEAM_LIBRARY_3 DIR /B %STEAM_LIBRARY_3%
 SET /P GAME_NAME="Set Game name: "
 
 IF DEFINED STEAM_LIBRARY (
-	SET GAME_ROOT_DIR="%STEAM_LIBRARY%\%GAME_NAME%"
+	SET GAME_ROOT_DIR=%STEAM_LIBRARY%\%GAME_NAME%
 	CALL :ARCHIVE_GAME_SETTINGS
 )
 
 IF DEFINED STEAM_LIBRARY_2 (
-	SET GAME_ROOT_DIR="%STEAM_LIBRARY_2%\%GAME_NAME%"
+	SET GAME_ROOT_DIR=%STEAM_LIBRARY_2%\%GAME_NAME%
 	CALL :ARCHIVE_GAME_SETTINGS
 )
 
 IF DEFINED STEAM_LIBRARY_3 (
-	SET GAME_ROOT_DIR="%STEAM_LIBRARY_3%\%GAME_NAME%"
+	SET GAME_ROOT_DIR=%STEAM_LIBRARY_3%\%GAME_NAME%
 	CALL :ARCHIVE_GAME_SETTINGS
 )
+SET GAME_ROOT_DIR=%DOCUMENTS_DIR%\My Games
+CALL :ARCHIVE_GAME_SETTINGS
 
 PAUSE
 EXPLORER %DOWNLOADS_DIR%
@@ -66,20 +68,25 @@ REM ======================================================================
 :ARCHIVE_GAME_SETTINGS
 	IF NOT DEFINED GAME_NAME EXIT /B
 	IF NOT DEFINED GAME_ROOT_DIR GAME_NAME EXIT /B
-	CALL :CheckDirectory %GAME_ROOT_DIR%
+	CALL :CheckDirectory "%GAME_ROOT_DIR%"
 	IF %ERRORLEVEL% EQU 1 (
-		ECHO Directory not Exist. %GAME_ROOT_DIR%
+		ECHO Directory not Exist. "%GAME_ROOT_DIR%"
 		EXIT /B
 	)
-	CALL :ChangeDirectory %GAME_ROOT_DIR%
-	IF EXIST "%~dp0\%GAME_NAME%_settings.txt.cmd" (
-		CALL "%~dp0\%GAME_NAME%_settings.txt.cmd"
+	CALL :ChangeDirectory "%GAME_ROOT_DIR%"
+	IF EXIST "%~dp0\G_%GAME_NAME%_settings.txt.cmd" (
+		CALL "%~dp0\G_%GAME_NAME%_settings.txt.cmd">"%TOOLS_DIR%\Games\G_%GAME_NAME%_settings.txt"
+	) ELSE (
+		ECHO ECHO "%%USERPROFILE%%\Documents\My Games\%GAME_NAME%" >"%~dp0\G_%GAME_NAME%_settings.txt.cmd"
+		ECHO ECHO "%%GAME_ROOT_DIR%%\config" >>"%~dp0\G_%GAME_NAME%_settings.txt.cmd"
+		NOTEPAD "%~dp0\G_%GAME_NAME%_settings.txt.cmd"
+		CALL "%~dp0\G_%GAME_NAME%_settings.txt.cmd">"%TOOLS_DIR%\Games\G_%GAME_NAME%_settings.txt"
 	)
-	IF NOT EXIST "%~dp0\%GAME_NAME%_settings.txt" (
-		EXPLORER %GAME_ROOT_DIR%
-		REM FORFILES /s /m *.txt /c "cmd /c ECHO @path >>\"%~dp0\%GAME_NAME%_settings.txt\""
-		NOTEPAD "%~dp0\%GAME_NAME%_settings.txt"
+	IF NOT EXIST "%~dp0\G_%GAME_NAME%_settings.txt" (
+		EXPLORER "%GAME_ROOT_DIR%"
+		REM FORFILES /s /m *.txt /c "cmd /c ECHO @path >>\"%~dp0\G_%GAME_NAME%_settings.txt\""
+		NOTEPAD "%~dp0\G_%GAME_NAME%_settings.txt."
 	)
-	7z a -tzip "%DOWNLOADS_DIR%\%GAME_NAME%-settings-%yyyy%%mm%%dd%@%USERDOMAIN%.zip" -spf2 @"%~dp0\%GAME_NAME%_settings.txt"
+	7z a -tzip "%DOWNLOADS_DIR%\%GAME_NAME%-settings-%yyyy%%mm%%dd%@%USERDOMAIN%.zip" -spf2 @"%~dp0\G_%GAME_NAME%_settings.txt"
 	7z l "%DOWNLOADS_DIR%\%GAME_NAME%-settings-%yyyy%%mm%%dd%@%USERDOMAIN%.zip"
 	EXIT /B

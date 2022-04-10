@@ -1,2 +1,0 @@
-insurgency\cfg\config.cfg
-insurgency\cfg\video.txt

@@ -1,0 +1,1 @@
+ECHO "%USERPROFILE%\Documents\My Games\Paladins\ChaosGame\Config"
