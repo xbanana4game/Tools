@@ -77,8 +77,8 @@ REM ======================================================================
 	IF EXIST "%~dp0\G_%GAME_NAME%_settings.txt.cmd" (
 		CALL "%~dp0\G_%GAME_NAME%_settings.txt.cmd">"%TOOLS_DIR%\Games\G_%GAME_NAME%_settings.txt"
 	) ELSE (
-		ECHO ECHO "%%USERPROFILE%%\Documents\My Games\%GAME_NAME%" >"%~dp0\G_%GAME_NAME%_settings.txt.cmd"
-		ECHO ECHO "%%GAME_ROOT_DIR%%\config" >>"%~dp0\G_%GAME_NAME%_settings.txt.cmd"
+		ECHO ECHO "%%USERPROFILE%%\Documents\My Games\%GAME_NAME%">"%~dp0\G_%GAME_NAME%_settings.txt.cmd"
+		ECHO ECHO "%%GAME_ROOT_DIR%%\config">>"%~dp0\G_%GAME_NAME%_settings.txt.cmd"
 		NOTEPAD "%~dp0\G_%GAME_NAME%_settings.txt.cmd"
 		CALL "%~dp0\G_%GAME_NAME%_settings.txt.cmd">"%TOOLS_DIR%\Games\G_%GAME_NAME%_settings.txt"
 	)

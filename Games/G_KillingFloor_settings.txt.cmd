@@ -1,3 +1,4 @@
-echo System\KillingFloor.ini
-echo System\User.ini
-echo System\ServerPerksClient.ini
+ECHO System\KillingFloor.ini
+ECHO System\User.ini
+ECHO System\ServerPerksClient.ini
+REM ECHO KF-SERVER
