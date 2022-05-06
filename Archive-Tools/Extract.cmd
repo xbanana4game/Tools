@@ -55,10 +55,11 @@ REM ======================================================================
 	FOR /D %%i IN ("%ARCHIVE_DIR%\%EXTRACT_YYYY%") DO (
 		FOR %%j IN ("%ARCHIVE_DIR%\%%~ni\DL_*.7z") DO (
 			7z x -p%DOWNLOADS_PASSWORD% %%j -o%EXTRACT_TARGET_DIR%\%%~ni -aot %EXTRACT_EXT% -r %IGNORE_OPT%
+			7z l -p%DOWNLOADS_PASSWORD% %%j>%EXTRACT_TARGET_DIR%\%%~ni.txt
 		)
 		FOR %%j IN ("%ARCHIVE_DIR%\%%~ni\UL_*.7z") DO (
 			7z x -p%DOWNLOADS_PASSWORD% %%j -o%EXTRACT_TARGET_DIR%\%%~ni -aot %EXTRACT_EXT% -r
-			IF %MOVE_STORE_FLG%==1 MOVE %EXTRACT_TARGET_DIR%\%%~ni %STORE_DIR%\%EXTRACT_YYYY%\%%~ni
+			7z l -p%DOWNLOADS_PASSWORD% %%j>%EXTRACT_TARGET_DIR%\%%~ni.txt
 		)
 		IF %MOVE_STORE_FLG%==1 (
 			MOVE %ARCHIVE_DIR%\%EXTRACT_YYYY%\*.7z %STORE_DIR%\%EXTRACT_YYYY%\

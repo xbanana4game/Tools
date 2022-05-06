@@ -4,10 +4,10 @@
 *3D* *360* *VIDEO_NAME* (*H*p_*FPS*fps_*VIDEO_CODEC*-*AUDIO_BITRATE*kbit_*AUDIO_CODEC*).*EXT*
 *VIDEO_NAME* [*CATEGORY*][*USER*][*ID*][*DATE[yyyy-MM-dd]*].*EXT*
 
-%title% - [%genre%][%artist%][%comment%][%year%]
+%album%\%title% - [%genre%][%artist%][%comment%][%year%]
 
-youtube.com\Genre\%genre%\%artist%\%year% %comment%
-youtube.com\Playlist\%album%\%artist%\%year% %comment%
+C:\Users\USERNAME\Downloads\youtube.com\Genre\%genre%\%artist%\%year% %comment%
+C:\Users\USERNAME\Downloads\youtube.com\Playlist\%album%\%artist%\%year% %comment%
 
 
 ==========================================================================

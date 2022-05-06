@@ -89,4 +89,5 @@ REM ======================================================================
 	)
 	7z a -tzip "%DOWNLOADS_DIR%\%GAME_NAME%-settings-%yyyy%%mm%%dd%@%USERDOMAIN%.zip" -spf2 @"%~dp0\G_%GAME_NAME%_settings.txt"
 	7z l "%DOWNLOADS_DIR%\%GAME_NAME%-settings-%yyyy%%mm%%dd%@%USERDOMAIN%.zip"
+	DEL "%TOOLS_DIR%\Games\G_%GAME_NAME%_settings.txt"
 	EXIT /B
