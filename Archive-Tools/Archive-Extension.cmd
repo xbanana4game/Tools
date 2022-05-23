@@ -11,7 +11,7 @@ REM
 REM                                Main
 REM
 REM ======================================================================
-IF NOT DEFINED SDEL_FLG (SET /P SDEL_FLG="Enter SDEL_FLG 1/0(default): ")
+IF NOT DEFINED SDEL_FLG (SET /P SDEL_FLG="Enter SDEL_FLG 1/0(default:0): ")
 IF "%SDEL_FLG%"=="1" (SET SDEL_OPT=-sdel)
 
 IF "%~x1" == ".7zext" (

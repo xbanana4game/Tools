@@ -11,7 +11,7 @@ C:\Users\USERNAME\Downloads\youtube.com\Playlist\%album%\%artist%\%year% %commen
 
 
 ==========================================================================
-								videos
+                                  videos
 ==========================================================================
 :File_BaseName: - [:Hash_CRC32:] [:File_DateCreated:]
 
