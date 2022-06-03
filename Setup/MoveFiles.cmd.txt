@@ -15,11 +15,11 @@ REM
 REM                                Main
 REM
 REM ======================================================================
+SET VIDEOS_STORE_DIR=%VIDEOS_DIR%\Store
 IF EXIST %USERPROFILE%\.Tools\MoveFiles-user.cmd (CALL %USERPROFILE%\.Tools\MoveFiles-user.cmd)
 
 CALL :MOVE_TARGET_FILES  %DOWNLOADS_DIR%\Games\Osu!\Beatmap_Pack %DOWNLOADS_DIR%\*Beatmap*.7z
-CALL :MOVE_TARGET_FILES %DOWNLOADS_DIR%\VD_%yyyy%%mm%%dd% %DOWNLOADS_DIR%\*.mp4
-CALL :MOVE_TARGET_FILES %DOWNLOADS_DIR%\VD_%yyyy%%mm%%dd% %VIDEOS_DIR%\Captures
+CALL :MOVE_TARGET_FILES %DOWNLOADS_DIR%\Videos %DOWNLOADS_DIR%\*.mp4
 
 IF DEFINED MOVE_VIDEOS CALL :MOVE_VIDEOS
 IF DEFINED SAVE_STEAM_SS CALL :SAVE_STEAM_SS
@@ -42,36 +42,17 @@ REM ======================================================================
 
 :MOVE_VIDEOS
 	IF 1 EQU %ARCHIVE_FLG% (
-		MD %VIDEOS_DIR%\Store
-		FOR /D %%i IN (%DOWNLOADS_DIR%\VD_*) DO (
-			MOVE %%i %VIDEOS_DIR%\Store
+		MD %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
+		FOR /D %%i IN (%DOWNLOADS_DIR%\Captures) DO (
+			MOVE %%i %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\
 		)
-		FOR %%i IN (%DOWNLOADS_DIR%\VD_*) DO (
-			MOVE %%i %VIDEOS_DIR%\Store
+		FOR %%i IN (%DOWNLOADS_DIR%\youtube.com) DO (
+			MOVE %%i %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\
 		)
-		EXPLORER %DOWNLOADS_DIR%
+		EXPLORER %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 		PAUSE
 		EXIT /B
 	)
-	SET TARGET_DIR=%DOWNLOADS_DIR%\VD_%yyyy%%mm%%dd%
-	MOVE /Y %DOWNLOADS_DIR%\*.mp4 %VIDEOS_DIR%\
-	MOVE /Y %DOWNLOADS_DIR%\*.mkv %VIDEOS_DIR%\
-	IF NOT EXIST %VIDEOS_DIR%\*.mp4 EXIT /B
-	MD %TARGET_DIR%
-	MOVE /Y %VIDEOS_DIR%\*.mp4 %TARGET_DIR%\
-	MOVE /Y %VIDEOS_DIR%\*.mkv %TARGET_DIR%\
-	RMDIR %TARGET_DIR%
-	IF NOT EXIST %TARGET_DIR% EXIT /B
-	IF 1 EQU %ARCHIVE_FLG% (
-		ECHO DO NOTHING
-		REM 7z a -t7z -sdel %TARGET_DIR%.7z %TARGET_DIR% -mx=0
-	)
-	7z x %TOOLS_DIR%\videos.zip -o%TARGET_DIR%
-	REM MD %TARGET_DIR%\Captures
-	REM MD %TARGET_DIR%\Videos
-	REM MD %TARGET_DIR%\Movies
-	ECHO Playlist 1 >%TARGET_DIR%.archive
-	REM ECHO Captures 1 >%TARGET_DIR%.archive
 	EXIT /B
 	
 :SAVE_STEAM_SS
