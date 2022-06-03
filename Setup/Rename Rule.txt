@@ -19,3 +19,29 @@ C:\Users\USERNAME\Downloads\youtube.com\Playlist\%album%\%artist%\%year% %commen
 
 C:\Users\USERNAME\Downloads\%genre%\%album%\%comment%
 
+
+==========================================================================
+                                  music
+==========================================================================
+C:\Users\USERNAME\Downloads\Music\
+
+[ジャンル]
+ジャンル\%genre%\%album%\$num(%track%,2) %title%
+
+[インターネット]
+
+[アニメ]
+[ゲーム]
+[アイドル]
+%genre%\%album%\$num(%track%,2) %title%
+%genre%\%albumartist%\%album%\$num(%track%,2) %title%
+
+[アニポップ]
+[アーティスト]
+%genre%\%artist%\%album%\$num(%track%,2) %title%
+
+[東方]
+%genre%\%albumartist%\%album%\$num(%track%,2) %title%
+
+
+Various Artists
