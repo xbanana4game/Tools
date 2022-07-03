@@ -1,0 +1,12 @@
+@DirectHotkey=ONPASTE,1
+改行を挿入 || <#clip,#clip> || RegExReplace | m)$ | `r`n
+
+@DirectHotkey=ONPASTE
+mp4を挿入 || <#clip,#clip> || RegExReplace | m)$ | .mp4
+
+@DirectHotkey=ONPASTE
+mp4を削除 || <#clip,#clip> || Trim|.mp4
+
+@DirectHotkey=ONPASTE
+URLデコード || <#clip,#clip> || EncodeURL | 1
+
