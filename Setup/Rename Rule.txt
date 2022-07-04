@@ -6,7 +6,7 @@
 
 %album%\%title% - [%genre%][%artist%][%comment%][%year%]
 
-$if($isdigit(%_covers%),C:\Users\USERNAME\Downloads\youtube.com\,no_cover\)$if($strcmp(%album%,_youtube.com),Genere\%genre%,Playlist\%album%)\%artist% %year% '['%comment%']'
+$if($isdigit(%_covers%),C:\Users\$getenv(USERNAME)\Downloads\youtube.com\,no_cover\)$if($strcmp(%album%,_youtube.com),Genere\%genre%,Playlist\%album%)\%artist% %year% '['%comment%']'
 
 ==========================================================================
                                   videos
