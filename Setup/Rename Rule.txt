@@ -15,7 +15,21 @@ $if($isdigit(%_covers%),C:\Users\$getenv(USERNAME)\Downloads\youtube.com\,no_cov
 
 %genre%\%album%\%title% - [%comment%] [%year%]
 
-C:\Users\USERNAME\Downloads\%genre%\%album%\%comment%
+C:\Users\$getenv(USERNAME)\Downloads\%genre%\%album%\%comment%
+
+==========================================================================
+                                  TagSpaces
+==========================================================================
+Filename->Tag
+%dummy%[%tags%]
+
+Tag->Filename
+%dummy%[%tags%]
+TAGS\$replace(%tags%, ,\)\%_filename%
+
+Filename->Filename
+%1[%2]
+TAGS\$replace(%2, ,\)\%1'['%2']'
 
 ==========================================================================
                                   captures
