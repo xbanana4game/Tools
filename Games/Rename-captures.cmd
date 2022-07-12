@@ -51,7 +51,7 @@ FOR %%i IN (%CAPTURES_DIR%\*.mp4) DO (
 	MOVE "%CAPTURES_DIR%\%GAME_NAME%%%~nxi" "%CAPTURES_DIR%\%GAME_DIR%\"
 )
 
-ECHO Mp3tag: %%genre%%\%%album%%\%%dummy%%\%%title%%
+ECHO Mp3tag: %%genre%%\%%album%%\%%dummy%%\%%title%%[%%tags%%]
 PAUSE
 EXPLORER %CAPTURES_DIR%
 EXIT
