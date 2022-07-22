@@ -13,8 +13,8 @@ IF ""=="%CAPTURES_DIR%" (
 	SET CAPTURES_DIR=%VIDEOS_DIR%\Captures
 )
 MD %VIDEOS_DIR%\Captures
-EXPLORER %CAPTURES_DIR%
-CALL :CheckDirectory %CAPTURES_DIR%
+EXPLORER "%CAPTURES_DIR%"
+CALL :CheckDirectory "%CAPTURES_DIR%"
 IF %ERRORLEVEL% EQU 1 (
 	PAUSE
 	EXIT
@@ -45,7 +45,7 @@ REM
 REM ======================================================================
 MD "%CAPTURES_DIR%\%GAME_DIR%"
 REM CALL :RENAME_ADD_DATE "%CAPTURES_DIR%"
-FOR %%i IN (%CAPTURES_DIR%\*.mp4) DO (
+FOR %%i IN ("%CAPTURES_DIR%\*.mp4") DO (
 	ECHO RENAME "%%i" "%GAME_NAME%%%~nxi"
 	RENAME "%%i" "%GAME_NAME%%%~nxi"
 	MOVE "%CAPTURES_DIR%\%GAME_NAME%%%~nxi" "%CAPTURES_DIR%\%GAME_DIR%\"
@@ -53,7 +53,7 @@ FOR %%i IN (%CAPTURES_DIR%\*.mp4) DO (
 
 ECHO Mp3tag: %%genre%%\%%album%%\%%dummy%%\%%title%%[%%tags%%]
 PAUSE
-EXPLORER %CAPTURES_DIR%
+EXPLORER "%CAPTURES_DIR%"
 EXIT
 
 

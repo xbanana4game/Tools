@@ -32,10 +32,14 @@ IF NOT EXIST %MP4_IMG_DIR% MD %MP4_IMG_DIR%
 IF NOT EXIST %MP4_IMG_DIR%_%FFMPGE_OPT_SS% MD %MP4_IMG_DIR%_%FFMPGE_OPT_SS%
 
 CALL :ChangeDirectory %MP4_FILES_DIR%
-FORFILES /s /m *.m?? /c ^
-"cmd /c IF NOT EXIST %MP4_IMG_DIR%\\@file.jpg ffmpeg -y -i @path -ss %FFMPGE_OPT_SS% -vframes 1 -f image2 -vf scale=640:-1 %MP4_IMG_DIR%_%FFMPGE_OPT_SS%\\@file.jpg"
-REM "cmd /c IF NOT EXIST @fname.jpg ffmpeg -y -i @path -ss %FFMPGE_OPT_SS% -vframes 1 -f image2 -vf scale=640:-1 @fname.jpg"
-
+FOR %%i IN (avi wmv flv mp4 mpge mpg) DO (
+	FORFILES /s /m *.%%i /c ^
+	"cmd /c IF NOT EXIST %MP4_IMG_DIR%\\@file.jpg ffmpeg -y -i @path -ss %FFMPGE_OPT_SS% -vframes 1 -f image2 -vf scale=640:-1 %MP4_IMG_DIR%_%FFMPGE_OPT_SS%\\@file.jpg"
+	REM TagSpace
+	REM "cmd /c IF NOT EXIST .ts\\@file.jpg ffmpeg -y -i @path -ss %FFMPGE_OPT_SS% -vframes 1 -f image2 -vf scale=640:-1 .ts\\@file.jpg"
+	REM Twonky
+	REM "cmd /c IF NOT EXIST @fname.jpg ffmpeg -y -i @path -ss %FFMPGE_OPT_SS% -vframes 1 -f image2 -vf scale=640:-1 @fname.jpg"
+)
 ECHO mp3tag Action Import Cover %MP4_IMG_DIR%\%%_filename_ext%%.jpg
 EXPLORER %MP4_IMG_DIR%_%FFMPGE_OPT_SS%
 
