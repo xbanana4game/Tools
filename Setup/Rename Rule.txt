@@ -15,7 +15,7 @@ $if($isdigit(%_covers%),C:\Users\$getenv(USERNAME)\Downloads\youtube.com\,no_cov
 
 %genre%\%album%\%title% - [%comment%] [%year%]
 
-C:\Users\$getenv(USERNAME)\Downloads\%genre%\%album%\%comment%
+C:\Users\$getenv(USERNAME)\Downloads\%genre%\%comment%
 
 ==========================================================================
                                   TagSpaces
