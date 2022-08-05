@@ -24,9 +24,14 @@ IF NOT ""%1""=="""" (
 	echo ""%1""
 	FOR %%i in (%*) DO (
 		ECHO "%%~fi"
-		7z a -t7z -sdel "%DOWNLOADS_DIR%\%%~nxi@%yyyy%%mm%%dd%_%USERDOMAIN%.7z" ""%%i""
-		7z l "%DOWNLOADS_DIR%\%%~nxi@%yyyy%%mm%%dd%_%USERDOMAIN%.7z"
-		7z l "%DOWNLOADS_DIR%\%%~nxi@%yyyy%%mm%%dd%_%USERDOMAIN%.7z">"%DOWNLOADS_DIR%\%%~nxi@%yyyy%%mm%%dd%_%USERDOMAIN%.7z.txt"
+		7z a -t7z -sdel "%DOWNLOADS_DIR%\%%~nxi@%yyyy%%mm%%dd%_%USERDOMAIN%.7z" ""%%i"" -v25g
+		IF EXIST "%DOWNLOADS_DIR%\%%~nxi@%yyyy%%mm%%dd%_%USERDOMAIN%.7z.001" (
+			7z l "%DOWNLOADS_DIR%\%%~nxi@%yyyy%%mm%%dd%_%USERDOMAIN%.7z.001">"%DOWNLOADS_DIR%\%%~nxi@%yyyy%%mm%%dd%_%USERDOMAIN%.7z.txt"
+			TYPE "%DOWNLOADS_DIR%\%%~nxi@%yyyy%%mm%%dd%_%USERDOMAIN%.7z.txt"
+		) ELSE (
+			7z l "%DOWNLOADS_DIR%\%%~nxi@%yyyy%%mm%%dd%_%USERDOMAIN%.7z">"%DOWNLOADS_DIR%\%%~nxi@%yyyy%%mm%%dd%_%USERDOMAIN%.7z.txt"
+			TYPE "%DOWNLOADS_DIR%\%%~nxi@%yyyy%%mm%%dd%_%USERDOMAIN%.7z.txt"
+		)
 	)
 	PAUSE
 	EXIT
@@ -44,23 +49,6 @@ REM
 REM ----------------------------------------------------------------------
 IF 1 EQU %SHUTDOWN_FLG% SET /P SHUTDOWN_FLG2="Shutdown? 1:YES 0:NO -> "
 IF ""=="%SHUTDOWN_FLG2%" SET SHUTDOWN_FLG2=0
-
-IF 1 EQU %ARCHIVE_UPLOAD_FLG% (
-	CALL :isEmptyDir  %UPLOADS_DIR%
-	IF %ERRORLEVEL% EQU 1 (
-		ECHO Files not Exist. %UPLOADS_DIR%
-		MD %UPLOADS_DIR%
-	)
-	SET /P ARCHIVE_UPLOAD_FLG2="Archive Upload Dir? 1:YES 0:NO -> "
-	IF ""=="%ARCHIVE_UPLOAD_FLG2%" SET ARCHIVE_UPLOAD_FLG2=0
-) ELSE (
-	SET ARCHIVE_UPLOAD_FLG2=0
-)
-
-REM ----------------------------------------------------------------------
-REM UPLOAD
-REM ----------------------------------------------------------------------
-IF 1 EQU %ARCHIVE_UPLOAD_FLG2% CALL :Archive_Upload
 
 REM ----------------------------------------------------------------------
 REM DOWNLOAD
@@ -92,26 +80,13 @@ REM ======================================================================
 		ECHO Files not Exist. %DOWNLOADS_DIR%
 		EXIT /B
 	)
-	IF NOT "%DOWNLOADS_PASSWORD%"=="" SET ARCHIVE_OPT_PW=-p%DOWNLOADS_PASSWORD% -mhe
+	IF NOT "%DOWNLOADS_PASSWORD%"=="" SET ARCHIVE_OPT_PW=-p%DOWNLOADS_PASSWORD% -mhe -v1g
 	7z a -t7z -sdel %ARCHIVE_OPT_PW% %DL_DIR%\%DOWNLOAD_FILENAME%.7z %USERPROFILE%\Downloads\* -xr!desktop.ini -xr!*.part -xr!*.mega -xr!*.crdownload -xr!*.downloading -mx=%ARCHIVE_OPT_X%
-	7z l %ARCHIVE_OPT_PW% %DL_DIR%\%DOWNLOAD_FILENAME%.7z
-	EXIT /B
-
-:Archive_Upload
-	SET UL_DIR=%ARCHIVE_DIR%\%yyyy%%mm%
-	SET UPLOAD_FILENAME=UL_%yyyy%%mm%_%USERDOMAIN%
-	IF NOT "%DOWNLOADS_PASSWORD%"=="" SET ARCHIVE_OPT_PW=-p%DOWNLOADS_PASSWORD% -mhe
-	7z a -t7z  -sdel %ARCHIVE_OPT_PW% %UL_DIR%\%UPLOAD_FILENAME%.7z %UPLOADS_DIR%\* -mx=%ARCHIVE_OPT_X%
-	7z l %ARCHIVE_OPT_PW% %UL_DIR%\%UPLOAD_FILENAME%.7z
-	MD %UPLOADS_DIR%
-	EXIT /B
-
-:Archive_Directory
-	SET OUT_NAME=%1
-	SET IN=%2
-	IF NOT "%DOWNLOADS_PASSWORD%"=="" SET ARCHIVE_OPT_PW=-p%DOWNLOADS_PASSWORD% -mhe
-	7z a -t7z -sdel %ARCHIVE_OPT_PW% %ARCHIVE_DIR%\%OUT_NAME% %IN% -mx=%ARCHIVE_OPT_X%
-	7z l %ARCHIVE_OPT_PW% %ARCHIVE_DIR%\%OUT_NAME%
+	IF EXIST "%DL_DIR%\%DOWNLOAD_FILENAME%.7z.001" (
+		7z l %ARCHIVE_OPT_PW% %DL_DIR%\%DOWNLOAD_FILENAME%.7z.001
+	) ELSE (
+		7z l %ARCHIVE_OPT_PW% %DL_DIR%\%DOWNLOAD_FILENAME%.7z
+	)
 	EXIT /B
 
 :isEmptyDir
