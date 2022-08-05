@@ -4,9 +4,12 @@
 *3D* *360* *VIDEO_NAME* (*H*p_*FPS*fps_*VIDEO_CODEC*-*AUDIO_BITRATE*kbit_*AUDIO_CODEC*).*EXT*
 *VIDEO_NAME* [*CATEGORY*][*USER*][*ID*][*DATE[yyyy-MM-dd]*].*EXT*
 
+Filename->Tag
 %album%\%title% - [%genre%][%artist%][%comment%][%year%]
 
+Tag->Filename
 $if($isdigit(%_covers%),C:\Users\$getenv(USERNAME)\Downloads\youtube.com\,no_cover\)$if($strcmp(%album%,_youtube.com),Genere\%genre%,Playlist\%album%)\%artist% %year% '['%comment%']'
+
 
 ==========================================================================
                                   videos
@@ -16,6 +19,7 @@ $if($isdigit(%_covers%),C:\Users\$getenv(USERNAME)\Downloads\youtube.com\,no_cov
 %genre%\%album%\%title% - [%comment%] [%year%]
 
 C:\Users\$getenv(USERNAME)\Downloads\%genre%\%comment%
+
 
 ==========================================================================
                                   TagSpaces
@@ -31,10 +35,17 @@ Filename->Filename
 %1[%2]
 TAGS\$replace(%2, ,\)\%1'['%2']'
 
+
 ==========================================================================
-                                  captures
+                                  Captures
 ==========================================================================
-%genre%\%album%\%dummy%\%title%
+Filename->Tag
+%genre%\%album%\videos\%title%
+%dummy% - %year% %dummy%
+
+Tag->Filename
+C:\Users\$getenv(USERNAME)\Downloads\%genre%\%album%\videos\%title%'['%tags%']'
+
 
 ==========================================================================
                                   music
@@ -61,3 +72,4 @@ C:\Users\USERNAME\Downloads\Music\
 
 
 Various Artists
+
