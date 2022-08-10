@@ -18,8 +18,8 @@ REM ======================================================================
 SET VIDEOS_STORE_DIR=%VIDEOS_DIR%\Store
 IF EXIST %USERPROFILE%\.Tools\MoveFiles-user.cmd (CALL %USERPROFILE%\.Tools\MoveFiles-user.cmd)
 
+ECHO Move Beatmap_Pack
 CALL :MOVE_TARGET_FILES  %DOWNLOADS_DIR%\Games\Osu!\Beatmap_Pack %DOWNLOADS_DIR%\*Beatmap*.7z
-CALL :MOVE_TARGET_FILES %DOWNLOADS_DIR%\Videos %DOWNLOADS_DIR%\*.mp4
 
 IF DEFINED MOVE_VIDEOS CALL :MOVE_VIDEOS
 IF DEFINED SAVE_STEAM_SS CALL :SAVE_STEAM_SS
@@ -41,14 +41,11 @@ REM ======================================================================
 	EXIT /B
 
 :MOVE_VIDEOS
+	ECHO MOVE VIDEOS %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 	IF 1 EQU %ARCHIVE_FLG% (
 		MD %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
-		FOR /D %%i IN (%DOWNLOADS_DIR%\Captures) DO (
-			MOVE %%i %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\
-		)
-		FOR %%i IN (%DOWNLOADS_DIR%\youtube.com) DO (
-			MOVE %%i %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\
-		)
+		IF EXIST %DOWNLOADS_DIR%\Captures MOVE %DOWNLOADS_DIR%\Captures %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\
+		IF EXIST %DOWNLOADS_DIR%\youtube.com MOVE %DOWNLOADS_DIR%\youtube.com %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 		RMDIR %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% EXPLORER %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 		PAUSE
@@ -57,6 +54,7 @@ REM ======================================================================
 	EXIT /B
 	
 :SAVE_STEAM_SS
+	ECHO ARCHIVE STEAM SS
 	IF 0 EQU %ARCHIVE_FLG% (
 		EXIT /B
 	)
@@ -70,6 +68,7 @@ REM ======================================================================
 	EXIT /B
 
 :SAVE_OSU_SS
+	ECHO SAVE OSU SS
 	IF 0 EQU %ARCHIVE_FLG% (
 		EXIT /B
 	)
