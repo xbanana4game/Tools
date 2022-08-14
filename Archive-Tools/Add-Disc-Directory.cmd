@@ -6,7 +6,8 @@ REM
 REM ======================================================================
 IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
-
+REM ---------- Add-Disc-Directory.cmd ----------
+SET DISK_PROFILE=%~n0
 
 REM ======================================================================
 REM
@@ -22,3 +23,9 @@ IF %NUMBER% LSS 10 SET F_NUMBER=0%NUMBER%
 ELSE SET F_NUMBER=%NUMBER%
 IF EXIST %DISK_PROFILE%-Disc-%F_NUMBER% GOTO :NEXT_NUMBER
 MD %DISK_PROFILE%-Disc-%F_NUMBER%
+
+FOR %%i IN (%*) DO (
+	MKLINK /H "%DISK_PROFILE%-Disc-%F_NUMBER%\%%~nxi" "%%i"
+	REM MOVE "%%i" "%DISK_PROFILE%-Disc-%F_NUMBER%\%%~nxi"
+)
+
