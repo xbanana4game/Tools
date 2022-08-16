@@ -6,18 +6,19 @@ REM
 REM ======================================================================
 IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
-REM ---------- Archive Directory ----------
+REM ---------- Archive Directory(SettingsOptions) ----------
 REM SET SDEL_FLG=0
 REM SET ARCHIVE_OUTPUT_DIR=
 REM SET Z_PASSWORD=%DOWNLOADS_PASSWORD%
+REM CALL :CheckDirectory %OUTPUT_DIR%
 
 REM ======================================================================
 REM
 REM                                Main
 REM
 REM ======================================================================
-IF NOT DEFINED Z_PASSWORD (SET /P Z_PASSWORD="SET Z_PASSWORD(%ARCHIVE_PASSWORD%)=")
-IF NOT DEFINED Z_PASSWORD (SET Z_PASSWORD=%ARCHIVE_PASSWORD%)
+IF NOT DEFINED Z_PASSWORD (SET /P Z_PASSWORD="SET Z_PASSWORD(%DOWNLOADS_PASSWORD%)=")
+IF NOT DEFINED Z_PASSWORD (SET Z_PASSWORD=%DOWNLOADS_PASSWORD%)
 
 IF NOT DEFINED ARCHIVE_OUTPUT_DIR (SET /P ARCHIVE_OUTPUT_DIR="SET ARCHIVE_OUTPUT_DIR(%DOWNLOADS_DIR%)=")
 IF NOT DEFINED ARCHIVE_OUTPUT_DIR (SET ARCHIVE_OUTPUT_DIR=%DOWNLOADS_DIR%)

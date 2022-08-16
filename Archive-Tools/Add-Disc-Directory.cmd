@@ -6,7 +6,7 @@ REM
 REM ======================================================================
 IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
-REM ---------- Add-Disc-Directory.cmd ----------
+REM ---------- Add-Disc-Directory.cmd(SettingsOptions) ----------
 SET DISK_PROFILE=%~n0
 
 REM ======================================================================
