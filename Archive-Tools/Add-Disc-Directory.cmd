@@ -69,9 +69,9 @@ REM 23GB = 24117248 kbyte
 		ECHO REM ----------------------------------------------------------------------------------------------------------- >>%CMD_FILE%
 	)
 	IF EXIST %CMD_FILE% (
-		NOTEPAD %CMD_FILE%
+		REM NOTEPAD %CMD_FILE%
 		CALL %CMD_FILE%
-		REM DEL %CMD_FILE%
+		DEL %CMD_FILE%
 	)
 	EXIT /B 0
 	
