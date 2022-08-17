@@ -40,6 +40,7 @@ REM
 REM                                Function
 REM
 REM ======================================================================
+REM 25,000,000,000 Byte　=　24,414,062 KB　=　23,841 MB　=　23.28 GB
 REM BD Free Space: 25025314816 bytes = 24438784 kbyte
 REM 1GB = 1073741824 byte = 1048576 kbyte
 REM 23GB = 24117248 kbyte

@@ -33,8 +33,8 @@ FOR %%i in (%*) DO (
 	7z a -t7z %SDEL_OPT% %ARCHIVE_OPT_PW% "%ARCHIVE_OUTPUT_DIR%\%%~nxi.7z" ""%%i"" -xr!.ts -mx=5 -v1g
 	REM 7z a -t7z %SDEL_OPT% "%%~nxi.7z" ""%%i"" -mx=0
 	IF EXIST "%ARCHIVE_OUTPUT_DIR%\%%~nxi.7z.001" 7z l %ARCHIVE_OPT_PW% "%ARCHIVE_OUTPUT_DIR%\%%~nxi.7z.001" >"%ARCHIVE_OUTPUT_DIR%\%%~nxi.7z.txt"
-	IF EXIST "%ARCHIVE_OUTPUT_DIR%\%%~nxi.7z" 7z l %ARCHIVE_OPT_PW% "%ARCHIVE_OUTPUT_DIR%\%%~nxi.7z" >"%ARCHIVE_OUTPUT_DIR%\%%~nxi.7z.txt"
-	TYPE "%ARCHIVE_OUTPUT_DIR%\%%~nxi.7z.txt"
+	IF EXIST "%ARCHIVE_OUTPUT_DIR%\%%~nxi.7z" 7z l %ARCHIVE_OPT_PW% "%ARCHIVE_OUTPUT_DIR%\%%~nxi.7z" >"%DOWNLOADS_DIR%\%%~nxi.7z.txt"
+	TYPE "%DOWNLOADS_DIR%\%%~nxi.7z.txt"
 )
 REM PAUSE
 EXIT

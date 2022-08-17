@@ -6,7 +6,8 @@ REM
 REM ======================================================================
 IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
-
+REM ---------- Archive.cmd(SettingsOptions) ----------
+REM SET VOLUME_SIZE=1g
 
 REM ======================================================================
 REM
@@ -17,6 +18,7 @@ REM ======================================================================
 REM ----------------------------------------------------------------------
 REM 
 REM ----------------------------------------------------------------------
+IF NOT DEFINED VOLUME_SIZE (SET VOLUME_SIZE=0)
 IF NOT DEFINED DOWNLOADS_PASSWORD (SET /P DOWNLOADS_PASSWORD="SET DOWNLOADS_PASSWORD(%ARCHIVE_PASSWORD%)=")
 IF NOT DEFINED DOWNLOADS_PASSWORD (SET DOWNLOADS_PASSWORD=%ARCHIVE_PASSWORD%)
 
@@ -82,7 +84,7 @@ REM ======================================================================
 		ECHO Files not Exist. %DOWNLOADS_DIR%
 		EXIT /B
 	)
-	REM SET OPT_VOLUME=-v1g
+	IF NOT %VOLUME_SIZE%==0 SET OPT_VOLUME=-v%VOLUME_SIZE%
 	IF NOT "%DOWNLOADS_PASSWORD%"=="" SET ARCHIVE_OPT_PW=-p%DOWNLOADS_PASSWORD% -mhe
 	7z a -t7z -sdel %ARCHIVE_OPT_PW% %DL_DIR%\%DOWNLOAD_FILENAME%.7z %USERPROFILE%\Downloads\* -xr!desktop.ini -xr!*.part -xr!*.mega -xr!*.crdownload -xr!*.downloading -mx=%ARCHIVE_OPT_X% %OPT_VOLUME%
 	IF EXIST "%DL_DIR%\%DOWNLOAD_FILENAME%.7z.001" (
