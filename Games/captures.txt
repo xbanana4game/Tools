@@ -6,4 +6,5 @@ CAPTURE_NO:GAME_NAME:GAME_DIR
 10:Planetside2:Planetside2\videos
 12:Insurgency:Insurgency\videos
 13:Factorio:Factorio\videos
+14:7 Days to Die:7 Days to Die\videos
 99:Unknown:Unknown\videos
