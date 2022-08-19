@@ -5,9 +5,9 @@ REM ----------------------------------------------------------------------
 IF NOT EXIST %USERPROFILE%\Settings.cmd (EXIT)
 CALL %USERPROFILE%\Settings.cmd
 REM ---------- Extract.cmd(SettingsOptions) ----------
-REM SET ARCHIVE_DIR=G:\Archives
+REM SET ARCHIVE_DIR=C:\Archives
 REM CALL :CheckDirectory %ARCHIVE_DIR%
-REM SET STORE_DIR=G:\Archives
+REM SET STORE_DIR=C:\Store
 REM CALL :CheckDirectory %STORE_DIR%
 REM SET EXTRACT_TARGET_DIR=E:\ARCHIVE2022\Downloads
 REM CALL :CheckDirectory %EXTRACT_TARGET_DIR%
