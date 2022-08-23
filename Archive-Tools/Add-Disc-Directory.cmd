@@ -6,11 +6,12 @@ REM
 REM ======================================================================
 IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
-REM ---------- Add-Disc-Directory.cmd(SettingsOptions) ----------
-SET DISK_OUTPUT_DIR=%~dp0
-SET DISK_PROFILE=%~n0
-SET MOVE_MODE=1
+REM --------------- Add-Disc-Directory.cmd(SettingsOptions) --------------
+REM SET DISK_OUTPUT_DIR=%DOWNLOADS_DIR%
+REM SET DISK_PROFILE=test
+REM SET MOVE_MODE=[1:MOVE 0:MKLINK 2:MKLINK X.7z.001]
 REM CALL :CheckDirectory %DISK_OUTPUT_DIR%
+REM ----------------------------------------------------------------------
 
 
 REM ======================================================================
@@ -18,8 +19,10 @@ REM
 REM                                Main
 REM
 REM ======================================================================
-IF NOT DEFINED DISK_PROFILE (SET /P DISK_PROFILE="SET DISK_PROFILE=")
-IF NOT DEFINED DISK_OUTPUT_DIR (SET /P DISK_OUTPUT_DIR="SET DISK_OUTPUT_DIR=")
+IF NOT DEFINED DISK_PROFILE (SET /P DISK_PROFILE="SET DISK_PROFILE(%~n0)=")
+IF NOT DEFINED DISK_PROFILE SET DISK_PROFILE=%~n0
+IF NOT DEFINED DISK_OUTPUT_DIR (SET /P DISK_OUTPUT_DIR="SET DISK_OUTPUT_DIR(%~dp0)=")
+IF NOT DEFINED DISK_OUTPUT_DIR (SET DISK_OUTPUT_DIR=%~dp0)
 IF NOT DEFINED MOVE_MODE (SET MOVE_MODE=1)
 
 SET NUMBER=0
@@ -67,6 +70,10 @@ REM	FOR /R %%i in (*.mp4) DO (
 		ECHO IF NOT EXIST "%DISK_OUTPUT_DIR%\%DISK_PROFILE%-Disc-%%F_NUMBER%%" MD "%DISK_OUTPUT_DIR%\%DISK_PROFILE%-Disc-%%F_NUMBER%%" >>%CMD_FILE%
 		REM ECHO ELSE MD "%DISK_OUTPUT_DIR%\%DISK_PROFILE%-Disc-%F_NUMBER%" >>%CMD_FILE%
 		REM ECHO MOVE "%%~nxi" "%DISK_OUTPUT_DIR%\%DISK_PROFILE%-Disc-%%F_NUMBER%%" >>%CMD_FILE%
+
+		ECHO SET FILENAME=%%~nxi >>%CMD_FILE%
+		ECHO SET FILENAME=%%FILENAME:~0,1%%.7z%%~xi >>%CMD_FILE%
+		IF %MOVE_MODE%==2 (ECHO MKLINK /H "%DISK_OUTPUT_DIR%\%DISK_PROFILE%-Disc-%%F_NUMBER%%\%%FILENAME%%" "%%i" >>%CMD_FILE%)
 		IF %MOVE_MODE%==1 (
 			ECHO MOVE "%%i" "%DISK_OUTPUT_DIR%\%DISK_PROFILE%-Disc-%%F_NUMBER%%\%%~nxi" >>%CMD_FILE%
 		) ELSE (
@@ -75,7 +82,7 @@ REM	FOR /R %%i in (*.mp4) DO (
 		ECHO REM ----------------------------------------------------------------------------------------------------------- >>%CMD_FILE%
 	)
 	IF EXIST %CMD_FILE% (
-		REM NOTEPAD %CMD_FILE%
+		IF DEFINED DEBUG NOTEPAD %CMD_FILE%
 		CALL %CMD_FILE%
 		DEL %CMD_FILE%
 	)
