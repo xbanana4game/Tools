@@ -7,9 +7,11 @@ REM ======================================================================
 IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
 REM --------------- Add-Disc-Directory.cmd(SettingsOptions) --------------
+REM SET BASE_DIR=.
 REM SET DISK_OUTPUT_DIR=%DOWNLOADS_DIR%
 REM SET DISK_PROFILE=test
-REM SET MOVE_MODE=[1:MOVE 0:MKLINK 2:MKLINK X.7z.001]
+REM SET MOVE_MODE=1
+REM MOVE_MODE [1:MOVE 0:MKLINK 2:MKLINK X.7z.001]
 REM CALL :CheckDirectory %DISK_OUTPUT_DIR%
 REM ----------------------------------------------------------------------
 
@@ -24,6 +26,8 @@ IF NOT DEFINED DISK_PROFILE SET DISK_PROFILE=%~n0
 IF NOT DEFINED DISK_OUTPUT_DIR (SET /P DISK_OUTPUT_DIR="SET DISK_OUTPUT_DIR(%~dp0)=")
 IF NOT DEFINED DISK_OUTPUT_DIR (SET DISK_OUTPUT_DIR=%~dp0)
 IF NOT DEFINED MOVE_MODE (SET MOVE_MODE=1)
+
+IF DEFINED BASE_DIR CD /D %BASE_DIR%
 
 SET NUMBER=0
 :NEXT_NUMBER
