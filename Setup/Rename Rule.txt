@@ -7,8 +7,11 @@
 Filename->Tag
 %album%\%title% - [%genre%][%artist%][%comment%][%year%]
 
+Tag->Filename(Store)
+youtube.com\%album% %artist% %year% %comment%
+
 Tag->Filename
-$if($isdigit(%_covers%),C:\Users\$getenv(USERNAME)\Downloads\youtube.com\,no_cover\)$if($strcmp(%album%,_youtube.com),Genere\%genre%,Playlist\%album%)\%artist% %year% '['%comment%']'
+$if($isdigit(%_covers%),C:\Users\$getenv(USERNAME)\Downloads\youtube.com\$if($strcmp(%album%,_youtube.com),Genere\%genre%,Playlist\%album%)\%artist% %year% %comment%,no_cover\%album% %artist% %comment%)
 
 
 ==========================================================================
@@ -16,9 +19,12 @@ $if($isdigit(%_covers%),C:\Users\$getenv(USERNAME)\Downloads\youtube.com\,no_cov
 ==========================================================================
 :File_BaseName: - [:Hash_CRC32:] [:File_DateCreated:]
 
+Filename->Tag
 %genre%\%album%\%title% - [%comment%] [%year%]
+%dummy%[%tags%]
 
-$if($isdigit(%_covers%),C:\Users\$getenv(USERNAME)\Downloads\,no_cover\)%genre%\%comment%
+Tag->Filename
+$if($isdigit(%_covers%),C:\Users\$getenv(USERNAME)\Downloads\,no_cover\)%genre%\%year% %comment%$if(%tags%,'['%tags%']',)
 
 
 ==========================================================================
@@ -41,35 +47,27 @@ TAGS\$replace(%2, ,\)\%1'['%2']'
 ==========================================================================
 Filename->Tag
 %genre%\%album%\videos\%title%
-%dummy% - %year% %dummy%
+%dummy% - %year% %dummy%[%tags%]
 
 Tag->Filename
-C:\Users\$getenv(USERNAME)\Downloads\%genre%\%album%\videos\%title%'['%tags%']'
+C:\Users\$getenv(USERNAME)\Downloads\$if($strcmp(%genre%,Captures),%genre%\%album%\videos\%title%$if(%tags%,'['%tags%']',),%title%)
 
 
 ==========================================================================
                                   music
 ==========================================================================
-C:\Users\USERNAME\Downloads\Music\
+Tag->Filename
+C:\Users\$getenv(USERNAME)\Downloads\
+Music\%genre%\
 
-[ジャンル]
-ジャンル\%genre%\%album%\$num(%track%,2) %title%
+$if($strcmp(%genre%,インターネット),%artist%\,
+$if($strcmp(%genre%,アニポップ),%artist%\,
+$if($strcmp(%genre%,東方),%albumartist%\,
+$if($strcmp(%genre%,アニメ),%albumartist%\,
+$if($strcmp(%genre%,ゲーム),%albumartist%\,
+$if($strcmp(%genre%,アイドル),%albumartist%\,
+$if($strcmp(%albumartist%,Various Artists),%albumartist%\,%artist%\)
+))))))
 
-[インターネット]
-
-[アニメ]
-[ゲーム]
-[アイドル]
-%genre%\%album%\$num(%track%,2) %title%
-%genre%\%albumartist%\%album%\$num(%track%,2) %title%
-
-[アニポップ]
-[アーティスト]
-%genre%\%artist%\%album%\$num(%track%,2) %title%
-
-[東方]
-%genre%\%albumartist%\%album%\$num(%track%,2) %title%
-
-
-Various Artists
+%album%\$num(%track%,2) %title%
 
