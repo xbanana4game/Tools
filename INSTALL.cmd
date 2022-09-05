@@ -74,7 +74,9 @@ REM ======================================================================
 	COPY /Y Keepass-Tools\Archive-kdbx.cmd %TOOLS_INSTALL_DIR%\bin
 	COPY /Y Archive-Tools\Archive-Extension.cmd %TOOLS_INSTALL_DIR%\bin
 	
-	COPY /Y Archive-Tools\Archive.cmd %USERPROFILE%\Desktop
+	COPY /Y Archive-Tools\Archive.cmd %USERPROFILE%\Desktop\Archive.cmd
+	REM IF EXIST %USERPROFILE%\Desktop\Archive.cmd DEL %USERPROFILE%\Desktop\Archive.cmd
+	REM MKLINK /H %USERPROFILE%\Desktop\Archive.cmd Archive-Tools\Archive.cmd
 	REM COPY /Y File-Tools\Archive_Directory.cmd %USERPROFILE%\Desktop
 	EXIT /B
 	
