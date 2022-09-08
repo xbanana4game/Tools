@@ -7,11 +7,12 @@ REM ======================================================================
 IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
 REM --------------- Add-Disc-Directory.cmd(SettingsOptions) --------------
-REM SET BASE_DIR=.
+REM SET BASE_DIR=.\test-Base
 REM SET DISK_OUTPUT_DIR=%DOWNLOADS_DIR%
 REM SET DISK_PROFILE=test
 REM SET MOVE_MODE=1
 REM MOVE_MODE [1:MOVE 0:MKLINK 2:MKLINK X.7z.001]
+REM IF NOT EXIST %DISK_OUTPUT_DIR% MD %DISK_OUTPUT_DIR%
 REM CALL :CheckDirectory %DISK_OUTPUT_DIR%
 REM ----------------------------------------------------------------------
 
@@ -28,7 +29,6 @@ IF NOT DEFINED DISK_OUTPUT_DIR (SET DISK_OUTPUT_DIR=%~dp0)
 IF NOT DEFINED MOVE_MODE (SET MOVE_MODE=1)
 
 IF DEFINED BASE_DIR CD /D %BASE_DIR%
-
 SET NUMBER=0
 :NEXT_NUMBER
 SET /A NUMBER=%NUMBER%+1
@@ -62,7 +62,7 @@ REM 23GB = 24117248 kbyte
 	ECHO SET TOTAL_SIZE=0 >>%CMD_FILE%
 	ECHO REM ----------------------------------------------------------------------------------------------------------- >>%CMD_FILE%
 REM	FOR /R %%i in (*.mp4) DO (
-	FOR %%i in (*.7z.???) DO (
+	FOR /R %%i in (*.7z.???) DO (
 		ECHO %%~nxi
 		ECHO REM %%~nxi >>%CMD_FILE%
 		ECHO SET FILE_SIZE=%%~zi/1024 >>%CMD_FILE%
