@@ -16,6 +16,8 @@ REM ======================================================================
 REM ----------------------------------------------------------------------
 REM 
 REM ----------------------------------------------------------------------
+IF NOT DEFINED STEAM_DIR SET /P STEAM_DIR="SET STEAM_DIR="
+IF NOT DEFINED STEAM_DIR (SET STEAM_DIR=C:\Progra~2\Steam)
 IF NOT DEFINED SAVE_STEAM_SS_FLG SET /P SAVE_STEAM_SS_FLG="SAVE_STEAM_SS_FLG [1|0] -> "
 IF "%SAVE_STEAM_SS_FLG%"=="" SET SAVE_STEAM_SS_FLG=0
 CALL :CheckDirectory %STEAM_DIR%\userdata

@@ -11,7 +11,7 @@ Tag->Filename(Store)
 youtube.com\$if($strcmp(%album%,_youtube.com),Genre\%genre%,Channel\%album%)\%artist% %year% %comment%
 
 Tag->Filename
-$if($isdigit(%_covers%),C:\Users\$getenv(USERNAME)\Downloads\youtube.com\,no_cover\)$if($strcmp(%album%,_youtube.com),_%genre%,%album%) %artist% %year% %comment%)
+$if($isdigit(%_covers%),C:\Users\$getenv(USERNAME)\Downloads\youtube.com\,C:\Users\$getenv(USERNAME)\Videos\no_cover\%album%\)$if($strcmp(%album%,_youtube.com),_%genre%,%album%) %artist% %year% %comment%
 
 
 ==========================================================================

@@ -1,11 +1,11 @@
 CAPTURE_NO:GAME_NAME:GAME_DIR
-1:Killing Floor:Killing Floor\videos
-2:Killing Floor (ZMT Mori^2 Server):Killing Floor\videos
-3:Paladins:Paladins\videos
-4:Osu!:Osu!\videos
-10:Planetside2:Planetside2\videos
-12:Insurgency:Insurgency\videos
-13:Factorio:Factorio\videos
-14:7 Days to Die:7 Days to Die\videos
-15:Deep Rock Galactic:Deep Rock Galactic\videos
-99:Unknown:Unknown\videos
+1:Killing Floor:Killing Floor
+2:Killing Floor (ZMT Mori^2 Server):Killing Floor\ZMT Mori^2 Server
+3:Paladins:Paladins
+4:Osu!:Osu!
+5:Deep Rock Galactic:Deep Rock Galactic
+10:Planetside2:Planetside2
+12:Insurgency:Insurgency
+13:Factorio:Factorio
+14:7 Days to Die:7 Days to Die
+99:Unknown:Unknown
