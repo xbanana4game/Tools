@@ -1,9 +1,10 @@
 CAPTURE_NO:GAME_NAME:GAME_DIR
 1:Killing Floor:Killing Floor
-2:Killing Floor (ZMT Mori^2 Server):Killing Floor\ZMT Mori^2 Server
+2:Killing Floor (ZMT Mori^2 Server):Killing Floor
 3:Paladins:Paladins
 4:Osu!:Osu!
 5:Deep Rock Galactic:Deep Rock Galactic
+6:Gundam Evolution:Gundam Evolution
 10:Planetside2:Planetside2
 12:Insurgency:Insurgency
 13:Factorio:Factorio
