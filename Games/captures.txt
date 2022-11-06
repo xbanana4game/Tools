@@ -5,8 +5,10 @@ CAPTURE_NO:GAME_NAME:GAME_DIR
 4:Osu!:Osu!
 5:Deep Rock Galactic:Deep Rock Galactic
 6:Gundam Evolution:Gundam Evolution
+7:Overwatch 2:Overwatch 2
 10:Planetside2:Planetside2
 12:Insurgency:Insurgency
 13:Factorio:Factorio
 14:7 Days to Die:7 Days to Die
+15:Shatterline:Shatterline
 99:Unknown:Unknown

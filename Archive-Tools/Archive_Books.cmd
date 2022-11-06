@@ -18,10 +18,12 @@ IF NOT EXIST MD %BOOKS_OUTPUT_DIR%
 FOR %%i in (%*) DO (
 	ECHO %%i
 	REM CALL  :RENAME_ADD_DATE  %%i
-	IF NOT EXIST "%BOOKS_OUTPUT_DIR%\%%~nxi.zip" 7z a -tzip -sdel "%BOOKS_OUTPUT_DIR%\%%~nxi.zip" ""%%i\*"" -xr!*.db -xr!*.dat -xr!*.url -xr!.DS_Store -mx=0 -mtc=off
-	REM 7z a -tzip -sdel "%%~nxi.zip" ""%%i"" -mx=0 -mtc=off
-	7z l "%BOOKS_OUTPUT_DIR%\%%~nxi.zip">"%%~nxi.zip.txt"
-	7z l "%BOOKS_OUTPUT_DIR%\%%~nxi.zip">>"%DOWNLOADS_DIR%\books-%yyyy%%mm%%dd%.log"
+	IF NOT EXIST "%BOOKS_OUTPUT_DIR%\%%~nxi.zip" (
+		7z a -tzip -sdel "%BOOKS_OUTPUT_DIR%\%%~nxi.zip" ""%%i\*"" -xr!*.db -xr!*.dat -xr!*.url -xr!.DS_Store -mx=0 -mtc=off
+		REM 7z a -tzip -sdel "%%~nxi.zip" ""%%i"" -mx=0 -mtc=off
+		7z l "%BOOKS_OUTPUT_DIR%\%%~nxi.zip">"%%~nxi.zip.txt"
+		7z l "%BOOKS_OUTPUT_DIR%\%%~nxi.zip">>"%DOWNLOADS_DIR%\books-%yyyy%%mm%%dd%.log"
+	)
 )
 EXIT
 
