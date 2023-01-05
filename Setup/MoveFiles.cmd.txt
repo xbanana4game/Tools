@@ -22,6 +22,7 @@ ECHO Move Beatmap_Pack
 CALL :MOVE_TARGET_FILES  %DOWNLOADS_DIR%\Games\Osu!\Beatmap_Pack %DOWNLOADS_DIR%\*Beatmap*.7z
 
 IF DEFINED MOVE_VIDEOS CALL :MOVE_VIDEOS
+IF DEFINED COPY_VIDEOS CALL :COPY_VIDEOS
 IF DEFINED SAVE_STEAM_SS CALL :SAVE_STEAM_SS
 IF DEFINED SAVE_OSU_SS CALL :SAVE_OSU_SS
 EXIT /B
@@ -49,6 +50,20 @@ REM ======================================================================
 		RMDIR %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% EXPLORER %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 		PAUSE
+		EXIT /B
+	)
+	EXIT /B
+
+:COPY_VIDEOS
+	ECHO MOVE VIDEOS %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
+	IF 1 EQU %ARCHIVE_FLG% (
+		MD %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
+		IF EXIST %DOWNLOADS_DIR%\Captures MOVE %DOWNLOADS_DIR%\Captures %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\
+		IF EXIST %DOWNLOADS_DIR%\youtube.com MOVE %DOWNLOADS_DIR%\youtube.com %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
+		RMDIR %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
+		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% EXPLORER %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
+		PAUSE
+		XCOPY %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% %ARCHIVE_DIR%\VD_%yyyy%%mm%%dd% /Y /H /S /E /F /K 
 		EXIT /B
 	)
 	EXIT /B

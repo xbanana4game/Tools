@@ -2,4 +2,8 @@ SET yyyy=2022
 SET mm=12
 SET dd=31
 
+SET hh=24
+SET mn=00
+SET ss=00
+
 SET DOWNLOAD_FILENAME=DL_%yyyy%%mm%%dd%_%USERDOMAIN%-%hh%%mn%%ss%

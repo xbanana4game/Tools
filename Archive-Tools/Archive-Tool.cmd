@@ -144,9 +144,9 @@ REM ======================================================================
 
 :MAKE_7Z_FILE
 	IF NOT DEFINED OUTPUT_DIR (
-		SET /P OUTPUT_DIR="Enter Output (E:, C:\Archives, default:%BACKUPS_DIR%): "
+		SET /P OUTPUT_DIR="SET OUTPUT_DIR=E:,C:\Archives,default:%BACKUPS_DIR%="
 	)
-	REM SET /P ARCHIVE_PASSWORD="Password: "
+	REM SET /P ARCHIVE_PASSWORD="SET ARCHIVE_PASSWORD="
 	IF "%OUTPUT_DIR%"=="" SET OUTPUT_DIR=%BACKUPS_DIR%
 	IF NOT "%ARCHIVE_PASSWORD%"=="" SET ARCHIVE_OPT_PW=-p%ARCHIVE_PASSWORD% -mhe
 	7z a -t%FILE_TYPE% %ARCHIVE_OPT_PW% %OUTPUT_DIR%\%ARCHIVE_PROFILE%@%yyyy%%mm%%dd%.%FILE_TYPE% %ARCHIVE_ROOT_DIR_NAME% -mx=%ARCHIVE_OPT_X% -xr!__Store

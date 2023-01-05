@@ -8,7 +8,7 @@ Filename->Tag
 %album%\%title% - [%genre%][%artist%][%comment%][%year%]
 
 Tag->Filename(Store)
-youtube.com\$if($strcmp(%album%,_youtube.com),Genre\%genre%,Channel\%album%)\%artist% %year% %comment%
+youtube.com\$if($strcmp(%album%,youtube.com),Genre\%genre%,Channel\%album%)\%artist% %year% %comment%
 
 Tag->Filename
 $if($isdigit(%_covers%),C:\Users\$getenv(USERNAME)\Downloads\youtube.com\,C:\Users\$getenv(USERNAME)\Videos\no_cover\%album%\)$if($strcmp(%album%,youtube.com),_%genre%,%album%) %artist% %year% %comment%
@@ -54,7 +54,7 @@ Filename->Tag
 %dummy% - %year% %dummy%[%tags%]
 
 Tag->Filename
-C:\Users\$getenv(USERNAME)\Downloads\$if($strcmp(%genre%,Captures),%genre%\%album%\videos\%title%$if(%tags%,'['%tags%']',),%title%)
+C:\Users\$getenv(USERNAME)\Downloads\$if($strcmp(%genre%,Captures),%genre%\%album%\%title%$if(%tags%,'['%tags%']',),Othervideo\%title%)
 
 
 ==========================================================================
