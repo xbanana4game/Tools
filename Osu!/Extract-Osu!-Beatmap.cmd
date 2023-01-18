@@ -47,6 +47,14 @@ REM ======================================================================
 	 		ECHO %yyyy%/%mm%/%dd%:%%~nxi>>%LOGNAME%
 			7z l "%%i">>%OSU_SONGS_DIR%\.log\%%~nxi.txt
 		)
+	FOR %%i in ("%BEATMAP_SRC_DIR%\*Beatmap Pack*.zip")  DO (
+		IF EXIST %OSU_SONGS_DIR%\.log\%%~nxi.txt (
+			ECHO %%~nxi is already imported.
+		) ELSE (
+	 		7z e "%%i" -o%OSU_SONGS_DIR% -aoa
+	 		ECHO %yyyy%/%mm%/%dd%:%%~nxi>>%LOGNAME%
+			7z l "%%i">>%OSU_SONGS_DIR%\.log\%%~nxi.txt
+		)
 	)
 	EXIT /B
 

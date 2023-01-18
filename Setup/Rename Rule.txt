@@ -14,7 +14,7 @@ Tag->Filename
 $if($isdigit(%_covers%),C:\Users\$getenv(USERNAME)\Downloads\youtube.com\,C:\Users\$getenv(USERNAME)\Videos\no_cover\%album%\)$if($strcmp(%album%,youtube.com),_%genre%,%album%) %artist% %year% %comment%
 
 VLC
-%d.jpg-_-
+$d.jpg-_-
 
 
 ==========================================================================
