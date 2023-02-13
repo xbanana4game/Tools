@@ -11,3 +11,5 @@
 "Vampire_Survivors","%STEAM_DIR%\userdata\%STEAM_USER_ID%\760\remote\1794680\screenshots"
 "Borderlands_3","%STEAM_DIR%\userdata\%STEAM_USER_ID%\760\remote\397540\screenshots"
 "FarCry5","%STEAM_DIR%\userdata\%STEAM_USER_ID%\760\remote\552520\screenshots"
+"Tribes_of_Midgard","%STEAM_DIR%\userdata\%STEAM_USER_ID%\760\remote\858820\screenshots"
+"Warlander","%STEAM_DIR%\userdata\%STEAM_USER_ID%\760\remote\1675900\screenshots"

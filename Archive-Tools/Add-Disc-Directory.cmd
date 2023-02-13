@@ -7,6 +7,7 @@ REM ======================================================================
 IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
 REM --------------- Add-Disc-Directory.cmd(SettingsOptions) --------------
+REM SET BASE_DIR=S:\Store\VD_20XX
 REM SET BASE_DIR=.\test-Base
 REM SET DISK_OUTPUT_DIR=%DOWNLOADS_DIR%
 REM SET DISK_PROFILE=test
@@ -56,6 +57,7 @@ REM 25,000,000,000 Byte　=　24,414,062 KB　=　23,841 MB　=　23.28 GB
 REM BD Free Space: 25025314816 bytes = 24438784 kbyte
 REM 1GB = 1073741824 byte = 1048576 kbyte
 REM 23GB = 24117248 kbyte
+REM 数値は 32 ビットで表記される数値 -2147483648 ～ 2147483647
 :MAKE_DISK
 	SET CMD_FILE=%USERPROFILE%\.Tools\%yyyy%%mm%%dd%%hh%%mn%%ss%.cmd
 	ECHO SET /A NUMBER=%NUMBER% >>%CMD_FILE%
@@ -65,7 +67,10 @@ REM	FOR /R %%i in (*.mp4) DO (
 	FOR /R %%i in (*.7z.???) DO (
 		ECHO %%~nxi
 		ECHO REM %%~nxi >>%CMD_FILE%
+		ECHO SET FILE_SIZE_BYTE=%%~zi>>%CMD_FILE%
 		ECHO SET FILE_SIZE=%%~zi/1024 >>%CMD_FILE%
+		REM 2GByteを超えるファイルがある場合
+		REM ECHO SET FILE_SIZE=%%FILE_SIZE_BYTE:~0,-3%%>>%CMD_FILE%
 		ECHO SET /A TOTAL_SIZE=%%TOTAL_SIZE%%+%%FILE_SIZE%% >>%CMD_FILE%
 		ECHO IF %%TOTAL_SIZE%% GEQ 24414062 SET /A NUMBER=%%NUMBER%%+1 >>%CMD_FILE%
 		ECHO IF %%TOTAL_SIZE%% GEQ 24414062 SET TOTAL_SIZE=%%FILE_SIZE%% >>%CMD_FILE%
@@ -92,4 +97,5 @@ REM	FOR /R %%i in (*.mp4) DO (
 	)
 	EXIT /B 0
 	
+
 	
