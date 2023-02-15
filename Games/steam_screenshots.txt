@@ -1,4 +1,5 @@
 "Game","%STEAM_DIR%\userdata\%STEAM_USER_ID%\760\remote\00000000\screenshots"
+"Osu!","%STEAM_DIR%\userdata\%STEAM_USER_ID%\760\remote\00000000\screenshots"
 "Factorio","%STEAM_DIR%\userdata\%STEAM_USER_ID%\760\remote\427520\screenshots"
 "Insurgency","%STEAM_DIR%\userdata\%STEAM_USER_ID%\760\remote\222880\screenshots"
 "AimLab","%STEAM_DIR%\userdata\%STEAM_USER_ID%\760\remote\714010\screenshots"
