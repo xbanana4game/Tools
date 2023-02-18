@@ -6,7 +6,8 @@ REM
 REM ======================================================================
 IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
-REM --------------- Add-Disc-Directory.cmd(SettingsOptions) --------------
+REM --------------- Add-Disc-Directory.cmd(SettingsOptions.cmd) --------------
+REM SET DEBUG=1
 REM SET BASE_DIR=S:\Store\VD_20XX
 REM SET BASE_DIR=.\test-Base
 REM SET DISK_OUTPUT_DIR=%DOWNLOADS_DIR%
@@ -30,8 +31,10 @@ IF NOT DEFINED DISK_PROFILE SET DISK_PROFILE=%~n0
 IF NOT DEFINED DISK_OUTPUT_DIR (SET /P DISK_OUTPUT_DIR="SET DISK_OUTPUT_DIR(%~dp0)=")
 IF NOT DEFINED DISK_OUTPUT_DIR (SET DISK_OUTPUT_DIR=%~dp0)
 IF NOT DEFINED MOVE_MODE (SET MOVE_MODE=0)
+IF NOT DEFINED TARGET_EXT (SET /P TARGET_EXT="TARGET_EXT(*.7z.???)=")
 IF NOT DEFINED TARGET_EXT (SET TARGET_EXT=*.7z.???)
-IF NOT DEFINED MAX_VOLUME_SIZE_KB(SET MAX_VOLUME_SIZE_KB=24414062)
+IF NOT DEFINED MAX_VOLUME_SIZE_KB (SET MAX_VOLUME_SIZE_KB=24414062)
+IF NOT DEFINED BASE_DIR (SET /P BASE_DIR="BASE_DIR(.)=")
 
 IF DEFINED BASE_DIR CD /D %BASE_DIR%
 SET NUMBER=0
@@ -49,6 +52,8 @@ REM 		MKLINK /H "%DISK_OUTPUT_DIR%\%DISK_PROFILE%-Disc-%F_NUMBER%\%%~nxi" "%%i"
 REM 	)
 REM )
 CALL :MAKE_DISK
+ECHO =================== FINISH ===================
+PAUSE
 EXIT
 
 
@@ -60,7 +65,7 @@ REM ======================================================================
 REM 25,000,000,000 Byte　=　24,414,062 KB　=　23,841 MB　=　23.28 GB
 REM BD Free Space: 25025314816 bytes = 24438784 kbyte
 REM 1GB = 1073741824 byte = 1048576 kbyte
-REM 23GB = 24117248 kbyte
+REM 23GB = 24117248 kbyte = 24696061952 byte
 REM 数値は 32 ビットで表記される数値 -2147483648 ～ 2147483647
 :MAKE_DISK
 	SET CMD_FILE=%USERPROFILE%\.Tools\%yyyy%%mm%%dd%%hh%%mn%%ss%.cmd
@@ -86,12 +91,14 @@ REM 数値は 32 ビットで表記される数値 -2147483648 ～ 2147483647
 
 		ECHO SET FILENAME=%%~nxi >>%CMD_FILE%
 		ECHO SET FILENAME=%%FILENAME:~0,1%%.7z%%~xi >>%CMD_FILE%
+		ECHO ECHO "---------- %%~nxi ----------" >>%CMD_FILE%
 		IF %MOVE_MODE%==2 (ECHO MKLINK /H "%DISK_OUTPUT_DIR%\%DISK_PROFILE%-Disc-%%F_NUMBER%%\%%FILENAME%%" "%%i" >>%CMD_FILE%)
 		IF %MOVE_MODE%==1 (
 			ECHO MOVE "%%i" "%DISK_OUTPUT_DIR%\%DISK_PROFILE%-Disc-%%F_NUMBER%%\%%~nxi" >>%CMD_FILE%
 		) ELSE (
 			ECHO MKLINK /H "%DISK_OUTPUT_DIR%\%DISK_PROFILE%-Disc-%%F_NUMBER%%\%%~nxi" "%%i" >>%CMD_FILE%
 		)
+		ECHO IF NOT %%ERRORLEVEL%% EQU 0 PAUSE >>%CMD_FILE%
 		ECHO REM ----------------------------------------------------------------------------------------------------------- >>%CMD_FILE%
 	)
 	IF EXIST %CMD_FILE% (
