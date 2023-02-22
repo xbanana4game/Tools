@@ -8,6 +8,12 @@ IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
 REM if  called this batch from Archive.cmd ARCHIVE_FLG is 1. 
 IF NOT DEFINED ARCHIVE_FLG (SET ARCHIVE_FLG=0)
+REM ---------- MoveFiles.cmd(SettingsOptions) ----------
+REM SET MOVE_VIDEOS=ON
+REM SET COPY_VIDEOS=ON
+REM SET SAVE_STEAM_SS=ON
+REM SET SAVE_OSU_SS=ON
+REM SET XCOPY_DIRECTORY=F:\%USERDOMAIN%\Store\
 
 
 REM ======================================================================
@@ -57,14 +63,16 @@ REM ======================================================================
 
 :COPY_VIDEOS
 	ECHO MOVE VIDEOS %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
+	IF NOT DEFINED XCOPY_DIRECTORY (SET /P XCOPY_DIRECTORY="XCOPY_DIRECTORY(F:\%USERDOMAIN%\Store\)=")
+	IF NOT DEFINED XCOPY_DIRECTORY (SET XCOPY_DIRECTORY=F:\%USERDOMAIN%\Store\)
+
 	IF 1 EQU %ARCHIVE_FLG% (
 		MD %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 		IF EXIST %DOWNLOADS_DIR%\Captures MOVE %DOWNLOADS_DIR%\Captures %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\
 		IF EXIST %DOWNLOADS_DIR%\youtube.com MOVE %DOWNLOADS_DIR%\youtube.com %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 		RMDIR %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% EXPLORER %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
-		PAUSE
-		XCOPY %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% %ARCHIVE_DIR%\VD_%yyyy%%mm%%dd% /Y /H /S /E /F /K 
+		XCOPY %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% %XCOPY_DIRECTORY%\Store\VD_%yyyy%%mm%%dd% /Y /H /S /E /F /K 
 		EXIT /B
 	)
 	EXIT /B

@@ -65,6 +65,11 @@ IF 1 EQU %MOVE_FILES_FLG% (
 CALL :Archive_Downloads
 
 REM ----------------------------------------------------------------------
+REM COPY
+REM ----------------------------------------------------------------------
+IF DEFINED COPY_VIDEOS CALL :COPY_FILE
+
+REM ----------------------------------------------------------------------
 REM SHUTDOWN
 REM ----------------------------------------------------------------------
 IF 1 EQU %SHUTDOWN_FLG2% (SHUTDOWN /S /T 3)
@@ -107,3 +112,14 @@ REM ======================================================================
 	IF EXIST %TOOLS_INSTALL_DIR%\MoveFiles.cmd (CALL %TOOLS_INSTALL_DIR%\MoveFiles.cmd)
 	EXIT /B
 
+:COPY_FILE
+	IF NOT DEFINED XCOPY_DIRECTORY (SET /P XCOPY_DIRECTORY="XCOPY_DIRECTORY(F:\%USERDOMAIN%\)=")
+	IF NOT DEFINED XCOPY_DIRECTORY (SET XCOPY_DIRECTORY=F:\%USERDOMAIN%\)
+	XCOPY %ARCHIVE_DIR%\%yyyy%%mm%\%DOWNLOAD_FILENAME%.* %XCOPY_DIRECTORY%\%yyyy%%mm%\ /Y /H /S /E /F /K
+	MD %STORE_DIR%\%EXTRACT_YYYY%
+	MOVE %ARCHIVE_DIR%\%yyyy%%mm%\*.7z %STORE_DIR%\%yyyy%%mm%\
+	MOVE %ARCHIVE_DIR%\%yyyy%%mm%\*.7z.??? %STORE_DIR%\%yyyy%%mm%\
+	RMDIR %ARCHIVE_DIR%\%yyyy%%mm%
+	EXIT /B
+	
+	
