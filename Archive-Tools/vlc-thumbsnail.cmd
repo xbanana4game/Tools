@@ -22,6 +22,7 @@ REM RENAME MD5.jpg-_-date.jpg -> MD5.jpg
 FOR %%i IN ("%PICTURES_DIR%\*.jpg-_-*.jpg") DO (
 	ECHO SET FILENAME=%%~nxi >>%CMD_FILE%
 	ECHO SET FILENAME=%%FILENAME:~0,12%% >>%CMD_FILE%
+	ECHO ECHO MOVE "%%i" "%MP4_IMG_DIR%\%%FILENAME%%" >>%CMD_FILE%
 	ECHO MOVE "%%i" "%MP4_IMG_DIR%\%%FILENAME%%" >>%CMD_FILE%
 )
 IF EXIST %CMD_FILE% (
