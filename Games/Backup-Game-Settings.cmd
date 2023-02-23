@@ -6,16 +6,22 @@ REM
 REM ======================================================================
 IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
-
+REM ---------- Template.cmd(SettingsOptions.cmd) ----------
+REM SET STEAM_LIBRARY_2=D:\SteamLibrary\steamapps\common
+REM SET STEAM_LIBRARY_Z=D
 
 REM ======================================================================
 REM
 REM                                Main
 REM
 REM ======================================================================
+IF NOT DEFINED STEAM_DRIVE_LETTER (SET /P STEAM_DRIVE_LETTER="SET STEAM_DRIVE_LETTER(D)=")
+IF DEFINED STEAM_DRIVE_LETTER (SET STEAM_LIBRARY_Z=%STEAM_DRIVE_LETTER%:\SteamLibrary\steamapps\common)
+
 IF DEFINED STEAM_LIBRARY DIR /B %STEAM_LIBRARY%
 IF DEFINED STEAM_LIBRARY_2 DIR /B %STEAM_LIBRARY_2%
 IF DEFINED STEAM_LIBRARY_3 DIR /B %STEAM_LIBRARY_3%
+IF DEFINED STEAM_LIBRARY_Z DIR /B %STEAM_LIBRARY_Z%
 
 SET /P GAME_NAME="Set Game name: "
 
@@ -33,6 +39,12 @@ IF DEFINED STEAM_LIBRARY_3 (
 	SET GAME_ROOT_DIR=%STEAM_LIBRARY_3%\%GAME_NAME%
 	CALL :ARCHIVE_GAME_SETTINGS
 )
+
+IF DEFINED STEAM_LIBRARY_Z (
+	SET GAME_ROOT_DIR=%STEAM_LIBRARY_Z%\%GAME_NAME%
+	CALL :ARCHIVE_GAME_SETTINGS
+)
+
 SET GAME_ROOT_DIR=%DOCUMENTS_DIR%\My Games
 CALL :ARCHIVE_GAME_SETTINGS
 

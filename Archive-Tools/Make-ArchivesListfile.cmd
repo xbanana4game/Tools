@@ -2,7 +2,7 @@
 REM ----------------------------------------------------------------------
 REM Read Settings
 REM ----------------------------------------------------------------------
-IF NOT EXIST %USERPROFILE%\Settings.cmd (EXIT)
+IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\Settings.cmd
 
 REM ----------------------------------------------------------------------

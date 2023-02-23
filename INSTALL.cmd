@@ -47,8 +47,6 @@ REM ======================================================================
 
 :INSTALL_SETTINGS
 	MD %TOOLS_INSTALL_DIR%
-	COPY /Y Setup\Settings.cmd.txt %USERPROFILE%\Settings.cmd
-	ECHO SET TOOLS_DIR=%~dp0>>%USERPROFILE%\Settings.cmd
 	
 	COPY /Y Setup\Settings.cmd.txt %TOOLS_INSTALL_DIR%\Settings.cmd
 	ECHO SET TOOLS_DIR=%~dp0>>%TOOLS_INSTALL_DIR%\Settings.cmd

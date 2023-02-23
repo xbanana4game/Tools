@@ -6,6 +6,7 @@ REM
 REM ======================================================================
 IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
+REM ---------- Template.cmd(SettingsOptions.cmd) ----------
 
 
 REM ======================================================================
@@ -14,6 +15,9 @@ REM                                Main
 REM
 REM ======================================================================
 REM CALL :INPUT_SETTINGS TEST "SET TEST=0 : " 0
+IF NOT DEFINED DOWNLOADS_PASSWORD (SET /P DOWNLOADS_PASSWORD="SET DOWNLOADS_PASSWORD(%ARCHIVE_PASSWORD%)=")
+IF NOT DEFINED DOWNLOADS_PASSWORD (SET DOWNLOADS_PASSWORD=%ARCHIVE_PASSWORD%)
+
 ECHO %~dp0
 ECHO %~n0
 ECHO %0

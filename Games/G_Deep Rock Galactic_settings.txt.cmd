@@ -1,1 +1,1 @@
-ECHO "I:\SteamLibrary\steamapps\common\Deep Rock Galactic\FSD\Saved\SaveGames"
+ECHO "FSD\Saved\SaveGames"
