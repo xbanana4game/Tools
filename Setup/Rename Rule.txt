@@ -12,7 +12,7 @@ youtube.com\$if($strcmp(%album%,youtube.com),Genre\%genre%,Channel\%album%)\%yea
 
 Tag->Filename
 $if($isdigit(%_covers%),C:\Users\$getenv(USERNAME)\Downloads\,C:\Users\$getenv(USERNAME)\Videos\no_cover\%album%\)
-youtube.com\$if($strcmp(%album%,youtube.com),$replace(_%genre%,&,and)\,%album%\)\
+youtube.com\$if($strcmp(%album%,youtube.com),$replace(_%genre%_,&,and)\,%album%\)\
 %artist% %year% %comment%
 
 VLC
@@ -26,6 +26,7 @@ $d.jpg-_-
 
 Filename->Tag
 %genre%\%album%\%title% - [%comment%] [%year%]
+%title% - [%comment%] [%year%][%genre%][%album%]
 %dummy%[%tags%]
 
 Tag->Filename

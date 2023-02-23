@@ -9,11 +9,16 @@ CALL %USERPROFILE%\.Tools\Settings.cmd
 REM if  called this batch from Archive.cmd ARCHIVE_FLG is 1. 
 IF NOT DEFINED ARCHIVE_FLG (SET ARCHIVE_FLG=0)
 REM ---------- MoveFiles.cmd(SettingsOptions) ----------
-REM SET MOVE_VIDEOS=ON
-REM SET COPY_VIDEOS=ON
-REM SET SAVE_STEAM_SS=ON
-REM SET SAVE_OSU_SS=ON
+REM SET VIDEOS_STORE_DIR=%STORE_DIR%
+REM SET MOVE_VIDEOS=1
+REM SET COPY_VIDEOS=1
+REM SET SAVE_STEAM_SS=1
+REM SET SAVE_OSU_SS=1
 REM SET XCOPY_DIRECTORY=F:\%USERDOMAIN%\Store\
+
+
+IF EXIST %USERPROFILE%\.Tools\MoveFiles-user.cmd (CALL %USERPROFILE%\.Tools\MoveFiles-user.cmd)
+IF NOT DEFINED VIDEOS_STORE_DIR SET VIDEOS_STORE_DIR=%STORE_DIR%
 
 
 REM ======================================================================
@@ -21,9 +26,6 @@ REM
 REM                                Main
 REM
 REM ======================================================================
-SET VIDEOS_STORE_DIR=%VIDEOS_DIR%\Store
-IF EXIST %USERPROFILE%\.Tools\MoveFiles-user.cmd (CALL %USERPROFILE%\.Tools\MoveFiles-user.cmd)
-
 ECHO Move Beatmap_Pack
 CALL :MOVE_TARGET_FILES  %DOWNLOADS_DIR%\Games\Osu!\Beatmap_Pack %DOWNLOADS_DIR%\*Beatmap*.7z
 CALL :MOVE_TARGET_FILES  %DOWNLOADS_DIR%\Games\Osu!\Beatmap_Pack %DOWNLOADS_DIR%\*Beatmap*.zip
