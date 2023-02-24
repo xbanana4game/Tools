@@ -90,8 +90,8 @@ REM ======================================================================
 	EXIT /B
 	
 :BACKUP_SETTINGS
-	IF NOT EXIST %USERPROFILE%\Settings.cmd (EXIT /B)
-	CALL %USERPROFILE%\Settings.cmd
+	IF NOT EXIST %TOOLS_INSTALL_DIR%\Settings.cmd (EXIT /B)
+	CALL %TOOLS_INSTALL_DIR%\Settings.cmd
 	REM IF NOT "%ARCHIVE_PASSWORD%"=="" SET ARCHIVE_OPT_PW=-p%ARCHIVE_PASSWORD% -mhe
 	DEL %TOOLS_INSTALL_DIR%\Tools-Settings@%USERDOMAIN%_%yyyy%%mm%%dd%.7z
 	7z a -t7z  %ARCHIVE_OPT_PW% %TOOLS_INSTALL_DIR%\Tools-Settings@%USERDOMAIN%_%yyyy%%mm%%dd%.7z %TOOLS_INSTALL_DIR% -xr!*bin -xr!*.7z
