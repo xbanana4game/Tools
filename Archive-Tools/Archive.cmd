@@ -8,7 +8,7 @@ IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
 REM ---------- Archive.cmd(SettingsOptions) ----------
 REM SET VOLUME_SIZE=1g
-REM SET XCOPY_DL_FILE=1
+REM SET XCOPY_ARCHIVES=1
 
 
 REM ======================================================================
@@ -69,7 +69,7 @@ CALL :Archive_Downloads
 REM ----------------------------------------------------------------------
 REM COPY
 REM ----------------------------------------------------------------------
-IF "%COPY_VIDEOS%"=="1" CALL :COPY_FILE
+IF "%XCOPY_ARCHIVES%"=="1" CALL :COPY_FILE
 
 REM ----------------------------------------------------------------------
 REM SHUTDOWN
