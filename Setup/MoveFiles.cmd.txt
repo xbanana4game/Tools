@@ -15,7 +15,7 @@ REM SET MOVE_VIDEOS=1
 REM SET COPY_VIDEOS=1
 REM SET SAVE_STEAM_SS=1
 REM SET SAVE_OSU_SS=1
-REM SET XCOPY_DIRECTORY=F:\%USERDOMAIN%\Videos\
+REM SET XCOPY_DIRECTORY=F:\%USERDOMAIN%\
 
 IF EXIST %USERPROFILE%\.Tools\MoveFiles-user.cmd (CALL %USERPROFILE%\.Tools\MoveFiles-user.cmd)
 IF NOT DEFINED VIDEOS_STORE_DIR SET VIDEOS_STORE_DIR=%STORE_DIR%
@@ -69,6 +69,7 @@ REM ======================================================================
 	IF 1 EQU %ARCHIVE_FLG% (
 		XCOPY %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% %XCOPY_DIRECTORY%\VD_%yyyy%%mm%%dd%\ /Y /H /S /E /F /K 
 	)
+	EXPLORER %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 	EXIT /B
 	
 :SAVE_STEAM_SS
@@ -104,6 +105,7 @@ REM ======================================================================
 		ECHO 2star >>xxx-exclude.txt
 		ECHO 3star >>xxx-exclude.txt
 		XCOPY %DOWNLOADS_DIR%\xxx %XCOPY_DIRECTORY%\xxx_%yyyy%%mm%%dd%\ /Y /H /S /E /F /K /EXCLUDE:xxx-exclude.txt
+		EXPLORER %XCOPY_DIRECTORY%\xxx_%yyyy%%mm%%dd%\
 		DEL xxx-exclude.txt
 	)
 	EXIT /B
