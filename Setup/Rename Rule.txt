@@ -73,8 +73,10 @@ $if($strcmp(%genre%,東方),%albumartist%\,
 $if($strcmp(%genre%,アニメ),\,
 $if($strcmp(%genre%,ゲーム),%albumartist%\,
 $if($strcmp(%genre%,アイドル),%albumartist%\,
+$if($strcmp(%genre%,アルバム),\,
+$if($strcmp(%genre%,Sound Horizon),\,
 $if($strcmp(%albumartist%,Various Artists),%albumartist%\,%artist%\)
-))))))
+))))))))
 
 %album%\$num(%track%,2) %title%
 

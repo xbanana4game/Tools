@@ -30,7 +30,7 @@ ECHO Move Beatmap_Pack
 CALL :MOVE_TARGET_FILES  %DOWNLOADS_DIR%\Games\Osu!\Beatmap_Pack %DOWNLOADS_DIR%\*Beatmap*.7z
 CALL :MOVE_TARGET_FILES  %DOWNLOADS_DIR%\Games\Osu!\Beatmap_Pack %DOWNLOADS_DIR%\*Beatmap*.zip
 
-IF "XCOPY_XXX"=="1" CALL :F_XCOPY_XXX
+IF "%XCOPY_XXX%"=="1" CALL :F_XCOPY_XXX
 IF DEFINED MOVE_VIDEOS CALL :MOVE_VIDEOS
 IF DEFINED SAVE_STEAM_SS CALL :SAVE_STEAM_SS
 IF DEFINED SAVE_OSU_SS CALL :SAVE_OSU_SS
@@ -68,8 +68,8 @@ REM ======================================================================
 	ECHO COPY VIDEOS %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 	IF 1 EQU %ARCHIVE_FLG% (
 		XCOPY %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% %XCOPY_DIRECTORY%\VD_%yyyy%%mm%%dd%\ /Y /H /S /E /F /K 
+		EXPLORER %XCOPY_DIRECTORY%\VD_%yyyy%%mm%%dd%\
 	)
-	EXPLORER %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 	EXIT /B
 	
 :SAVE_STEAM_SS
