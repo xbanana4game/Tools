@@ -1,0 +1,31 @@
+﻿[#0]
+T=7
+F=%_filename%
+1=%title% - [%genre%][%artist%][%comment%][%year%]
+
+[#1]
+T=12
+1=C:\\Users\\tomas\\Pictures\\mp4img\\%year% %comment%.jpg
+2=1
+3=3
+
+[#2]
+T=7
+F=%_directory%
+1=%album%
+
+[#3]
+T=5
+1=$if($strcmp(%album%,youtube.com),youtube.com,)$if($strcmp(%albumartist%,youtube.com),youtube.com,)
+F=ALBUMARTIST
+
+[#4]
+T=5
+1=$if($strcmp(%albumartist%,youtube.com),%genre%,%album%)
+F=ALBUM
+
+[#5]
+T=5
+1=$if($isdigit(%_covers%),youtube.com,no_cover)\\$if($strcmp(%albumartist%,youtube.com),$replace(_%genre%_,&,and)\\,%album%\\)\\%year% %comment%
+F=_FILENAME
+

@@ -1,0 +1,16 @@
+[Rule0]
+ID=RegEx
+Config=EXPRESSION:%5C%28%28%2E%2A%29%5C%29+%5C%28%28%2E%2A%29%5C%29;REPLACE:%28%241%29;CASESENSITIVE:0;SKIPEXTENSION:1
+Marked=1
+Comment=
+
+[Filters]
+AddFilesFromFolders=0
+AddFoldersAsFiles=1
+IncludeSubfolders=0
+IncludeHidden=0
+IncludeSystem=0
+SkipRootFoldersAsFiles=0
+MasksOnFileName=0
+Masks=
+MasksExclude=

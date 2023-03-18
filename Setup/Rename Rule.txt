@@ -53,7 +53,7 @@ TAGS\$replace(%2, ,\)\%1'['%2']'
                                   Captures
 ==========================================================================
 Filename->Tag
-%genre%\%album%\videos\%title%
+%genre%\%album%\%title%
 %dummy% - %year% %dummy%[%tags%]
 
 Tag->Filename
@@ -80,3 +80,10 @@ $if($strcmp(%albumartist%,Various Artists),%albumartist%\,%artist%\)
 
 %album%\$num(%track%,2) %title%
 
+CRC32->Filename
+Music\%genre%\
+%_file_mod_date%-%AudioMD5%
+
+foobar2000
+artist short
+$if($strstr(%artist%, ), $substr(%artist%,0,$strstr(%artist%, )), %artist%)
