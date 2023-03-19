@@ -1,0 +1,21 @@
+﻿[#0]
+T=7
+F=%_filename%
+1=%title% - [%comment%][%year%][%genre%][%album%]
+
+[#1]
+T=12
+1=C:\\Users\\tomas\\Pictures\\mp4img\\%comment%.jpg
+2=1
+3=3
+
+[#2]
+T=7
+F=%_filename%
+1=%dummy%[%tags%]
+
+[#3]
+T=5
+1=$if2(%AudioMD5%,%comment%)$if(%tags%,'['%tags%']',)
+F=_FILENAME
+

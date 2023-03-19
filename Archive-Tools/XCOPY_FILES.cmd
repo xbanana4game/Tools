@@ -15,9 +15,9 @@ REM ----------------------------------------------------------------------
 REM 
 REM ----------------------------------------------------------------------
 
-FOR /F "tokens=1,2,3* delims=," %%i in (XCOPY_LIST.txt) DO CALL :LIST_XCOPY "%%i" "%%j" "%%k\%%i\"
+FOR /F "skip=1 tokens=1,2,3* delims=," %%i in (XCOPY_LIST.txt) DO CALL :LIST_XCOPY "%%i" "%%j" "%%k\%%i\"
 CALL :Msg "Check copy-list.txt Execute. Press Enter..."
-FOR /F "tokens=1,2,3* delims=," %%i in (XCOPY_LIST.txt) DO CALL :EXEC_XCOPY "%%i" "%%j" "%%k\%%i\"
+FOR /F "skip=1 tokens=1,2,3* delims=," %%i in (XCOPY_LIST.txt) DO CALL :EXEC_XCOPY "%%i" "%%j" "%%k\%%i\"
 
 CALL :Msg Finished
 EXIT
