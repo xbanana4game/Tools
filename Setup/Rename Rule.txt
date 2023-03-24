@@ -33,6 +33,8 @@ Tag->Filename
 $if($isdigit(%_covers%),C:\Users\$getenv(USERNAME)\Downloads\,no_cover\)%genre%\%year% %comment%$if(%tags%,'['%tags%']',)
 %year% $left(%title%,100) [%tags%]
 
+Tag->Tag
+$if($neql($strstr(%tags%,5star),0),5,)$if($neql($strstr(%tags%,4star),0),4,)$if($neql($strstr(%tags%,3star),0),3,)$if($neql($strstr(%tags%,2star),0),2,)$if($neql($strstr(%tags%,1star),0),1,)
 
 ==========================================================================
                                   TagSpaces
@@ -81,9 +83,11 @@ $if($strcmp(%albumartist%,Various Artists),%albumartist%\,%artist%\)
 %album%\$num(%track%,2) %title%
 
 CRC32->Filename
-Music\%genre%\
-%_file_mod_date%-%AudioMD5%
+Music-%_date%\%genre%\$if2(%AudioMD5%,%comment%)
 
 foobar2000
 artist short
 $if($strstr(%artist%, ), $substr(%artist%,0,$strstr(%artist%, )), %artist%)
+$if2(%albumartist%,%artist%)
+%genre%/%audiomd5%
+

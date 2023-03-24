@@ -31,6 +31,7 @@ SET ARCHIVE_DIR=%USERPROFILE%\Archives
 SET UPLOADS_DIR=%ARCHIVE_DIR%\Uploads
 SET STORE_DIR=%USERPROFILE%\Store
 SET PATH=%PATH%;C:\Program Files\7-Zip
+SET NOTEPAD="C:\Program Files\Notepad++\notepad++.exe"
 
 REM ----------------------------------------------------------------------
 REM Archive-Tools
@@ -57,7 +58,7 @@ IF EXIST %USERPROFILE%\.Tools\SettingsOptions.cmd (CALL %USERPROFILE%\.Tools\Set
 IF EXIST %USERPROFILE%\Desktop\SettingsOptions.cmd (
 	REM ECHO %USERPROFILE%\Desktop\SettingsOptions.cmd
 	REM TYPE %USERPROFILE%\Desktop\SettingsOptions.cmd
-	NOTEPAD %USERPROFILE%\Desktop\SettingsOptions.cmd
+	%NOTEPAD% %USERPROFILE%\Desktop\SettingsOptions.cmd
 	CALL %USERPROFILE%\Desktop\SettingsOptions.cmd
 )
 
