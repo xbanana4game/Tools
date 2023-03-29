@@ -5,7 +5,7 @@ F=%_filename%
 
 [#1]
 T=12
-1=C:\\Users\\tomas\\Pictures\\mp4img\\%year% %comment%.jpg
+1=C:\\Users\\tomas\\Pictures\\mp4img\\%comment%.jpg
 2=1
 3=3
 
@@ -26,6 +26,6 @@ F=ALBUM
 
 [#5]
 T=5
-1=$if($isdigit(%_covers%),youtube.com,no_cover)\\$if($strcmp(%albumartist%,youtube.com),$replace(_%genre%_,&,and)\\,%album%\\)\\%year% %comment%
+1=$if($isdigit(%_covers%),youtube.com-%_date%,no_cover)\\$if($strcmp(%albumartist%,youtube.com),$replace(_%genre%_,&,and)\\,%album%\\)\\%year% %comment%
 F=_FILENAME
 

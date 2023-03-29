@@ -91,3 +91,4 @@ $if($strstr(%artist%, ), $substr(%artist%,0,$strstr(%artist%, )), %artist%)
 $if2(%albumartist%,%artist%)
 %genre%/%audiomd5%
 
+$if(%rating%,$repeat(★,%rating%)$repeat(☆,$sub(5,%rating%)),)

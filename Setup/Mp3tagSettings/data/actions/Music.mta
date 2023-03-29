@@ -1,0 +1,5 @@
+﻿[#0]
+T=5
+1=Music-%_date%\\%genre%\\$if2(%AudioMD5%,%comment%)
+F=_FILENAME
+
