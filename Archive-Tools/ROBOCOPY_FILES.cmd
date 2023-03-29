@@ -32,7 +32,7 @@ EXIT
 	ECHO From: %COPY_FROM%
 	ECHO To: %COPY_TO%
 	ECHO ROBOCOPY %COPY_FROM% %COPY_TO%
-	ROBOCOPY %COPY_FROM% %COPY_TO% /z /e /r:3 /w:10 /log:copy-list@%COPY_PROFILE%.txt /l
+	ROBOCOPY %COPY_FROM% %COPY_TO% /z /e /r:3 /w:10 /log:copy-list@%COPY_PROFILE%.txt /l /fp
 	IF %ERRORLEVEL% EQU 1 (
 		ECHO OK
 	)
