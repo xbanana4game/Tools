@@ -44,8 +44,8 @@ EXIT
 	SET COPY_FROM=%2
 	SET COPY_TO=%3
 	ECHO ROBOCOPY %COPY_FROM% %COPY_TO%
-	ROBOCOPY %COPY_FROM% %COPY_TO% /z /e /r:3 /w:10 /log:ROBOCOPY@%COPY_PROFILE%.log /v /fp
-	MOVE ROBOCOPY@%COPY_PROFILE%.log ROBOCOPY_%COPY_PROFILE%@%yyyy%%mm%%dd%%hh%%mn%%ss%.log
+	ROBOCOPY %COPY_FROM% %COPY_TO% /z /e /r:3 /w:10 /log:ROBOCOPY_%COPY_PROFILE%@%yyyy%%mm%%dd%%hh%%mn%%ss%.log /v /fp /np /tee
+	NOTEPAD ROBOCOPY_%COPY_PROFILE%@%yyyy%%mm%%dd%%hh%%mn%%ss%.log
 	REM EXPLORER %COPY_TO%
 	EXIT /B
 
