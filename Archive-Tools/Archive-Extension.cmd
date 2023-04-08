@@ -2,7 +2,7 @@
 REM ----------------------------------------------------------------------
 REM Read Settings
 REM ----------------------------------------------------------------------
-IF NOT EXIST %USERPROFILE%\Settings.cmd (EXIT)
+IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
 
 
@@ -53,7 +53,7 @@ REM ======================================================================
 	SET EXT_LIST_FILE=%1
 	FOR /F "skip=1 tokens=1,2 delims=;" %%C IN (%EXT_LIST_FILE%) DO (
 		MD %OUTPUT_DIR_NAME%
-		7z a -tzip %SDEL_OPT% %OUTPUT_DIR_NAME%\%%C  %%D -r -xr!Archive-Extension.cmd -xr!%%C -xr!%%C.txt -xr!.ts -mx=0
+		7z a -tzip %SDEL_OPT% %OUTPUT_DIR_NAME%\%%C %%D -r -xr!Archive-Extension.cmd -xr!%%C -xr!%%C.txt -xr!.ts -mx=0
 		7z l %OUTPUT_DIR_NAME%\%%C >%OUTPUT_DIR_NAME%\%%C.txt
 		TYPE %OUTPUT_DIR_NAME%\%%C.txt
 	)
