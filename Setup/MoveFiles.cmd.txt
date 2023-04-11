@@ -27,6 +27,7 @@ REM
 REM                                Main
 REM
 REM ======================================================================
+SET ROBOCOPY_LOG=robocopy-%yyyy%%mm%%dd%%hh%%mn%%ss%.log
 ECHO Move Beatmap_Pack
 CALL :MOVE_TARGET_FILES  %DOWNLOADS_DIR%\Games\Osu!\Beatmap_Pack %DOWNLOADS_DIR%\*Beatmap*.7z
 CALL :MOVE_TARGET_FILES  %DOWNLOADS_DIR%\Games\Osu!\Beatmap_Pack %DOWNLOADS_DIR%\*Beatmap*.zip
