@@ -110,9 +110,9 @@ REM ======================================================================
 	IF NOT DEFINED XCOPY_XXX_DIRECTORY SET XCOPY_XXX_DIRECTORY=%XCOPY_DIRECTORY%
 	IF NOT EXIST %DOWNLOADS_DIR%\xxx EXIT /B
 	IF 1 EQU %ARCHIVE_FLG% (
-		ROBOCOPY %DOWNLOADS_DIR%\xxx %XCOPY_DIRECTORY%\xxx_%yyyy%%mm%%dd% *4star* *5star* /z /e /r:3 /w:10 /log:robocopy.log /v /fp /np /tee
+		ROBOCOPY %DOWNLOADS_DIR%\xxx %XCOPY_XXX_DIRECTORY%\xxx_%yyyy%%mm%%dd% *4star* *5star* /z /e /r:3 /w:10 /log:robocopy.log /v /fp /np /tee
 		IF %ERRORLEVEL% EQU 1 (
-			EXPLORER %XCOPY_DIRECTORY%\xxx_%yyyy%%mm%%dd%
+			EXPLORER %XCOPY_XXX_DIRECTORY%\xxx_%yyyy%%mm%%dd%
 		)
 		NOTEPAD robocopy.log
 		DEL robocopy.log
