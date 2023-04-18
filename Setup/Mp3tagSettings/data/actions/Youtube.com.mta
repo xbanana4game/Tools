@@ -26,6 +26,6 @@ F=ALBUM
 
 [#5]
 T=5
-1=$if($isdigit(%_covers%),youtube.com-%_date%,no_cover)\\$if($strcmp(%albumartist%,youtube.com),$replace(_%genre%_,&,and)\\,%album%\\)\\$if($and(%year%,%comment%),%year% %comment%,%_FILENAME%)
+1=$if($isdigit(%_covers%),youtube.com-%_date%,no_cover)\\youtube.com\\$if($strcmp(%albumartist%,youtube.com),$replace(_%genre%_,&,and)\\,%album%\\)\\$if($and(%year%,%comment%),%year% %comment%,%_FILENAME%)
 F=_FILENAME
 
