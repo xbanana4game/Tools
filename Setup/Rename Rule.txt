@@ -32,6 +32,7 @@ Filename->Tag
 Tag->Filename
 $if($isdigit(%_covers%),C:\Users\$getenv(USERNAME)\Downloads\,no_cover\)%genre%\%year% %comment%$if(%tags%,'['%tags%']',)
 %year% $left(%title%,100) [%tags%]
+$if($and(%year%,%comment%),%year% %comment%,%_FILENAME%)
 
 Tag->Tag
 $if($neql($strstr(%tags%,5star),0),5,)$if($neql($strstr(%tags%,4star),0),4,)$if($neql($strstr(%tags%,3star),0),3,)$if($neql($strstr(%tags%,2star),0),2,)$if($neql($strstr(%tags%,1star),0),1,)

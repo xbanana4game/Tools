@@ -14,6 +14,8 @@ REM
 REM                                Main
 REM
 REM ======================================================================
+CHOICE /C YN /T 10 /D N /M "test"
+ECHO %ERRORLEVEL%
 REM CALL :INPUT_SETTINGS TEST "SET TEST=0 : " 0
 IF NOT DEFINED VARIABLE (SET /P VARIABLE="SET VARIABLE(DEFAULT)=")
 IF NOT DEFINED VARIABLE (SET VARIABLE=DEFAULT)
