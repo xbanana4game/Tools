@@ -67,12 +67,17 @@ IF NOT DEFINED BACKUPS_DIR (SET BACKUPS_DIR=C:\Backups\7z)
 REM ----------------------------------------------------------------------
 REM 
 REM ----------------------------------------------------------------------
+IF NOT EXIST %ARCHIVE_ROOT_DIR_NAME% (
+	CALL :MAKE_ARCHIVE_DIRECTORY
+	EXIT
+)
+
 ECHO ARCHIVE_PATH: %ARCHIVE_PATH%
 ECHO PROFILE: %ARCHIVE_PROFILE%
 ECHO   1:Make Directory
 ECHO   2:Remove empty Directory and Make Listfile
 ECHO   3:Archive(exclude __Store)
-ECHO   4:Update
+ECHO   4:Update (%BACKUPS_DIR%\%ARCHIVE_PROFILE%@????????.%FILE_TYPE%)
 ECHO   5:Store Old Directory (_store, _old)
 SET /P A="-> "
 IF 1 EQU %A% (CALL :MAKE_ARCHIVE_DIRECTORY)
