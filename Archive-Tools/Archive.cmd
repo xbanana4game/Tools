@@ -46,7 +46,7 @@ IF NOT ""%1""=="""" (
 			TYPE "%DOWNLOADS_DIR%\%%~nxi@%yyyy%%mm%%dd%_%USERDOMAIN%.%Z_TYPE%.txt"
 		)
 	)
-	PAUSE
+	TIMEOUT /T 5
 	EXIT
 )
 
