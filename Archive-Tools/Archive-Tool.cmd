@@ -98,7 +98,6 @@ IF 4 EQU %A% (
 )
 IF 5 EQU %A% (CALL :STORE_OLD_DIR)
 
-PAUSE
 EXIT
 
 
@@ -144,6 +143,7 @@ REM ======================================================================
 	TREE /F /A %ARCHIVE_ROOT_DIR_NAME% > %ARCHIVE_PROFILE%.txt
 	COPY %ARCHIVE_PROFILE%.txt %ARCHIVE_PROFILE%@%yyyy%%mm%%dd%.txt
 	7z a -tzip  %ARCHIVE_ROOT_DIR_NAME%\Settings@%ARCHIVE_PROFILE%.zip  %ARCHIVE_PATH%\ArchiveOptions.cmd  %ARCHIVE_PROFILE_FILE% %ARCHIVE_PROFILE%@%yyyy%%mm%%dd%.txt
+	NOTEPAD %ARCHIVE_PROFILE%@%yyyy%%mm%%dd%.txt
 	DEL %ARCHIVE_PROFILE%@%yyyy%%mm%%dd%.txt
 	EXIT /B
 
