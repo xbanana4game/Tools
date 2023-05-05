@@ -37,6 +37,12 @@ $if($and(%year%,%comment%),%year% %comment%,%_FILENAME%)
 Tag->Tag
 $if($neql($strstr(%tags%,5star),0),5,)$if($neql($strstr(%tags%,4star),0),4,)$if($neql($strstr(%tags%,3star),0),3,)$if($neql($strstr(%tags%,2star),0),2,)$if($neql($strstr(%tags%,1star),0),1,)
 
+Tag->Tag(ALBUM)
+$if($grtr($strstr(%tags%,アルバム用タグ1),0),アルバム用タグ1,
+$if($grtr($strstr(%tags%,アルバム用タグ2),0),アルバム用タグ2,
+xxx))
+タグの数だけ)追加
+
 ==========================================================================
                                   TagSpaces
 ==========================================================================

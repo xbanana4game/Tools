@@ -59,8 +59,10 @@ REM ======================================================================
 		IF EXIST %DOWNLOADS_DIR%\Captures MOVE %DOWNLOADS_DIR%\Captures %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\
 		IF EXIST %DOWNLOADS_DIR%\youtube.com MOVE %DOWNLOADS_DIR%\youtube.com %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 		RMDIR %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
+		ECHO VD_%yyyy%%mm%%dd%
 		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% EXPLORER %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 		PAUSE
+		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\mp3tag.m3u RENAME %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\mp3tag.m3u VD_%yyyy%%mm%%dd%.m3u
 		IF DEFINED COPY_VIDEOS CALL :COPY_VIDEOS
 		EXIT /B
 	)

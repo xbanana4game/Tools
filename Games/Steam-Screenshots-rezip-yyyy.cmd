@@ -6,6 +6,11 @@ REM
 REM ======================================================================
 IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
+REM ---------- Steam-Screenshots-rezip-yyyy.cmd(SettingsOptions.cmd) ----------
+SET yyyy=2022
+SET SS_BASE_DIR=D:\Games-Screenshots
+SET SS_OUTPUT_DIR=%DESKTOP_DIR%
+SET SS_WORK_DIR=%DESKTOP_DIR%\Steam-SS-Work
 
 
 REM ======================================================================
@@ -16,14 +21,14 @@ REM ======================================================================
 REM ----------------------------------------------------------------------
 REM 
 REM ----------------------------------------------------------------------
-SET yyyy=2022
-SET SS_BASE_DIR=D:\Games-Screenshots
-SET SS_OUTPUT_DIR=%DESKTOP_DIR%
-SET SS_WORK_DIR=%DESKTOP_DIR%\Steam-SS-Work
-
+REM IF NOT EXIST %SS_BASE_DIR% EXIT
 CD /D %SS_BASE_DIR%
 MD %SS_WORK_DIR%
+EXPLORER %SS_BASE_DIR%
+PAUSE
+
 FOR /F "tokens=1,2* delims=," %%i IN (%TOOLS_DIR%\Games\steam_screenshots.txt) DO (
+	ECHO SEARCH %SS_BASE_DIR%\%%i-Screenshots-%yyyy%*.zip
 	MD %SS_WORK_DIR%\%%i
 	FOR /R %%j IN ("%%i-Screenshots-%yyyy%*.zip") DO (
 		7z x %%j -o"%SS_WORK_DIR%\%%i"
