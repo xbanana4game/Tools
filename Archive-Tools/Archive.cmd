@@ -7,10 +7,11 @@ REM ======================================================================
 IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
 REM ---------- Archive.cmd(SettingsOptions) ----------
-REM SET ARCHIVE_DIR=C:\Archives
+REM SET DRIVE_LETTER=C
+REM SET ARCHIVE_DIR=%DRIVE_LETTER%:\Archives
 REM SET ARCHIVE_OPT_X=0
-REM SET BACKUPS_DIR=C:\Backups
-REM SET STORE_DIR=C:\Store
+REM SET BACKUPS_DIR=%DRIVE_LETTER%:\Backups
+REM SET STORE_DIR=%DRIVE_LETTER%:\Store
 REM SET MOVE_STORE_FLG=1
 REM SET VOLUME_SIZE=1g
 REM SET XCOPY_ARCHIVES=0

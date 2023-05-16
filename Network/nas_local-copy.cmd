@@ -7,7 +7,6 @@ REM ======================================================================
 IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
 REM ---------- nas_local-COPY.cmd(SettingsOptions.cmd) ----------
-REM SET ROBOCOPY_LOG=%DESKTOP_DIR%\robocopy-%yyyy%%mm%%dd%%hh%%mn%%ss%.log
 REM SET COPY_FROM=%DOCUMENTS_DIR%
 REM SET COPY_TO=\\nas\Backups\Backups\%USERDOMAIN%
 REM SET TARGET_FILES=*.*

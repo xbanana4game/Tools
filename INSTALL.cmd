@@ -48,7 +48,7 @@ REM ======================================================================
 :INSTALL_SETTINGS
 	MD %TOOLS_INSTALL_DIR%
 	
-	COPY /Y Setup\Settings.cmd.txt %TOOLS_INSTALL_DIR%\Settings.cmd
+	COPY /Y Setup\Settings.cmd %TOOLS_INSTALL_DIR%\Settings.cmd
 	ECHO SET TOOLS_DIR=%~dp0>>%TOOLS_INSTALL_DIR%\Settings.cmd
 	ECHO SET PATH=%%PATH%%;%~dp0Games>>%TOOLS_INSTALL_DIR%\Settings.cmd
 	ECHO SET PATH=%%PATH%%;%~dp0File-Tools>>%TOOLS_INSTALL_DIR%\Settings.cmd
@@ -59,7 +59,7 @@ REM ======================================================================
 		COPY /Y SettingsOptions.cmd %TOOLS_INSTALL_DIR%\SettingsOptions.cmd
 	)
 	
-	COPY /Y Setup\MoveFiles.cmd.txt %TOOLS_INSTALL_DIR%\MoveFiles.cmd
+	COPY /Y Setup\MoveFiles.cmd %TOOLS_INSTALL_DIR%\MoveFiles.cmd
 	IF EXIST "MoveFiles-user.cmd" (
 		NOTEPAD MoveFiles-user.cmd
 		COPY /Y MoveFiles-user.cmd %TOOLS_INSTALL_DIR%\MoveFiles-user.cmd

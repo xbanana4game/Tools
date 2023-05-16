@@ -10,27 +10,32 @@ T=12
 3=3
 
 [#2]
+T=5
+1=$if(%tags%,%_filename%,$if2(NoTags %comment%,%_filename%))
+F=_FILENAME
+
+[#3]
 T=7
 F=%_filename%
 1=%dummy%[%tags%]
 
-[#3]
+[#4]
 T=5
 1=$if($neql($strstr(%tags%,5star),0),5,)$if($neql($strstr(%tags%,4star),0),4,)$if($neql($strstr(%tags%,3star),0),3,)$if($neql($strstr(%tags%,2star),0),2,)$if($neql($strstr(%tags%,1star),0),1,)
 F=RATING
 
-[#4]
+[#5]
 T=5
-1=$if2(%AudioMD5%$if(%tags%,'['%tags%']',),$if2(Need AudioMD5 %comment%,%title%))
+1=$if(%AudioMD5%,%AudioMD5%$if(%tags%,'['%tags%']',),$if2(Need AudioMD5 %comment%,%title%))
 F=_FILENAME
 
-[#5]
+[#6]
 T=13
 1=.ts\\%_filename_ext%
 3=0|3
 2=1
 
-[#6]
+[#7]
 T=5
 1=$if($eql(%album%,xxx),$if($grtr($strstr(%tags%,\u6bbf\u5802),0),\u6bbf\u5802,xxx),%album%)
 F=ALBUM

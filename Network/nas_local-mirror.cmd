@@ -7,7 +7,6 @@ REM ======================================================================
 IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
 REM ---------- nas_local-mirror.cmd(SettingsOptions.cmd) ----------
-REM SET ROBOCOPY_LOG=%DESKTOP_DIR%\robocopy-%yyyy%%mm%%dd%%hh%%mn%%ss%.log
 REM SET MIRROR_SRC=\\nas\Multimedia\Videos
 REM SET MIRROR_TRG=%DESKTOP_DIR%\Videos
 REM SET TARGET_FILES=*.*

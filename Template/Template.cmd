@@ -14,6 +14,8 @@ REM
 REM                                Main
 REM
 REM ======================================================================
+
+
 CHOICE /C YN /T 10 /D N /M "test"
 IF %ERRORLEVEL% EQU 1 (
 	ECHO YES
@@ -159,3 +161,12 @@ REM ======================================================================
 	)
 	TYPE a.txt
 	EXIT /B
+
+:SetDriveLetter
+IF NOT DEFINED DRIVE_LETTER (
+	SET /P DRIVE_LETTER="SET DRIVE_LETTER(D)="
+)
+IF NOT DEFINED DRIVE_LETTER (SET DRIVE_LETTER=D)
+CD %DRIVE_LETTER%:
+IF %ERRORLEVEL% EQU 1 EXIT
+
