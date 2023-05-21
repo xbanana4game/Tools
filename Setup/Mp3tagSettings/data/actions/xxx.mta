@@ -11,7 +11,7 @@ T=12
 
 [#2]
 T=5
-1=$if(%tags%,%_filename%,$if2(NoTags %comment%,%_filename%))
+1=$if(%comment%,%_filename%,$if(%tags%,%_filename%,$if2(NoTags %comment%,%_filename%)))
 F=_FILENAME
 
 [#3]
@@ -26,7 +26,7 @@ F=RATING
 
 [#5]
 T=5
-1=$if(%AudioMD5%,%AudioMD5%$if(%tags%,'['%tags%']',),$if2(Need AudioMD5 %comment%,%title%))
+1=$if(%AudioMD5%,%AudioMD5%$if(%tags%,'['%tags%']',),$if2(Need AudioMD5 and Tags %comment%,%title%))
 F=_FILENAME
 
 [#6]

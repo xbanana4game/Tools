@@ -45,6 +45,16 @@ REM ======================================================================
 	)
 	EXIT /B
 
+:INSTALL_NKF
+	IF EXIST %TOOLS_INSTALL_DIR%\bin\ffmpeg.exe EXIT /B
+	IF EXIST nkf32.exe (
+		COPY nkf32.exe %TOOLS_INSTALL_DIR%\bin\nkf32.exe
+	) ELSE (
+		ECHO Please Download https://www.vector.co.jp/download/file/win95/util/fh526847.html
+		PAUSE
+	)
+	EXIT /B
+
 :INSTALL_SETTINGS
 	MD %TOOLS_INSTALL_DIR%
 	
