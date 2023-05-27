@@ -62,10 +62,15 @@ REM ======================================================================
 		ECHO VD_%yyyy%%mm%%dd%
 		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% EXPLORER %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 		ECHO 1. Sort Album and make %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\mp3tag.m3u
-		ECHO 2. Convert UTF-8
 		PAUSE
-		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\mp3tag.m3u nkf32.exe -w %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\mp3tag.m3u >%VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\VD_%yyyy%%mm%%dd%.m3u
-		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\mp3tag.m3u nkf32.exe -w %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\mp3tag.m3u >%VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\youtube.com_%yyyy%%mm%%dd%.m3u
+		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\mp3tag.m3u (
+			nkf32.exe -w %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\mp3tag.m3u >%VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\VD_%yyyy%%mm%%dd%.m3u
+			DEL %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\mp3tag.m3u 
+		)
+		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\mp3tag.m3u (
+			nkf32.exe -w %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\mp3tag.m3u >%VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\youtube.com_%yyyy%%mm%%dd%.m3u
+			DEL %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\mp3tag.m3u
+		)
 		IF DEFINED COPY_VIDEOS CALL :COPY_VIDEOS
 		EXIT /B
 	)

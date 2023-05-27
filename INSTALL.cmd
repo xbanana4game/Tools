@@ -10,6 +10,7 @@ REM
 REM ======================================================================
 CALL :INSTALL_7Z
 CALL :INSTALL_FFMPEG
+CALL :INSTALL_NKF
 CALL :INSTALL_SETTINGS
 CALL :INSTALL_SAKURA_MACRO
 CALL :BACKUP_SETTINGS
@@ -46,7 +47,7 @@ REM ======================================================================
 	EXIT /B
 
 :INSTALL_NKF
-	IF EXIST %TOOLS_INSTALL_DIR%\bin\ffmpeg.exe EXIT /B
+	IF EXIST %TOOLS_INSTALL_DIR%\bin\nkf32.exe EXIT /B
 	IF EXIST nkf32.exe (
 		COPY nkf32.exe %TOOLS_INSTALL_DIR%\bin\nkf32.exe
 	) ELSE (
