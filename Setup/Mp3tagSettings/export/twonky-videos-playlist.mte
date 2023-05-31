@@ -1,0 +1,15 @@
+$filename(..\Twonky\%_workingdir%.wpl,utf-8)
+<?wpl version="1.0"?>
+<smil>
+<head>
+<meta name="Type" content="V"/>
+<title>%_workingdir%</title>
+</head>
+<body>
+<seq>
+$loop(%_path%)<media src="$replace($regexp(%_path%,.*Multimedia\\(.*),/share/HDA_DATA/Multimedia/$1),\,/)"/>
+$loopend()
+</seq>
+</body>
+</smil>
+

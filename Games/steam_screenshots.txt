@@ -1,4 +1,4 @@
-"Game","%STEAM_DIR%\userdata\%STEAM_USER_ID%\760\remote\00000000\screenshots"
+"Game_no_space","%STEAM_DIR%\userdata\%STEAM_USER_ID%\760\remote\00000000\screenshots"
 "Osu!","%STEAM_DIR%\userdata\%STEAM_USER_ID%\760\remote\00000000\screenshots"
 "Factorio","%STEAM_DIR%\userdata\%STEAM_USER_ID%\760\remote\427520\screenshots"
 "Insurgency","%STEAM_DIR%\userdata\%STEAM_USER_ID%\760\remote\222880\screenshots"
@@ -14,4 +14,4 @@
 "FarCry5","%STEAM_DIR%\userdata\%STEAM_USER_ID%\760\remote\552520\screenshots"
 "Tribes_of_Midgard","%STEAM_DIR%\userdata\%STEAM_USER_ID%\760\remote\858820\screenshots"
 "Warlander","%STEAM_DIR%\userdata\%STEAM_USER_ID%\760\remote\1675900\screenshots"
-"Starship Troopers Extermination","%STEAM_DIR%\userdata\%STEAM_USER_ID%\760\remote\1268750\screenshots"
+"Starship_Troopers_Extermination","%STEAM_DIR%\userdata\%STEAM_USER_ID%\760\remote\1268750\screenshots"
