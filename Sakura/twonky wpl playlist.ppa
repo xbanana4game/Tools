@@ -1,0 +1,38 @@
+
+S_ReplaceAll('#.*\r\n', '', 28);
+S_ReplaceAll('\\', '/', 28);
+//S_ReplaceAll('^', '<media src="/share/HDA_DATA/Multimedia/Videos/youtube.com/', 28);
+S_ReplaceAll('^', '<media src="', 28);
+S_ReplaceAll('$', '"/>', 28);
+
+S_GoFileTop ();
+S_InsText('<?wpl version="1.0"?>');
+S_Char(13)；S_ReDraw(0);
+S_InsText('<smil>');
+S_Char(13)；S_ReDraw(0);
+S_InsText('<head>');
+S_Char(13)；S_ReDraw(0);
+S_InsText('<meta name="Type" content="V"/>');
+S_Char(13)；S_ReDraw(0);
+S_InsText('<title>'+S_ExpandParameter('$g')+'</title>');
+S_Char(13)；S_ReDraw(0);
+S_InsText('</head>');
+S_Char(13)；S_ReDraw(0);
+S_InsText('<body>');
+S_Char(13)；S_ReDraw(0);
+S_InsText('<seq>');
+S_Char(13)；S_Char(13)；S_ReDraw(0);
+
+S_GoFileEnd();
+S_Char(13)；S_Char(13)；S_ReDraw(0);
+S_InsText('</seq>');
+S_Char(13)；S_ReDraw(0);
+S_AddTail('</body>');
+S_Char(13)；S_ReDraw(0);
+S_AddTail('</smil>');
+
+S_ReDraw(0);	// 再描画
+//S_ExecCommand('md twonky', 0, '');
+S_FileSaveAs(S_ExpandParameter('$g')+'-twonky.wpl', 4 ,1 );
+
+//S_ExitAllEditors();

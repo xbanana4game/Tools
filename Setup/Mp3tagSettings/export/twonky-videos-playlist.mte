@@ -7,7 +7,7 @@ $filename(..\Twonky\%_workingdir%.wpl,utf-8)
 </head>
 <body>
 <seq>
-$loop(%_path%)<media src="$replace($regexp(%_path%,.*Multimedia\\(.*),/share/HDA_DATA/Multimedia/$1),\,/)"/>
+$loop(%album%)<media src="$replace(%_filename_rel%,\,/)"/>
 $loopend()
 </seq>
 </body>
