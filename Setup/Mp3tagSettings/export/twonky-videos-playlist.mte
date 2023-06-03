@@ -1,4 +1,4 @@
-$filename(..\Twonky\%_workingdir%.wpl,utf-8)
+$filename(%_workingdir%.wpl,utf-8)
 <?wpl version="1.0"?>
 <smil>
 <head>

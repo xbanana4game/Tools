@@ -68,7 +68,7 @@ REM ======================================================================
 			DEL %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\mp3tag.m3u 
 		)
 		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\mp3tag.m3u (
-			nkf32.exe -w %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\mp3tag.m3u >%VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\youtube.com_%yyyy%%mm%%dd%.m3u
+			nkf32.exe -w %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\mp3tag.m3u >%VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\VD_%yyyy%%mm%%dd%.m3u
 			DEL %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\mp3tag.m3u
 		)
 		IF DEFINED COPY_VIDEOS CALL :COPY_VIDEOS

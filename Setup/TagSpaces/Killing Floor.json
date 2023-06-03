@@ -1,0 +1,37 @@
+{ "appName": "TagSpaces", "appVersion": "4.4.3", "settingsVersion": 3, "tagGroups": [
+  {
+    "title": "Killing Floor",
+    "uuid": "a3565ba0-4c6f-11ed-8bea-75b0919118ff",
+    "children": [
+      {
+        "title": "Patriarch_kill",
+        "color": "#f83a22ff",
+        "textcolor": "white",
+        "type": "sidecar"
+      },
+      {
+        "title": "定番マップ",
+        "color": "#f83a22ff",
+        "textcolor": "white",
+        "type": "sidecar"
+      },
+      {
+        "title": "SURVIVED",
+        "color": "#f83a22ff",
+        "textcolor": "white",
+        "type": "sidecar"
+      },
+      {
+        "title": "WIPED_OUT",
+        "color": "#f83a22ff",
+        "textcolor": "white",
+        "type": "sidecar"
+      }
+    ],
+    "created_date": "2022-10-15T09:56:28.379Z",
+    "color": "#ff0000ff",
+    "textcolor": "white",
+    "modified_date": "2022-10-15T09:56:28.379Z",
+    "expanded": true
+  }
+]}

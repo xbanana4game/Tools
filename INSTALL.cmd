@@ -94,9 +94,9 @@ REM ======================================================================
 		COPY /Y Sakura\ppa.dll "C:\Program Files (x86)\sakura"
 	)
 	IF EXIST "%SAKURA_SETTINGS_DIR%" (
-		COPY /Y Osu!\*.mac %SAKURA_SETTINGS_DIR%\
 		COPY /Y Osu!\*.ppa %SAKURA_SETTINGS_DIR%\
-		COPY /Y Games\*.mac %SAKURA_SETTINGS_DIR%\
+		COPY /Y Games\*.ppa %SAKURA_SETTINGS_DIR%\
+		COPY /Y Sakura\*.ppa %SAKURA_SETTINGS_DIR%\
 	)
 	EXIT /B
 	
