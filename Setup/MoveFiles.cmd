@@ -15,7 +15,9 @@ REM SET MOVE_VIDEOS=1
 REM SET COPY_VIDEOS=1
 REM SET SAVE_STEAM_SS=1
 REM SET SAVE_OSU_SS=1
-REM SET XCOPY_DIRECTORY=F:\%USERDOMAIN%
+REM SET XCOPY_DIRECTORY=E:\%USERDOMAIN%
+REM SET XCOPY_DIRECTORY=\\NAS\Multimedia\Videos
+REM SET XCOPY_DIRECTORY_YYYY=\\NAS\Multimedia\VD_%yyyy%
 REM SET XCOPY_XXX_DIRECTORY=%XCOPY_DIRECTORY%
 
 IF EXIST %USERPROFILE%\.Tools\MoveFiles-user.cmd (CALL %USERPROFILE%\.Tools\MoveFiles-user.cmd)
@@ -77,13 +79,16 @@ REM ======================================================================
 	EXIT /B
 
 :COPY_VIDEOS
+	IF NOT DEFINED XCOPY_DIRECTORY_YYYY EXIT /B
 	IF NOT EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% EXIT /B
 	ECHO COPY VIDEOS %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 	IF 1 EQU %ARCHIVE_FLG% (
 		REM XCOPY %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% %XCOPY_DIRECTORY%\VD_%yyyy%%mm%%dd%\ /Y /H /S /E /F /K
-		ROBOCOPY %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% %XCOPY_DIRECTORY%\VD_%yyyy%%mm%%dd%\ /z /e /r:3 /w:10 /log+:%ROBOCOPY_LOG% /v /fp /np /tee
+		ROBOCOPY %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% %XCOPY_DIRECTORY_YYYY% /z /e /r:3 /w:10 /log+:%ROBOCOPY_LOG% /v /fp /np /tee
+		REM ROBOCOPY %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% %XCOPY_DIRECTORY%\VD_%yyyy%%mm%%dd%\ /z /e /r:3 /w:10 /log+:%ROBOCOPY_LOG% /v /fp /np /tee
 		IF %ERRORLEVEL% EQU 1 (
-			EXPLORER %XCOPY_DIRECTORY%\VD_%yyyy%%mm%%dd%\
+			REM EXPLORER %XCOPY_DIRECTORY%\VD_%yyyy%%mm%%dd%\
+			EXPLORER %XCOPY_DIRECTORY_YYYY%
 		)
 		NOTEPAD %ROBOCOPY_LOG%
 		DEL %ROBOCOPY_LOG%

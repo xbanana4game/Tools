@@ -51,6 +51,12 @@ FOR %%i IN ("%CAPTURES_DIR%\*.mp4") DO (
 	MOVE "%CAPTURES_DIR%\%GAME_NAME% - %%~nxi" "%CAPTURES_DIR%\%GAME_DIR%\"
 )
 
+SET MP4_FILES_DIR=%CAPTURES_DIR%
+SET IMG_OUTPUT_DIR=%PICTURES_DIR%\mp4img
+SET FFMPGE_OPT_SS=1
+SET END_FLG=1
+CALL mp4img.cmd
+
 PAUSE
 EXPLORER "%CAPTURES_DIR%"
 EXIT
@@ -86,3 +92,4 @@ REM ======================================================================
 		DEL a.cmd
 	)
 	EXIT /B 0
+	

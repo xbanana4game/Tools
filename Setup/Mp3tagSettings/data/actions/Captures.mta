@@ -28,3 +28,9 @@ T=7
 F=%_parent_directory%
 1=%genre%
 
+[#6]
+T=12
+1=C:\\Users\\tomas\\Pictures\\mp4img\\%_filename_ext%.jpg
+2=1
+3=3
+

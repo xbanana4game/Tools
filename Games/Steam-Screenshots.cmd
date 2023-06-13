@@ -19,12 +19,12 @@ REM ----------------------------------------------------------------------
 IF NOT DEFINED TARGET_FILE SET TARGET_FILE=%yyyy%*.*
 IF NOT DEFINED STEAM_DIR SET /P STEAM_DIR="SET STEAM_DIR="
 IF NOT DEFINED STEAM_DIR (SET STEAM_DIR=C:\Progra~2\Steam)
-IF NOT DEFINED SAVE_STEAM_SS_FLG SET /P SAVE_STEAM_SS_FLG="SAVE_STEAM_SS_FLG [1|0] -> "
-IF "%SAVE_STEAM_SS_FLG%"=="" SET SAVE_STEAM_SS_FLG=0
+IF NOT DEFINED SAVE_ALL_STEAM_SS_FLG SET /P SAVE_ALL_STEAM_SS_FLG="SAVE_ALL_STEAM_SS_FLG [1|0] -> "
+IF "%SAVE_ALL_STEAM_SS_FLG%"=="" SET SAVE_ALL_STEAM_SS_FLG=0
 CALL :CheckDirectory %STEAM_DIR%\userdata
 
 FOR /F "tokens=1,2* delims=," %%i IN (%TOOLS_DIR%\Games\steam_screenshots.txt) DO CALL :ArchiveGameScreenshots %%i %%j
-IF %SAVE_STEAM_SS_FLG% EQU 1 CALL :ArchiveSteamScreenshots 
+IF %SAVE_ALL_STEAM_SS_FLG% EQU 1 CALL :ArchiveSteamScreenshots 
 
 REM If not called MoveFiles.cmd pause.
 IF NOT DEFINED ARCHIVE_FLG PAUSE
