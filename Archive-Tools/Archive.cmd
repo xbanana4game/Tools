@@ -134,7 +134,7 @@ REM ======================================================================
 	REM XCOPY %ARCHIVE_DIR%\%yyyy%%mm%\%DOWNLOAD_FILENAME%.* %XCOPY_ARCHIVE_DIRECTORY%\%yyyy%%mm%\ /Y /H /S /E /F /K
 	ROBOCOPY %ARCHIVE_DIR%\%yyyy%%mm%\ %XCOPY_ARCHIVE_DIRECTORY%\%yyyy%%mm%\ %DOWNLOAD_FILENAME%.* /z /e /r:3 /w:10 /log:robocopy.log /v /fp /np /tee
 	IF %ERRORLEVEL% EQU 1 (
-		EXPLORER %XCOPY_ARCHIVE_DIRECTORY%\xxx_%yyyy%%mm%%dd%
+		EXPLORER %XCOPY_ARCHIVE_DIRECTORY%\%yyyy%%mm%%dd%
 	)
 	NOTEPAD robocopy.log
 	DEL robocopy.log

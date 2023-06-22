@@ -1,3 +1,6 @@
+//making twonky wpl playlist
+//convert m3u to wpl
+
 //S_SJIStoUTF8();
 
 S_ReplaceAll('#.*\r\n', '', 28);
@@ -36,4 +39,5 @@ S_ReDraw(0);	// 再描画
 //S_ExecCommand('md twonky', 0, '');
 S_FileSaveAs(S_ExpandParameter('$g')+'-twonky.wpl', 4 ,1 );
 
+S_GoFileTop ();
 //S_ExitAllEditors();

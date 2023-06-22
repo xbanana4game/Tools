@@ -70,7 +70,8 @@ Filename->Tag
 %dummy% - %year% %dummy%[%tags%]
 
 Tag->Filename
-C:\Users\$getenv(USERNAME)\Downloads\$if($strcmp(%genre%,Captures),%genre%\%album%\%title%$if(%tags%,'['%tags%']',),Othervideo\%title%)
+$if($strcmp($left(%_folderpath%,3),C:\),C:\Users\$getenv(USERNAME)\Downloads\,)
+$if($strcmp(%genre%,Captures),%genre%\%album%\%title%$if(%tags%,'['%tags%']',),Othervideo\%title%)
 
 
 ==========================================================================

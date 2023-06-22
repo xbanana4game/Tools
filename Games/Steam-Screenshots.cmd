@@ -16,7 +16,7 @@ REM ======================================================================
 REM ----------------------------------------------------------------------
 REM 
 REM ----------------------------------------------------------------------
-IF NOT DEFINED TARGET_FILE SET TARGET_FILE=%yyyy%*.*
+IF NOT DEFINED STEAM_TARGET_FILE SET STEAM_TARGET_FILE=%yyyy%*.*
 IF NOT DEFINED STEAM_DIR SET /P STEAM_DIR="SET STEAM_DIR="
 IF NOT DEFINED STEAM_DIR (SET STEAM_DIR=C:\Progra~2\Steam)
 IF NOT DEFINED SAVE_ALL_STEAM_SS_FLG SET /P SAVE_ALL_STEAM_SS_FLG="SAVE_ALL_STEAM_SS_FLG [1|0] -> "
@@ -51,7 +51,7 @@ REM ======================================================================
 	SET OUT="%DOWNLOADS_DIR%\%GAME_NAME%-Screenshots-%yyyy%%mm%%dd%_%hh%%mn%@%USERDOMAIN%.zip"
 	IF EXIST %SS_DIR%\*.jpg (
 		CD /D %SS_DIR%
-		7z a -tzip -sdel %OUT% -ir!%TARGET_FILE% -mx=0
+		7z a -tzip -sdel %OUT% -ir!%STEAM_TARGET_FILE% -mx=0
 		7z d %OUT% thumbnails -r
 		7z l %OUT%
 	)

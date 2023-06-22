@@ -17,8 +17,8 @@ REM SET SAVE_STEAM_SS=1
 REM SET SAVE_OSU_SS=1
 REM SET XCOPY_DIRECTORY=E:\%USERDOMAIN%
 REM SET XCOPY_DIRECTORY=\\NAS\Multimedia\Videos
-REM SET XCOPY_DIRECTORY_YYYY=\\NAS\Multimedia\VD_%yyyy%
-REM SET XCOPY_XXX_DIRECTORY=%XCOPY_DIRECTORY%
+REM SET XCOPY_DIRECTORY_VIDEOS=\\NAS\Multimedia\VD_%yyyy%
+REM SET XCOPY_DIRECTORY_XXX=\\NAS\Multimedia\Videos
 
 IF EXIST %USERPROFILE%\.Tools\MoveFiles-user.cmd (CALL %USERPROFILE%\.Tools\MoveFiles-user.cmd)
 IF NOT DEFINED VIDEOS_STORE_DIR SET VIDEOS_STORE_DIR=%STORE_DIR%
@@ -59,7 +59,7 @@ REM ======================================================================
 	IF 1 EQU %ARCHIVE_FLG% (
 		MD %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 		IF EXIST %DOWNLOADS_DIR%\Captures MOVE %DOWNLOADS_DIR%\Captures %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\
-		IF EXIST %DOWNLOADS_DIR%\youtube.com MOVE %DOWNLOADS_DIR%\youtube.com %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
+		IF EXIST %DOWNLOADS_DIR%\youtube.com MOVE %DOWNLOADS_DIR%\youtube.com %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\
 		RMDIR %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 		ECHO VD_%yyyy%%mm%%dd%
 		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% EXPLORER %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
@@ -79,16 +79,16 @@ REM ======================================================================
 	EXIT /B
 
 :COPY_VIDEOS
-	IF NOT DEFINED XCOPY_DIRECTORY_YYYY EXIT /B
+	IF NOT DEFINED XCOPY_DIRECTORY_VIDEOS EXIT /B
 	IF NOT EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% EXIT /B
 	ECHO COPY VIDEOS %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 	IF 1 EQU %ARCHIVE_FLG% (
 		REM XCOPY %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% %XCOPY_DIRECTORY%\VD_%yyyy%%mm%%dd%\ /Y /H /S /E /F /K
-		ROBOCOPY %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% %XCOPY_DIRECTORY_YYYY% /z /e /r:3 /w:10 /log+:%ROBOCOPY_LOG% /v /fp /np /tee
+		ROBOCOPY %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% %XCOPY_DIRECTORY_VIDEOS% /z /e /r:3 /w:10 /log+:%ROBOCOPY_LOG% /v /fp /np /tee
 		REM ROBOCOPY %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% %XCOPY_DIRECTORY%\VD_%yyyy%%mm%%dd%\ /z /e /r:3 /w:10 /log+:%ROBOCOPY_LOG% /v /fp /np /tee
 		IF %ERRORLEVEL% EQU 1 (
 			REM EXPLORER %XCOPY_DIRECTORY%\VD_%yyyy%%mm%%dd%\
-			EXPLORER %XCOPY_DIRECTORY_YYYY%
+			EXPLORER %XCOPY_DIRECTORY_VIDEOS%
 		)
 		NOTEPAD %ROBOCOPY_LOG%
 		DEL %ROBOCOPY_LOG%
@@ -102,7 +102,6 @@ REM ======================================================================
 	)
 	IF NOT DEFINED SAVE_STEAM_SS_EXECUTE (SET /P SAVE_STEAM_SS_EXECUTE="SET SAVE_STEAM_SS_EXECUTE(0)=")
 	IF NOT DEFINED SAVE_STEAM_SS_EXECUTE (SET SAVE_STEAM_SS_EXECUTE=0)
-	IF NOT DEFINED SAVE_STEAM_SS_FLG (SET SAVE_STEAM_SS_FLG=0)
 	IF 1 EQU %SAVE_STEAM_SS_EXECUTE% (
 		CALL Steam-Screenshots.cmd
 		PAUSE
@@ -123,13 +122,13 @@ REM ======================================================================
 	EXIT /B
 
 :F_XCOPY_XXX
-	IF NOT DEFINED XCOPY_XXX_DIRECTORY SET XCOPY_XXX_DIRECTORY=%XCOPY_DIRECTORY%
+	IF NOT DEFINED XCOPY_DIRECTORY_XXX SET XCOPY_DIRECTORY_XXX=%XCOPY_DIRECTORY%\xxx
 	IF NOT EXIST %DOWNLOADS_DIR%\xxx EXIT /B
 	IF 1 EQU %ARCHIVE_FLG% (
-		ROBOCOPY %DOWNLOADS_DIR%\xxx %XCOPY_XXX_DIRECTORY%\xxx *5star* *4star* /z /e /r:3 /w:10 /log+:%ROBOCOPY_LOG% /v /fp /np /tee
-		REM ROBOCOPY %DOWNLOADS_DIR%\xxx %XCOPY_XXX_DIRECTORY%\xxx_%yyyy%%mm%%dd% *4star* /z /e /r:3 /w:10 /log+:%ROBOCOPY_LOG% /v /fp /np /tee
+		ROBOCOPY %DOWNLOADS_DIR%\xxx %XCOPY_DIRECTORY_XXX% *5star* *4star* /z /e /r:3 /w:10 /log+:%ROBOCOPY_LOG% /v /fp /np /tee
+		REM ROBOCOPY %DOWNLOADS_DIR%\xxx %XCOPY_DIRECTORY_XXX%\xxx_%yyyy%%mm%%dd% *4star* /z /e /r:3 /w:10 /log+:%ROBOCOPY_LOG% /v /fp /np /tee
 		IF %ERRORLEVEL% EQU 1 (
-			EXPLORER %XCOPY_XXX_DIRECTORY%\xxx_%yyyy%%mm%%dd%
+			EXPLORER %XCOPY_DIRECTORY_XXX%
 		)
 		NOTEPAD %ROBOCOPY_LOG%
 		DEL %ROBOCOPY_LOG%
