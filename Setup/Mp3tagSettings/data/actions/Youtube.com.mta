@@ -21,7 +21,7 @@ F=%_directory%
 
 [#4]
 T=5
-1=$if($eql(%album%,__\u5f8c\u3067\u898b\u308b),,%album%)
+1=$if($eql(%album%,\u5f8c\u3067\u898b\u308b),,%album%)
 F=ALBUM
 
 [#5]
@@ -35,7 +35,14 @@ T=5
 F=ALBUM
 
 [#7]
+T=2
+F=ALBUM
+1= \u3055\u3093\u306e\u30a2\u30c3\u30d7\u30ed\u30fc\u30c9\u52d5\u753b
+2=
+3=0|0
+
+[#8]
 T=5
-1=$if($strcmp($left(%_folderpath%,3),C:\\),C:\\Users\\$getenv(USERNAME)\\Desktop\\,)$if($isdigit(%_covers%),youtube.com-%_date%,no_cover)\\youtube.com\\$if($strcmp(%albumartist%,youtube.com),$replace(_%genre%_,&,and)\\,%album%\\)\\$if($and(%year%,%comment%),%year% %comment%,%_FILENAME%)
+1=$if($strcmp($left(%_folderpath%,3),C:\\),C:\\Users\\$getenv(USERNAME)\\Videos\\,)$if($isdigit(%_covers%),youtube.com-%_date%,no_cover)\\youtube.com\\$if($strcmp(%albumartist%,youtube.com),$replace(_%genre%_,&,and)\\,%album%\\)\\$if($and(%year%,%comment%),%year% %comment%,%_FILENAME%)
 F=_FILENAME
 

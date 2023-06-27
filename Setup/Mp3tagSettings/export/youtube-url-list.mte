@@ -1,0 +1,17 @@
+$filename(youtube-url-list.html,utf-8)
+
+<h1>Youtube.com</h1>
+$loop(%album%)
+<h2>%album%</h2>
+<nobr>
+$loop(%year%)<a href="https://www.youtube.com/watch?v=%comment%">%title%</a><br>
+$loopend()
+$loopend()
+</nobr>
+
+<h1>URL</h1>
+$loop(%album%)
+<h2>%album%</h2>
+$loop(%year%)https://www.youtube.com/watch?v=%comment%<br>
+$loopend()
+$loopend()
