@@ -21,26 +21,31 @@ F=%_filename%
 
 [#4]
 T=5
+1=$if($grtr($strstr(%tags%,'['xxx']'),0),,%tags%)
+F=TAGS
+
+[#5]
+T=5
 1=$if($neql($strstr(%tags%,5star),0),5,)$if($neql($strstr(%tags%,4star),0),4,)$if($neql($strstr(%tags%,3star),0),3,)$if($neql($strstr(%tags%,2star),0),2,)$if($neql($strstr(%tags%,1star),0),1,)
 F=RATING
 
-[#5]
+[#6]
 T=5
 1=$if(%AudioMD5%,%AudioMD5%$if(%tags%,'['%tags%']',),$if2(Need AudioMD5 and Tags %comment%,%title%))
 F=_FILENAME
 
-[#6]
+[#7]
 T=13
 1=.ts\\%_filename_ext%
 3=0|3
 2=1
 
-[#7]
+[#8]
 T=5
 1=$if($eql(%album%,xxx),$if($grtr($strstr(%tags%,\u6bbf\u5802),0),\u6bbf\u5802,xxx),%album%)
 F=ALBUM
 
-[#8]
+[#9]
 T=5
 1=$if($eql(%AudioMD5%,3A17E63434F1E6635C7B3DDC5FE385D6),%AudioMD5%_%comment%,%AudioMD5%)
 F=AUDIOMD5

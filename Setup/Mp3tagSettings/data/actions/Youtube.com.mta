@@ -46,3 +46,8 @@ T=5
 1=$if($strcmp($left(%_folderpath%,3),C:\\),C:\\Users\\$getenv(USERNAME)\\Videos\\,)$if($isdigit(%_covers%),youtube.com-%_date%,no_cover)\\youtube.com\\$if($strcmp(%albumartist%,youtube.com),$replace(_%genre%_,&,and)\\,%album%\\)\\$if($and(%year%,%comment%),%year% %comment%,%_FILENAME%)
 F=_FILENAME
 
+[#9]
+T=5
+1=$if($leql(%_video_height%,360),youtube.com-low\\%_directory%,%_directory%)
+F=_DIRECTORY
+
