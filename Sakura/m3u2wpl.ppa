@@ -5,6 +5,7 @@
 
 S_ReplaceAll('#.*\r\n', '', 28);
 S_ReplaceAll('\\', '/', 28);
+S_ReplaceAll('^\r\n', '', 28);
 //S_ReplaceAll('^', '<media src="/share/HDA_DATA/Multimedia/Videos/youtube.com/', 28);
 S_ReplaceAll('^', '<media src="', 28);
 S_ReplaceAll('$', '"/>', 28);

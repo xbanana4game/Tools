@@ -60,6 +60,7 @@ IF ""%1""=="""" (
 )
 
 PAUSE
+TIMEOUT /T 5
 EXIT
 
 

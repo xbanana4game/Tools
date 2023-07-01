@@ -47,11 +47,11 @@ IF NOT ""%1""=="""" (
 			TYPE "%DOWNLOADS_DIR%\%%~nxi@%yyyy%%mm%%dd%_%USERDOMAIN%.%Z_TYPE%.txt"
 		)
 	)
-	TIMEOUT /T 5
+	TIMEOUT /T 3
 	EXIT
 )
 
-CHOICE /C YN /T 3 /D N /M "MOVEFILES_ONLY"
+CHOICE /C YN /T 2 /D N /M "MOVEFILES_ONLY"
 IF %ERRORLEVEL% EQU 1 (
 	SET MOVEFILES_ONLY=1
 ) ELSE (
@@ -135,8 +135,9 @@ REM ======================================================================
 	ROBOCOPY %ARCHIVE_DIR%\%yyyy%%mm%\ %XCOPY_ARCHIVE_DIRECTORY%\%yyyy%%mm%\ %DOWNLOAD_FILENAME%.* /z /e /r:3 /w:10 /log:robocopy.log /v /fp /np /tee
 	IF %ERRORLEVEL% EQU 1 (
 		EXPLORER %XCOPY_ARCHIVE_DIRECTORY%\%yyyy%%mm%%dd%
+	) ELSE (
+		NOTEPAD robocopy.log
 	)
-	NOTEPAD robocopy.log
 	DEL robocopy.log
 	
 	MD %STORE_DIR%\%yyyy%%mm%
