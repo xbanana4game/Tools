@@ -38,7 +38,7 @@ S_AddTail('</smil>');
 
 S_ReDraw(0);	// 再描画
 //S_ExecCommand('md twonky', 0, '');
-S_FileSaveAs(S_ExpandParameter('$g')+'-twonky.wpl', 4 ,1 );
+S_FileSaveAs(S_ExpandParameter('$g')+'.wpl', 4 ,1 );
 
 S_GoFileTop ();
 //S_ExitAllEditors();
