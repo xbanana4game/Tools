@@ -64,7 +64,15 @@ REM ======================================================================
 		ECHO VD_%yyyy%%mm%%dd%
 		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% EXPLORER %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 		ECHO 1. Sort Album and make %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\mp3tag.m3u8
+		CALL :RENAME_PLAYLIST_FILES
 		PAUSE
+		CALL :RENAME_PLAYLIST_FILES
+		IF DEFINED COPY_VIDEOS CALL :COPY_VIDEOS
+		EXIT /B
+	)
+	EXIT /B
+	
+:RENAME_PLAYLIST_FILES
 		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\mp3tag.m3u (
 			nkf32.exe -w %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\mp3tag.m3u >%VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\VD_%yyyy%%mm%%dd%.m3u8
 			DEL %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\mp3tag.m3u 
@@ -79,10 +87,7 @@ REM ======================================================================
 		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\mp3tag.m3u8 (
 			RENAME %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\mp3tag.m3u8 VD_%yyyy%%mm%%dd%.m3u8
 		)
-		IF DEFINED COPY_VIDEOS CALL :COPY_VIDEOS
 		EXIT /B
-	)
-	EXIT /B
 
 :COPY_VIDEOS
 	IF NOT DEFINED XCOPY_DIRECTORY_VIDEOS EXIT /B
@@ -90,9 +95,9 @@ REM ======================================================================
 	ECHO COPY VIDEOS %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 	IF 1 EQU %ARCHIVE_FLG% (
 		CHOICE /C YN /T 3 /D Y /M "COPY VIDEOS %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%?"
-		IF %ERRORLEVEL% EQU 1 (EXIT /B)
+		IF %ERRORLEVEL% EQU 2 (EXIT /B)
 		REM XCOPY %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% %XCOPY_DIRECTORY%\VD_%yyyy%%mm%%dd%\ /Y /H /S /E /F /K
-		ROBOCOPY %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% %XCOPY_DIRECTORY_VIDEOS% /z /e /r:3 /w:10 /log+:%ROBOCOPY_LOG% /v /fp /np /tee
+		ROBOCOPY %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% %XCOPY_DIRECTORY_VIDEOS% /e /r:3 /w:10 /log+:%ROBOCOPY_LOG% /v /fp /tee
 		REM ROBOCOPY %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% %XCOPY_DIRECTORY%\VD_%yyyy%%mm%%dd%\ /z /e /r:3 /w:10 /log+:%ROBOCOPY_LOG% /v /fp /np /tee
 		IF %ERRORLEVEL% EQU 1 (
 			REM EXPLORER %XCOPY_DIRECTORY%\VD_%yyyy%%mm%%dd%\
@@ -135,7 +140,7 @@ REM ======================================================================
 	IF NOT EXIST %DOWNLOADS_DIR%\xxx EXIT /B
 	SET TARGET_XXX_FILE=*5star* *4star* *3star*
 	IF 1 EQU %ARCHIVE_FLG% (
-		ROBOCOPY %DOWNLOADS_DIR%\xxx %XCOPY_DIRECTORY_XXX% %TARGET_XXX_FILE% /z /e /r:3 /w:10 /log+:%ROBOCOPY_LOG% /v /fp /np /tee
+		ROBOCOPY %DOWNLOADS_DIR%\xxx %XCOPY_DIRECTORY_XXX% %TARGET_XXX_FILE% /e /r:3 /w:10 /log+:%ROBOCOPY_LOG% /v /fp /tee
 		REM ROBOCOPY %DOWNLOADS_DIR%\xxx %XCOPY_DIRECTORY_XXX%\xxx_%yyyy%%mm%%dd% *4star* /z /e /r:3 /w:10 /log+:%ROBOCOPY_LOG% /v /fp /np /tee
 		IF %ERRORLEVEL% EQU 1 (
 			EXPLORER %XCOPY_DIRECTORY_XXX%

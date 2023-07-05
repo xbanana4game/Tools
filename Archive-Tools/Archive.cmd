@@ -132,7 +132,7 @@ REM ======================================================================
 	IF NOT DEFINED XCOPY_ARCHIVE_DIRECTORY (SET XCOPY_ARCHIVE_DIRECTORY=E:\%USERDOMAIN%)
 	
 	REM XCOPY %ARCHIVE_DIR%\%yyyy%%mm%\%DOWNLOAD_FILENAME%.* %XCOPY_ARCHIVE_DIRECTORY%\%yyyy%%mm%\ /Y /H /S /E /F /K
-	ROBOCOPY %ARCHIVE_DIR%\%yyyy%%mm%\ %XCOPY_ARCHIVE_DIRECTORY%\%yyyy%%mm%\ %DOWNLOAD_FILENAME%.* /z /e /r:3 /w:10 /log:robocopy.log /v /fp /np /tee
+	ROBOCOPY %ARCHIVE_DIR%\%yyyy%%mm%\ %XCOPY_ARCHIVE_DIRECTORY%\%yyyy%%mm%\ %DOWNLOAD_FILENAME%.* /e /r:3 /w:10 /log:robocopy.log /v /fp /tee
 	IF %ERRORLEVEL% EQU 1 (
 		EXPLORER %XCOPY_ARCHIVE_DIRECTORY%\%yyyy%%mm%
 	) ELSE (
