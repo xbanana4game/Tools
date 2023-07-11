@@ -60,6 +60,10 @@ REM ======================================================================
 		MD %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 		IF EXIST %DOWNLOADS_DIR%\Captures MOVE %DOWNLOADS_DIR%\Captures %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\
 		IF EXIST %DOWNLOADS_DIR%\youtube.com MOVE %DOWNLOADS_DIR%\youtube.com %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\
+		FOR /D %%i IN ("%DOWNLOADS_DIR%\youtube.com*") DO (
+			ECHO %%i
+			MOVE %%i %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\
+		)
 		RMDIR %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 		ECHO VD_%yyyy%%mm%%dd%
 		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% EXPLORER %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%

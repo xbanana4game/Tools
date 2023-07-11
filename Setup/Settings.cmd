@@ -33,6 +33,7 @@ SET UPLOADS_DIR=%ARCHIVE_DIR%\Uploads
 SET STORE_DIR=%USERPROFILE%\Store
 SET PATH=%PATH%;C:\Program Files\7-Zip
 SET PATH=%PATH%;C:\Program Files\WinRAR
+SET PATH=%PATH%;C:\Program Files\Mp3tag
 REM SET NOTEPAD="C:\Program Files\Notepad++\notepad++.exe"
 SET NOTEPAD=NOTEPAD
 
