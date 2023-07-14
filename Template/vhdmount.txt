@@ -1,0 +1,4 @@
+SELECT VDISK FILE="D:\Sample.vhdx"
+ATTACH VDISK
+
+EXIT
