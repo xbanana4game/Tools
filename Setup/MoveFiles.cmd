@@ -102,12 +102,11 @@ REM ======================================================================
 		REM XCOPY %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% %XCOPY_DIRECTORY%\VD_%yyyy%%mm%%dd%\ /Y /H /S /E /F /K
 		ROBOCOPY %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% %XCOPY_DIRECTORY_VIDEOS% /e /r:3 /w:10 /log+:%ROBOCOPY_LOG% /v /fp /tee
 		REM ROBOCOPY %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% %XCOPY_DIRECTORY%\VD_%yyyy%%mm%%dd%\ /z /e /r:3 /w:10 /log+:%ROBOCOPY_LOG% /v /fp /np /tee
-		IF %ERRORLEVEL% EQU 1 (
-			REM EXPLORER %XCOPY_DIRECTORY%\VD_%yyyy%%mm%%dd%\
-			EXPLORER %XCOPY_DIRECTORY_VIDEOS%
-		) ELSE (
-			NOTEPAD %ROBOCOPY_LOG%
-		)		
+	IF %ERRORLEVEL% EQU 8 (
+		NOTEPAD %ROBOCOPY_LOG%
+	) ELSE (
+		EXPLORER %COPY_TO%
+	)
 		DEL %ROBOCOPY_LOG%
 	)
 	EXIT /B
@@ -145,10 +144,11 @@ REM ======================================================================
 	IF 1 EQU %ARCHIVE_FLG% (
 		ROBOCOPY %DOWNLOADS_DIR%\xxx %XCOPY_DIRECTORY_XXX% %TARGET_XXX_FILE% /e /r:3 /w:10 /log+:%ROBOCOPY_LOG% /v /fp /tee
 		REM ROBOCOPY %DOWNLOADS_DIR%\xxx %XCOPY_DIRECTORY_XXX%\xxx_%yyyy%%mm%%dd% *4star* /z /e /r:3 /w:10 /log+:%ROBOCOPY_LOG% /v /fp /np /tee
-		IF %ERRORLEVEL% EQU 1 (
-			EXPLORER %XCOPY_DIRECTORY_XXX%
+		IF %ERRORLEVEL% EQU 8 (
+			NOTEPAD %ROBOCOPY_LOG%
+		) ELSE (
+			EXPLORER %COPY_TO%
 		)
-		NOTEPAD %ROBOCOPY_LOG%
 		DEL %ROBOCOPY_LOG%
 	)
 	EXIT /B

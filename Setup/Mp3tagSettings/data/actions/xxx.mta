@@ -42,7 +42,7 @@ T=13
 
 [#8]
 T=5
-1=$if($eql(%album%,xxx),$if($grtr($strstr(%tags%,\u6bbf\u5802),0),\u6bbf\u5802,xxx),%album%)
+1=$if($eql(%album%,www),$if($grtr($strstr(%tags%,\u6bbf\u5802),0),\u6bbf\u5802,%album%),%album%)
 F=ALBUM
 
 [#9]

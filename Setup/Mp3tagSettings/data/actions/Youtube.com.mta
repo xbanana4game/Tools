@@ -55,6 +55,6 @@ F=_FILENAME
 
 [#10]
 T=5
-1=$if($leql(%_video_height%,360),youtube.com-low\\%_directory%,%_directory%)\\
+1=$if($leql(%_video_height%,360),%_directory%,%_directory%)\\
 F=_DIRECTORY
 
