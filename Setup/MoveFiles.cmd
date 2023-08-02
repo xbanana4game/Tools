@@ -105,7 +105,7 @@ REM ======================================================================
 	IF %ERRORLEVEL% EQU 8 (
 		NOTEPAD %ROBOCOPY_LOG%
 	) ELSE (
-		EXPLORER %COPY_TO%
+		EXPLORER %XCOPY_DIRECTORY_VIDEOS%
 	)
 		DEL %ROBOCOPY_LOG%
 	)
@@ -147,7 +147,7 @@ REM ======================================================================
 		IF %ERRORLEVEL% EQU 8 (
 			NOTEPAD %ROBOCOPY_LOG%
 		) ELSE (
-			EXPLORER %COPY_TO%
+			EXPLORER %XCOPY_DIRECTORY_XXX%
 		)
 		DEL %ROBOCOPY_LOG%
 	)
