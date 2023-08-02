@@ -77,19 +77,11 @@ REM ======================================================================
 	EXIT /B
 	
 :RENAME_PLAYLIST_FILES
-		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\mp3tag.m3u (
-			nkf32.exe -w %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\mp3tag.m3u >%VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\VD_%yyyy%%mm%%dd%.m3u8
-			DEL %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\mp3tag.m3u 
-		)
-		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\mp3tag.m3u (
-			nkf32.exe -w %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\mp3tag.m3u >%VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\VD_%yyyy%%mm%%dd%.m3u8
-			DEL %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\mp3tag.m3u
-		)
-		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\mp3tag.m3u8 (
-			RENAME %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\mp3tag.m3u8 VD_%yyyy%%mm%%dd%.m3u8
-		)
 		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\mp3tag.m3u8 (
 			RENAME %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\mp3tag.m3u8 VD_%yyyy%%mm%%dd%.m3u8
+		)
+		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\mp3tag.wpl (
+			RENAME %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\mp3tag.wpl VD_%yyyy%%mm%%dd%.wpl
 		)
 		EXIT /B
 
