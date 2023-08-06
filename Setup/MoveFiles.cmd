@@ -67,8 +67,9 @@ REM ======================================================================
 		RMDIR %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 		ECHO VD_%yyyy%%mm%%dd%
 		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% EXPLORER %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
-		ECHO 1. Sort Album and make %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\mp3tag.m3u8
+		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com Mp3tag.exe /fp:"%VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com"
 		CALL :RENAME_PLAYLIST_FILES
+		ECHO make wpl
 		PAUSE
 		CALL :RENAME_PLAYLIST_FILES
 		IF DEFINED COPY_VIDEOS CALL :COPY_VIDEOS

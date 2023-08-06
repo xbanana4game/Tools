@@ -50,7 +50,7 @@ F=ALBUM
 
 [#9]
 T=5
-1=$if($strcmp($left(%_folderpath%,3),C:\\),C:\\Users\\$getenv(USERNAME)\\Videos\\,)$if($isdigit(%_covers%),youtube.com-%_date%,no_cover)\\youtube.com\\$if($strcmp(%albumartist%,youtube.com),$replace(_%genre%_,&,and)\\,$if2(%album%,_work)\\)\\$if($and(%year%,%comment%),%year% %comment%,%_FILENAME%)
+1=$if($strcmp($left(%_folderpath%,3),C:\\),C:\\Users\\$getenv(USERNAME)\\Downloads\\,)youtube.com-%_date%$if($isdigit(%_covers%),,\\no_cover)\\youtube.com\\$if($strcmp(%albumartist%,youtube.com),$replace(_%genre%_,&,and)\\,$if2(%album%,_work)\\)\\$if($and(%year%,%comment%),%year% %comment%,%_FILENAME%)
 F=_FILENAME
 
 [#10]

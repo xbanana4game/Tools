@@ -34,3 +34,8 @@ T=12
 2=1
 3=3
 
+[#7]
+T=5
+1=$if($strcmp($left(%_folderpath%,3),C:\\),C:\\Users\\$getenv(USERNAME)\\Downloads\\,)%genre%\\%album%\\%title%$if(%tags%,'['%tags%']',)
+F=_FILENAME
+
