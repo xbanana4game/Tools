@@ -113,7 +113,6 @@ REM ======================================================================
 	IF NOT DEFINED SAVE_STEAM_SS_EXECUTE (SET SAVE_STEAM_SS_EXECUTE=0)
 	IF 1 EQU %SAVE_STEAM_SS_EXECUTE% (
 		CALL Steam-Screenshots.cmd
-		PAUSE
 	)
 	EXIT /B
 
@@ -126,7 +125,6 @@ REM ======================================================================
 	IF NOT DEFINED SAVE_OSU_SS_EXECUTE (SET SAVE_OSU_SS_EXECUTE=0)
 	IF 1 EQU %SAVE_OSU_SS_EXECUTE% (
 		CALL %TOOLS_DIR%\Osu!\Archive-Osu!-Screenshot.cmd
-		PAUSE
 	)
 	EXIT /B
 
