@@ -55,6 +55,12 @@ REM ======================================================================
 		7z d %OUT% thumbnails -r
 		7z l %OUT%
 	)
+	IF EXIST %SS_DIR%\*.png (
+		CD /D %SS_DIR%
+		7z a -tzip -sdel %OUT% -ir!%STEAM_TARGET_FILE% -mx=0
+		7z d %OUT% thumbnails -r
+		7z l %OUT%
+	)
 	EXIT /B
 
 :ArchiveSteamScreenshots

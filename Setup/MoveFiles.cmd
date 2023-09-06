@@ -90,7 +90,7 @@ REM ======================================================================
 	IF NOT DEFINED XCOPY_DIRECTORY_VIDEOS EXIT /B
 	IF NOT EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% EXIT /B
 	IF 1 EQU %ARCHIVE_FLG% (
-		CHOICE /C YN /T 3 /D Y /M "COPY VIDEOS %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%?"
+		CHOICE /C YN /T 3 /D Y /M "COPY VIDEOS %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%? -> %XCOPY_DIRECTORY_VIDEOS%"
 		IF %ERRORLEVEL% EQU 2 (EXIT /B)
 		REM XCOPY %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% %XCOPY_DIRECTORY%\VD_%yyyy%%mm%%dd%\ /Y /H /S /E /F /K
 		ROBOCOPY %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% %XCOPY_DIRECTORY_VIDEOS% /e /r:3 /w:10 /log+:%ROBOCOPY_LOG% /v /fp /tee

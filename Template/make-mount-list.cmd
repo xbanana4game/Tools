@@ -6,6 +6,7 @@ REM
 REM ======================================================================
 IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
+REM ---------- Template.cmd(SettingsOptions.cmd) ----------
 
 
 REM ======================================================================
@@ -13,31 +14,20 @@ REM
 REM                                Main
 REM
 REM ======================================================================
-REM SET DEBUG=1
-SET CMD_FILE=%USERPROFILE%\.Tools\%yyyy%%mm%%dd%%hh%%mn%%ss%.cmd
-SET MP4_IMG_DIR=%PICTURES_DIR%\mp4img
-MD %MP4_IMG_DIR%
-
-REM RENAME MD5.jpg-_-date.jpg -> MD5.jpg
-FOR %%i IN ("%PICTURES_DIR%\*.jpg-_-*.jpg") DO (
-	ECHO SET FILENAME=%%~nxi >>%CMD_FILE%
-	ECHO SET FILENAME=%%FILENAME:~0,12%% >>%CMD_FILE%
-	ECHO ECHO MOVE "%%i" "%MP4_IMG_DIR%\%%FILENAME%%" >>%CMD_FILE%
-	ECHO MOVE "%%i" "%MP4_IMG_DIR%\%%FILENAME%%" >>%CMD_FILE%
-)
-IF EXIST %CMD_FILE% (
-	IF DEFINED DEBUG NOTEPAD %CMD_FILE%
-	CALL %CMD_FILE%
-	DEL %CMD_FILE%
-)
-Mp3tag.exe /fp:"%DOWNLOADS_DIR%\xxx"
-
-CHOICE /C YN /T 10 /D N /M "MOVE *.jpg %MP4_IMG_DIR%"
-IF %ERRORLEVEL% EQU 1 (
-	MOVE *.jpg %MP4_IMG_DIR%
+FOR %%i in (Steam-vhdx\*.vhdx) DO (
+	ECHO REM SELECT VDISK FILE="%%~fni"
+	ECHO REM ATTACH VDISK
+	REM ECHO DETACH VDISK
 )
 
-TIMEOUT /T 2
+FOR %%i in (Games-vhdx\*.vhdx) DO (
+	ECHO REM SELECT VDISK FILE="%%~fni"
+	ECHO REM ATTACH VDISK
+)
+
+ECHO EXIT
+
+PAUSE
 EXIT
 
 
@@ -46,5 +36,4 @@ REM
 REM                                Function
 REM
 REM ======================================================================
-
 

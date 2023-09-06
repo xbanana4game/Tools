@@ -79,6 +79,8 @@ $if($strcmp(%genre%,Captures),%genre%\%album%\%title%$if(%tags%,'['%tags%']',),O
 ==========================================================================
 Tag->Filename
 C:\Users\$getenv(USERNAME)\Downloads\
+C:\Users\$getenv(USERNAME)\Videos\
+C:\Users\$getenv(USERNAME)\Desktop\
 Music\%genre%\
 
 $if($strcmp(%genre%,インターネット),%artist%\,
