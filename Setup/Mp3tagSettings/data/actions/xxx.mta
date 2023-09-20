@@ -14,48 +14,53 @@ F=%_filename%
 1=%title% - [%comment%][%year%]
 
 [#3]
+T=7
+F=%_filename%
+1=%title% - (%comment%)(%year%)
+
+[#4]
 T=12
 1=C:\\Users\\tomas\\Pictures\\mp4img\\%comment%.jpg
 2=1
 3=3
 
-[#4]
+[#5]
 T=5
 1=$if(%comment%,%_filename%,$if(%tags%,%_filename%,$if2(NoTags %comment%,%_filename%)))
 F=_FILENAME
 
-[#5]
+[#6]
 T=7
 F=%_filename%
 1=%dummy%[%tags%]
 
-[#6]
+[#7]
 T=5
 1=$if($grtr($strstr(%tags%,'['xxx']'),0),,%tags%)
 F=TAGS
 
-[#7]
+[#8]
 T=5
 1=$if($neql($strstr(%tags%,5star),0),5,)$if($neql($strstr(%tags%,4star),0),4,)$if($neql($strstr(%tags%,3star),0),3,)$if($neql($strstr(%tags%,2star),0),2,)$if($neql($strstr(%tags%,1star),0),1,)
 F=RATING
 
-[#8]
+[#9]
 T=5
-1=$if(%AudioMD5%,%AudioMD5%$if(%tags%,'['%tags%']',),$if2(Need AudioMD5 and Tags %comment%,%title%))
+1=$if($strcmp($left(%_folderpath%,3),C:\\),C:\\Users\\$getenv(USERNAME)\\Downloads\\xxx\\,)$if(%AudioMD5%,%AudioMD5%$if(%tags%,'['%tags%']',),$if2(Need AudioMD5 and Tags %comment%,%title%))
 F=_FILENAME
 
-[#9]
+[#10]
 T=13
-1=.ts\\%_filename_ext%
+1=.ts\\%AudioMD5%
 3=0|3
 2=1
 
-[#10]
+[#11]
 T=5
 1=$if($eql(%album%,xxx),$if($grtr($strstr(%tags%,\u6bbf\u5802),0),\u6bbf\u5802,%album%),%album%)
 F=ALBUM
 
-[#11]
+[#12]
 T=5
 1=$if($eql(%AudioMD5%,3A17E63434F1E6635C7B3DDC5FE385D6),%AudioMD5%_%comment%,%AudioMD5%)
 F=AUDIOMD5

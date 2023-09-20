@@ -1,0 +1,2 @@
+$filename(mp3tag.txt,utf-8)$loop(%_filename_ext%)%_filename_rel%|%_crc%|%_md5%
+$loopend()

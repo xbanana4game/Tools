@@ -1,5 +1,5 @@
 ﻿[#0]
 T=5
-1=Music-%_date%\\%genre%\\$if2(%AudioMD5%,%comment%)
+1=%genre%\\$if2(%AudioMD5%,%album%-%title%)
 F=_FILENAME
 
