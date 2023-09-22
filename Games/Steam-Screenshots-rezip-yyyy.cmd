@@ -8,7 +8,8 @@ IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
 REM ---------- Steam-Screenshots-rezip-yyyy.cmd(SettingsOptions.cmd) ----------
 SET yyyy=2023
-REM SET SS_BASE_DIR=E:\ARCHIVE%yyyy%\Downloads\%yyyy%
+REM IF NOT DEFINED DRIVE_LETTER (SET DRIVE_LETTER=%CD:~0,1%)
+REM SET SS_BASE_DIR=%DRIVE_LETTER%:\ARCHIVE%yyyy%\Downloads\%yyyy%
 SET SS_OUTPUT_DIR=%DESKTOP_DIR%
 SET SS_WORK_DIR=%DESKTOP_DIR%\Steam-SS-Work
 
