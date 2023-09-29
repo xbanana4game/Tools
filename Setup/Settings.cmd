@@ -36,6 +36,7 @@ SET PATH=%PATH%;C:\Program Files\WinRAR
 SET PATH=%PATH%;C:\Program Files\Mp3tag
 REM SET NOTEPAD="C:\Program Files\Notepad++\notepad++.exe"
 SET NOTEPAD=NOTEPAD
+SET SAKURA="C:\Program Files (x86)\sakura\sakura.exe"
 
 REM ----------------------------------------------------------------------
 REM Archive-Tools
@@ -43,7 +44,6 @@ REM ----------------------------------------------------------------------
 SET DOWNLOAD_FILENAME=DL_%yyyy%%mm%%dd%_%USERDOMAIN%
 REM SET DOWNLOAD_FILENAME=DL_%yyyy%%mm%%dd%_%hh%%mn%_%USERDOMAIN%
 REM SET DOWNLOAD_FILENAME=DL_%yyyy%%mm%-%week%_%USERDOMAIN%
-SET SHUTDOWN_FLG=0
 SET ARCHIVE_UPLOAD_FLG=0
 SET MOVE_FILES_FLG=1
 REM x=[0 | 1 | 3 | 5 | 7 | 9 ] 

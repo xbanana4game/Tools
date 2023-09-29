@@ -7,8 +7,11 @@ REM ======================================================================
 IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
 REM ---------- Archive.cmd(SettingsOptions) ----------
+REM SET SHUTDOWN_FLG=0
+REM SET ARCHIVE_UPLOAD_FLG=0
 REM SET DRIVE_LETTER=C
 REM SET ARCHIVE_DIR=%DRIVE_LETTER%:\Archives
+REM x=[0 | 1 | 3 | 5 | 7 | 9 ] 
 REM SET ARCHIVE_OPT_X=0
 REM SET BACKUPS_DIR=%DRIVE_LETTER%:\Backups
 REM SET STORE_DIR=%DRIVE_LETTER%:\Store
@@ -27,6 +30,7 @@ REM ======================================================================
 REM ----------------------------------------------------------------------
 REM 
 REM ----------------------------------------------------------------------
+IF NOT DEFINED SHUTDOWN_FLG (SET SHUTDOWN_FLG=0)
 IF NOT DEFINED Z_TYPE (SET Z_TYPE=7z)
 IF NOT DEFINED VOLUME_SIZE (SET VOLUME_SIZE=0)
 IF NOT DEFINED DOWNLOADS_PASSWORD (SET /P DOWNLOADS_PASSWORD="SET DOWNLOADS_PASSWORD(%ARCHIVE_PASSWORD%)=")
@@ -51,15 +55,14 @@ IF NOT ""%1""=="""" (
 	EXIT
 )
 
-CHOICE /C YN /T 2 /D N /M "MOVEFILES_ONLY"
+CHOICE /C YN /T 2 /D N /M "ONLY CALL MoveFiles.cmd (N)"
 IF %ERRORLEVEL% EQU 1 (
 	SET MOVEFILES_ONLY=1
 ) ELSE (
 	SET MOVEFILES_ONLY=0
 )
-IF NOT DEFINED MOVEFILES_ONLY (SET /P MOVEFILES_ONLY="SET MOVEFILES_ONLY(1)=")
-IF ""=="%MOVEFILES_ONLY%" SET MOVEFILES_ONLY=1
 IF 1 EQU %MOVEFILES_ONLY% (
+	SET ARCHIVE_FLG=1
 	CALL :moveFiles
 	EXIT
 )
