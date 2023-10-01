@@ -69,8 +69,8 @@ REM ======================================================================
 		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% EXPLORER %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com Mp3tag.exe /fp:"%VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com"
 		CALL :RENAME_PLAYLIST_FILES
-		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\VD_%yyyy%%mm%%dd%.wpl (
-			%SAKURA% %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\VD_%yyyy%%mm%%dd%.wpl
+		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\VD_%yyyy%%mm%%dd%.m3u8 (
+			%SAKURA% %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\VD_%yyyy%%mm%%dd%.m3u8
 		)
 		ECHO make wpl
 		PAUSE

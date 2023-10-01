@@ -17,7 +17,7 @@ F=%_directory%
 [#3]
 T=7
 F=%_directory%
-1=youtube - [%album%][%dummy%]
+1=youtube - [%album%]
 
 [#4]
 T=5
