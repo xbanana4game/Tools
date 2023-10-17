@@ -105,6 +105,7 @@ REM ======================================================================
 	)
 		DEL %ROBOCOPY_LOG%
 	)
+	IF DEFINED NASDOMAIN START http://%NASDOMAIN%:9000/webconfig#advanced
 	EXIT /B
 	
 :SAVE_STEAM_SS
