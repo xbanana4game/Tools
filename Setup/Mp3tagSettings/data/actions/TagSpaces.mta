@@ -1,6 +1,11 @@
 ﻿[#0]
+T=7
+F=%_filename%
+1=%dummy%[%tags%]
+
+[#1]
 T=13
-1=C:\\Users\\$getenv(USERNAME)\\Pictures\\thumbsnails\\%_filename_ext%
+1=C:\\Users\\$getenv(USERNAME)\\Pictures\\thumbsnails\\.ts\\%_filename_ext%
 3=0|3
 2=1
 

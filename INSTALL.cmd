@@ -8,6 +8,7 @@ REM
 REM                                INSTALL
 REM
 REM ======================================================================
+CALL :INSTALL_ENV
 CALL :INSTALL_7Z
 CALL :INSTALL_FFMPEG
 CALL :INSTALL_NKF
@@ -25,6 +26,13 @@ REM
 REM                                Function
 REM
 REM ======================================================================
+:INSTALL_ENV
+	IF NOT DEFINED NASDOMAIN (
+		ECHO NASDOMAIN
+		PAUSE
+	)
+	EXIT /B
+
 :INSTALL_7Z
 	IF EXIST "C:\Program Files\7-Zip\7z.exe" EXIT /B
 	IF EXIST "%FILE_7Z_INSTALLER%" (
