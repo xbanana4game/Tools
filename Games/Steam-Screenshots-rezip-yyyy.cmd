@@ -43,7 +43,10 @@ FOR /F "tokens=1,2* delims=," %%i IN (%TOOLS_DIR%\Games\steam_screenshots.txt) D
 		IF DEFINED SS_STORE_DIR MOVE %%j %SS_STORE_DIR%
 	)
 	RMDIR %SS_WORK_DIR%\%%i
-	IF EXIST %SS_WORK_DIR%\%%i 7z -tzip -sdel a "%SS_OUTPUT_DIR%\%%i-Screenshots-%yyyy%.zip" %SS_WORK_DIR%\%%i\* -mx=0
+	IF EXIST %SS_WORK_DIR%\%%i (
+		MD %SS_OUTPUT_DIR%\%%i\screenshots
+		7z -tzip -sdel a "%SS_OUTPUT_DIR%\%%i\screenshots\%%i-Screenshots-%yyyy%.zip" %SS_WORK_DIR%\%%i\* -mx=0
+	)
 	RMDIR %SS_WORK_DIR%\%%i
 )
 RMDIR %SS_WORK_DIR%

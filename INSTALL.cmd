@@ -9,6 +9,7 @@ REM                                INSTALL
 REM
 REM ======================================================================
 CALL :INSTALL_ENV
+CALL :INSTALL_PYTHON
 CALL :INSTALL_7Z
 CALL :INSTALL_FFMPEG
 CALL :INSTALL_NKF
@@ -27,10 +28,16 @@ REM                                Function
 REM
 REM ======================================================================
 :INSTALL_ENV
+	ECHO Create System Environment Variables on Windows
 	IF NOT DEFINED NASDOMAIN (
 		ECHO NASDOMAIN
+		rundll32 sysdm.cpl,EditEnvironmentVariables
 		PAUSE
 	)
+	EXIT /B
+	
+:INSTALL_PYTHON
+	ECHO Python 3.11 (64-bit)
 	EXIT /B
 
 :INSTALL_7Z
