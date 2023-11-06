@@ -10,15 +10,18 @@ REM if  called this batch from Archive.cmd ARCHIVE_FLG is 1.
 IF NOT DEFINED ARCHIVE_FLG (SET ARCHIVE_FLG=0)
 REM ---------- MoveFiles.cmd(SettingsOptions) ----------
 REM SET VIDEOS_STORE_DIR=%STORE_DIR%
+REM SET VHDX_STORE_DIR=%STORE_DIR%\VHDX_%yyyy%%mm%%dd%
+REM SET COPY_VHDX=1
+REM SET COPY_DIRECTORY_VHDX=\\%NASDOMAIN%\Multimedia\VD_%yyyy%%mm%%dd%
 REM SET XCOPY_XXX=1
 REM SET MOVE_VIDEOS=1
 REM SET COPY_VIDEOS=1
 REM SET SAVE_STEAM_SS=1
 REM SET SAVE_OSU_SS=1
 REM SET XCOPY_DIRECTORY=E:\%USERDOMAIN%
-REM SET XCOPY_DIRECTORY=\\NAS\Multimedia\Videos
-REM SET XCOPY_DIRECTORY_VIDEOS=\\NAS\Multimedia\VD_%yyyy%%mm%%dd%
-REM SET XCOPY_DIRECTORY_XXX=\\NAS\Multimedia\Videos
+REM SET XCOPY_DIRECTORY=\\%NASDOMAIN%\Multimedia\Videos
+REM SET XCOPY_DIRECTORY_VIDEOS=\\%NASDOMAIN%\Multimedia\VD_%yyyy%%mm%%dd%
+REM SET XCOPY_DIRECTORY_XXX=\\%NASDOMAIN%\Multimedia\Videos
 
 IF EXIST %USERPROFILE%\.Tools\MoveFiles-user.cmd (CALL %USERPROFILE%\.Tools\MoveFiles-user.cmd)
 IF NOT DEFINED VIDEOS_STORE_DIR SET VIDEOS_STORE_DIR=%STORE_DIR%
@@ -53,19 +56,42 @@ REM ======================================================================
 	MD %TARGET_DIR%
 	MOVE %TARGET_FILE% %TARGET_DIR%\
 	EXIT /B
-
+	
+:MOVE_VHDX
+	ECHO MOVE VHDX
+	IF 1 EQU %ARCHIVE_FLG% (
+		MD %VHDX_STORE_DIR%
+		IF EXIST %DOWNLOADS_DIR%\*.vhdx MOVE %DOWNLOADS_DIR%\*.vhdx %VHDX_STORE_DIR%
+		RMDIR %VHDX_STORE_DIR%
+		IF EXIST %VHDX_STORE_DIR% EXPLORER %VHDX_STORE_DIR%
+		IF "%COPY_VHDX%"=="1" CALL :COPY_VHDX
+		EXIT /B
+	)
+	EXIT /B
+	
+:COPY_VHDX
+	IF NOT DEFINED COPY_DIRECTORY_VHDX EXIT /B
+	IF NOT EXIST %VHDX_STORE_DIR% EXIT /B
+	IF 1 EQU %ARCHIVE_FLG% (
+		CHOICE /C YN /T 3 /D Y /M "COPY VHDX %VHDX_STORE_DIR%? -> %COPY_DIRECTORY_VHDX%"
+		IF %ERRORLEVEL% EQU 2 (EXIT /B)
+		ROBOCOPY %VHDX_STORE_DIR% %COPY_DIRECTORY_VHDX% /e /r:3 /w:10 /log+:%ROBOCOPY_LOG% /v /fp /tee
+		IF %ERRORLEVEL% EQU 8 (
+			NOTEPAD %ROBOCOPY_LOG%
+		) ELSE (
+			EXPLORER %COPY_DIRECTORY_VHDX%
+			DEL %ROBOCOPY_LOG%
+		)
+	)
+	EXIT /B
+	
 :MOVE_VIDEOS
 	ECHO MOVE VIDEOS %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 	IF 1 EQU %ARCHIVE_FLG% (
 		MD %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 		IF EXIST %DOWNLOADS_DIR%\Captures MOVE %DOWNLOADS_DIR%\Captures %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\
 		IF EXIST %DOWNLOADS_DIR%\youtube.com MOVE %DOWNLOADS_DIR%\youtube.com %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\
-		FOR /D %%i IN ("%DOWNLOADS_DIR%\youtube.com*") DO (
-			ECHO %%i
-			MOVE %%i %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\
-		)
 		RMDIR %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
-		ECHO VD_%yyyy%%mm%%dd%
 		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% EXPLORER %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com Mp3tag.exe /fp:"%VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com"
 		CALL :RENAME_PLAYLIST_FILES
@@ -81,13 +107,13 @@ REM ======================================================================
 	EXIT /B
 	
 :RENAME_PLAYLIST_FILES
-		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\mp3tag.m3u8 (
-			RENAME %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\mp3tag.m3u8 VD_%yyyy%%mm%%dd%.m3u8
-		)
-		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\mp3tag.wpl (
-			RENAME %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\mp3tag.wpl VD_%yyyy%%mm%%dd%.wpl
-		)
-		EXIT /B
+	IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\mp3tag.m3u8 (
+		RENAME %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\mp3tag.m3u8 VD_%yyyy%%mm%%dd%.m3u8
+	)
+	IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\mp3tag.wpl (
+		RENAME %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\mp3tag.wpl VD_%yyyy%%mm%%dd%.wpl
+	)
+	EXIT /B
 
 :COPY_VIDEOS
 	IF NOT DEFINED XCOPY_DIRECTORY_VIDEOS EXIT /B
@@ -98,12 +124,12 @@ REM ======================================================================
 		REM XCOPY %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% %XCOPY_DIRECTORY%\VD_%yyyy%%mm%%dd%\ /Y /H /S /E /F /K
 		ROBOCOPY %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% %XCOPY_DIRECTORY_VIDEOS% /e /r:3 /w:10 /log+:%ROBOCOPY_LOG% /v /fp /tee
 		REM ROBOCOPY %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% %XCOPY_DIRECTORY%\VD_%yyyy%%mm%%dd%\ /z /e /r:3 /w:10 /log+:%ROBOCOPY_LOG% /v /fp /np /tee
-	IF %ERRORLEVEL% EQU 8 (
-		NOTEPAD %ROBOCOPY_LOG%
-	) ELSE (
-		EXPLORER %XCOPY_DIRECTORY_VIDEOS%
-	)
-		DEL %ROBOCOPY_LOG%
+		IF %ERRORLEVEL% EQU 8 (
+			NOTEPAD %ROBOCOPY_LOG%
+		) ELSE (
+			EXPLORER %XCOPY_DIRECTORY_VIDEOS%
+			DEL %ROBOCOPY_LOG%
+		)
 	)
 	IF DEFINED NASDOMAIN START http://%NASDOMAIN%:9000/webconfig#advanced
 	EXIT /B
@@ -143,8 +169,8 @@ REM ======================================================================
 			NOTEPAD %ROBOCOPY_LOG%
 		) ELSE (
 			EXPLORER %XCOPY_DIRECTORY_XXX%
+			DEL %ROBOCOPY_LOG%
 		)
-		DEL %ROBOCOPY_LOG%
 	)
 	EXIT /B
 

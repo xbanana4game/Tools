@@ -16,4 +16,5 @@ CAPTURE_NO:GAME_NAME:GAME_DIR
 16:Starship Troopers Extermination:Starship Troopers Extermination
 17:Vampire Survivors:Vampire Survivors
 18:Minecraft:Minecraft
+19:ARK:ARK
 99:Unknown:Unknown

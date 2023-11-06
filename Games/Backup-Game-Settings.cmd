@@ -8,23 +8,36 @@ IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
 REM ---------- Template.cmd(SettingsOptions.cmd) ----------
 REM SET STEAM_LIBRARY_2=D:\SteamLibrary\steamapps\common
+REM SET STEAM_LIBRARY_3=E:\SteamLibrary\steamapps\common
 REM SET STEAM_LIBRARY_Z=D
+REM x=[0 | 1 | 3 | 5 | 7 | 9 ] 
+REM SET GAMES_OPT_X=5
+REM SET GAME_NAME=
+REM SET OUTPUT_FILE_NAME=%GAME_NAME%-settings-%yyyy%%mm%%dd%_%hh%%mn%@%USERDOMAIN%.zip
+REM SET OUTPUT_DIR=%DOWNLOADS_DIR%
+
 
 REM ======================================================================
 REM
 REM                                Main
 REM
 REM ======================================================================
-REM IF NOT DEFINED STEAM_DRIVE_LETTER (SET /P STEAM_DRIVE_LETTER="SET STEAM_DRIVE_LETTER(%CD:~0,1%)=")
-IF NOT DEFINED STEAM_DRIVE_LETTER (SET STEAM_DRIVE_LETTER=%CD:~0,1%)
-IF NOT %STEAM_DRIVE_LETTER% EQU C (SET STEAM_LIBRARY_Z=%STEAM_DRIVE_LETTER%:\SteamLibrary\steamapps\common)
+DIR /B G_*_settings.txt.cmd
 
+REM IF NOT DEFINED STEAM_DRIVE_LETTER (SET /P STEAM_DRIVE_LETTER="SET STEAM_DRIVE_LETTER(%CD:~0,1%)=")
 IF DEFINED STEAM_LIBRARY DIR /B %STEAM_LIBRARY%
 IF DEFINED STEAM_LIBRARY_2 DIR /B %STEAM_LIBRARY_2%
 IF DEFINED STEAM_LIBRARY_3 DIR /B %STEAM_LIBRARY_3%
 IF DEFINED STEAM_LIBRARY_Z DIR /B %STEAM_LIBRARY_Z%
 
-SET /P GAME_NAME="Set Game name: "
+IF NOT DEFINED STEAM_DRIVE_LETTER (SET STEAM_DRIVE_LETTER=%CD:~0,1%)
+IF NOT %STEAM_DRIVE_LETTER% EQU C (SET STEAM_LIBRARY_Z=%STEAM_DRIVE_LETTER%:\SteamLibrary\steamapps\common)
+
+IF NOT DEFINED GAMES_OPT_X (SET GAMES_OPT_X=3)
+
+IF NOT DEFINED GAME_NAME (SET /P GAME_NAME="Set Game name: ")
+IF NOT DEFINED OUTPUT_FILE_NAME (SET OUTPUT_FILE_NAME=%GAME_NAME%-settings-%yyyy%%mm%%dd%_%hh%%mn%@%USERDOMAIN%.zip)
+IF NOT DEFINED OUTPUT_DIR (SET OUTPUT_DIR=%DOWNLOADS_DIR%)
 
 IF DEFINED STEAM_LIBRARY (
 	SET GAME_ROOT_DIR=%STEAM_LIBRARY%\%GAME_NAME%
@@ -50,7 +63,7 @@ SET GAME_ROOT_DIR=%DOCUMENTS_DIR%\My Games
 CALL :ARCHIVE_GAME_SETTINGS
 
 PAUSE
-EXPLORER %DOWNLOADS_DIR%
+EXPLORER %OUTPUT_DIR%
 EXIT
 
 
@@ -100,7 +113,7 @@ REM ======================================================================
 		REM FORFILES /s /m *.txt /c "cmd /c ECHO @path >>\"%TOOLS_DIR%\Games\G_%GAME_NAME%_settings.txt\""
 		NOTEPAD "%TOOLS_DIR%\Games\G_%GAME_NAME%_settings.txt."
 	)
-	7z a -tzip "%DOWNLOADS_DIR%\%GAME_NAME%-settings-%yyyy%%mm%%dd%@%USERDOMAIN%.zip" -spf2 @"%TOOLS_DIR%\Games\G_%GAME_NAME%_settings.txt"
-	7z l "%DOWNLOADS_DIR%\%GAME_NAME%-settings-%yyyy%%mm%%dd%@%USERDOMAIN%.zip"
+	7z a -tzip "%OUTPUT_DIR%\%OUTPUT_FILE_NAME%" -spf2 @"%TOOLS_DIR%\Games\G_%GAME_NAME%_settings.txt" -mx=%GAMES_OPT_X%
+	7z l "%OUTPUT_DIR%\%OUTPUT_FILE_NAME%"
 	DEL "%TOOLS_DIR%\Games\G_%GAME_NAME%_settings.txt"
 	EXIT /B

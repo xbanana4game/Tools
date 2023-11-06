@@ -41,4 +41,4 @@ S_ReDraw(0);	// 再描画
 S_FileSaveAs(S_ExpandParameter('$g')+'.wpl', 4 ,1 );
 
 S_GoFileTop ();
-//S_ExitAllEditors();
+S_ExitAllEditors();

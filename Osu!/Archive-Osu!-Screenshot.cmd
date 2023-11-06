@@ -4,6 +4,9 @@ REM Read Settings
 REM ----------------------------------------------------------------------
 IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
+REM ---------- Archive-Osu!-Screenshot.cmd(SettingsOptions) ----------
+REM SET SCREENSHOT_DIR=%OSU_DIR%\Screenshots
+REM SET SCREENSHOTS_ARCHIVE_NAME=Osu!-Screenshots-%SCREENSHOT_YYYYMM%
 
 
 REM ======================================================================
@@ -14,21 +17,23 @@ REM ======================================================================
 REM ----------------------------------------------------------------------
 REM 
 REM ----------------------------------------------------------------------
-CALL :CheckDirectory %OSU_DIR%\Screenshots
+IF NOT DEFINED SCREENSHOT_DIR SET SCREENSHOT_DIR=%OSU_DIR%\Screenshots
+IF NOT DEFINED SCREENSHOTS_ARCHIVE_NAME SET SCREENSHOTS_ARCHIVE_NAME=Osu!-Screenshots-%yyyy%%mm%%dd%_%hh%%mn%
+
+CALL :CheckDirectory %SCREENSHOT_DIR%
 IF %ERRORLEVEL% EQU 1 (
 	ECHO Directory not Exist. %DESKTOP_DIR%
 	EXIT
 )
-CALL  :RENAME_ADD_DATE_OSU  %OSU_DIR%\Screenshots
+CALL  :RENAME_ADD_DATE_OSU  %SCREENSHOT_DIR%
 
 REM SET /P SCREENSHOT_YYYYMM="YYYYMM default:%yyyy%%mm%->"
 REM IF "%SCREENSHOT_YYYYMM%"=="" SET SCREENSHOT_YYYYMM=%yyyy%%mm%
 REM SET SCREENSHOTS_ARCHIVE_NAME=Osu!-Screenshots-%SCREENSHOT_YYYYMM%
-REM 7z a -tzip -sdel %DOCUMENTS_DIR%\%SCREENSHOTS_ARCHIVE_NAME%.zip %OSU_DIR%\Screenshots\%SCREENSHOT_YYYYMM%*  -mx=0
+REM 7z a -tzip -sdel %DOCUMENTS_DIR%\%SCREENSHOTS_ARCHIVE_NAME%.zip %SCREENSHOT_DIR%\%SCREENSHOT_YYYYMM%*  -mx=0
 REM EXPLORER %DOCUMENTS_DIR%
 
-SET SCREENSHOTS_ARCHIVE_NAME=Osu!-Screenshots-%yyyy%%mm%%dd%_%hh%%mn%
-7z a -tzip -sdel %DOWNLOADS_DIR%\%SCREENSHOTS_ARCHIVE_NAME%.zip %OSU_DIR%\Screenshots\%yyyy%*  -mx=0
+7z a -tzip -sdel %DOWNLOADS_DIR%\%SCREENSHOTS_ARCHIVE_NAME%.zip %SCREENSHOT_DIR%\%yyyy%* -mx=0
 
 EXIT /B 0
 

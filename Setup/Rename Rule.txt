@@ -8,6 +8,7 @@ Filename->Tag
 %album%\%title% - [%genre%][%artist%][%comment%][%year%]
 
 Tag->Filename(Store)
+$if($grtr($strstr(%_folderpath%,\\$getenv(NASDOMAIN)),0),\\$getenv(NASDOMAIN)\Multimedia\Videos\,)
 youtube.com\$if($strcmp(%album%,youtube.com),Genre\%genre%,Channel\%album%)\%year% %comment%
 
 Tag->Filename
