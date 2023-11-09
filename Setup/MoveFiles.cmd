@@ -33,6 +33,8 @@ REM                                Main
 REM
 REM ======================================================================
 SET ROBOCOPY_LOG=%DESKTOP_DIR%\robocopy-%yyyy%%mm%%dd%%hh%%mn%%ss%.log
+SET ROBOCOPY_LOG_OPTIONS=/log+:"%ROBOCOPY_LOG%" /v /fp /tee
+SET ROBOCOPY_COPY_OPTIONS=/e /r:3 /w:10
 ECHO Move Beatmap_Pack
 CALL :MOVE_TARGET_FILES  %DOWNLOADS_DIR%\Games\Osu!\Beatmap_Pack %DOWNLOADS_DIR%\*Beatmap*.7z
 CALL :MOVE_TARGET_FILES  %DOWNLOADS_DIR%\Games\Osu!\Beatmap_Pack %DOWNLOADS_DIR%\*Beatmap*.zip
@@ -75,7 +77,7 @@ REM ======================================================================
 	IF 1 EQU %ARCHIVE_FLG% (
 		CHOICE /C YN /T 3 /D Y /M "COPY VHDX %VHDX_STORE_DIR%? -> %COPY_DIRECTORY_VHDX%"
 		IF %ERRORLEVEL% EQU 2 (EXIT /B)
-		ROBOCOPY %VHDX_STORE_DIR% %COPY_DIRECTORY_VHDX% /e /r:3 /w:10 /log+:%ROBOCOPY_LOG% /v /fp /tee
+		ROBOCOPY %VHDX_STORE_DIR% %COPY_DIRECTORY_VHDX% %ROBOCOPY_COPY_OPTIONS% %ROBOCOPY_LOG_OPTIONS%
 		IF %ERRORLEVEL% EQU 8 (
 			NOTEPAD %ROBOCOPY_LOG%
 		) ELSE (
@@ -91,6 +93,7 @@ REM ======================================================================
 		MD %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 		IF EXIST %DOWNLOADS_DIR%\Captures MOVE %DOWNLOADS_DIR%\Captures %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\
 		IF EXIST %DOWNLOADS_DIR%\youtube.com MOVE %DOWNLOADS_DIR%\youtube.com %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\
+		RMDIR %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\_work
 		RMDIR %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% EXPLORER %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com Mp3tag.exe /fp:"%VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com"
@@ -122,8 +125,7 @@ REM ======================================================================
 		CHOICE /C YN /T 3 /D Y /M "COPY VIDEOS %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%? -> %XCOPY_DIRECTORY_VIDEOS%"
 		IF %ERRORLEVEL% EQU 2 (EXIT /B)
 		REM XCOPY %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% %XCOPY_DIRECTORY%\VD_%yyyy%%mm%%dd%\ /Y /H /S /E /F /K
-		ROBOCOPY %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% %XCOPY_DIRECTORY_VIDEOS% /e /r:3 /w:10 /log+:%ROBOCOPY_LOG% /v /fp /tee
-		REM ROBOCOPY %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% %XCOPY_DIRECTORY%\VD_%yyyy%%mm%%dd%\ /z /e /r:3 /w:10 /log+:%ROBOCOPY_LOG% /v /fp /np /tee
+		ROBOCOPY %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% %XCOPY_DIRECTORY_VIDEOS% %ROBOCOPY_COPY_OPTIONS% %ROBOCOPY_LOG_OPTIONS%
 		IF %ERRORLEVEL% EQU 8 (
 			NOTEPAD %ROBOCOPY_LOG%
 		) ELSE (
@@ -163,8 +165,7 @@ REM ======================================================================
 	IF NOT EXIST %DOWNLOADS_DIR%\xxx EXIT /B
 	SET TARGET_XXX_FILE=*5star* *4star* *3star*
 	IF 1 EQU %ARCHIVE_FLG% (
-		ROBOCOPY %DOWNLOADS_DIR%\xxx %XCOPY_DIRECTORY_XXX% %TARGET_XXX_FILE% /e /r:3 /w:10 /log+:%ROBOCOPY_LOG% /v /fp /tee
-		REM ROBOCOPY %DOWNLOADS_DIR%\xxx %XCOPY_DIRECTORY_XXX%\xxx_%yyyy%%mm%%dd% *4star* /z /e /r:3 /w:10 /log+:%ROBOCOPY_LOG% /v /fp /np /tee
+		ROBOCOPY %DOWNLOADS_DIR%\xxx %XCOPY_DIRECTORY_XXX% %TARGET_XXX_FILE% %ROBOCOPY_COPY_OPTIONS% %ROBOCOPY_LOG_OPTIONS%
 		IF %ERRORLEVEL% EQU 8 (
 			NOTEPAD %ROBOCOPY_LOG%
 		) ELSE (

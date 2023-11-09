@@ -34,6 +34,12 @@ REM ======================================================================
 		rundll32 sysdm.cpl,EditEnvironmentVariables
 		PAUSE
 	)
+	IF NOT DEFINED JD2_DL (
+		ECHO JD2_DL
+		rundll32 sysdm.cpl,EditEnvironmentVariables
+		PAUSE
+	)
+	
 	EXIT /B
 	
 :INSTALL_PYTHON
