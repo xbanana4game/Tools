@@ -17,4 +17,5 @@ CAPTURE_NO:GAME_NAME:GAME_DIR
 17:Vampire Survivors:Vampire Survivors
 18:Minecraft:Minecraft
 19:ARK:ARK
+20:Grim Dawn:Grim Dawn
 99:Unknown:Unknown

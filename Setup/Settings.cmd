@@ -34,6 +34,7 @@ SET STORE_DIR=%USERPROFILE%\Store
 SET PATH=%PATH%;C:\Program Files\7-Zip
 SET PATH=%PATH%;C:\Program Files\WinRAR
 SET PATH=%PATH%;C:\Program Files\Mp3tag
+REM SET PATH=%PATH%;C:\App\renamer-7.3
 REM SET NOTEPAD="C:\Program Files\Notepad++\notepad++.exe"
 SET NOTEPAD=NOTEPAD
 SET SAKURA="C:\Program Files (x86)\sakura\sakura.exe"

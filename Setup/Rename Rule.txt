@@ -79,6 +79,7 @@ $if($strcmp(%genre%,Captures),%genre%\%album%\%title%$if(%tags%,'['%tags%']',),O
 ==========================================================================
                                   music
 ==========================================================================
+$if($strcmp($left(%_folderpath%,3),C:\),C:\Users\$getenv(USERNAME)\Downloads\,$if($grtr($strstr(%_folderpath%,\\$getenv(NASDOMAIN)),0),\\$getenv(NASDOMAIN)\Multimedia\,$left(%_folderpath%,3)Multimedia\))Music\
 Tag->Filename
 C:\Users\$getenv(USERNAME)\Downloads\
 C:\Users\$getenv(USERNAME)\Videos\
