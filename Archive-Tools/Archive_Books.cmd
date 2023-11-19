@@ -24,6 +24,7 @@ FOR %%i in (%*) DO (
 		7z l "%OUTPUT_DIRECTORY%\%%~nxi.zip">"%%~nxi.zip.txt"
 		7z l "%OUTPUT_DIRECTORY%\%%~nxi.zip">>"%DOWNLOADS_DIR%\books-%yyyy%%mm%%dd%.log"
 	)
+	RMDIR "%%i"
 )
 EXIT
 
