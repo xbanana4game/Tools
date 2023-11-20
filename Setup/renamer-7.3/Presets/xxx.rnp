@@ -22,6 +22,12 @@ Config=SOURCEFORMATS:yyyy%2Dmm%2Ddd+hh%2Dnn%2Dss;TARGETFORMAT:yyyy%2Dmm%2Ddd;USE
 Marked=1
 Comment=
 
+[Rule4]
+ID=Insert
+Config=TEXT:C%3A%5CUsers%5Ctomas%5CDownloads%5Cxxx%5C;WHERE:1;POSITION:1;INSERTAFTERTEXT:;INSERTBEFORETEXT:;RIGHTTOLEFT:0;SKIPEXTENSION:1
+Marked=1
+Comment=
+
 [Filters]
 AddFilesFromFolders=1
 AddFoldersAsFiles=0
@@ -30,5 +36,5 @@ IncludeHidden=0
 IncludeSystem=0
 SkipRootFoldersAsFiles=0
 MasksOnFileName=0
-Masks=
+Masks=*.mp4
 MasksExclude=
