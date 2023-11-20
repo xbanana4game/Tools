@@ -1,9 +1,0 @@
-﻿[#0]
-T=9
-F=ALBUM;ALBUMARTIST
-
-[#1]
-T=5
-1=C:\\Users\\$getenv(USERNAME)\\Desktop\\youtube.com\\_work\\%year% %comment%.mp4
-F=_FILENAME
-

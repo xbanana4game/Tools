@@ -1,0 +1,5 @@
+﻿[#0]
+T=5
+1=$if($strcmp($left(%_folderpath%,3),C:\\),C:\\Users\\$getenv(USERNAME)\\Downloads\\,$if($grtr($strstr(%_folderpath%,\\\\$getenv(NASDOMAIN)),0),\\\\$getenv(NASDOMAIN)\\Multimedia\\VD_20XX\\,$left(%_folderpath%,3)Multimedia\\))Anime\\imcomplete\\$regexp(%album%,[ ]\\(.*\\d\\),)$if2( '('%year%')',)\\%title%$if2( '('%crc%')',)
+F=_FILENAME
+

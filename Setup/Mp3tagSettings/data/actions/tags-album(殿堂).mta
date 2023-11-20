@@ -1,0 +1,5 @@
+﻿[#0]
+T=5
+1=$if($grtr($strstr(%tags%,\u6bbf\u5802),0),\u6bbf\u5802,%album%)
+F=ALBUM
+

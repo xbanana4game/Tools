@@ -1,0 +1,5 @@
+﻿[#0]
+T=5
+1=%genre%\\%album%\\videos\\%title%$if(%tags%,'['%tags%']',)
+F=_FILENAME
+

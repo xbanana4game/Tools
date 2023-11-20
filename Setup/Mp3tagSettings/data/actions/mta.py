@@ -37,3 +37,5 @@ class mtafile:
         self.f.write(out)
         return
   
+    def decode(self, string):
+        return string.rstrip('\n').encode('unicode-escape').decode('utf8')
