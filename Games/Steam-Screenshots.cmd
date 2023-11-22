@@ -6,6 +6,9 @@ REM
 REM ======================================================================
 IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
+REM ---------- Steam-Screenshots.cmd(SettingsOptions.cmd) ----------
+REM SET STEAM_DIR=C:\Progra~2\Steam
+REM SET SAVE_ALL_STEAM_SS_FLG=1
 
 
 REM ======================================================================
@@ -17,7 +20,7 @@ REM ----------------------------------------------------------------------
 REM 
 REM ----------------------------------------------------------------------
 IF NOT DEFINED STEAM_TARGET_FILE SET STEAM_TARGET_FILE=%yyyy%*.*
-IF NOT DEFINED STEAM_DIR SET /P STEAM_DIR="SET STEAM_DIR="
+REM IF NOT DEFINED STEAM_DIR SET /P STEAM_DIR="SET STEAM_DIR="
 IF NOT DEFINED STEAM_DIR (SET STEAM_DIR=C:\Progra~2\Steam)
 IF NOT DEFINED SAVE_ALL_STEAM_SS_FLG SET /P SAVE_ALL_STEAM_SS_FLG="SAVE_ALL_STEAM_SS_FLG [1|0] -> "
 IF "%SAVE_ALL_STEAM_SS_FLG%"=="" SET SAVE_ALL_STEAM_SS_FLG=0

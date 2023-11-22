@@ -7,6 +7,10 @@ REM ======================================================================
 IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
 REM ---------- Archive.cmd(SettingsOptions) ----------
+REM SET DOWNLOAD_FILENAME=DL_%yyyy%%mm%%dd%_%USERDOMAIN%
+REM SET DOWNLOAD_FILENAME=DL_%yyyy%%mm%%dd%_%hh%%mn%_%USERDOMAIN%
+REM SET DOWNLOAD_FILENAME=DL_%yyyy%%mm%-%week%_%USERDOMAIN%
+REM SET DOWNLOADS_PASSWORD=
 REM SET SHUTDOWN_FLG=0
 REM SET ARCHIVE_UPLOAD_FLG=0
 REM SET DRIVE_LETTER=C
@@ -15,7 +19,7 @@ REM x=[0 | 1 | 3 | 5 | 7 | 9 ]
 REM SET ARCHIVE_OPT_X=0
 REM SET BACKUPS_DIR=%DRIVE_LETTER%:\Backups
 REM SET STORE_DIR=%DRIVE_LETTER%:\Store
-REM SET MOVE_STORE_FLG=1
+REM SET MOVE_FILES_FLG=1
 REM SET VOLUME_SIZE=1g
 REM SET XCOPY_ARCHIVES=0
 REM SET XCOPY_ARCHIVE_DIRECTORY=E:\%USERDOMAIN%
@@ -30,6 +34,7 @@ REM ======================================================================
 REM ----------------------------------------------------------------------
 REM 
 REM ----------------------------------------------------------------------
+IF NOT DEFINED DOWNLOAD_FILENAME (SET DOWNLOAD_FILENAME=DL_%yyyy%%mm%%dd%_%USERDOMAIN%)
 IF NOT DEFINED SHUTDOWN_FLG (SET SHUTDOWN_FLG=0)
 IF NOT DEFINED Z_TYPE (SET Z_TYPE=7z)
 IF NOT DEFINED VOLUME_SIZE (SET VOLUME_SIZE=0)

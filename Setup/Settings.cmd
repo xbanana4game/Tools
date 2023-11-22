@@ -1,6 +1,6 @@
 REM ======================================================================
 REM
-REM                                Tools-3.8.0
+REM                                Tools-3.9.0
 REM
 REM ======================================================================
 @ECHO OFF
@@ -34,35 +34,16 @@ SET STORE_DIR=%USERPROFILE%\Store
 SET PATH=%PATH%;C:\Program Files\7-Zip
 SET PATH=%PATH%;C:\Program Files\WinRAR
 SET PATH=%PATH%;C:\Program Files\Mp3tag
-REM SET PATH=%PATH%;C:\App\renamer-7.3
-REM SET NOTEPAD="C:\Program Files\Notepad++\notepad++.exe"
-SET NOTEPAD=NOTEPAD
+SET PATH=%PATH%;C:\App\renamer-7.3
+SET NOTEPAD="C:\Program Files\Notepad++\notepad++.exe"
+REM SET NOTEPAD=NOTEPAD
 SET SAKURA="C:\Program Files (x86)\sakura\sakura.exe"
 
 REM ----------------------------------------------------------------------
-REM Archive-Tools
-REM ----------------------------------------------------------------------
-SET DOWNLOAD_FILENAME=DL_%yyyy%%mm%%dd%_%USERDOMAIN%
-REM SET DOWNLOAD_FILENAME=DL_%yyyy%%mm%%dd%_%hh%%mn%_%USERDOMAIN%
-REM SET DOWNLOAD_FILENAME=DL_%yyyy%%mm%-%week%_%USERDOMAIN%
-SET ARCHIVE_UPLOAD_FLG=0
-SET MOVE_FILES_FLG=1
-REM x=[0 | 1 | 3 | 5 | 7 | 9 ] 
-SET ARCHIVE_OPT_X=3
-
-REM ----------------------------------------------------------------------
-REM Games Settings
-REM ----------------------------------------------------------------------
-SET STEAM_DIR=C:\Progra~2\Steam
-SET STEAM_LIBRARY=%STEAM_DIR%\steamapps\common
-
-REM ----------------------------------------------------------------------
-REM Options
+REM SettingsOptions
 REM ----------------------------------------------------------------------
 IF EXIST %USERPROFILE%\.Tools\SettingsOptions.cmd (CALL %USERPROFILE%\.Tools\SettingsOptions.cmd)
 IF EXIST %USERPROFILE%\Desktop\SettingsOptions.cmd (
-	REM ECHO %USERPROFILE%\Desktop\SettingsOptions.cmd
-	REM TYPE %USERPROFILE%\Desktop\SettingsOptions.cmd
 	%NOTEPAD% %USERPROFILE%\Desktop\SettingsOptions.cmd
 	CALL %USERPROFILE%\Desktop\SettingsOptions.cmd
 )
