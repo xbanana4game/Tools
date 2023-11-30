@@ -19,7 +19,7 @@ REM x=[0 | 1 | 3 | 5 | 7 | 9 ]
 REM SET ARCHIVE_OPT_X=0
 REM SET BACKUPS_DIR=%DRIVE_LETTER%:\Backups
 REM SET STORE_DIR=%DRIVE_LETTER%:\Store
-REM SET MOVE_FILES_FLG=1
+REM SET MOVE_FILES_FLG=0
 REM SET VOLUME_SIZE=1g
 REM SET XCOPY_ARCHIVES=0
 REM SET XCOPY_ARCHIVE_DIRECTORY=E:\%USERDOMAIN%
@@ -40,6 +40,10 @@ IF NOT DEFINED Z_TYPE (SET Z_TYPE=7z)
 IF NOT DEFINED VOLUME_SIZE (SET VOLUME_SIZE=0)
 IF NOT DEFINED DOWNLOADS_PASSWORD (SET /P DOWNLOADS_PASSWORD="SET DOWNLOADS_PASSWORD(%ARCHIVE_PASSWORD%)=")
 IF NOT DEFINED DOWNLOADS_PASSWORD (SET DOWNLOADS_PASSWORD=%ARCHIVE_PASSWORD%)
+IF NOT DEFINED XCOPY_ARCHIVES (SET XCOPY_ARCHIVES=0)
+IF NOT DEFINED SHUTDOWN_FLG2 (SET SHUTDOWN_FLG2=0)
+IF NOT DEFINED MOVE_FILES_FLG (SET MOVE_FILES_FLG=0)
+
 
 IF NOT ""%1""=="""" (
 	echo ""%1""
@@ -60,44 +64,19 @@ IF NOT ""%1""=="""" (
 	EXIT
 )
 
-CHOICE /C YN /T 2 /D N /M "ONLY CALL MoveFiles.cmd (N)"
-IF %ERRORLEVEL% EQU 1 (
-	SET MOVEFILES_ONLY=1
-) ELSE (
-	SET MOVEFILES_ONLY=0
-)
-IF 1 EQU %MOVEFILES_ONLY% (
-	SET ARCHIVE_FLG=1
-	CALL :moveFiles
-	EXIT
-)
-
 REM ----------------------------------------------------------------------
 REM 
 REM ----------------------------------------------------------------------
 IF 1 EQU %SHUTDOWN_FLG% SET /P SHUTDOWN_FLG2="Shutdown? 1:YES 0:NO -> "
-IF ""=="%SHUTDOWN_FLG2%" SET SHUTDOWN_FLG2=0
-
-REM ----------------------------------------------------------------------
-REM DOWNLOAD
-REM ----------------------------------------------------------------------
 IF 1 EQU %MOVE_FILES_FLG% (
 	SET ARCHIVE_FLG=1
 	CALL :moveFiles
 )
 CALL :Archive_Downloads
-
-REM ----------------------------------------------------------------------
-REM COPY
-REM ----------------------------------------------------------------------
 IF "%XCOPY_ARCHIVES%"=="1" CALL :COPY_FILE
-
-REM ----------------------------------------------------------------------
-REM SHUTDOWN
-REM ----------------------------------------------------------------------
 IF 1 EQU %SHUTDOWN_FLG2% (SHUTDOWN /S /T 3)
 
-PAUSE
+TIMEOUT /T 3
 EXIT
 
 

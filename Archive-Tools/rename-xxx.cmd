@@ -18,7 +18,9 @@ REM                                Main
 REM
 REM ======================================================================
 ReNamer.exe /%RENAMER_MODE% "%RENAMER_PROFILE%" "%JD2_DL%\%RENAMER_PROFILE%"
-Mp3tag.exe /fp:"%DOWNLOADS_DIR%\%RENAMER_PROFILE%"
+REM START C:\PROGRA~2\foobar2000\foobar2000.exe
+"C:\Program Files (x86)\foobar2000\foobar2000.exe"
+Mp3tag.exe /fp:"%VIDEOS_DIR%\%RENAMER_PROFILE%"
 
 EXIT /B
 
