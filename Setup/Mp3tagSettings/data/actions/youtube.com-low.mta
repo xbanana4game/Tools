@@ -1,0 +1,10 @@
+﻿[#0]
+T=5
+1=\\\\$getenv(NASDOMAIN)\\Multimedia\\Videos\\youtube.com-low\\%year% %comment%
+F=_FILENAME
+
+[#1]
+T=5
+1=youtube.com-low
+F=ALBUM
+
