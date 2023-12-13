@@ -1,32 +1,32 @@
 ﻿[#0]
-T=7
-F=%_filename%
-1=%dummy% - %year% %dummy%
+T=5
+1=Captures
+F=GENRE
 
 [#1]
 T=7
 F=%_filename%
-1=%dummy%[%tags%]
+1=%dummy% - %year% %dummy%
 
 [#2]
 T=7
 F=%_filename%
-1=%title%
+1=%dummy%[%tags%]
 
 [#3]
 T=7
 F=%_filename%
-1=%title%[%dummy%]
+1=%title%
 
 [#4]
 T=7
-F=%_directory%
-1=%album%
+F=%_filename%
+1=%title%[%dummy%]
 
 [#5]
 T=7
-F=%_parent_directory%
-1=%genre%
+F=%_directory%
+1=%album%
 
 [#6]
 T=12
