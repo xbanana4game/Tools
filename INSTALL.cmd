@@ -12,6 +12,7 @@ CALL :INSTALL_ENV
 CALL :INSTALL_PYTHON
 CALL :INSTALL_7Z
 CALL :INSTALL_FFMPEG
+CALL :INSTALL_YTDLP
 CALL :INSTALL_NKF
 CALL :INSTALL_SETTINGS
 CALL :INSTALL_SAKURA_MACRO
@@ -61,8 +62,19 @@ REM ======================================================================
 	IF EXIST %TOOLS_INSTALL_DIR%\bin\ffmpeg.exe EXIT /B
 	IF EXIST ffmpeg.exe (
 		COPY ffmpeg.exe %TOOLS_INSTALL_DIR%\bin\ffmpeg.exe
+		COPY ffprobe.exe %TOOLS_INSTALL_DIR%\bin\ffprobe.exe
 	) ELSE (
 		ECHO Please Download https://www.ffmpeg.org/
+		PAUSE
+	)
+	EXIT /B
+
+:INSTALL_YTDLP
+	IF EXIST %TOOLS_INSTALL_DIR%\bin\yt-dlp.exe EXIT /B
+	IF EXIST yt-dlp.exe (
+		COPY yt-dlp.exe %TOOLS_INSTALL_DIR%\bin\yt-dlp.exe
+	) ELSE (
+		ECHO Download URL https://github.com/yt-dlp/yt-dlp/releases
 		PAUSE
 	)
 	EXIT /B
