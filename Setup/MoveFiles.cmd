@@ -93,6 +93,7 @@ REM ======================================================================
 		MD %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 		IF EXIST %DOWNLOADS_DIR%\Captures MOVE %DOWNLOADS_DIR%\Captures %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\
 		IF EXIST %DOWNLOADS_DIR%\youtube.com MOVE %DOWNLOADS_DIR%\youtube.com %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\
+		IF EXIST %DOWNLOADS_DIR%\twitch.tv MOVE %DOWNLOADS_DIR%\twitch.tv %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\
 		RMDIR %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\_work
 		RMDIR %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% EXPLORER %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
