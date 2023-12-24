@@ -19,7 +19,7 @@ REM ======================================================================
 REM ----------------------------------------------------------------------
 REM 
 REM ----------------------------------------------------------------------
-IF NOT DEFINED STEAM_TARGET_FILE SET STEAM_TARGET_FILE=%yyyy%*.*
+IF NOT DEFINED STEAM_TARGET_FILE SET STEAM_TARGET_FILE=*%yyyy%*.*
 REM IF NOT DEFINED STEAM_DIR SET /P STEAM_DIR="SET STEAM_DIR="
 IF NOT DEFINED STEAM_DIR (SET STEAM_DIR=C:\Progra~2\Steam)
 IF NOT DEFINED SAVE_ALL_STEAM_SS_FLG SET /P SAVE_ALL_STEAM_SS_FLG="SAVE_ALL_STEAM_SS_FLG [1|0] -> "
