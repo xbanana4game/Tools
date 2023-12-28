@@ -40,7 +40,12 @@ CALL :MOVE_TARGET_FILES %DOWNLOADS_DIR%\Games\Osu!\Beatmap_Pack %DOWNLOADS_DIR%\
 CALL :MOVE_TARGET_FILES %DOWNLOADS_DIR%\Games\Osu!\Beatmap_Pack %DOWNLOADS_DIR%\*Beatmap*.zip
 
 IF "%XCOPY_XXX%"=="1" CALL :F_XCOPY_XXX
-IF DEFINED MOVE_VIDEOS CALL :MOVE_VIDEOS
+IF DEFINED MOVE_VIDEOS (
+	CALL :MOVE_VIDEOS Captures
+	CALL :MOVE_VIDEOS youtube.com
+	CALL :MOVE_VIDEOS twitch.tv
+	IF DEFINED COPY_VIDEOS CALL :COPY_VIDEOS
+)
 IF DEFINED SAVE_STEAM_SS CALL :SAVE_STEAM_SS
 IF DEFINED SAVE_OSU_SS CALL :SAVE_OSU_SS
 EXIT /B
@@ -88,34 +93,34 @@ REM ======================================================================
 	EXIT /B
 	
 :MOVE_VIDEOS
-	ECHO MOVE VIDEOS %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
+	SET TARGET_DIR=%1
+	ECHO MOVE %TARGET_DIR% %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 	IF 1 EQU %ARCHIVE_FLG% (
 		MD %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
-		IF EXIST %DOWNLOADS_DIR%\Captures MOVE %DOWNLOADS_DIR%\Captures %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\
-		IF EXIST %DOWNLOADS_DIR%\youtube.com MOVE %DOWNLOADS_DIR%\youtube.com %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\
-		IF EXIST %DOWNLOADS_DIR%\twitch.tv MOVE %DOWNLOADS_DIR%\twitch.tv %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\
-		RMDIR %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\_work
+		IF EXIST %DOWNLOADS_DIR%\%TARGET_DIR% MOVE %DOWNLOADS_DIR%\%TARGET_DIR% %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\
+		IF NOT EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\%TARGET_DIR% (EXIT /B)
+		RMDIR %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\%TARGET_DIR%\_work
 		RMDIR %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
-		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% EXPLORER %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
-		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com Mp3tag.exe /fp:"%VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com"
-		CALL :RENAME_PLAYLIST_FILES
-		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\VD_%yyyy%%mm%%dd%.m3u8 (
-			%SAKURA% %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\VD_%yyyy%%mm%%dd%.m3u8
+		REM IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% EXPLORER %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
+		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\%TARGET_DIR% Mp3tag.exe /fp:"%VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\%TARGET_DIR%"
+		CALL :RENAME_PLAYLIST_FILES %TARGET_DIR%
+		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\%TARGET_DIR%\%TARGET_DIR%-%yyyy%%mm%%dd%.m3u8 (
+			ECHO m3u2wpl
+			%SAKURA% %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\%TARGET_DIR%\%TARGET_DIR%-%yyyy%%mm%%dd%.m3u8
 		)
-		ECHO make wpl
-		PAUSE
-		CALL :RENAME_PLAYLIST_FILES
-		IF DEFINED COPY_VIDEOS CALL :COPY_VIDEOS
+		CALL :RENAME_PLAYLIST_FILES %TARGET_DIR%
 		EXIT /B
 	)
 	EXIT /B
 	
 :RENAME_PLAYLIST_FILES
-	IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\mp3tag.m3u8 (
-		RENAME %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\mp3tag.m3u8 VD_%yyyy%%mm%%dd%.m3u8
+	SET TARGET_DIR=%1
+	echo RENAME %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\%TARGET_DIR%\mp3tag.m3u8 %TARGET-DIR%-%yyyy%%mm%%dd%.m3u8
+	IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\%TARGET_DIR%\mp3tag.m3u8 (
+		RENAME %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\%TARGET_DIR%\mp3tag.m3u8 %TARGET_DIR%-%yyyy%%mm%%dd%.m3u8
 	)
-	IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\mp3tag.wpl (
-		RENAME %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\youtube.com\mp3tag.wpl VD_%yyyy%%mm%%dd%.wpl
+	IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\%TARGET_DIR%\mp3tag.wpl (
+		RENAME %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\%TARGET_DIR%\mp3tag.wpl %TARGET_DIR%-%yyyy%%mm%%dd%.wpl
 	)
 	EXIT /B
 
@@ -130,7 +135,7 @@ REM ======================================================================
 		IF %ERRORLEVEL% EQU 8 (
 			NOTEPAD %ROBOCOPY_LOG%
 		) ELSE (
-			EXPLORER %XCOPY_DIRECTORY_VIDEOS%
+			REM EXPLORER %XCOPY_DIRECTORY_VIDEOS%
 			DEL %ROBOCOPY_LOG%
 		)
 	)

@@ -31,7 +31,8 @@ REM NOTEPAD yt-dlp.conf
 NOTEPAD %VIDEOS_DIR%\dlurl.txt
 CD %VIDEOS_DIR%
 yt-dlp.exe %YTDLP_UPDATE_OPT%
-MOVE %VIDEOS_DIR%\dlurl.txt "%VIDEOS_DIR%\dlurl-%yyyy%%mm%%dd%_%hh%%mn%.txt"
+TYPE %VIDEOS_DIR%\dlurl.txt >>"%VIDEOS_DIR%\dlurl.log"
+DEL %VIDEOS_DIR%\dlurl.txt
 REM pause
 
 EXPLORER %VIDEOS_DIR%\yt-dlp
