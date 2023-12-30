@@ -48,3 +48,4 @@ IF EXIST %USERPROFILE%\Desktop\SettingsOptions.cmd (
 	CALL %USERPROFILE%\Desktop\SettingsOptions.cmd
 )
 
+#SET TOOLS_DIR=

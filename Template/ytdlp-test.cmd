@@ -9,6 +9,7 @@ CALL %USERPROFILE%\.Tools\Settings.cmd
 REM ---------- ytdlp-dl.cmd(SettingsOptions.cmd) ----------
 REM SET YTDLP_UPDATE_OPT=-U
 REM SET YTDLP_PROFILE=test
+REM SET SHUTDOWN_FLG=0
 
 
 REM ======================================================================
@@ -16,7 +17,10 @@ REM
 REM                                Main
 REM
 REM ======================================================================
+IF NOT DEFINED SHUTDOWN_FLG (SET SHUTDOWN_FLG=0)
+IF 1 EQU %SHUTDOWN_FLG% SET /P SHUTDOWN_FLG2="Shutdown? 1:YES 0:NO -> "
 IF NOT DEFINED YTDLP_PROFILE (SET YTDLP_PROFILE=test)
+
 REM yt-dlp.exe --help >yt-dlp.txt
 REM yt-dlp.exe --version
 IF NOT "%1"=="" (
@@ -36,5 +40,6 @@ DEL %VIDEOS_DIR%\dlurl.txt
 REM pause
 
 EXPLORER %VIDEOS_DIR%\yt-dlp
+IF 1 EQU %SHUTDOWN_FLG2% (SHUTDOWN /S /T 3)
 
 EXIT
