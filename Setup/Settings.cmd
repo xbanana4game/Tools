@@ -1,6 +1,6 @@
 REM ======================================================================
 REM
-REM                                Tools-3.9.0
+REM                                Tools-4.0.0
 REM
 REM ======================================================================
 @ECHO OFF
@@ -48,4 +48,4 @@ IF EXIST %USERPROFILE%\Desktop\SettingsOptions.cmd (
 	CALL %USERPROFILE%\Desktop\SettingsOptions.cmd
 )
 
-#SET TOOLS_DIR=
+REM SET TOOLS_DIR=
