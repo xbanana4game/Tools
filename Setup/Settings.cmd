@@ -49,3 +49,4 @@ IF EXIST %USERPROFILE%\Desktop\SettingsOptions.cmd (
 )
 
 REM SET TOOLS_DIR=
+
