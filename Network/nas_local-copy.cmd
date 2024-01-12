@@ -19,6 +19,7 @@ REM SET ROBOCOPY_COPY_OPTIONS=/mir /e /r:3 /w:10
 REM SET ROBOCOPY_COPY_OPTIONS=/MOVE /e
 REM SET TARGET_FILES=*.*
 REM SET ROBOCOPY_EXTRA_OPTIONS=/A+:R
+REM SET ROBOCOPY_EXTRA_OPTIONS=/MAXAGE:1
 
 
 REM ======================================================================
