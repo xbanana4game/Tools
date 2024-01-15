@@ -36,7 +36,7 @@ REM NOTEPAD yt-dlp.conf
 ECHO;>>%VIDEOS_DIR%\dlurl.txt
 NOTEPAD %VIDEOS_DIR%\dlurl.txt
 CD %VIDEOS_DIR%
-yt-dlp.exe %YTDLP_UPDATE_OPT%
+yt-dlp.exe -a dlurl.txt %YTDLP_UPDATE_OPT%
 TYPE %VIDEOS_DIR%\dlurl.txt >>"%VIDEOS_DIR%\dlurl.log"
 ECHO;>>"%VIDEOS_DIR%\dlurl.log"
 DEL %VIDEOS_DIR%\dlurl.txt

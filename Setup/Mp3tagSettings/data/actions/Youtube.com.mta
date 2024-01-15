@@ -12,29 +12,19 @@ T=12
 [#2]
 T=7
 F=%_directory%
-1=%album%
-
-[#3]
-T=7
-F=%_directory%
 1=youtube - [%album%]
 
-[#4]
-T=5
-1=$if($eql(%album%,\u5f8c\u3067\u898b\u308b),,%album%)
-F=ALBUM
-
-[#5]
+[#3]
 T=5
 1=$if($strcmp(%album%,youtube.com),youtube.com,)$if($strcmp(%albumartist%,youtube.com),youtube.com,)
 F=ALBUMARTIST
 
-[#6]
+[#4]
 T=5
 1=$if($strcmp(%albumartist%,youtube.com),%genre%,%album%)
 F=ALBUM
 
-[#7]
+[#5]
 T=5
 1=$if($strcmp($left(%_folderpath%,3),C:\\),C:\\Users\\$getenv(USERNAME)\\,)$if($isdigit(%_covers%),$if(%album%,Downloads\\youtube.com\\,Videos\\youtube.com\\_work\\),Videos\\youtube.com\\no_cover\\)$if($strcmp(%albumartist%,youtube.com),$replace(_%genre%_,&,and)\\,%album%\\)\\$if($and(%year%,%comment%),%year% %comment%,%_FILENAME%)
 F=_FILENAME
