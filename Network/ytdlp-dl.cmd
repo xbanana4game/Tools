@@ -8,7 +8,7 @@ IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
 REM ---------- ytdlp-dl.cmd(SettingsOptions.cmd) ----------
 REM SET YTDLP_UPDATE_OPT=-U
-REM SET YTDLP_PROFILE=test
+REM SET YTDLP_PROFILE=default
 REM SET SHUTDOWN_FLG=0
 
 
@@ -43,6 +43,7 @@ DEL %VIDEOS_DIR%\dlurl.txt
 REM PAUSE
 
 REM EXPLORER %VIDEOS_DIR%\yt-dlp
+REM Mp3tag.exe /fp:"%VIDEOS_DIR%\yt-dlp"
 IF 1 EQU %SHUTDOWN_FLG2% (SHUTDOWN /S /T 3)
 
 EXIT
