@@ -1,0 +1,19 @@
+﻿//VLC PRFIX
+//$d.jpg-_-$T_-
+
+//キーボードマクロのファイル
+S_ReplaceAll('.*jpg-_-', '', 28);	// すべて置換
+S_ReDraw(0);	// 再描画
+S_ReplaceAll('\.jpg', '', 28);	// すべて置換
+S_ReDraw(0);	// 再描画
+S_ReplaceAll('_-_', '.000 ', 28);	// すべて置換
+S_ReDraw(0);	// 再描画
+S_ReplaceAll('_', ':', 28);	// すべて置換
+S_ReDraw(0);	// 再描画
+
+S_GoFileTop ();
+S_InsText('00:00:00:000 start');
+S_Char(13)；S_ReDraw(0);
+
+//S_FileSaveAs('chapter.txt', 4 ,1 );
+//S_ExitAllEditors();
