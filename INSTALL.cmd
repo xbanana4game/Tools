@@ -37,6 +37,8 @@ REM ======================================================================
 	)
 	IF NOT DEFINED JD2_DL (
 		ECHO JD2_DL
+		ECHO C:\Users\<jd:env:USERNAME>\Documents\JDownloader
+		ECHO D:\JDownloader
 		rundll32 sysdm.cpl,EditEnvironmentVariables
 		PAUSE
 	)
