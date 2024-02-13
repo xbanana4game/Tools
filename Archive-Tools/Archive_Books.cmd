@@ -6,6 +6,7 @@ REM
 REM ======================================================================
 IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
+REM SET OUTPUT_BOOKS_DIR=%DOCUMENTS_DIR%\Books
 
 
 REM ======================================================================
@@ -13,16 +14,16 @@ REM
 REM                                Main
 REM
 REM ======================================================================
-SET OUTPUT_DIRECTORY=%USERPROFILE%\Documents\Books
-IF NOT EXIST MD %OUTPUT_DIRECTORY%
+IF NOT DEFINED OUTPUT_BOOKS_DIR SET OUTPUT_BOOKS_DIR=%DOCUMENTS_DIR%\Books
+IF NOT EXIST MD %OUTPUT_BOOKS_DIR%
 FOR %%i in (%*) DO (
 	ECHO %%i
 	REM CALL  :RENAME_ADD_DATE  %%i
-	IF NOT EXIST "%OUTPUT_DIRECTORY%\%%~nxi.zip" (
-		7z a -tzip -sdel "%OUTPUT_DIRECTORY%\%%~nxi.zip" ""%%i\*"" -xr!*.db -xr!*.dat -xr!*.url -xr!.DS_Store -mx=0 -mtc=off
+	IF NOT EXIST "%OUTPUT_BOOKS_DIR%\%%~nxi.zip" (
+		7z a -tzip -sdel "%OUTPUT_BOOKS_DIR%\%%~nxi.zip" ""%%i\*"" -xr!*.db -xr!*.dat -xr!*.url -xr!.DS_Store -mx=0 -mtc=off
 		REM 7z a -tzip -sdel "%%~nxi.zip" ""%%i"" -mx=0 -mtc=off
-		7z l "%OUTPUT_DIRECTORY%\%%~nxi.zip">"%%~nxi.zip.txt"
-		7z l "%OUTPUT_DIRECTORY%\%%~nxi.zip">>"%DOWNLOADS_DIR%\books-%yyyy%%mm%%dd%.log"
+		7z l "%OUTPUT_BOOKS_DIR%\%%~nxi.zip">"%%~nxi.zip.txt"
+		7z l "%OUTPUT_BOOKS_DIR%\%%~nxi.zip">>"%DOWNLOADS_DIR%\books-%yyyy%%mm%%dd%.log"
 	)
 	RMDIR "%%i"
 )

@@ -5,7 +5,7 @@ CAPTURE_NO:GAME_NAME:GAME_DIR
 4:Osu!:Osu!
 5:Deep Rock Galactic:Deep Rock Galactic
 6:Gundam Evolution:Gundam Evolution
-7:Overwatch 2:Overwatch_2
+7:Overwatch 2:Overwatch 2
 8:Tribes of Midgard:Tribes of Midgard
 9:Warlander:Warlander
 10:Planetside2:Planetside2

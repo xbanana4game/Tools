@@ -6,6 +6,8 @@ REM
 REM ======================================================================
 IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
+REM VLC Output Screenshot Filename
+REM $d.jpg-_-$T_-_
 
 
 REM ======================================================================

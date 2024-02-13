@@ -74,7 +74,7 @@ REM ----------------------------------------------------------------------
 :F_FORFILES_ARCHIVE_EXECUTE
 	IF NOT DEFINED FORFILES_CMD_FILE EXIT /B
 	IF NOT EXIST "%FORFILES_CMD_FILE%" EXIT /B
-	TYPE %~dp0\skin.txt >>%FORFILES_CMD_FILE%
+	TYPE %TOOLS_DIR%\Osu!\skin.txt >>%FORFILES_CMD_FILE%
 	NOTEPAD %FORFILES_CMD_FILE%
 	7z a -t7z -sdel %OSU_SONGS_DIR%\..\SongsFiles@%yyyy%%mm%%dd%%hh%%mn%.7z -spf2 @%FORFILES_CMD_FILE%
 	MOVE %FORFILES_CMD_FILE% %FORFILES_CMD_FILE%.log
