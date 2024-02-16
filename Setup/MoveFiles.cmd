@@ -8,7 +8,7 @@ IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
 REM if  called this batch from Archive.cmd ARCHIVE_FLG is 1. 
 IF NOT DEFINED ARCHIVE_FLG (SET ARCHIVE_FLG=0)
-REM ---------- MoveFiles.cmd(SettingsOptions) ----------
+REM ---------- MoveFiles.cmd(MoveFiles-user) ----------
 REM SET VIDEOS_STORE_DIR=%STORE_DIR%
 REM SET DOWNLOADED_VIDEOS_DIR=%DOWNLOADS_DIR%
 REM SET VHDX_STORE_DIR=%STORE_DIR%\VHDX_%yyyy%%mm%%dd%

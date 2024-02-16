@@ -69,6 +69,7 @@ REM ======================================================================
 	IF DEFINED IGNORE_FILE_2 SET IGNORE_OPT=%IGNORE_OPT% -xr!%IGNORE_FILE_2%
 	IF %MOVE_STORE_FLG%==1 MD %STORE_DIR%\%EXTRACT_YYYY%
 	
+	REM auto rename existing file (for example, name.txt will be renamed to name_1.txt).
 	FOR /D %%i IN ("%ARCHIVE_DIR%\%EXTRACT_YYYY%") DO (
 		FOR %%j IN ("%ARCHIVE_DIR%\%%~ni\DL_*.7z") DO (
 			IF NOT EXIST %EXTRACT_TARGET_DIR%\%%~ni\%%~nj.txt (
@@ -101,7 +102,8 @@ REM ======================================================================
 	SET EXTRACT_EXT=*
 	REM IF NOT DEFINED EXTRACT_TARGET_DIR SET EXTRACT_TARGET_DIR=%USERPROFILE%\Desktop\*
 	IF NOT DEFINED EXTRACT_TARGET_DIR SET EXTRACT_TARGET_DIR=%DOWNLOADS_DIR%
-	7z x -p%DOWNLOADS_PASSWORD% %EXTRACT_FILE% -o%EXTRACT_TARGET_DIR% %EXTRACT_EXT% -r %IGNORE_OPT%
+	REM Overwrite All existing files without prompt.
+	7z x -p%DOWNLOADS_PASSWORD% %EXTRACT_FILE% -o%EXTRACT_TARGET_DIR% -aoa %EXTRACT_EXT% -r %IGNORE_OPT%
 	7z l -p%DOWNLOADS_PASSWORD% %EXTRACT_FILE%>%EXTRACT_TARGET_DIR%\%~n1.txt
 	EXIT /B
 
