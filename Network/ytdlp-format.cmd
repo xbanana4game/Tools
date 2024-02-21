@@ -7,7 +7,8 @@ REM ======================================================================
 IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
 REM ---------- ytdlp-dl.cmd(SettingsOptions.cmd) ----------
-SET YTDLP_UPDATE_OPT=-v -F
+SET YTDLP_OPT=-v -F
+REM SET VIDEO_OUTPUT_DIR=%USERPROFILE%\Videos\yt-dlp
 
 
 REM ======================================================================
@@ -29,7 +30,7 @@ CD %VIDEOS_DIR%
 
 :DL_START
 SET /P DOWNLOAD_URL="URL: "
-yt-dlp.exe %YTDLP_UPDATE_OPT% %DOWNLOAD_URL%
+yt-dlp.exe %YTDLP_OPT% %DOWNLOAD_URL%
 GOTO :DL_START
 
 EXIT
