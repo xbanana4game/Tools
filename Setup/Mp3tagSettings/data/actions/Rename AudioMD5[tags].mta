@@ -1,5 +1,0 @@
-﻿[#0]
-T=5
-1=$if2(%AudioMD5%,%comment%)$if(%tags%,'['%tags%']',)
-F=_FILENAME
-

@@ -1,5 +1,0 @@
-﻿[#0]
-T=5
-1=$regexp(%_file_create_date%,/,-)
-F=YEAR
-

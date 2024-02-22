@@ -1,6 +1,12 @@
 import mta
 import os
 
+mta_dir = 'mta'
+try:
+    os.makedirs(mta_dir)
+except FileExistsError:
+    pass
+
 fc = open('category.txt', 'r', encoding='UTF-8')
 for data in fc:
     profile=data.rstrip('\n')
@@ -8,7 +14,7 @@ for data in fc:
     if not is_file:
         continue
     fr = open('youtube-album('+profile+').txt', 'r', encoding='UTF-8')
-    mta_filename='youtube-album('+profile+').mta'
+    mta_filename=mta_dir+'\youtube-album('+profile+').mta'
     mta_file=mta.mtafile(mta_filename)
 
     for data in fr:

@@ -1,5 +1,0 @@
-﻿[#0]
-T=5
-1=$if($neql($strstr(%tags%,5star),0),5,)$if($neql($strstr(%tags%,4star),0),4,)$if($neql($strstr(%tags%,3star),0),3,)$if($neql($strstr(%tags%,2star),0),2,)$if($neql($strstr(%tags%,1star),0),1,)
-F=RATING
-
