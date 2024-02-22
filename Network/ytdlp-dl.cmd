@@ -40,8 +40,8 @@ REM NOTEPAD yt-dlp.conf
 ECHO;>>%DLURL_LIST%
 NOTEPAD %DLURL_LIST%
 CD %VIDEOS_DIR%
-REM IF DEFINED (yt-dlp.exe %YTDLP_UPDATE_OPT%) ELSE (yt-dlp.exe -a dlurl.txt)
-yt-dlp.exe -a dlurl.txt
+REM IF DEFINED (yt-dlp.exe %YTDLP_UPDATE_OPT%) ELSE (yt-dlp.exe -a %DLURL_LIST%)
+yt-dlp.exe -a %DLURL_LIST%
 TYPE %DLURL_LIST% >>"%VIDEOS_DIR%\dlurl.log"
 ECHO;>>"%VIDEOS_DIR%\dlurl.log"
 DEL %DLURL_LIST%
