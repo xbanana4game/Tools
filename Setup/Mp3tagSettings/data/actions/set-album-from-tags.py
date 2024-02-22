@@ -1,14 +1,7 @@
 import os
-import mta
-
-mta_dir = 'mta'
-try:
-    os.makedirs(mta_dir)
-except FileExistsError:
-    pass
 
 fr = open('set-album-from-tags.txt', 'r', encoding='UTF-8')
-mta_filename=mta_dir+'\set-album-from-tags.mta'
+mta_filename='set-album-from-tags.mta'
 mta_file=mta.mtafile(mta_filename)
 
 for data in fr:

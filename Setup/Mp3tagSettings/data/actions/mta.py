@@ -1,3 +1,4 @@
+import os
 
 class mtafile:
 
@@ -11,7 +12,8 @@ class mtafile:
 
     def open(self, filename):
         self.filename=filename
-        self.f = open(filename, 'w', encoding='utf_8_sig')
+        mta_path='C:\\Users\\'+os.getenv('USERNAME')+'\\AppData\\Roaming\\Mp3tag\\data\\actions'
+        self.f = open(mta_path+'\\'+filename, 'w', encoding='utf_8_sig')
         return
         
     def close(self):

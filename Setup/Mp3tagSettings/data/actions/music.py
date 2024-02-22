@@ -1,16 +1,9 @@
 import mta
-import os
-
-mta_dir = 'mta'
-try:
-    os.makedirs(mta_dir)
-except FileExistsError:
-    pass
 
 fr = open('music.txt', 'r', encoding='UTF-8')
 
 for data in fr:
-    mta_filename=mta_dir+'\Music-'+data.rstrip('\n')+'.mta'
+    mta_filename='Music-'+data.rstrip('\n')+'.mta'
     print(mta_filename)
     genre=data.rstrip('\n')
     mta_file=mta.mtafile(mta_filename)

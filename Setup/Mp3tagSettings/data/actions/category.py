@@ -1,16 +1,13 @@
 import mta
 import os
+import shutil
 
-mta_dir = 'mta'
-try:
-    os.makedirs(mta_dir)
-except FileExistsError:
-    pass
+mta_path='C:\\Users\\'+os.getenv('USERNAME')+'\\AppData\\Roaming\\Mp3tag\\data\\actions'
+shutil.copy('Category-None.mta', mta_path+'\Category-None.mta')
 
 fr = open('category.txt', 'r', encoding='UTF-8')
-
 for data in fr:
-    mta_filename=mta_dir+'\Category-'+data.rstrip('\n')+'.mta'
+    mta_filename='Category-'+data.rstrip('\n')+'.mta'
     print(mta_filename)
     album=data.rstrip('\n')
     mta_file=mta.mtafile(mta_filename)
