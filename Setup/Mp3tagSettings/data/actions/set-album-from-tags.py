@@ -1,4 +1,4 @@
-import os
+import mta
 
 fr = open('set-album-from-tags.txt', 'r', encoding='UTF-8')
 mta_filename='set-album-from-tags.mta'
