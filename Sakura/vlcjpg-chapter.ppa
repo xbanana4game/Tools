@@ -12,8 +12,9 @@ S_ReplaceAll('_', ':', 28);	// すべて置換
 S_ReDraw(0);	// 再描画
 
 S_GoFileTop ();
-S_InsText('00:00:00:000 start');
+S_InsText('00:00:00.000 start');
 S_Char(13)；S_ReDraw(0);
 
+S_FileSave();
 //S_FileSaveAs('chapter.txt', 4 ,1 );
 //S_ExitAllEditors();
