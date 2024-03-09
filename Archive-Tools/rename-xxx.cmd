@@ -17,7 +17,7 @@ REM
 REM                                Main
 REM
 REM ======================================================================
-ReNamer.exe /%RENAMER_MODE% "%RENAMER_PROFILE%" "%JD2_DL%\%RENAMER_PROFILE%"
+ReNamer.exe /%RENAMER_MODE% "%RENAMER_PROFILE%" "\\?\%JD2_DL%\%RENAMER_PROFILE%"
 REM START C:\PROGRA~2\foobar2000\foobar2000.exe
 EXPLORER %JD2_DL%\%RENAMER_PROFILE%
 foobar2000.exe %JD2_DL%\%RENAMER_PROFILE%
