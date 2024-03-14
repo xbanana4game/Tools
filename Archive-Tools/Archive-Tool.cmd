@@ -79,6 +79,7 @@ ECHO   2:Remove empty Directory and Make Listfile
 ECHO   3:Archive(exclude __Store)
 ECHO   4:Update (%BACKUPS_DIR%\%ARCHIVE_PROFILE%@????????.%FILE_TYPE%)
 ECHO   5:Store Old Directory (_store, _old)
+ECHO   6:Make Robocopy Listfile
 SET /P A="-> "
 IF 1 EQU %A% (CALL :MAKE_ARCHIVE_DIRECTORY)
 IF 2 EQU %A% (
@@ -97,6 +98,7 @@ IF 4 EQU %A% (
 	)
 )
 IF 5 EQU %A% (CALL :STORE_OLD_DIR)
+IF 6 EQU %A% (CALL :MakeRobocopyList)
 
 EXIT
 
@@ -201,5 +203,15 @@ REM ======================================================================
 	)
 	EXIT /B 0
 
-
+:MakeRobocopyList
+	SET /P COPY_TO_DRIVE="COPY_TO_DRIVE(A-Z): "
+	IF NOT DEFINED COPY_TO_DRIVE (SET COPY_TO_DRIVE=Z)
+	ECHO PROFILE,COPY_FROM,COPY_TO>COPY_LIST.txt
+	FOR /F "tokens=1,2 delims= " %%C IN (%ARCHIVE_PROFILE_FILE%) DO (
+		IF EXIST "%ARCHIVE_ROOT_DIR_NAME%\%%C" (
+			ECHO %%C,%ARCHIVE_PATH%%ARCHIVE_PROFILE%\%%C,%COPY_TO_DRIVE%:\_work\%ARCHIVE_PROFILE%>>COPY_LIST.txt
+		)
+	)
+	EXIT /B 0
+	
 	
