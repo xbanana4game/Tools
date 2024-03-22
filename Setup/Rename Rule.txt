@@ -4,76 +4,10 @@
 *3D* *360* *VIDEO_NAME* (*H*p_*FPS*fps_*VIDEO_CODEC*-*AUDIO_BITRATE*kbit_*AUDIO_CODEC*).*EXT*
 *VIDEO_NAME* [*CATEGORY*][*USER*][*ID*][*DATE[yyyy-MM-dd]*].*EXT*
 
-Filename->Tag
-%album%\%title% - [%genre%][%artist%][%comment%][%year%]
-
-Tag->Filename(Store)
-$if($grtr($strstr(%_folderpath%,\\$getenv(NASDOMAIN)),0),\\$getenv(NASDOMAIN)\Multimedia\Videos\,)
-youtube.com\$if($strcmp(%album%,youtube.com),Genre\%genre%,Channel\%album%)\%year% %comment%
-
-Tag->Filename
-$if($isdigit(%_covers%),C:\Users\$getenv(USERNAME)\Downloads\,C:\Users\$getenv(USERNAME)\Videos\no_cover\%album%\)
-youtube.com\$if($strcmp(%albumartist%,youtube.com),$replace(_%genre%_,&,and)\,%album%\)\
-%year% %comment%
+$if($grtr($strstr(%_folderpath%,\\$getenv(NASDOMAIN)),0),\\$getenv(NASDOMAIN)\Multimedia\Videos\,$if($strcmp($left(%_folderpath%,3),C:\),C:\Users\$getenv(USERNAME)\Downloads\,$left(%_folderpath%,3)Videos\))youtube.com
 
 VLC
 $d.jpg-_-
-
-
-==========================================================================
-                                  videos
-==========================================================================
-:File_BaseName: - [:Hash_CRC32:] [:File_DateCreated:]
-
-Filename->Tag
-%genre%\%album%\%title% - [%comment%] [%year%]
-%title% - [%comment%][%year%][%genre%][%album%]
-%dummy%[%tags%]
-
-Tag->Filename
-$if($isdigit(%_covers%),C:\Users\$getenv(USERNAME)\Downloads\,no_cover\)%genre%\%year% %comment%$if(%tags%,'['%tags%']',)
-%year% $left(%title%,100) [%tags%]
-$if($and(%year%,%comment%),%year% %comment%,%_FILENAME%)
-
-Tag->Tag
-$if($neql($strstr(%tags%,5star),0),5,)$if($neql($strstr(%tags%,4star),0),4,)$if($neql($strstr(%tags%,3star),0),3,)$if($neql($strstr(%tags%,2star),0),2,)$if($neql($strstr(%tags%,1star),0),1,)
-
-Tag->Tag(ALBUM)
-$if($grtr($strstr(%tags%,アルバム用タグ1),0),アルバム用タグ1,
-$if($grtr($strstr(%tags%,アルバム用タグ2),0),アルバム用タグ2,
-xxx))
-タグの数だけ)追加
-
-Tag->Tag(#番号をTRACKに設定)
-$regexp(%title%,(.*)#(.*),$2)
-$regexp(%title%,#(.*\d)$,第$1話)
-$regexp(%album%,[ ]\(.*\d\),)
-
-==========================================================================
-                                  TagSpaces
-==========================================================================
-Filename->Tag
-%dummy%[%tags%]
-
-Tag->Filename
-%dummy%[%tags%]
-TAGS\$replace(%tags%, ,\)\%_filename%
-
-Filename->Filename
-%1[%2]
-TAGS\$replace(%2, ,\)\%1'['%2']'
-
-
-==========================================================================
-                                  Captures
-==========================================================================
-Filename->Tag
-%genre%\%album%\%title%
-%dummy% - %year% %dummy%[%tags%]
-
-Tag->Filename
-$if($strcmp($left(%_folderpath%,3),C:\),C:\Users\$getenv(USERNAME)\Downloads\,)
-$if($strcmp(%genre%,Captures),%genre%\%album%\%title%$if(%tags%,'['%tags%']',),Othervideo\%title%)
 
 
 ==========================================================================
@@ -109,3 +43,4 @@ $if2(%albumartist%,%artist%)
 %genre%/%audiomd5%
 
 $if(%rating%,$repeat(★,%rating%)$repeat(☆,$sub(5,%rating%)),)
+

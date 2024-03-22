@@ -18,4 +18,5 @@ CAPTURE_NO:GAME_NAME:GAME_DIR
 18:Minecraft:Minecraft
 19:ARK:ARK
 20:Grim Dawn:Grim Dawn
+21:Muck:Muck
 99:Unknown:Unknown
