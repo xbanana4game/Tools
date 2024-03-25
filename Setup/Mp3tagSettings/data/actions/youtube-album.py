@@ -1,6 +1,7 @@
 import mta
 import os
 
+os.chdir('C:\\Users\\'+os.environ.get('USERNAME')+'\\Documents\\mp3tag')
 fc = open('category.txt', 'r', encoding='UTF-8')
 mta_file=mta.mtafile('youtube-album.mta')
 for data in fc:
