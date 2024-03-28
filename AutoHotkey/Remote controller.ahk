@@ -3,7 +3,7 @@
 AppsKey
 Browser_Home
 Browser_Back
-Browser_Search
+Browser_Search::s
 Media_Next
 Media_Prev
 Media_Play_Pause

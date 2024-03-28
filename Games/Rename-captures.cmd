@@ -20,7 +20,7 @@ SET CAPTURES_LIST_FILE=%TOOLS_DIR%\Games\captures.txt
 IF NOT DEFINED CAPTURES_DIR (SET CAPTURES_DIR=%VIDEOS_DIR%\Captures)
 
 MD %VIDEOS_DIR%\Captures
-EXPLORER "%CAPTURES_DIR%"
+REM EXPLORER "%CAPTURES_DIR%"
 
 ECHO ======================================================================
 FOR /F "skip=1 tokens=1,2,3 delims=:" %%C IN (%CAPTURES_LIST_FILE%) DO (
