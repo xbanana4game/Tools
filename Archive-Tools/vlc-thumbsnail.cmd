@@ -36,7 +36,11 @@ IF EXIST %CMD_FILE% (
 	DEL %CMD_FILE%
 )
 Mp3tag.exe /fp:"%DOWNLOADS_DIR%\xxx"
-REM Mp3tag.exe /fn:"%DESKTOP_DIR%\xxx.m3u8"
+IF EXIST "%DESKTOP_DIR%\xxx.m3u8" (
+	Mp3tag.exe /fn:"%DESKTOP_DIR%\xxx.m3u8"
+) ELSE (
+	Mp3tag.exe
+)
 
 EXIT
 CHOICE /C YN /T 3 /D N /M "MOVE *.jpg %MP4_IMG_DIR%"
