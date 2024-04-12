@@ -22,5 +22,6 @@ DIR /B *.jpg >chapter.txt
 
 ECHO RUN vlcjpg-chapter.ppa
 %SAKURA% chapter.txt
+"C:\Program Files (x86)\Drax\Drax\drax.exe"
 EXIT
 

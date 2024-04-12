@@ -38,7 +38,8 @@ IF NOT EXIST %MP4_IMG_DIR% MD %MP4_IMG_DIR%
 IF NOT EXIST %IMG_OUTPUT_DIR% MD %IMG_OUTPUT_DIR%
 
 CALL :ChangeDirectory %MP4_FILES_DIR%
-FOR %%i IN (avi wmv flv mp4 mpge mpg) DO (
+REM FOR %%i IN (avi wmv flv mp4 mpeg mpg) DO (
+FOR %%i IN (mp4) DO (
 	FORFILES /s /m *.%%i /c ^
 	"cmd /c IF NOT EXIST %MP4_IMG_DIR%\\@file.jpg ffmpeg -y -i @path -ss %FFMPGE_OPT_SS% -vframes 1 -f image2 -vf scale=640:-1 %IMG_OUTPUT_DIR%\\@file.jpg"
 	REM Mp3Tag
