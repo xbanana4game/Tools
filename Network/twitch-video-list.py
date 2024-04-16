@@ -5,13 +5,13 @@ from twitchAPI.oauth import UserAuthenticator
 import asyncio
 from datetime import date
 import datetime
+import configparser
 
-
-APP_ID = 'app_id'
-APP_SECRET = 'app_secret'
-USER_SCOPE = [AuthScope.USER_READ_FOLLOWS]
-LOGIN_ID = 'login_id'
-
+config = configparser.ConfigParser()
+config.read('Connection.ini', encoding='utf-8')
+LOGIN_ID = config.get("connection", "LOGIN_ID")
+APP_ID = config.get("connection", "APP_ID")
+APP_SECRET = config.get("connection", "APP_SECRET")
 
 async def twitch_example():
     # initialize the twitch instance, this will by default also create a app authentication for you
@@ -22,6 +22,7 @@ async def twitch_example():
 
 
     # Get My Channel List
+    USER_SCOPE = [AuthScope.USER_READ_FOLLOWS]
     auth = UserAuthenticator(twitch, USER_SCOPE, force_verify=False)
     # this will open your default browser and prompt you with the twitch verification website
     token, refresh_token = await auth.authenticate()
@@ -37,8 +38,8 @@ async def twitch_example():
     
     async for user in twitch.get_users(logins=CHANNEL_LIST):
         count = 0
-        # async for videoInf in twitch.get_videos(user_id=user.id, video_type=VideoType.ARCHIVE, period=TimePeriod.WEEK):
-        async for videoInf in twitch.get_videos(user_id=user.id, video_type=VideoType.ALL, period=TimePeriod.DAY):
+        # video_type=VideoType.ALL|VideoType.ARCHIVE, period=TimePeriod.DAY|TimePeriod.WEEK|TimePeriod.ALL
+	async for videoInf in twitch.get_videos(user_id=user.id, video_type=VideoType.ARCHIVE, period=TimePeriod.WEEK):
             count+=1
             # print('--------------------------------------------------------')
             # print(videoInf.title)
