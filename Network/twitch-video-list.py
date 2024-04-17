@@ -6,6 +6,7 @@ import asyncio
 from datetime import date
 import datetime
 import configparser
+#python -m pip install twitchAPI
 
 config = configparser.ConfigParser()
 config.read('Connection.ini', encoding='utf-8')
@@ -36,26 +37,13 @@ async def twitch_example():
         CHANNEL_LIST.append(ch.broadcaster_login)
     print(CHANNEL_LIST)
     
+    fc.write('user_name,type,viewable,published_at,title,duration,view_count,url\n')
     async for user in twitch.get_users(logins=CHANNEL_LIST):
-        count = 0
         # video_type=VideoType.ALL|VideoType.ARCHIVE, period=TimePeriod.DAY|TimePeriod.WEEK|TimePeriod.ALL
-	async for videoInf in twitch.get_videos(user_id=user.id, video_type=VideoType.ARCHIVE, period=TimePeriod.WEEK):
-            count+=1
-            # print('--------------------------------------------------------')
-            # print(videoInf.title)
-            # print(videoInf.description)
-            # print(videoInf.viewable)
-            # print(videoInf.url)
-            # print(videoInf.type)
-            # print(videoInf.duration)
-            # print(videoInf.view_count)
-            fc.write('{user_name},{type},{viewable},{published_at},{title},{duration},{url}\n'.format(type=videoInf.type, user_name=videoInf.user_name, viewable=videoInf.viewable, title=videoInf.title.replace(',',' '), url=videoInf.url, duration=videoInf.duration, published_at=videoInf.published_at))
-            # print('video_id={},stream_id={},user_id={},user_login={},user_name={}'.format(videoInf.id, videoInf.stream_id, videoInf.user_id, videoInf.user_login, videoInf.user_name))
+        async for videoInf in twitch.get_videos(user_id=user.id, video_type=VideoType.ARCHIVE, period=TimePeriod.MONTH):
+            fc.write('{user_name},{type},{viewable},{published_at},{title},{duration},{view_count},{url}\n'.format(view_count=videoInf.view_count, type=videoInf.type, user_name=videoInf.user_name, viewable=videoInf.viewable, title=videoInf.title.replace(',',' ').replace('\n',' '), url=videoInf.url, duration=videoInf.duration, published_at=videoInf.published_at.replace('+00:00','')))
             print('{user_name},{title},{url}'.format(user_name=videoInf.user_name, viewable=videoInf.viewable, title=videoInf.title, url=videoInf.url, duration=videoInf.duration, published_at=videoInf.published_at))
-            if count >= 100:
-                break
-        # print the ID of your user or do whatever else you want with it
-        #print(user.id)
+
     fc.close()
     await twitch.close()
     
