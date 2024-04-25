@@ -35,11 +35,10 @@ IF EXIST %CMD_FILE% (
 	CALL %CMD_FILE%
 	DEL %CMD_FILE%
 )
-Mp3tag.exe /fp:"%DOWNLOADS_DIR%\xxx"
 IF EXIST "%DESKTOP_DIR%\xxx.m3u8" (
 	Mp3tag.exe /fn:"%DESKTOP_DIR%\xxx.m3u8"
 ) ELSE (
-	Mp3tag.exe
+	Mp3tag.exe /fp:"%DOWNLOADS_DIR%\xxx"
 )
 
 EXIT
