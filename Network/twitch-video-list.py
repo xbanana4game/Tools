@@ -6,6 +6,7 @@ import asyncio
 from datetime import date
 import datetime
 import configparser
+import os
 #python -m pip install twitchAPI
 
 config = configparser.ConfigParser()
@@ -14,12 +15,15 @@ LOGIN_ID = config.get("connection", "LOGIN_ID")
 APP_ID = config.get("connection", "APP_ID")
 APP_SECRET = config.get("connection", "APP_SECRET")
 CHANNEL_LIST=eval(config["channel"]["CHANNEL_LIST"])
+config_period=eval(config["channel"]["PERIOD"])
+config_videotype=eval(config["channel"]["VIDEOTYPE"])
+
 
 async def twitch_example():
     # initialize the twitch instance, this will by default also create a app authentication for you
     twitch = await Twitch(APP_ID, APP_SECRET)
     today=datetime.datetime.now()
-    fc = open('twitch-'+today.strftime("%Y%m%d%H%M")+'.csv', 'w', encoding='utf-8-sig')
+    fc = open('C:\\Users\\'+os.getenv('USERNAME')+'\\Downloads\\'+'twitch-'+today.strftime("%Y%m%d%H%M")+'.csv', 'w', encoding='utf-8-sig')
     myuser = await first(twitch.get_users(logins=LOGIN_ID))
 
 
@@ -38,11 +42,12 @@ async def twitch_example():
             CHANNEL_LIST.append(ch.broadcaster_login)
     print(CHANNEL_LIST)
     
-    fc.write('user_name,type,viewable,published_at,title,duration,view_count,url\n')
+    #fc.write('user_name,type,viewable,published_at,title,duration,view_count,url\n')
+    fc.write('user_name,published_at,title,duration,view_count,url\n')
     async for user in twitch.get_users(logins=CHANNEL_LIST):
-        # video_type=VideoType.ALL|VideoType.ARCHIVE, period=TimePeriod.DAY|TimePeriod.WEEK|TimePeriod.ALL
-        async for videoInf in twitch.get_videos(user_id=user.id, video_type=VideoType.ARCHIVE, period=TimePeriod.DAY):
-            fc.write('{user_name},{type},{viewable},{published_at},{title},{duration},{view_count},{url}\n'.format(view_count=videoInf.view_count, type=videoInf.type, user_name=videoInf.user_name, viewable=videoInf.viewable, title=videoInf.title.replace(',',' ').replace('\n',' '), url=videoInf.url, duration=videoInf.duration, published_at=videoInf.published_at.strftime("%Y-%m-%d %H:%M:%S")))
+        async for videoInf in twitch.get_videos(user_id=user.id, video_type=config_videotype, period=config_period):
+            #fc.write('{user_name},{type},{viewable},{published_at},{title},{duration},{view_count},{url}\n'.format(view_count=videoInf.view_count, type=videoInf.type, user_name=videoInf.user_name, viewable=videoInf.viewable, title=videoInf.title.replace(',',' ').replace('\n',' '), url=videoInf.url, duration=videoInf.duration, published_at=videoInf.published_at.strftime("%Y-%m-%d %H:%M:%S")))
+            fc.write('{user_name},{published_at},{title},{duration},{view_count},{url}\n'.format(view_count=videoInf.view_count, type=videoInf.type, user_name=videoInf.user_name, viewable=videoInf.viewable, title=videoInf.title.replace(',',' ').replace('\n',' '), url=videoInf.url, duration=videoInf.duration, published_at=videoInf.published_at.strftime("%Y-%m-%d")))
             print('{user_name},{title},{url}'.format(user_name=videoInf.user_name, viewable=videoInf.viewable, title=videoInf.title, url=videoInf.url, duration=videoInf.duration, published_at=videoInf.published_at))
 
     fc.close()

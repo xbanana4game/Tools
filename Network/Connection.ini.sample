@@ -4,6 +4,10 @@ APP_ID=XXXXX
 APP_SECRET=XXXXX
 
 [channel]
+# TimePeriod.DAY|TimePeriod.WEEK|TimePeriod.ALL
+PERIOD=TimePeriod.WEEK
+# VideoType.ALL|VideoType.ARCHIVE
+VIDEOTYPE=VideoType.ARCHIVE
 CHANNEL_LIST=[]
 
 [channel-example]
