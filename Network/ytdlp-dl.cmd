@@ -50,7 +50,7 @@ FOR /F %%i IN (%DLURL_LIST%) DO (
 		ECHO %%i>>%DLURL_LIST%.tmp
 		ECHO;>>%DLURL_LIST%.tmp
 	) ELSE (
-		ECHO Skip DL: %%i
+		ECHO Skip DL: %%i>>"%DLURL_HISTORY%"
 	)
 )
 IF EXIST %DLURL_LIST%.tmp MOVE %DLURL_LIST%.tmp %DLURL_LIST%
