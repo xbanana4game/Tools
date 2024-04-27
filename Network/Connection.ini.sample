@@ -3,6 +3,11 @@ LOGIN_ID=XXXXX
 APP_ID=XXXXX
 APP_SECRET=XXXXX
 
+[twitch]
+GAME=['Overwatch 2','just chatting']
+#LANG=None
+LANG='JA'
+
 [channel]
 # TimePeriod.DAY|TimePeriod.WEEK|TimePeriod.ALL
 PERIOD=TimePeriod.WEEK

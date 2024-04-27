@@ -45,7 +45,7 @@ async def twitch_example():
     #fc.write('user_name,type,viewable,published_at,title,duration,view_count,url\n')
     fc.write('user_name,published_at,title,duration,view_count,url\n')
     async for user in twitch.get_users(logins=CHANNEL_LIST):
-        async for videoInf in twitch.get_videos(user_id=user.id, video_type=config_videotype, period=config_period):
+        async for videoInf in twitch.get_videos(user_id=user.id, period=config_period, video_type=config_videotype):
             #fc.write('{user_name},{type},{viewable},{published_at},{title},{duration},{view_count},{url}\n'.format(view_count=videoInf.view_count, type=videoInf.type, user_name=videoInf.user_name, viewable=videoInf.viewable, title=videoInf.title.replace(',',' ').replace('\n',' '), url=videoInf.url, duration=videoInf.duration, published_at=videoInf.published_at.strftime("%Y-%m-%d %H:%M:%S")))
             fc.write('{user_name},{published_at},{title},{duration},{view_count},{url}\n'.format(view_count=videoInf.view_count, type=videoInf.type, user_name=videoInf.user_name, viewable=videoInf.viewable, title=videoInf.title.replace(',',' ').replace('\n',' '), url=videoInf.url, duration=videoInf.duration, published_at=videoInf.published_at.strftime("%Y-%m-%d")))
             print('{user_name},{title},{url}'.format(user_name=videoInf.user_name, viewable=videoInf.viewable, title=videoInf.title, url=videoInf.url, duration=videoInf.duration, published_at=videoInf.published_at))
