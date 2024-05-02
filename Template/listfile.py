@@ -5,7 +5,8 @@ import re
 # test.py
 # import listfile
 # a = listfile.favorite('playlist.txt')
-# print(a.getPlaylistURLs('https://www.twitch.tv/'))
+# userlist = a.getPlaylistURLs('https://www.twitch.tv/')
+# print('LIST=%s'%userlist)
 
 
 class favorite:

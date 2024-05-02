@@ -142,7 +142,12 @@ REM ======================================================================
 	EXIT /B
 
 :MAKE_LIST_FILE
-	TREE /F /A %ARCHIVE_ROOT_DIR_NAME% > %ARCHIVE_PROFILE%.txt
+	IF EXIST %ARCHIVE_PROFILE%.txt DEL %ARCHIVE_PROFILE%.txt
+REM	TREE /F /A %ARCHIVE_ROOT_DIR_NAME% > %ARCHIVE_PROFILE%.txt
+	DIR /B /S %ARCHIVE_ROOT_DIR_NAME% > %ARCHIVE_PROFILE%.txt.tmp
+	%TOOLS_DIR%\Archive-Tools\remove_driveletter.py %ARCHIVE_PROFILE%.txt.tmp %ARCHIVE_PROFILE%.txt
+	DEL %ARCHIVE_PROFILE%.txt.tmp
+	
 	COPY %ARCHIVE_PROFILE%.txt %ARCHIVE_PROFILE%@%yyyy%%mm%%dd%.txt
 	7z a -tzip  %ARCHIVE_ROOT_DIR_NAME%\Settings@%ARCHIVE_PROFILE%.zip  %ARCHIVE_PATH%\ArchiveOptions.cmd  %ARCHIVE_PROFILE_FILE% %ARCHIVE_PROFILE%@%yyyy%%mm%%dd%.txt
 	NOTEPAD %ARCHIVE_PROFILE%@%yyyy%%mm%%dd%.txt
