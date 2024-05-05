@@ -19,6 +19,12 @@ IF %dd% GTR 10 SET week=2
 IF %dd% GTR 20 SET week=3
 
 REM ----------------------------------------------------------------------
+REM INSTALL
+REM ----------------------------------------------------------------------
+IF NOT DEFINED NASDOMAIN SET NASDOMAIN=%USERPROFILE%\NAS
+IF NOT DEFINED JD2_DL SET JD2_DL=%USERPROFILE%\Documents\JDownloader 
+
+REM ----------------------------------------------------------------------
 REM Common
 REM ----------------------------------------------------------------------
 SET TOOLS_INSTALL_DIR=%USERPROFILE%\.Tools
