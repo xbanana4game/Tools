@@ -42,6 +42,11 @@ REM ======================================================================
 		rundll32 sysdm.cpl,EditEnvironmentVariables
 		PAUSE
 	)
+	IF NOT DEFINED CLOUD_DRIVE (
+		ECHO CLOUD_DRIVE
+		rundll32 sysdm.cpl,EditEnvironmentVariables
+		PAUSE
+	)
 	
 	EXIT /B
 	
