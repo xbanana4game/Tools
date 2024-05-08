@@ -10,7 +10,7 @@ REM ---------- ytdlp-dl.cmd(SettingsOptions.cmd) ----------
 REM SET VIDEO_OUTPUT_DIR=%USERPROFILE%\Videos\yt-dlp
 REM SET YTDLP_CONFIG_FILE=%VIDEOS_DIR%\yt-dlp.conf
 REM SET YTDLP_CONFIG_FILE=%CLOUD_DRIVE%\Cloud-Tools\yt-dlp\yt-dlp.conf
-REM SET DLURL_HISTORY=%VIDEOS_DIR%\dlurl.log
+REM SET DLURL_HISTORY=%VIDEOS_DIR%\history.log
 REM SET DLURL_HISTORY=%CLOUD_DRIVE%\Cloud-Tools\yt-dlp\history.log
 
 

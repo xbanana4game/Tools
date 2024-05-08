@@ -28,12 +28,12 @@ async def twitch_example():
     myuser = await first(twitch.get_users(logins=LOGIN_ID))
 
     fc = open('C:\\Users\\'+os.getenv('USERNAME')+'\\Downloads\\'+'twitch-game-'+today.strftime("%Y%m%d%H%M")+'.csv', 'w', encoding='utf-8-sig')
-    fc.write('game,user_name,published_at,title,duration,view_count,url\n')
+    fc.write('dl,game,user_name,published_at,title,duration,view_count,url\n')
     async for game in twitch.get_games(names=config_gamename):
         print(game.id)
         async for videoInf in twitch.get_videos(game_id=game.id, language=config_lang, period=config_period, video_type=config_videotype, sort=SortMethod.VIEWS):
             print('{game},{user_name},{title},{url}'.format(game=game.name, user_name=videoInf.user_name, viewable=videoInf.viewable, title=videoInf.title, url=videoInf.url, duration=videoInf.duration, published_at=videoInf.published_at))
-            fc.write('{game},{user_name},{published_at},{title},{duration},{view_count},{url}\n'.format(game=game.name, view_count=videoInf.view_count, type=videoInf.type, user_name=videoInf.user_name, viewable=videoInf.viewable, title=videoInf.title.replace(',',' ').replace('\n',' '), url=videoInf.url, duration=videoInf.duration, published_at=videoInf.published_at.strftime("%Y-%m-%d")))
+            fc.write('0,{game},{user_name},{published_at},{title},{duration},{view_count},{url}\n'.format(game=game.name, view_count=videoInf.view_count, type=videoInf.type, user_name=videoInf.user_name, viewable=videoInf.viewable, title=videoInf.title.replace(',',' ').replace('\n',' '), url=videoInf.url, duration=videoInf.duration, published_at=videoInf.published_at.strftime("%Y-%m-%d")))
     fc.close()
 
 
