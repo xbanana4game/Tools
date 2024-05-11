@@ -51,7 +51,6 @@ FOR /F %%i IN (%DLURL_LIST%) DO (
 	IF ERRORLEVEL 1 (
 		ECHO Start DL: %%i
 		ECHO %%i>>%DLURL_LIST%.tmp
-		ECHO;>>%DLURL_LIST%.tmp
 	) ELSE (
 		ECHO Skip DL: %%i>>"%DLURL_HISTORY%"
 	)
