@@ -1,0 +1,5 @@
+[site]
+SITE_NAME=test
+MAX_PAGE_NUMBER=3
+EPISODE_SEARCH=\[.*\]
+URL_BASE=https://test/page/{number}/
