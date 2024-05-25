@@ -11,7 +11,7 @@ import csv
 #python -m pip install twitchAPI
 
 config = configparser.ConfigParser()
-config.read('Connection.ini', encoding='utf-8')
+config.read(os.getenv('CONFIG_DIR')+'\\Connection.ini', encoding='utf-8')
 LOGIN_ID = config.get("connection", "LOGIN_ID")
 APP_ID = config.get("connection", "APP_ID")
 APP_SECRET = config.get("connection", "APP_SECRET")

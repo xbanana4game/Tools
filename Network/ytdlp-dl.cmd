@@ -12,9 +12,8 @@ REM SET YTDLP_PROFILE=default
 REM SET DLURL_LIST=%VIDEOS_DIR%\yt-dlp_%yyyy%%mm%%dd%-%hh%%mn%%ss%.txt
 REM SET VIDEO_OUTPUT_DIR=%USERPROFILE%\Videos\yt-dlp
 REM SET YTDLP_CONFIG_FILE=%VIDEOS_DIR%\yt-dlp.conf
-REM SET YTDLP_CONFIG_FILE=%CLOUD_DRIVE%\Cloud-Tools\yt-dlp\yt-dlp.conf
+REM SET YTDLP_CONFIG_FILE=%CONFIG_DIR%\yt-dlp.conf
 REM SET DLURL_HISTORY_DIR=%VIDEOS_DIR%
-REM SET DLURL_HISTORY_DIR=%CLOUD_DRIVE%\Cloud-Tools\yt-dlp
 
 
 REM ======================================================================

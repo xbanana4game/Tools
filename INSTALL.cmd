@@ -42,8 +42,8 @@ REM ======================================================================
 		rundll32 sysdm.cpl,EditEnvironmentVariables
 		PAUSE
 	)
-	IF NOT DEFINED CLOUD_DRIVE (
-		ECHO CLOUD_DRIVE
+	IF NOT DEFINED CONFIG_DIR (
+		ECHO CONFIG_DIR
 		rundll32 sysdm.cpl,EditEnvironmentVariables
 		PAUSE
 	)
