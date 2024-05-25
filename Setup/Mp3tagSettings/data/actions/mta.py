@@ -19,6 +19,10 @@ class mtafile:
     def close(self):
         self.f.close()
         return
+        
+    def set_start_number(self, value):
+        self.exec_num = value
+        return
 
     def format_value(self, field, value):
         out='[#'+str(self.exec_num)+']\n'

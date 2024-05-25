@@ -23,7 +23,7 @@ async def twitch_example():
     # initialize the twitch instance, this will by default also create a app authentication for you
     twitch = await Twitch(APP_ID, APP_SECRET)
     today=datetime.datetime.now()
-    fc = open('C:\\Users\\'+os.getenv('USERNAME')+'\\Downloads\\'+'twitch-'+today.strftime("%Y%m%d%H%M")+'.csv', 'w', encoding='utf-8-sig')
+    fc = open('C:\\Users\\'+os.getenv('USERNAME')+'\\Downloads\\'+'twitch-channel_'+today.strftime("%Y%m%d%H%M")+'.csv', 'w', encoding='utf-8-sig')
     myuser = await first(twitch.get_users(logins=LOGIN_ID))
 
 

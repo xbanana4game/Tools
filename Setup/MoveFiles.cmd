@@ -118,6 +118,7 @@ REM ======================================================================
 		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\%TARGET_DIR%\%TARGET_DIR%-%yyyy%%mm%%dd%.m3u8 (
 			ECHO m3u2wpl
 			%SAKURA% %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\%TARGET_DIR%\%TARGET_DIR%-%yyyy%%mm%%dd%.m3u8
+			MD %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\__playlist
 		)
 		CALL :RENAME_PLAYLIST_FILES %TARGET_DIR%
 		EXIT /B
