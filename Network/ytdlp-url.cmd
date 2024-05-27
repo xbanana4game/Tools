@@ -9,7 +9,7 @@ CALL %USERPROFILE%\.Tools\Settings.cmd
 REM ---------- ytdlp-dl.cmd(SettingsOptions.cmd) ----------
 REM SET VIDEO_OUTPUT_DIR=%USERPROFILE%\Videos\yt-dlp
 REM SET YTDLP_CONFIG_FILE=%VIDEOS_DIR%\yt-dlp.conf
-REM SET YTDLP_CONFIG_FILE=%CONFIG_DIR%\yt-dlp.conf
+REM SET YTDLP_CONFIG_FILE=%CONFIG_DIR%\%~n0.conf
 REM SET DLURL_HISTORY_DIR=%VIDEOS_DIR%
 
 

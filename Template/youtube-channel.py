@@ -11,6 +11,7 @@ config.read(os.getenv('CONFIG_DIR')+'\\youtube.ini', encoding='utf-8')
 YOUTUBE_API_KEY = config.get("youtube", "YOUTUBE_API_KEY")
 PUBLISHED_AFTER = config.get("youtube", "PUBLISHED_AFTER")
 MAXRESULTS = config.get("youtube", "MAXRESULTS")
+VIDEODURATION = config.get("youtube", "VIDEODURATION")
 
 today=datetime.datetime.now()
 fc = open(os.getenv('USERPROFILE')+'\\Downloads\\'+'youtube-'+today.strftime("%Y%m%d%H%M")+'.csv', 'w', encoding='utf-8-sig', newline="")
@@ -42,6 +43,7 @@ for CHANNEL_ID in CHANNEL_ID_LIST:
                 channelId = CHANNEL_ID,
                 publishedAfter = PUBLISHED_AFTER,
                 maxResults = MAXRESULTS,
+                videoDuration = VIDEODURATION,
                 type="video",
                 order = "date"
             ).execute()
@@ -52,6 +54,7 @@ for CHANNEL_ID in CHANNEL_ID_LIST:
                 publishedAfter = PUBLISHED_AFTER,
                 maxResults = MAXRESULTS,
                 pageToken = pageToken,
+                videoDuration = VIDEODURATION,
                 type="video",
                 order = "date"
             ).execute()

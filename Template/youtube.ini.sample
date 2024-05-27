@@ -1,0 +1,19 @@
+[youtube]
+YOUTUBE_API_KEY=xxxxxxxxxxxxxxxxxx
+PUBLISHED_AFTER=2024-01-01T00:00:00Z
+MAXRESULTS=50
+
+# any – 検索結果を再生時間に基づいてフィルタしません。これがデフォルト値です。
+# long – 20 分を超える動画のみを含めます。
+# medium – 長さが 4 ～ 20 分の動画のみを含めます。
+# short – 4 分未満の動画のみを含めます。
+VIDEODURATION=any
+
+
+
+TYPE=video
+PUBLISHEDBEFORE=1970-01-01T00:00:00Z
+ORDER=date
+EVENTTYPE=completed
+
+
