@@ -27,7 +27,7 @@ reader = csv.reader(fr)
 fr.readline()
 for row in reader:
     if len(row) == 3:
-        print(row)
+        print(row[2])
         CHANNEL_ID_LIST.append(row[0])
         CHANNEL[row[0]]=row[2]
 
