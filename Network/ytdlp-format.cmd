@@ -7,7 +7,8 @@ REM ======================================================================
 IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
 REM ---------- ytdlp-dl.cmd(SettingsOptions.cmd) ----------
-SET YTDLP_OPT=-v -F
+REM SET YTDLP_OPT=-v -F
+REM SET YTDLP_OPT=--write-info-json
 REM SET VIDEO_OUTPUT_DIR=%USERPROFILE%\Videos\yt-dlp
 
 
@@ -18,6 +19,7 @@ REM
 REM ======================================================================
 IF NOT DEFINED YTDLP_PROFILE (SET YTDLP_PROFILE=default)
 IF NOT DEFINED VIDEO_OUTPUT_DIR SET VIDEO_OUTPUT_DIR=%USERPROFILE%\Videos\yt-dlp
+IF NOT DEFINED YTDLP_OPT SET YTDLP_OPT=-v -F
 
 IF NOT "%1"=="" (
 	SET YTDLP_PROFILE_FILE=%~1

@@ -27,7 +27,7 @@ async def twitch_example():
     today=datetime.datetime.now()
     myuser = await first(twitch.get_users(logins=LOGIN_ID))
 
-    fc = open('C:\\Users\\'+os.getenv('USERNAME')+'\\Downloads\\'+'twitch-game_'+today.strftime("%Y%m%d%H%M")+'.csv', 'w', encoding='utf-8-sig')
+    fc = open(os.getenv('USERPROFILE')+'\\Downloads\\'+'twitch-game_'+today.strftime("%Y%m%d%H%M")+'.csv', 'w', encoding='utf-8-sig')
     fc.write('dl,game,user_name,published_at,title,duration,view_count,url\n')
     async for game in twitch.get_games(names=config_gamename):
         print(game.id)

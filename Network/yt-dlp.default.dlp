@@ -41,6 +41,7 @@
 #--parse-metadata '%(categories.0)s:%(meta_genre)s'
 #--parse-metadata '%(chapters.0.title|)s,%(chapters.1.title|)s:%(meta_description)s'
 
+#--parse-metadata post_process:"%(title)s(%(protocol)s %(format_id)s %(width)sx%(height)s %(fps)sfps %(vcodec)s %(vbr)dkbps %(acodec)s %(abr)dkbps):%(meta_title)s"
 #--parse-metadata '%(title)s:%(meta_title)s'
 #--parse-metadata '%(upload_date>%Y-%m-%d)s:%(meta_date)s'
 #--parse-metadata 'description:%(meta_description)s'
