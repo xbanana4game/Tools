@@ -7,6 +7,8 @@ from datetime import date
 import datetime
 import configparser
 import os
+import subprocess
+import time
 #python -m pip install twitchAPI
 
 config = configparser.ConfigParser()
@@ -14,16 +16,25 @@ config.read(os.getenv('CONFIG_DIR')+'\\Connection.ini', encoding='utf-8')
 LOGIN_ID = config.get("connection", "LOGIN_ID")
 APP_ID = config.get("connection", "APP_ID")
 APP_SECRET = config.get("connection", "APP_SECRET")
-CHANNEL_LIST=eval(config["channel"]["CHANNEL_LIST"])
 config_period=eval(config["channel"]["PERIOD"])
 config_videotype=eval(config["channel"]["VIDEOTYPE"])
+
+channel_listfile=os.getenv('CONFIG_DIR')+'\\twitch_channel.csv.txt'
+proc = subprocess.Popen([r"c:\Windows\system32\notepad.exe", channel_listfile])
+
+CHANNEL_LIST=[]
+CHANNEL_NAME = input('CHANNEL_NAME: ')
+if CHANNEL_NAME == '':
+    CHANNEL_LIST=eval(config["channel"]["CHANNEL_LIST"])
+else:
+    CHANNEL_LIST.append(CHANNEL_NAME)
 
 
 async def twitch_example():
     # initialize the twitch instance, this will by default also create a app authentication for you
     twitch = await Twitch(APP_ID, APP_SECRET)
     today=datetime.datetime.now()
-    fc = open(os.getenv('USERPROFILE')+'\\Downloads\\'+'twitch-channel_'+today.strftime("%Y%m%d%H%M")+'.csv', 'w', encoding='utf-8-sig')
+    fc = open(os.getenv('USERPROFILE')+'\\Downloads\\'+'twitch-videos_'+today.strftime("%Y%m%d%H%M")+'.csv', 'w', encoding='utf-8-sig')
     myuser = await first(twitch.get_users(logins=LOGIN_ID))
 
 
@@ -37,9 +48,12 @@ async def twitch_example():
 
     channel = await twitch.get_followed_channels(user_id=myuser.id)
     if len(CHANNEL_LIST)==0:
+        f_channel = open(os.getenv('USERPROFILE')+'\\Desktop\\'+'twitch-channel_'+today.strftime("%Y%m%d%H%M")+'.csv', 'w', encoding='utf-8-sig')
         async for ch in channel:
-            print('{},{},{}'.format(ch.broadcaster_id, ch.broadcaster_login, ch.broadcaster_name))
+            print('{id},{login},{name}'.format(id=ch.broadcaster_id, login=ch.broadcaster_login, name=ch.broadcaster_name))
+            f_channel.write('{name},{login},{id}\n'.format(id=ch.broadcaster_id, login=ch.broadcaster_login, name=ch.broadcaster_name))
             CHANNEL_LIST.append(ch.broadcaster_login)
+        f_channel.close()
     print(CHANNEL_LIST)
     
     #fc.write('user_name,type,viewable,published_at,title,duration,view_count,url\n')

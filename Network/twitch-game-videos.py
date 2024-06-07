@@ -17,9 +17,22 @@ APP_SECRET = config.get("connection", "APP_SECRET")
 CHANNEL_LIST=eval(config["channel"]["CHANNEL_LIST"])
 config_period=eval(config["channel"]["PERIOD"])
 config_videotype=eval(config["channel"]["VIDEOTYPE"])
+config_gamename = []
 config_gamename=eval(config["twitch"]["GAME"])
-config_lang=eval(config["twitch"]["LANG"])
+if len(config_gamename) == 0:
+    gamename = input('GAME NAME(just chatting): ')
+    if gamename == '':
+        gamename='just chatting'
+    config_gamename.append(gamename)
+print(config_gamename)
 
+config_lang = input('LANG(JA,None): ')
+if config_lang == '':
+    config_lang=eval(config["twitch"]["LANG"])
+elif config_lang == 'None':
+    config_lang=None
+
+print(config_lang)
 
 async def twitch_example():
     # initialize the twitch instance, this will by default also create a app authentication for you
@@ -27,15 +40,14 @@ async def twitch_example():
     today=datetime.datetime.now()
     myuser = await first(twitch.get_users(logins=LOGIN_ID))
 
-    fc = open(os.getenv('USERPROFILE')+'\\Downloads\\'+'twitch-game_'+today.strftime("%Y%m%d%H%M")+'.csv', 'w', encoding='utf-8-sig')
-    fc.write('dl,game,user_name,published_at,title,duration,view_count,url\n')
     async for game in twitch.get_games(names=config_gamename):
+        fc = open(os.getenv('USERPROFILE')+'\\Downloads\\'+'twitch-'+game.name+'_'+today.strftime("%Y%m%d%H%M")+'.csv', 'w', encoding='utf-8-sig')
+        fc.write('dl,game,user_name,published_at,title,duration,view_count,url\n')
         print(game.id)
         async for videoInf in twitch.get_videos(game_id=game.id, language=config_lang, period=config_period, video_type=config_videotype, sort=SortMethod.VIEWS):
             print('{game},{user_name},{title},{url}'.format(game=game.name, user_name=videoInf.user_name, viewable=videoInf.viewable, title=videoInf.title, url=videoInf.url, duration=videoInf.duration, published_at=videoInf.published_at))
             fc.write('0,{game},{user_name},{published_at},{title:.30},{duration},{view_count},{url}\n'.format(game=game.name, view_count=videoInf.view_count, type=videoInf.type, user_name=videoInf.user_name, viewable=videoInf.viewable, title=videoInf.title.replace(',',' ').replace('\n',' '), url=videoInf.url, duration=videoInf.duration, published_at=videoInf.published_at.strftime("%Y-%m-%d")))
-    fc.close()
-
+        fc.close()
 
     await twitch.close()
     

@@ -5,9 +5,20 @@ import os
 import csv
 from datetime import date
 import datetime
+import subprocess
+import time
 
 config = configparser.ConfigParser()
-config.read(os.getenv('CONFIG_DIR')+'\\youtube.ini', encoding='utf-8')
+config_filename=os.getenv('CONFIG_DIR')+'\\youtube.ini'
+proc = subprocess.Popen([r"c:\Windows\system32\notepad.exe", config_filename])
+while True:
+    return_code = proc.poll()
+    if return_code is None:
+        time.sleep(3)
+    else:
+        break
+         
+config.read(config_filename, encoding='utf-8')
 YOUTUBE_API_KEY = config.get("youtube", "YOUTUBE_API_KEY")
 PUBLISHED_AFTER = config.get("youtube", "PUBLISHED_AFTER")
 MAXRESULTS = config.get("youtube", "MAXRESULTS")
@@ -20,9 +31,18 @@ writer.writerow(['dl','channel','publishedAt','title','url'])
 
 youtube = build('youtube', 'v3', developerKey=YOUTUBE_API_KEY)
 
+channel_listfile=os.getenv('CONFIG_DIR')+'\\youtube_channel.csv'
+proc = subprocess.Popen([r"c:\Windows\system32\notepad.exe", channel_listfile])
+while True:
+    return_code = proc.poll()
+    if return_code is None:
+        time.sleep(3)
+    else:
+        break
+
 CHANNEL_ID_LIST=[]
 CHANNEL={}
-fr=open(os.getenv('CONFIG_DIR')+'\\youtube_channel.csv', 'r', encoding='utf-8')
+fr=open(channel_listfile, 'r', encoding='utf-8')
 reader = csv.reader(fr)
 fr.readline()
 for row in reader:
