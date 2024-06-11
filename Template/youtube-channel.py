@@ -8,30 +8,12 @@ import datetime
 import subprocess
 import time
 
-config = configparser.ConfigParser()
+# SETTINGS
 config_filename=os.getenv('CONFIG_DIR')+'\\youtube.ini'
-proc = subprocess.Popen([r"c:\Windows\system32\notepad.exe", config_filename])
-while True:
-    return_code = proc.poll()
-    if return_code is None:
-        time.sleep(3)
-    else:
-        break
-         
-config.read(config_filename, encoding='utf-8')
-YOUTUBE_API_KEY = config.get("youtube", "YOUTUBE_API_KEY")
-PUBLISHED_AFTER = config.get("youtube", "PUBLISHED_AFTER")
-MAXRESULTS = config.get("youtube", "MAXRESULTS")
-VIDEODURATION = config.get("youtube", "VIDEODURATION")
-
-today=datetime.datetime.now()
-fc = open(os.getenv('USERPROFILE')+'\\Downloads\\'+'youtube-'+today.strftime("%Y%m%d%H%M")+'.csv', 'w', encoding='utf-8-sig', newline="")
-writer = csv.writer(fc)
-writer.writerow(['dl','channel','publishedAt','title','url'])
-
-youtube = build('youtube', 'v3', developerKey=YOUTUBE_API_KEY)
-
+channel_subscribe=os.getenv('CONFIG_DIR')+'\\登録チャンネル.csv.txt'
 channel_listfile=os.getenv('CONFIG_DIR')+'\\youtube_channel.csv'
+subprocess.Popen([r"c:\Windows\system32\notepad.exe", config_filename])
+subprocess.Popen([r"c:\Windows\system32\notepad.exe", channel_subscribe])
 proc = subprocess.Popen([r"c:\Windows\system32\notepad.exe", channel_listfile])
 while True:
     return_code = proc.poll()
@@ -40,6 +22,21 @@ while True:
     else:
         break
 
+# READ CONFIG
+config = configparser.ConfigParser()
+config.read(config_filename, encoding='utf-8')
+YOUTUBE_API_KEY = config.get("youtube", "YOUTUBE_API_KEY")
+PUBLISHED_AFTER = config.get("youtube", "PUBLISHED_AFTER")
+MAXRESULTS = config.get("youtube", "MAXRESULTS")
+VIDEODURATION = config.get("youtube", "VIDEODURATION")
+
+# OUTPUT CSV
+today=datetime.datetime.now()
+fc = open(os.getenv('USERPROFILE')+'\\Downloads\\'+'youtube-'+today.strftime("%Y%m%d%H%M")+'.csv', 'w', encoding='utf-8-sig', newline="")
+writer = csv.writer(fc)
+writer.writerow(['dl','channel','publishedAt','title','url'])
+
+# SET CHANNEL
 CHANNEL_ID_LIST=[]
 CHANNEL={}
 fr=open(channel_listfile, 'r', encoding='utf-8')
@@ -53,6 +50,8 @@ for row in reader:
 
 fr.close()
 
+# YOUTUBE API
+youtube = build('youtube', 'v3', developerKey=YOUTUBE_API_KEY)
 for CHANNEL_ID in CHANNEL_ID_LIST:
     page = 1
     pageToken = None

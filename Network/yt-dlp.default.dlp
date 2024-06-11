@@ -22,6 +22,8 @@
 #-S "res:720,ext:mp4,abr~64,+size"
 #-S "ext:mp4,ext:m4a,codec:avc:m4a"
 #-S +size,+br,+res,+fps
+#vcodec: Video Codec (av01 > vp9.2 > vp9 > h265 > h264 > vp8 > h263 > theora > other)
+#-S "res:144,vcodec:vp9,ext:mp4,+abr,+size"
 --console-title
 
 

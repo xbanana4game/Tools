@@ -8,7 +8,7 @@ IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
 REM ---------- ytdlp-dl.cmd(SettingsOptions.cmd) ----------
 REM SET YTDLP_OPT=-v -F
-REM SET YTDLP_OPT=--write-info-json
+REM SET FORMAT_OPTION=--write-info-json
 REM SET VIDEO_OUTPUT_DIR=%USERPROFILE%\Videos\yt-dlp
 
 
@@ -35,13 +35,7 @@ TYPE yt-dlp.conf
 :DL_START
 SET /P DOWNLOAD_URL="URL: "
 REM SET /P FORMAT_OPTION="FORMAT_OPTION: "
-REM FINDSTR "%DOWNLOAD_URL%" %VIDEOS_DIR%\dlurl.log
-REM if %ERRORLEVEL% EQU 0 (
-	REM ECHO Already downloaded.
-	REM GOTO :DL_START
-REM )
 yt-dlp.exe %YTDLP_OPT% %FORMAT_OPTION% %DOWNLOAD_URL%
-ECHO %DOWNLOAD_URL%>>%VIDEOS_DIR%\dlurl.log
 GOTO :DL_START
 
 EXIT
