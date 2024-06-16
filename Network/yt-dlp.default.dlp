@@ -1,16 +1,17 @@
-#--download-sections "*10:15-inf"
-#--download-sections "*0:00:00-0:00:00"
-#--download-sections "game"
+##########################################################################
+# SETTINGS
+##########################################################################
 #--concurrent-fragments 3
 #--ffmpeg-location "C:\App\ffmpeg-master-latest-win64-gpl\bin"
-
+--console-title
 
 ##########################################################################
 # INPUT
 ##########################################################################
-#-f "bv,ba"
-#-f "bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4] / bv*+ba/b"
-
+#--download-sections "*10:15-inf"
+#--download-sections "*0:00:00-0:00:00"
+#--download-sections "game"
+#WARNING: webm doesn't support embedding a thumbnail, mkv will be used
 #-S "res:144,ext:mp4,+br,+size"
 #-S "res:144,ext:mp4,fps:15"
 #-S "res:160,ext:mp4"
@@ -24,7 +25,24 @@
 #-S +size,+br,+res,+fps
 #vcodec: Video Codec (av01 > vp9.2 > vp9 > h265 > h264 > vp8 > h263 > theora > other)
 #-S "res:144,vcodec:vp9,ext:mp4,+abr,+size"
---console-title
+
+
+##########################################################################
+# OUTPUT
+##########################################################################
+#-f "bv,ba"
+# Download the best mp4 video available, or the best video if no mp4 available
+# $ yt-dlp -f "bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4] / bv*+ba/b"
+# Download and merge the best video-only format and the best audio-only format,
+# or download the best combined format if video-only format is not available
+# $ yt-dlp -f "bv+ba/b"
+# Download best format that contains video,
+# and if it doesn't already have an audio stream, merge it with best audio-only format
+# $ yt-dlp -f "bv*+ba/b"
+-f "bestvideo+bestaudio/b"
+#-f ba[format_note!*=drc]
+--merge-output-format mp4
+--write-description
 
 
 ##########################################################################
@@ -56,7 +74,7 @@
 #--parse-metadata '%(upload_date>%Y-%m-%d)s:%(meta_date)s'
 
 # ARTIST
-#--parse-metadata 'artist:%(meta_artist)s'
+#--parse-metadata '%(uploader)s:%(meta_artist)s'
 
 # GENRE
 #--parse-metadata '%(categories.0)s:%(meta_genre)s'

@@ -7,7 +7,11 @@ from datetime import date
 import datetime
 import configparser
 import os
-#python -m pip install twitchAPI
+import subprocess
+import time
+
+game_listfile=os.getenv('CONFIG_DIR')+'\\twitch-top-games.csv.txt'
+proc = subprocess.Popen([r"c:\Windows\system32\notepad.exe", game_listfile])
 
 config = configparser.ConfigParser()
 config.read(os.getenv('CONFIG_DIR')+'\\Connection.ini', encoding='utf-8')
