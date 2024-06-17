@@ -28,11 +28,13 @@ if len(config_gamename) == 0:
     if gamename == '':
         gamename='just chatting'
     config_gamename.append(gamename)
-print(config_gamename)
+print(config_gamename[0])
 
+config_lang_default=eval(config["twitch"]["LANG"])
+print(config_lang_default)
 config_lang = input('LANG(JA,None): ')
 if config_lang == '':
-    config_lang=eval(config["twitch"]["LANG"])
+    config_lang=config_lang_default
 elif config_lang == 'None':
     config_lang=None
 
