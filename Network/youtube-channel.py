@@ -30,11 +30,8 @@ PUBLISHED_AFTER = config.get("youtube", "PUBLISHED_AFTER")
 MAXRESULTS = config.get("youtube", "MAXRESULTS")
 VIDEODURATION = config.get("youtube", "VIDEODURATION")
 
-# OUTPUT CSV
-today=datetime.datetime.now()
-fc = open(os.getenv('USERPROFILE')+'\\Downloads\\'+'youtube-'+today.strftime("%Y%m%d%H%M")+'.csv', 'w', encoding='utf-8-sig', newline="")
-writer = csv.writer(fc)
-writer.writerow(['dl','channel','publishedAt','title','url'])
+
+youtube = build('youtube', 'v3', developerKey=YOUTUBE_API_KEY)
 
 # SET CHANNEL
 CHANNEL_ID_LIST=[]
@@ -49,35 +46,55 @@ for row in reader:
         CHANNEL[row[0]]=row[2]
 
 fr.close()
+if len(CHANNEL) == 0 :
+    channel_id=input('input channel id: ')
+    CHANNEL_ID_LIST.append(channel_id)
+    # channel_name=input('input channel name: ')
+    response = youtube.channels().list(
+        part='snippet',
+        id=channel_id
+    ).execute()
+    channel_name = response.get("items")[0]['snippet'].get('title')
+    CHANNEL[channel_id] = channel_name
+
+
 
 # YOUTUBE API
-youtube = build('youtube', 'v3', developerKey=YOUTUBE_API_KEY)
 for CHANNEL_ID in CHANNEL_ID_LIST:
+    # OUTPUT CSV
+    today = datetime.datetime.now()
+    fc = open(
+        os.getenv('USERPROFILE') + '\\Downloads\\' + 'youtube-' + CHANNEL[CHANNEL_ID] + today.strftime(
+            "_%Y%m%d%H%M") + '.csv',
+        'w', encoding='utf-8-sig', newline="")
+    writer = csv.writer(fc)
+    writer.writerow(['dl', 'channel', 'publishedAt', 'title', 'url'])
+
     page = 1
     pageToken = None
     while page<=5:
         if page == 1:
             response = youtube.search().list(
-                part = "snippet",
-                channelId = CHANNEL_ID,
-                publishedAfter = PUBLISHED_AFTER,
-                maxResults = MAXRESULTS,
-                videoDuration = VIDEODURATION,
+                part="snippet",
+                channelId=CHANNEL_ID,
+                publishedAfter=PUBLISHED_AFTER,
+                maxResults=MAXRESULTS,
+                videoDuration=VIDEODURATION,
                 type="video",
-                order = "date"
+                order="date"
             ).execute()
         else:
             response = youtube.search().list(
-                part = "snippet",
-                channelId = CHANNEL_ID,
-                publishedAfter = PUBLISHED_AFTER,
-                maxResults = MAXRESULTS,
-                pageToken = pageToken,
-                videoDuration = VIDEODURATION,
+                part="snippet",
+                channelId=CHANNEL_ID,
+                publishedAfter=PUBLISHED_AFTER,
+                maxResults=MAXRESULTS,
+                pageToken=pageToken,
+                videoDuration=VIDEODURATION,
                 type="video",
-                order = "date"
+                order="date"
             ).execute()
-        
+
         for item in response.get("items", []):
             if item["id"]["kind"] != "youtube#video":
                 continue
@@ -86,7 +103,9 @@ for CHANNEL_ID in CHANNEL_ID_LIST:
                 publishedAt=item['snippet']['publishedAt'],
                 title=item['snippet']['title'])
             )
-            writer.writerow(['0',CHANNEL[item['snippet']['channelId']],item['snippet']['publishedAt'],'{:.50}'.format(item['snippet']['title']),'https://www.youtube.com/watch?v={videoid}'.format(videoid=item['id']['videoId'])])
+            writer.writerow(['0', CHANNEL[item['snippet']['channelId']], item['snippet']['publishedAt'],
+                             '{:.50}'.format(item['snippet']['title']),
+                             'https://www.youtube.com/watch?v={videoid}'.format(videoid=item['id']['videoId'])])
             # print('*' * 10)
             # print(json.dumps(item, indent=2, ensure_ascii=False))
             # print('*' * 10)
@@ -99,7 +118,7 @@ for CHANNEL_ID in CHANNEL_ID_LIST:
             pageToken = response['nextPageToken']
             print(response['pageInfo'])
             continue
-        
+
+    fc.close()
 
     
-fc.close()
