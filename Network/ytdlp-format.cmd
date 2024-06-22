@@ -19,7 +19,7 @@ REM
 REM ======================================================================
 IF NOT DEFINED YTDLP_PROFILE (SET YTDLP_PROFILE=default)
 IF NOT DEFINED VIDEO_OUTPUT_DIR SET VIDEO_OUTPUT_DIR=%USERPROFILE%\Videos\yt-dlp
-IF NOT DEFINED YTDLP_OPT SET YTDLP_OPT=-v -F
+IF NOT DEFINED YTDLP_OPT SET YTDLP_OPT=-v -F --list-subs
 
 IF NOT "%1"=="" (
 	SET YTDLP_PROFILE_FILE=%~1
