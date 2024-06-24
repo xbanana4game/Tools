@@ -29,10 +29,25 @@
 #-S "res:720,ext:mp4"
 #-S "res:720,ext:mp4,abr~64,+size"
 #-S "ext:mp4,ext:m4a,codec:avc:m4a"
-#-S "res:%RESOLUTION%,ext:mp4,ext:m4a,abr~128,+br"
+# res:%RESOLUTION%
+#-S "ext:mp4,ext:m4a,abr~128,+br"
 #-S +size,+br,+res,+fps
 #vcodec: Video Codec (av01 > vp9.2 > vp9 > h265 > h264 > vp8 > h263 > theora > other)
 #-S "res:144,vcodec:vp9,ext:mp4,+abr,+size"
+
+#LOW
+-f "bestvideo+bestaudio"
+-S "res:144,+vbr,+abr"
+#-S "res:144,ext:mp4,ext:m4a,+vbr,+abr"
+
+#QUALITY TEST
+#-f 602+139,394+139
+#-f 602,269,160,603,394,139
+#480
+#-f 397,244,135,140
+#720
+#-f 232,136,140
+#--keep-video
 
 
 ##########################################################################
