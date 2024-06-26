@@ -10,6 +10,7 @@
 #--concurrent-fragments 3
 --retries infinite
 --fragment-retries infinite
+#--socket-timeout 600
 
 
 ##########################################################################

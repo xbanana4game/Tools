@@ -13,7 +13,8 @@ from zoneinfo import ZoneInfo
 def conv_time(iso_str):
     dt = None
     try:
-        dt = datetime.datetime.fromisoformat(iso_str)
+        #dt = datetime.datetime.fromisoformat(iso_str)
+        dt = datetime.datetime.strptime(iso_str, '%Y-%m-%dT%H:%M:%SZ')
     except ValueError:
         dt = datetime.datetime.strptime('1970-01-01T00:00:00Z', '%Y-%m-%dT%H:%M:%SZ')
     return dt.strftime('%Y/%m/%d %H:%M:%S')
