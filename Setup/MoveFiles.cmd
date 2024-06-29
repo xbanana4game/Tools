@@ -105,6 +105,7 @@ REM ======================================================================
 	
 :MOVE_VIDEOS
 	SET TARGET_DIR=%1
+	SET PLAYLIST_FILENAME=%TARGET_DIR%_%yyyy%-%mm%-%dd%
 	ECHO MOVE %TARGET_DIR% %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 	IF 1 EQU %ARCHIVE_FLG% (
 		MD %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
@@ -115,9 +116,9 @@ REM ======================================================================
 		REM IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd% EXPLORER %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%
 		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\%TARGET_DIR% Mp3tag.exe /fp:"%VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\%TARGET_DIR%"
 		CALL :RENAME_PLAYLIST_FILES %TARGET_DIR%
-		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\%TARGET_DIR%\%TARGET_DIR%-%yyyy%%mm%%dd%.m3u8 (
+		IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\%TARGET_DIR%\%PLAYLIST_FILENAME%.m3u8 (
 			ECHO m3u2wpl
-			%SAKURA% %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\%TARGET_DIR%\%TARGET_DIR%-%yyyy%%mm%%dd%.m3u8
+			%SAKURA% %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\%TARGET_DIR%\%PLAYLIST_FILENAME%.m3u8
 			MD %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\%TARGET_DIR%\__playlist
 		)
 		CALL :RENAME_PLAYLIST_FILES %TARGET_DIR%
@@ -127,12 +128,12 @@ REM ======================================================================
 	
 :RENAME_PLAYLIST_FILES
 	SET TARGET_DIR=%1
-	echo RENAME %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\%TARGET_DIR%\mp3tag.m3u8 %TARGET-DIR%-%yyyy%%mm%%dd%.m3u8
+	SET PLAYLIST_FILENAME=%TARGET-DIR%_%yyyy%-%mm%-%dd%
 	IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\%TARGET_DIR%\mp3tag.m3u8 (
-		RENAME %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\%TARGET_DIR%\mp3tag.m3u8 %TARGET_DIR%-%yyyy%%mm%%dd%.m3u8
+		RENAME %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\%TARGET_DIR%\mp3tag.m3u8 %PLAYLIST_FILENAME%.m3u8
 	)
 	IF EXIST %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\%TARGET_DIR%\mp3tag.wpl (
-		RENAME %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\%TARGET_DIR%\mp3tag.wpl %TARGET_DIR%-%yyyy%%mm%%dd%.wpl
+		RENAME %VIDEOS_STORE_DIR%\VD_%yyyy%%mm%%dd%\%TARGET_DIR%\mp3tag.wpl %PLAYLIST_FILENAME%.wpl
 	)
 	EXIT /B
 

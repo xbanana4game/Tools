@@ -3,13 +3,20 @@
 ##########################################################################
 #--ffmpeg-location "C:\App\ffmpeg-master-latest-win64-gpl\bin"
 --console-title
+#--print %(formats.:.format_id)s
+#-v
+#-F
+
 
 ##########################################################################
 # Download Options
 ##########################################################################
 #--concurrent-fragments 3
 --retries infinite
+#--file-access-retries infinite
 --fragment-retries infinite
+--retry-sleep fragment:exp=1:20
+#--retry-sleep linear=1::2
 #--socket-timeout 600
 
 
@@ -35,6 +42,8 @@
 #-S +size,+br,+res,+fps
 #vcodec: Video Codec (av01 > vp9.2 > vp9 > h265 > h264 > vp8 > h263 > theora > other)
 #-S "res:144,vcodec:vp9,ext:mp4,+abr,+size"
+# (https/ftps > http/ftp > m3u8_native > m3u8 > http_dash_segments ...)
+#-S "proto"
 
 #LOW
 -f "bestvideo+bestaudio"
@@ -76,13 +85,13 @@
 #-P "%USERPROFILE%\Videos\yt-dlp"
 -o "%(title)s[%(id)s][%(uploader)s](%(resolution)s).%(ext)s"
 #-o "%(upload_date>%Y-%m-%d)s %(id)s(%(protocol)s %(format_id)s %(width)sx%(height)s %(fps)sfps %(vcodec)s %(vbr)dkbps+%(acodec)s %(abr)dkbps).%(ext)s"
+#-o "Sample %(id)s(%(format_id)s %(formats.:.format_id)s).%(ext)s"
 
 
 ##########################################################################
 # Mp4tag
 ##########################################################################
 #--write-info-json
-#--parse-metadata '%()s:%(meta_)s'
 --add-metadata
 
 # ALBUM
@@ -96,6 +105,7 @@
 
 # YEAR
 #--parse-metadata '%(upload_date>%Y-%m-%d)s:%(meta_date)s'
+#--parse-metadata '%(epoch>%Y-%m-%d)s:%(meta_date)s'
 
 # ARTIST
 #--parse-metadata '%(uploader)s:%(meta_artist)s'
