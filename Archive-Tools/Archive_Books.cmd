@@ -16,7 +16,7 @@ REM
 REM                                Main
 REM
 REM ======================================================================
-IF NOT DEFINED OUTPUT_BOOKS_DIR SET OUTPUT_BOOKS_DIR=%DOCUMENTS_DIR%\Books
+IF NOT DEFINED OUTPUT_BOOKS_DIR SET OUTPUT_BOOKS_DIR=%DOCUMENTS_DIR%\Books-zip
 
 IF NOT EXIST %OUTPUT_BOOKS_DIR% MD %OUTPUT_BOOKS_DIR%
 

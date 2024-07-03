@@ -1,5 +1,0 @@
-[site]
-SITE_NAME=test
-MAX_PAGE_NUMBER=3
-EPISODE_SEARCH=\[(.*)\]|Vol\.(\d+)
-URL_BASE=https://test/page/{number}/
