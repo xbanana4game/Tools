@@ -118,6 +118,7 @@
 #--parse-metadata 'season_number:%(meta_season_number)s'
 
 # TVSHOW
+#--parse-metadata '%(webpage_url)s:%(meta_show)s'
 #--parse-metadata '%(display_id)s:%(meta_show)s'
 
 # TVEPISODEID

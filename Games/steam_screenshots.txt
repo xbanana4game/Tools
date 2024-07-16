@@ -20,3 +20,4 @@
 "ARK","%USERPROFILE%\Pictures\Captures\ARK\screenshots"
 "Overwatch_2","%USERPROFILE%\Pictures\Captures\Overwatch 2\screenshots"
 "TrainValley2","%USERPROFILE%\Pictures\Captures\TrainValley2\screenshots"
+"Palworld",""%USERPROFILE%\Pictures\Captures\Palworld\screenshots"

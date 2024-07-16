@@ -20,4 +20,5 @@ CAPTURE_NO:GAME_NAME:GAME_DIR
 20:Grim Dawn:Grim Dawn
 21:Muck:Muck
 22:TrainValley2:TrainValley2
+23:Palworld:Palworld
 99:Unknown:Unknown
