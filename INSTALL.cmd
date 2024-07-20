@@ -47,6 +47,12 @@ REM ======================================================================
 		rundll32 sysdm.cpl,EditEnvironmentVariables
 		PAUSE
 	)
+	IF NOT DEFINED BOOKS_ZIP_DIR (
+		ECHO BOOKS_ZIP_DIR
+		ECHO %DOCUMENTS_DIR%\Books-zip
+		rundll32 sysdm.cpl,EditEnvironmentVariables
+		PAUSE
+	)
 	
 	EXIT /B
 	
