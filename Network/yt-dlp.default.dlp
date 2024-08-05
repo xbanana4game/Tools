@@ -74,6 +74,7 @@
 # $ yt-dlp -f "bv*+ba/b"
 -f "bestvideo+bestaudio/b"
 #-f ba[format_note!*=drc]
+#-f "bv[format_note!*=THROTTLED]+ba[format_note!*=THROTTLED]"
 --merge-output-format mp4
 --write-description
 

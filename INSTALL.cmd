@@ -31,25 +31,23 @@ REM ======================================================================
 :INSTALL_ENV
 	ECHO Create System Environment Variables on Windows
 	IF NOT DEFINED NASDOMAIN (
-		ECHO NASDOMAIN
+		ECHO SETX NASDOMAIN sample-nas
 		rundll32 sysdm.cpl,EditEnvironmentVariables
 		PAUSE
 	)
 	IF NOT DEFINED JD2_DL (
-		ECHO JD2_DL
-		ECHO C:\Users\<jd:env:USERNAME>\Documents\JDownloader
-		ECHO D:\JDownloader
+		ECHO SETX JD2_DL %USERPROFILE%\Documents\JDownloader
+		ECHO SETX JD2_DL D:\JDownloader
 		rundll32 sysdm.cpl,EditEnvironmentVariables
 		PAUSE
 	)
 	IF NOT DEFINED CONFIG_DIR (
-		ECHO CONFIG_DIR
+		ECHO SETX CONFIG_DIR %USERPROFILE%\Documents\config
 		rundll32 sysdm.cpl,EditEnvironmentVariables
 		PAUSE
 	)
 	IF NOT DEFINED BOOKS_ZIP_DIR (
-		ECHO BOOKS_ZIP_DIR
-		ECHO %DOCUMENTS_DIR%\Books-zip
+		ECHO SETX BOOKS_ZIP_DIR %USERPROFILE%\Downloads\Books-zip
 		rundll32 sysdm.cpl,EditEnvironmentVariables
 		PAUSE
 	)
@@ -107,10 +105,10 @@ REM ======================================================================
 	
 	COPY /Y Setup\Settings.cmd %TOOLS_INSTALL_DIR%\Settings.cmd
 	ECHO SET TOOLS_DIR=%~dp0>>%TOOLS_INSTALL_DIR%\Settings.cmd
-	ECHO SET PATH=%%PATH%%;%~dp0Games>>%TOOLS_INSTALL_DIR%\Settings.cmd
-	ECHO SET PATH=%%PATH%%;%~dp0Archive-Tools>>%TOOLS_INSTALL_DIR%\Settings.cmd
-	ECHO SET PATH=%%PATH%%;%~dp0File-Tools>>%TOOLS_INSTALL_DIR%\Settings.cmd
-	ECHO SET PATH=%%PATH%%;%TOOLS_INSTALL_DIR%\bin>>%TOOLS_INSTALL_DIR%\Settings.cmd
+	ECHO SET PATH=%~dp0Games;%%PATH%%>>%TOOLS_INSTALL_DIR%\Settings.cmd
+	ECHO SET PATH=%~dp0Archive-Tools;%%PATH%%>>%TOOLS_INSTALL_DIR%\Settings.cmd
+	ECHO SET PATH=%~dp0File-Tools;%%PATH%%>>%TOOLS_INSTALL_DIR%\Settings.cmd
+	ECHO SET PATH=%TOOLS_INSTALL_DIR%\bin;%%PATH%%>>%TOOLS_INSTALL_DIR%\Settings.cmd
 	
 	IF EXIST "SettingsOptions.cmd" (
 		NOTEPAD SettingsOptions.cmd
