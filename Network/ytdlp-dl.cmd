@@ -89,8 +89,9 @@ CD %VIDEOS_DIR%
 
 
 :DL_START_INPUT
+SET DOWNLOAD_URL=
 SET /P DOWNLOAD_URL="URL: "
-%TOOLS_DIR%\Network\strip-url.py "%DOWNLOAD_URL%"
+%TOOLS_DIR%\Network\strip-url.py %DOWNLOAD_URL%
 FOR /F %%i IN (url.txt) DO (SET DOWNLOAD_URL=%%i)
 ECHO URL:%DOWNLOAD_URL%
 DEL url.txt
