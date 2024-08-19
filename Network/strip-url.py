@@ -77,6 +77,7 @@ def check_clipboard_loop():
 
 
 def check_clipboard():
+    print('wait for clipboard...')
     input_url = pyperclip.waitForNewPaste()
     add_txt([input_url])
     # URLS = []
