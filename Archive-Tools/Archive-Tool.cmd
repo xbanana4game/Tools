@@ -80,7 +80,8 @@ ECHO   3:Archive(exclude __Store)
 ECHO   4:Update (%BACKUPS_DIR%\%ARCHIVE_PROFILE%@????????.%FILE_TYPE%)
 ECHO   5:Store Old Directory (_store, _old)
 ECHO   6:Make Robocopy Listfile
-SET /P A="-> "
+CHOICE /C 123456 /M "-> "
+SET A=%ERRORLEVEL%
 IF 1 EQU %A% (CALL :MAKE_ARCHIVE_DIRECTORY)
 IF 2 EQU %A% (
 	IF %REMOVE_EMPTY_DIR_FLG%==1 CALL :REMOVE_EMPTY_DIR
