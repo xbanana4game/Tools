@@ -25,9 +25,9 @@ REM                                Main
 REM
 REM ======================================================================
 IF NOT DEFINED YTDLP_CONFIG_FILE_DEFAULT SET YTDLP_CONFIG_FILE_DEFAULT=%VIDEOS_DIR%\yt-dlp.conf
-IF NOT DEFINED YTDLP_CONFIG_FILE SET YTDLP_CONFIG_FILE=%VIDEOS_DIR%\yt-dlp_%yyyy%%mm%%dd%-%hh%%mn%%ss%.conf
+IF NOT DEFINED YTDLP_CONFIG_FILE SET YTDLP_CONFIG_FILE=%DESKTOP_DIR%\yt-dlp_%yyyy%%mm%%dd%-%hh%%mn%%ss%.conf
 IF NOT DEFINED YTDLP_DL_LIST_FILE SET YTDLP_DL_LIST_FILE=%DESKTOP_DIR%\dl.txt
-IF NOT DEFINED DLURL_LIST SET DLURL_LIST=%VIDEOS_DIR%\yt-dlp_%yyyy%%mm%%dd%-%hh%%mn%%ss%.txt
+IF NOT DEFINED DLURL_LIST SET DLURL_LIST=%DESKTOP_DIR%\yt-dlp_%yyyy%%mm%%dd%-%hh%%mn%%ss%.txt
 IF NOT DEFINED SHUTDOWN_FLG (SET SHUTDOWN_FLG=0)
 IF 1 EQU %SHUTDOWN_FLG% SET /P SHUTDOWN_FLG2="Shutdown? 1:YES 0:NO -> "
 IF NOT DEFINED YTDLP_PROFILE (SET YTDLP_PROFILE=default)
@@ -51,7 +51,7 @@ IF %ERRORLEVEL% EQU 1 (
 ) ELSE IF %ERRORLEVEL% EQU 3 (
 	SET MODE=FILE
 	SET /P YTDLP_DL_LIST_FILE="input csv.txt: "
-	SET DLURL_LIST=%VIDEOS_DIR%\yt-dlp_%yyyy%%mm%%dd%-%hh%%mn%%ss%.csv.txt
+	SET DLURL_LIST=%DESKTOP_DIR%\yt-dlp_%yyyy%%mm%%dd%-%hh%%mn%%ss%.csv.txt
 )
 ECHO %MODE%
 
@@ -90,8 +90,8 @@ GOTO :DL_START_%MODE%
 :DL_START_INPUT
 SET DOWNLOAD_URL=
 SET /P DOWNLOAD_URL="URL: "
-%TOOLS_DIR%\Network\strip-url.py %DOWNLOAD_URL%
-FOR /F %%i IN (url.txt) DO (SET DOWNLOAD_URL=%%i)
+%TOOLS_DIR%\Network\strip_url.py %DOWNLOAD_URL%
+FOR /F "tokens=1,2 delims=," %%i IN (url.txt) DO (SET DOWNLOAD_URL=%%i)
 ECHO URL:%DOWNLOAD_URL%
 DEL url.txt
 IF %SKIP_FLG%==1 (
@@ -111,11 +111,11 @@ GOTO :DL_START_INPUT
 IF EXIST %YTDLP_DL_LIST_FILE% COPY %YTDLP_DL_LIST_FILE% %DLURL_LIST%
 IF NOT EXIST %DLURL_LIST% TYPE nul >%DLURL_LIST%
 NOTEPAD %DLURL_LIST%
-%TOOLS_DIR%\Network\strip-url.py %DLURL_LIST%
+%TOOLS_DIR%\Network\strip_url.py %DLURL_LIST%
 MOVE url.txt %DLURL_LIST%
 IF %SKIP_FLG%==1 (
 	type nul>%DLURL_LIST%.tmp
-	FOR /F %%i IN (%DLURL_LIST%) DO (
+	FOR /F "tokens=1,2 delims=," %%i IN (%DLURL_LIST%) DO (
 		FINDSTR /C:"%%i" %DLURL_HISTORY_DIR%\*.log
 		IF ERRORLEVEL 1 (
 			ECHO Start DL: %%i
