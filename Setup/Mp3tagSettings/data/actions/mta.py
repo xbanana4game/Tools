@@ -42,6 +42,18 @@ class mtafile:
         self.exec_num+=1
         self.f.write(out)
         return
+        
+    def output_file(self, field, output_name, overwrite='0', value3='0'):
+        out='[#'+str(self.exec_num)+']\n'
+        out+='T=15\n'
+        out+='F='+field+'\n'
+        out+='1='+output_name.replace('\\','\\\\')+'\n'
+        out+='2='+overwrite+'\n'
+        out+='3='+value3+'\n'
+        out+='\n'
+        self.exec_num+=1
+        self.f.write(out)
+        return
   
     def decode(self, string):
         return string.rstrip('\n').encode('unicode-escape').decode('utf8')
