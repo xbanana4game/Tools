@@ -116,7 +116,7 @@ MOVE url.txt %DLURL_LIST%
 IF %SKIP_FLG%==1 (
 	type nul>%DLURL_LIST%.tmp
 	FOR /F "tokens=1,2 delims=," %%i IN (%DLURL_LIST%) DO (
-		FINDSTR /C:"%%i" %DLURL_HISTORY_DIR%\*.log
+		FINDSTR /C:"%%j" %DLURL_HISTORY_DIR%\*.log
 		IF ERRORLEVEL 1 (
 			ECHO Start DL: %%i
 			ECHO %%i>>%DLURL_LIST%.tmp

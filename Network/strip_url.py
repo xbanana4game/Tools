@@ -106,7 +106,7 @@ def add_txt(input_urls, output_txt='url.txt'):
             #     continue
         with open(output_txt, 'a') as f_txt:
             f_txt.write(url + ',' + vid + '\n')
-            print(url)
+            print(url + ' vid:' + vid)
     return
 
 
