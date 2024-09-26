@@ -33,6 +33,17 @@ class mtafile:
         self.exec_num+=1
         self.f.write(out)
         return
+        
+    # 値の規則性を推測し他のフィールドの値とする
+    def guess_field(self, field_ori, field_trg):
+        out='[#'+str(self.exec_num)+']\n'
+        out+='T=7\n'
+        out+='F='+field_ori+'\n'
+        out+='1='+field_trg+'\n'
+        out+='\n'
+        self.exec_num+=1
+        self.f.write(out)
+        return
 
     def remove_field(self, field):
         out='[#'+str(self.exec_num)+']\n'
