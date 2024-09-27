@@ -57,8 +57,12 @@ ydl_opts = \
 
 history_vid = []
 
+
 def read_history_files(directory):
     files = glob.glob(directory + r"/*.log")
+    for file in files:
+        read_history_file(file)
+    files = glob.glob(directory + r"/*.txt")
     for file in files:
         read_history_file(file)
     return
@@ -130,23 +134,24 @@ if __name__ == '__main__':
     # read_history_files(os.getenv('CONFIG_DIR') + r"/yt-dlp/")
     if len(sys.argv) > 1:
         input_url = sys.argv[1]
+        urls = []
         if re.match('.*.csv.txt', input_url) is not None:
             input_csv = sys.argv[1]
-            urls = []
             with open(input_csv, 'r', encoding='utf-8-sig') as f:
                 reader_csv = csv.reader(f)
                 for row_csv in reader_csv:
                     urls.append(row_csv[1])
-            urls = list(set(urls))
+            #urls = list(set(urls))
+            #urls.sort()
             add_txt(urls)
         elif re.match('.*.txt', input_url) is not None:
             input_txt = sys.argv[1]
             # print(input_txt)
-            urls = []
             with open(input_txt, 'r') as f:
                 for url in f.readlines():
                     urls.append(url.rstrip())
             urls = list(set(urls))
+            urls.sort()
             add_txt(urls)
         else:
             add_txt([input_url])
