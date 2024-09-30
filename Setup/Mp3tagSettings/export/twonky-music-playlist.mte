@@ -1,3 +1,0 @@
-$filename(..\Twonky\%_workingdir%.m3u,utf-8)
-$loop(%_path%)$replace($regexp(%_path%,.*Multimedia\\(.*),/share/HDA_DATA/Multimedia/$1),\,/)
-$loopend()

@@ -1,4 +1,0 @@
-$filename(mp3tag.m3u8,utf-8)#EXTM3U
-$loop(%albumartist%)$loop(%album%)$loop(%artist%)$loop(%year%)#EXTINF:%_length_seconds%,%artist% - %title%
-%_filename_rel%
-$loopend()$loopend()$loopend()$loopend()
