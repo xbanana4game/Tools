@@ -17,6 +17,7 @@ REM
 REM ======================================================================
 IF NOT DEFINED VIDEO_OUTPUT_DIR SET VIDEO_OUTPUT_DIR=%USERPROFILE%\Videos\yt-dlp
 
+CALL :EXEC_MP3TAG %DESKTOP_DIR%\youtube.com-low
 CALL :EXEC_MP3TAG %VIDEO_OUTPUT_DIR%\youtube.com
 CALL :EXEC_MP3TAG %VIDEO_OUTPUT_DIR%\twitch.tv
 CALL :EXEC_MP3TAG %JD2_DL%\Videos
