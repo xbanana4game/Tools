@@ -19,8 +19,7 @@ IF NOT DEFINED VIDEO_OUTPUT_DIR SET VIDEO_OUTPUT_DIR=%USERPROFILE%\Videos\yt-dlp
 
 CALL :EXEC_MP3TAG_DIRS %DESKTOP_DIR%
 CALL :EXEC_MP3TAG_DIRS %VIDEO_OUTPUT_DIR%
-CALL :EXEC_MP3TAG %JD2_DL%\Videos
-
+CALL :EXEC_MP3TAG_DIR %JD2_DL%\Videos
 EXIT
 
 
@@ -29,7 +28,18 @@ REM
 REM                                Function
 REM
 REM ======================================================================
-:EXEC_MP3TAG
+:EXEC_MP3TAG_MP4
+	IF EXIST %1\*.mp4 (
+		ECHO %1
+		Mp3tag.exe /fp:"%1"
+	) ELSE (
+		ECHO Directory %1 is not Exist.
+		EXIT /B 1
+	)
+	EXIT /B 0
+	
+	
+:EXEC_MP3TAG_DIR
 	IF EXIST %1 (
 		ECHO %1
 		Mp3tag.exe /fp:"%1"
@@ -42,7 +52,7 @@ REM ======================================================================
 
 :EXEC_MP3TAG_DIRS
 	FOR /D %%i IN ("%1\*") DO (
-		CALL :EXEC_MP3TAG %%i
+		CALL :EXEC_MP3TAG_MP4 %%i
 	)
 	EXIT /B 0
 
