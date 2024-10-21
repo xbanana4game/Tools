@@ -17,9 +17,8 @@ REM
 REM ======================================================================
 IF NOT DEFINED VIDEO_OUTPUT_DIR SET VIDEO_OUTPUT_DIR=%USERPROFILE%\Videos\yt-dlp
 
-CALL :EXEC_MP3TAG %DESKTOP_DIR%\youtube.com-low
-CALL :EXEC_MP3TAG %VIDEO_OUTPUT_DIR%\youtube.com
-CALL :EXEC_MP3TAG %VIDEO_OUTPUT_DIR%\twitch.tv
+CALL :EXEC_MP3TAG_DIRS %DESKTOP_DIR%
+CALL :EXEC_MP3TAG_DIRS %VIDEO_OUTPUT_DIR%
 CALL :EXEC_MP3TAG %JD2_DL%\Videos
 
 EXIT
@@ -40,4 +39,10 @@ REM ======================================================================
 	)
 	EXIT /B 0
 	
-	
+
+:EXEC_MP3TAG_DIRS
+	FOR /D %%i IN ("%1\*") DO (
+		CALL :EXEC_MP3TAG %%i
+	)
+	EXIT /B 0
+
