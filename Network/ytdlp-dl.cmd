@@ -149,7 +149,7 @@ IF %SKIP_FLG%==1 (
 		FINDSTR /C:"%%j" %DLURL_HISTORY_DIR%\*.log %VIDEO_OUTPUT_DIR%\*.log
 		IF ERRORLEVEL 1 (
 			ECHO Start DL: %%i
-			ECHO #Start DL: %%i>>%YTDLP_CONFIG_FILE%
+			REM ECHO #Start DL: %%i>>%YTDLP_CONFIG_FILE%
 			ECHO %%i>>%DLURL_LIST%.tmp
 		) ELSE (
 			ECHO Skip DL: %%i
