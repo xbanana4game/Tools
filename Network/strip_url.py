@@ -96,6 +96,7 @@ def add_txt(input_urls, output_txt='url.txt'):
             # print(output_txt)
             # result = re.search('(.*)&pp=.*', filename)
             url = re.sub('&pp=.*', '', input_url)
+            url = re.sub('&t=.*s', '', url)
             # print(url)
             result = re.search('v=(.{11})', url)
             if result is not None:
