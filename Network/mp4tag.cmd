@@ -19,7 +19,7 @@ IF NOT DEFINED VIDEO_OUTPUT_DIR SET VIDEO_OUTPUT_DIR=%USERPROFILE%\Videos\yt-dlp
 
 CALL :EXEC_MP3TAG_DIRS %DESKTOP_DIR%
 CALL :EXEC_MP3TAG_DIRS %VIDEO_OUTPUT_DIR%
-CALL :EXEC_MP3TAG_DIR %JD2_DL%\Videos
+CALL :EXEC_MP3TAG_DIRS %JD2_DL%\Videos
 EXIT
 
 
@@ -55,4 +55,5 @@ REM ======================================================================
 		CALL :EXEC_MP3TAG_MP4 %%i
 	)
 	EXIT /B 0
+
 
