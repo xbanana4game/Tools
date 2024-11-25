@@ -93,6 +93,8 @@
 -o "%(title)s[%(id)s][%(uploader)s](%(resolution)s).%(ext)s"
 #-o "%(upload_date>%Y-%m-%d)s %(id)s(%(protocol)s %(format_id)s %(width)sx%(height)s %(fps)sfps %(vcodec)s %(vbr)dkbps+%(acodec)s %(abr)dkbps).%(ext)s"
 #-o "Sample %(id)s(%(format_id)s %(formats.:.format_id)s).%(ext)s"
+#format or format_note 20XXX ABCDEFG(720p + audio).mp4
+#-o "%(upload_date>%Y-%m-%d)s %(id)s(%(format)s).%(ext)s"
 
 
 ##########################################################################

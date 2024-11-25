@@ -1,0 +1,98 @@
+#youtube.com
+
+
+##########################################################################
+# Download Options
+##########################################################################
+--console-title
+#--concurrent-fragments 3
+--retries infinite
+--fragment-retries infinite
+#--socket-timeout 600
+#--max-filesize 500M
+
+
+##########################################################################
+# INPUT
+##########################################################################
+#-f "bv+ba"
+-f "bv[format_note!*=THROTTLED]+ba[format_note!*=THROTTLED]"
+#res:%RESOLUTION%
+-S "ext:mp4,ext:m4a,abr~128,+br"
+#-S "res:720,ext:mp4,ext:m4a,abr~128,+br"
+#-S "abr~128,+br"
+
+# MP4
+#-S "res:144,ext:mp4,+br,+size"
+#-S "res:144,ext:mp4,fps:15"
+#-S "res:160,ext:mp4"
+#-S "res:180,ext:mp4"
+#-S "res:240,ext:mp4"
+#-S "res:360,ext:mp4"
+#-S "res:480,ext:mp4"
+#-S "res:720,ext:mp4"
+#-S "res:720,abr~128,+br"
+#-S "ext:mp4,ext:m4a,codec:avc:m4a"
+#-S "+size,+br,+res,+fps"
+
+# LOW
+#-f "bestvideo+bestaudio"
+#-S "res:144,+vbr,+abr"
+#-S "res:144,ext:mp4,ext:m4a,+vbr,+abr"
+
+# SHORT
+#136+140 720 30fps
+#298+140 720 60fps
+#-f "22/136+140/bv+ba/b"
+
+
+##########################################################################
+# OUTPUT
+##########################################################################
+-P "%VIDEO_OUTPUT_DIR%\youtube.com"
+#format_note"240p+ultralow, DRC"  or format "133 - 426x240 (240p)+599-drc - audio only (ultralow, DRC)"
+-o "%(upload_date>%Y-%m-%d)s %(id)s(%(format)s).%(ext)s"
+--merge-output-format mp4
+#--write-info-json
+
+
+##########################################################################
+# Mp4tag
+##########################################################################
+--parse-metadata '%(title)s:%(meta_title)s'
+--parse-metadata '%(id)s:%(meta_episode_id)s'
+--parse-metadata '%(uploader)s:%(meta_artist)s'
+--parse-metadata '%(categories.0)s:%(meta_genre)s'
+--parse-metadata '%(webpage_url)s:%(meta_show)s'
+--parse-metadata '%(display_id)s:%(meta_comment)s'
+--parse-metadata '%(upload_date>%Y-%m-%d)s:%(meta_date)s'
+--parse-metadata '%(channel_id)s,%(channel_url)s,%(channel)s:%(meta_composer)s'
+--add-metadata
+
+
+##########################################################################
+# Thumbnail
+##########################################################################
+--embed-thumbnail  
+--write-thumbnail
+--convert-thumbnails jpg
+--output "thumbnail:%USERPROFILE%\Pictures\youtube-thumbnails\%(id)s.%(ext)s"
+
+
+##########################################################################
+# Chapters
+##########################################################################
+--embed-chapters
+
+
+##########################################################################
+# Subtitle 
+##########################################################################
+--write-subs
+--sub-langs ja
+
+
+#-------------------------------------------------------------------------
+# youtube.com
+#-------------------------------------------------------------------------
+
