@@ -233,6 +233,8 @@ SET YTDLP_CONF_OPT=--config-location %YTDLP_CONFIG_FILE%
 IF DEFINED RESOLUTION (
 	SET YTDLP_RESOLUTION_OPT=-S "res:%RESOLUTION%"
 )
+%TOOLS_DIR%\Network\strip_url.py %DLURL_LIST%
+MOVE url.txt %DLURL_LIST%
 IF %SKIP_FLG%==1 (
 	type nul>%DLURL_LIST%.tmp
 	FOR /F "tokens=1,2 delims=," %%i IN (%DLURL_LIST%) DO (
