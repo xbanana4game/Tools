@@ -52,6 +52,7 @@
 -P "%VIDEO_OUTPUT_DIR%\youtube.com"
 #format_note"240p+ultralow, DRC"  or format "133 - 426x240 (240p)+599-drc - audio only (ultralow, DRC)"
 -o "%(upload_date>%Y-%m-%d)s %(id)s(%(format)s).%(ext)s"
+#-o "%(playlist)s/%(playlist_index)s - %(id)s(%(format)s).%(ext)s" 
 --merge-output-format mp4
 #--write-info-json
 
@@ -67,6 +68,7 @@
 --parse-metadata '%(display_id)s:%(meta_comment)s'
 --parse-metadata '%(upload_date>%Y-%m-%d)s:%(meta_date)s'
 --parse-metadata '%(channel_id)s,%(channel_url)s,%(channel)s:%(meta_composer)s'
+#--parse-metadata '%(playlist)s:%(meta_album)s'
 --add-metadata
 
 
