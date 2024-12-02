@@ -141,7 +141,8 @@ if __name__ == '__main__':
             with open(input_csv, 'r', encoding='utf-8-sig') as f:
                 reader_csv = csv.reader(f)
                 for row_csv in reader_csv:
-                    urls.append(row_csv[1])
+                    if len(row_csv) == 2:
+                        urls.append(row_csv[1])
             #urls = list(set(urls))
             #urls.sort()
             add_txt(urls)

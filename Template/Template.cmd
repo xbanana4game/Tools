@@ -181,3 +181,13 @@ REM ======================================================================
 :SEARCH_DIR
 	FOR /D %%i IN ("*") DO (ECHO %%i)
 	EXIT /B
+
+:IS_FILE_EMPTY
+FOR %%F IN (%1) DO (
+	IF %%~zF EQU 0 (
+		REM File size is zero
+		EXIT /B 0
+	)
+)
+EXIT /B 1
+
