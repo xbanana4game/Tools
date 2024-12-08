@@ -7,7 +7,7 @@ REM ======================================================================
 IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
 REM ---------- Template.cmd(SettingsOptions.cmd) ----------
-
+SETLOCAL ENABLEDELAYEDEXPANSION
 
 REM ======================================================================
 REM
