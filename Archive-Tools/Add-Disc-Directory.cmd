@@ -77,7 +77,7 @@ REM 数値は 32 ビットで表記される数値 -2147483648 ～ 2147483647
 	ECHO SET TOTAL_SIZE=0 >>%CMD_FILE%
 	ECHO REM ----------------------------------------------------------------------------------------------------------- >>%CMD_FILE%
 	FOR /R %%i in (%TARGET_EXT%) DO (
-		ECHO %%~nxi
+		ECHO %%~zibyte %%~nxi
 		ECHO REM %%~nxi >>%CMD_FILE%
 		ECHO SET FILE_SIZE_BYTE=%%~zi>>%CMD_FILE%
 		REM 2GByte以下のファイル

@@ -104,7 +104,9 @@ REM ======================================================================
 	MD %TOOLS_INSTALL_DIR%
 	
 	COPY /Y Setup\Settings.cmd %TOOLS_INSTALL_DIR%\Settings.cmd
-	ECHO SET TOOLS_DIR=%~dp0>>%TOOLS_INSTALL_DIR%\Settings.cmd
+	SET TOOLS_DIR=%~dp0
+	SET TOOLS_DIR=%TOOLS_DIR:~0,-1%
+	ECHO SET TOOLS_DIR=%TOOLS_DIR%>>%TOOLS_INSTALL_DIR%\Settings.cmd
 	ECHO SET PATH=%~dp0Games;%%PATH%%>>%TOOLS_INSTALL_DIR%\Settings.cmd
 	ECHO SET PATH=%~dp0Archive-Tools;%%PATH%%>>%TOOLS_INSTALL_DIR%\Settings.cmd
 	ECHO SET PATH=%~dp0File-Tools;%%PATH%%>>%TOOLS_INSTALL_DIR%\Settings.cmd
