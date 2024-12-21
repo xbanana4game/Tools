@@ -1,7 +1,10 @@
-#DOWNLOAD_SECTIONS
+##########################################################################
+# ytdlp-dl.cmd settings
+##########################################################################
 #INPUT_MODE
 #RESOLUTION
 #SKIP_MODE_OFF
+#SKIP_MODE_ON
 
 
 ##########################################################################
@@ -42,6 +45,7 @@
 #-S "res:360,ext:mp4"
 #-S "res:480,ext:mp4"
 #-S "res:720,ext:mp4"
+#-S "ext:mp4,+vbr,ext:m4a,abr~128"
 #-S "res:720,ext:mp4,abr~64,+size"
 #-S "ext:mp4,ext:m4a,codec:avc:m4a"
 # res:%RESOLUTION%

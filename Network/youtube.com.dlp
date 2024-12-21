@@ -11,6 +11,12 @@
 #--socket-timeout 600
 #--max-filesize 500M
 
+#--yes-playlist
+#--playlist-items 1:3,7,-5::2
+#--playlist-start NUMBER          -I NUMBER:
+#--playlist-end NUMBER            -I :NUMBER
+#--playlist-reverse               -I ::-1
+
 
 ##########################################################################
 # INPUT
@@ -18,27 +24,28 @@
 #-f "bv+ba"
 -f "bv[format_note!*=THROTTLED]+ba[format_note!*=THROTTLED]"
 #res:%RESOLUTION%
--S "ext:mp4,ext:m4a,abr~128,+br"
-#-S "res:720,ext:mp4,ext:m4a,abr~128,+br"
+-S "ext:mp4,+vbr,ext:m4a,abr~128,+br"
+#abr~128,abr~64
+#-S "res:720,ext:mp4,+vbr,ext:m4a,abr~128,+br"
 #-S "abr~128,+br"
 
 # MP4
-#-S "res:144,ext:mp4,+br,+size"
-#-S "res:144,ext:mp4,fps:15"
-#-S "res:160,ext:mp4"
-#-S "res:180,ext:mp4"
-#-S "res:240,ext:mp4"
-#-S "res:360,ext:mp4"
-#-S "res:480,ext:mp4"
-#-S "res:720,ext:mp4"
-#-S "res:720,abr~128,+br"
-#-S "ext:mp4,ext:m4a,codec:avc:m4a"
+#-S "res:144,ext:mp4,+vbr,+br,+size"
+#-S "res:144,ext:mp4,+vbr,fps:15"
+#-S "res:160,ext:mp4,+vbr"
+#-S "res:180,ext:mp4,+vbr"
+#-S "res:240,ext:mp4,+vbr"
+#-S "res:360,ext:mp4,+vbr"
+#-S "res:480,ext:mp4,+vbr"
+#-S "res:720,ext:mp4,+vbr"
+#-S "res:720,+vbr,abr~128,+br"
+#-S "ext:mp4,+vbr,ext:m4a,codec:avc:m4a"
 #-S "+size,+br,+res,+fps"
 
 # LOW
 #-f "bestvideo+bestaudio"
 #-S "res:144,+vbr,+abr"
-#-S "res:144,ext:mp4,ext:m4a,+vbr,+abr"
+#-S "res:144,ext:mp4,+vbr,ext:m4a,+abr"
 
 # SHORT
 #136+140 720 30fps
@@ -69,6 +76,8 @@
 --parse-metadata '%(upload_date>%Y-%m-%d)s:%(meta_date)s'
 --parse-metadata '%(channel_id)s,%(channel_url)s,%(channel)s:%(meta_composer)s'
 #--parse-metadata '%(playlist)s:%(meta_album)s'
+#--parse-metadata '%(playlist)s:%(meta_album_artist)s'
+#--parse-metadata '%(playlist_index)s:%(meta_track)s'
 --add-metadata
 
 
@@ -90,8 +99,8 @@
 ##########################################################################
 # Subtitle 
 ##########################################################################
---write-subs
---sub-langs ja
+#--write-subs
+#--sub-langs ja
 
 
 #-------------------------------------------------------------------------

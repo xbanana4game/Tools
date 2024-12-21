@@ -23,6 +23,12 @@ IF NOT DEFINED DRIVE_LETTER (SET /P DRIVE_LETTER="SET DRIVE_LETTER(%~d0)=")
 IF NOT DEFINED DRIVE_LETTER (SET DRIVE_LETTER=%~d0)
 ECHO DRIVE_LETTER=%DRIVE_LETTER%
 
+SET VAR=before
+	IF "%VAR%" == "before" (
+	SET VAR=after
+	IF "!VAR!" == "after" @echo IF you see this, it worked
+)
+
 CHOICE /C YN /T 10 /D N /M "test"
 IF %ERRORLEVEL% EQU 1 (
 	ECHO YES
