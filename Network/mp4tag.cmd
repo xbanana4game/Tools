@@ -23,6 +23,8 @@ CALL :EXEC_MP3TAG_DIR %JD2_DL%\Videos
 PAUSE
 CALL :EXEC_MP3TAG_DIR %DOWNLOADS_DIR%\youtube.com
 CALL :EXEC_MP3TAG_DIR %DOWNLOADS_DIR%\xxx
+REM PAUSE
+REM CALL :EXEC_MP3TAG_DIR \\%NASDOMAIN%\Multimedia\Videos
 
 EXIT
 
@@ -32,29 +34,37 @@ REM
 REM                                Function
 REM
 REM ======================================================================
+:IS_EXIST_MP4
+	FOR /R %1 %%i IN (*.mp4) DO EXIT /B 0
+	EXIT /B 1
+	
+	
 :EXEC_MP3TAG_MP4
-	IF EXIST %1\*.mp4 (
+	CALL :IS_EXIST_MP4 %1
+	IF %ERRORLEVEL% EQU 0 (
 		ECHO %1
 		Mp3tag.exe /fp:"%1"
 	) ELSE (
-		ECHO Directory %1 is not Exist.
+		ECHO mp4 file is not exist. %1
 		EXIT /B 1
 	)
 	EXIT /B 0
 	
 	
 :EXEC_MP3TAG_DIR
-	IF EXIST %1 (
-		ECHO %1
-		Mp3tag.exe /fp:"%1"
-	) ELSE (
-		ECHO Directory %1 is not Exist.
+	IF NOT EXIST %1 (
+		ECHO Directory %1 is not exist.
 		EXIT /B 1
 	)
+	CALL :EXEC_MP3TAG_MP4 %1
 	EXIT /B 0
 	
 
 :EXEC_MP3TAG_DIRS
+	IF NOT EXIST %1 (
+		ECHO Directory %1 is not exist.
+		EXIT /B 1
+	)
 	FOR /D %%i IN ("%1\*") DO (
 		CALL :EXEC_MP3TAG_MP4 %%i
 	)
