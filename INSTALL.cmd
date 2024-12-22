@@ -8,6 +8,7 @@ REM
 REM                                INSTALL
 REM
 REM ======================================================================
+CALL :INSTALL_CMD
 CALL :INSTALL_ENV
 CALL :INSTALL_PYTHON
 CALL :INSTALL_7Z
@@ -28,6 +29,13 @@ REM
 REM                                Function
 REM
 REM ======================================================================
+:INSTALL_CMD
+	IF EXIST %USERPROFILE%\init.cmd EXIT /B
+	COPY Setup\init.cmd %USERPROFILE%\
+	ECHO Add Registory key AutoRun.reg
+	PAUSE
+	EXIT /B
+	
 :INSTALL_ENV
 	ECHO Create System Environment Variables on Windows
 	IF NOT DEFINED NASDOMAIN (
