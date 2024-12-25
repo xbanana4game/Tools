@@ -2,7 +2,6 @@
 
 SET TOOLS_INSTALL_DIR=%USERPROFILE%\.Tools
 SET SAKURA_SETTINGS_DIR=%USERPROFILE%\AppData\Roaming\sakura
-SET FILE_7Z_INSTALLER=7z1900-x64.exe
 REM ======================================================================
 REM
 REM                                INSTALL
@@ -68,13 +67,8 @@ REM ======================================================================
 
 :INSTALL_7Z
 	IF EXIST "C:\Program Files\7-Zip\7z.exe" EXIT /B
-	IF EXIST "%FILE_7Z_INSTALLER%" (
-		START %FILE_7Z_INSTALLER%
-		PAUSE
-	) ELSE (
-		ECHO Please Install https://ja.osdn.net/dl/sevenzip/7z1900-x64.exe/
-		PAUSE
-	)
+	ECHO Please Install https://ja.osdn.net/dl/sevenzip/7z1900-x64.exe/
+	PAUSE
 	EXIT /B
 
 :INSTALL_FFMPEG
