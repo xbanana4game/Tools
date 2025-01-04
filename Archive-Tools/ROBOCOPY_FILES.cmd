@@ -22,8 +22,10 @@ REM ----------------------------------------------------------------------
 REM 
 REM ----------------------------------------------------------------------
 IF NOT DEFINED ROBOCOPY_COPY_OPTIONS (SET ROBOCOPY_COPY_OPTIONS=/e /r:3 /w:10)
-IF NOT DEFINED ROBOCOPY_LOG SET ROBOCOPY_LOG=%DESKTOP_DIR%\robocopy-%yyyy%%mm%%dd%%hh%%mn%%ss%.log
-IF NOT DEFINED ROBOCOPY_LOG_OPTIONS SET ROBOCOPY_LOG_OPTIONS=/log+:"%ROBOCOPY_LOG%" /v /fp /tee
+REM IF NOT DEFINED ROBOCOPY_LOG SET ROBOCOPY_LOG=%DESKTOP_DIR%\robocopy-%yyyy%%mm%%dd%%hh%%mn%%ss%.log
+IF NOT DEFINED ROBOCOPY_LOG SET ROBOCOPY_LOG=ROBOCOPY_%COPY_PROFILE%@%yyyy%%mm%%dd%%hh%%mn%%ss%.log
+REM IF NOT DEFINED ROBOCOPY_LOG_OPTIONS SET ROBOCOPY_LOG_OPTIONS=/log+:"%ROBOCOPY_LOG%" /v /fp /tee
+IF NOT DEFINED ROBOCOPY_LOG_OPTIONS SET ROBOCOPY_LOG_OPTIONS=/log:ROBOCOPY_%COPY_PROFILE%@%yyyy%%mm%%dd%%hh%%mn%%ss%.log /v /fp /np /tee
 
 NOTEPAD COPY_LIST.txt
 COPY COPY_LIST.txt COPY_LIST@%yyyy%%mm%%dd%%hh%%mn%%ss%.txt
@@ -32,8 +34,8 @@ FOR /F "skip=1 tokens=1,2,3* delims=," %%i in (COPY_LIST.txt) DO CALL :LIST_ROBO
 CALL :Msg "Check copy-list.txt Execute. Press Enter..."
 FOR /F "skip=1 tokens=1,2,3* delims=," %%i in (COPY_LIST.txt) DO CALL :EXEC_ROBOCOPY %%i "%%j" "%%k\%%i"
 
-CALL :Msg Finished
 CALL :ArchiveLogFiles
+CALL :Msg Finished
 EXIT
 
 
@@ -57,8 +59,12 @@ EXIT
 	SET COPY_FROM=%2
 	SET COPY_TO=%3
 	ECHO ROBOCOPY %COPY_FROM% %COPY_TO%
-	ROBOCOPY %COPY_FROM% %COPY_TO% %ROBOCOPY_COPY_OPTIONS% /log:ROBOCOPY_%COPY_PROFILE%@%yyyy%%mm%%dd%%hh%%mn%%ss%.log /v /fp /np /tee
-	START NOTEPAD ROBOCOPY_%COPY_PROFILE%@%yyyy%%mm%%dd%%hh%%mn%%ss%.log
+	ROBOCOPY %COPY_FROM% %COPY_TO% %ROBOCOPY_COPY_OPTIONS% %ROBOCOPY_LOG_OPTIONS%
+	IF %ERRORLEVEL% EQU 8 (
+		ECHO ROBOCOPY %COPY_FROM% %COPY_TO% %ROBOCOPY_COPY_OPTIONS% %ROBOCOPY_LOG_OPTIONS% is Failed.
+		PAUSE
+	)
+	START NOTEPAD %ROBOCOPY_LOG%
 	REM EXPLORER %COPY_TO%
 	EXIT /B
 
@@ -68,5 +74,7 @@ EXIT
 	EXIT /B
 
 :ArchiveLogFiles
+	ECHO Make logfile log_%yyyy%%mm%%dd%%hh%%mn%%ss%_%USERDOMAIN%.zip Press Enter...
+	PAUSE
 	7z a -tzip -sdel log_%yyyy%%mm%%dd%%hh%%mn%%ss%_%USERDOMAIN%.zip copy-list*.txt *%yyyy%%mm%%dd%%hh%%mn%%ss%*
 	EXIT /B
