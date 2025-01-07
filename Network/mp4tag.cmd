@@ -20,7 +20,8 @@ IF NOT DEFINED VIDEO_OUTPUT_DIR SET VIDEO_OUTPUT_DIR=%USERPROFILE%\Videos\yt-dlp
 CALL :EXEC_MP3TAG_DIRS %DESKTOP_DIR%
 CALL :EXEC_MP3TAG_DIRS %VIDEO_OUTPUT_DIR%
 CALL :EXEC_MP3TAG_DIR %JD2_DL%\Videos
-PAUSE
+CHOICE /C YN /T 10 /D N /M "Continue?"
+IF %ERRORLEVEL% EQU 2 EXIT
 CALL :EXEC_MP3TAG_DIR %DOWNLOADS_DIR%\youtube.com
 CALL :EXEC_MP3TAG_DIR %DOWNLOADS_DIR%\xxx
 REM PAUSE
@@ -35,7 +36,7 @@ REM                                Function
 REM
 REM ======================================================================
 :IS_EXIST_MP4
-	FOR /R %1 %%i IN (*.mp4) DO EXIT /B 0
+	FOR /R %1 %%i IN (*.mp4 *.webm *.m4a) DO EXIT /B 0
 	EXIT /B 1
 	
 	
@@ -45,7 +46,7 @@ REM ======================================================================
 		ECHO %1
 		Mp3tag.exe /fp:"%1"
 	) ELSE (
-		ECHO mp4 file is not exist. %1
+		ECHO video file is not exist. %1
 		EXIT /B 1
 	)
 	EXIT /B 0
