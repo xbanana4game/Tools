@@ -53,7 +53,7 @@ IF DEFINED XCOPY_XXX CALL :F_XCOPY_XXX
 IF DEFINED MOVE_VIDEOS (
 	CALL :MOVE_VIDEOS Captures
 	CALL :MOVE_VIDEOS youtube.com
-	CALL :MOVE_VIDEOS youtube.com-„ÉÅ„É£„É≥„Éç„É´
+	CALL :MOVE_VIDEOS youtube.com-É`ÉÉÉìÉlÉã
 	CALL :MOVE_VIDEOS twitch.tv
 	CALL :MOVE_VIDEOS twitch.tv-clip
 	IF 1 EQU %COPY_VIDEOS% CALL :COPY_VIDEOS
