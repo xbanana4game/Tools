@@ -22,5 +22,15 @@ ECHO ======================================================================
 FOR /F "skip=1 tokens=1,2,3 delims=:" %%C IN (%CAPTURES_LIST_FILE%) DO (
 	ECHO %%C : %%D
 )
+
+ECHO;
+DIR /B %DESKTOP_DIR%
+ECHO;
+
+FOR %%i IN (*.cmd) DO (
+	ECHO %%~fi
+	ECHO %%~ni
+)
+
 PAUSE
 

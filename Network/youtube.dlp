@@ -25,7 +25,7 @@
 -f "bv[format_note!*=THROTTLED]+ba[format_note!*=THROTTLED]"
 #res:%RESOLUTION%
 -S "ext:mp4,+vbr,ext:m4a,abr~128,+br"
-#abr~128,abr~64
+#abr~128,abr~64,abr~32
 #-S "res:720,ext:mp4,+vbr,ext:m4a,abr~128,+br"
 #-S "abr~128,+br"
 
@@ -51,6 +51,23 @@
 #136+140 720 30fps
 #298+140 720 60fps
 #-f "22/136+140/bv+ba/b"
+
+# Audio Only
+#-f "ba[format_note!*=THROTTLED]"
+#-S "ext:m4a,abr"
+
+# youtube.com-480p
+#-f "bv[format_note!*=THROTTLED]+ba[format_note!*=THROTTLED]"
+#-S "res:480,+vbr,ext:m4a,abr~128,+br"
+
+# youtube.com-144p-low
+#-f "bv[format_note!*=THROTTLED]+ba[format_note!*=THROTTLED]"
+#-S "res:144,+vbr,ext:m4a,abr~64,+br"
+
+# youtube.com-preview
+#-f "bv[format_note!*=THROTTLED]+ba[format_note!*=THROTTLED]"
+#-S "res:144,+vbr,ext:m4a,abr~32,+br"
+
 
 
 ##########################################################################
@@ -87,7 +104,7 @@
 --embed-thumbnail  
 --write-thumbnail
 --convert-thumbnails jpg
---output "thumbnail:%USERPROFILE%\Pictures\youtube-thumbnails\%(id)s.%(ext)s"
+#--output "thumbnail:%USERPROFILE%\Pictures\youtube-thumbnails\%(id)s.%(ext)s"
 
 
 ##########################################################################
