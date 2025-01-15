@@ -16,6 +16,7 @@ REM SET EXTRACT_EXT=*
 REM SET IGNORE_FILE=CloudDL-Store@*
 REM SET IGNORE_FILE_2=.ts
 REM SET MOVE_STORE_FLG=1
+REM SET ARCHIVE_STORE_DIR=%STORE_DIR%\%yyyy%%mm%
 
 
 REM ======================================================================
@@ -26,6 +27,7 @@ REM ======================================================================
 IF NOT DEFINED MOVE_STORE_FLG (SET MOVE_STORE_FLG=0)
 IF NOT DEFINED DOWNLOADS_PASSWORD (SET /P DOWNLOADS_PASSWORD="SET DOWNLOADS_PASSWORD(%ARCHIVE_PASSWORD%)=")
 IF NOT DEFINED DOWNLOADS_PASSWORD (SET DOWNLOADS_PASSWORD=%ARCHIVE_PASSWORD%)
+IF NOT DEFINED ARCHIVE_STORE_DIR SET ARCHIVE_STORE_DIR=%STORE_DIR%\%yyyy%%mm%
 
 IF NOT "%1"=="" (
 	FOR %%i in (%*) DO (CALL :Extract7z %%i)
@@ -33,8 +35,8 @@ IF NOT "%1"=="" (
 )
 
 DIR /B %ARCHIVE_DIR%
-SET /P EXTRACT_YYYY="Enter Extract YYYY* or YYYYMM. (Default:%yyyy%%mm%) -> "
-IF "%EXTRACT_YYYY%"=="" SET EXTRACT_YYYY=%yyyy%%mm%
+SET /P EXTRACT_YYYY="Enter Extract YYYY* or YYYYMM. (Default:DL_%yyyy%%mm%) -> "
+IF "%EXTRACT_YYYY%"=="" SET EXTRACT_YYYY=DL_%yyyy%%mm%
 CALL :MAKE_LIST_FILE
 CALL :EXTRACT_YYYYMM
 TIMEOUT /T 2
@@ -68,7 +70,8 @@ REM ======================================================================
 	IF "%EXTRACT_TARGET_DIR%"=="" SET EXTRACT_TARGET_DIR=%DESKTOP_DIR%
 	IF DEFINED IGNORE_FILE SET IGNORE_OPT=-xr!%IGNORE_FILE%
 	IF DEFINED IGNORE_FILE_2 SET IGNORE_OPT=%IGNORE_OPT% -xr!%IGNORE_FILE_2%
-	IF %MOVE_STORE_FLG%==1 MD %STORE_DIR%\%EXTRACT_YYYY%
+	%ARCHIVE_STORE_DIR%
+	IF %MOVE_STORE_FLG%==1 MD %ARCHIVE_STORE_DIR%
 	
 	REM auto rename existing file (for example, name.txt will be renamed to name_1.txt).
 	FOR /D %%i IN ("%ARCHIVE_DIR%\%EXTRACT_YYYY%") DO (
@@ -91,8 +94,9 @@ REM ======================================================================
 			)
 		)
 		IF %MOVE_STORE_FLG%==1 (
-			MOVE %ARCHIVE_DIR%\%EXTRACT_YYYY%\*.7z %STORE_DIR%\%EXTRACT_YYYY%\
-			MOVE %ARCHIVE_DIR%\%EXTRACT_YYYY%\*.7z.??? %STORE_DIR%\%EXTRACT_YYYY%\
+			IF NOT EXIST %ARCHIVE_STORE_DIR% MD %ARCHIVE_STORE_DIR%
+			MOVE %ARCHIVE_DIR%\%EXTRACT_YYYY%\*.7z %ARCHIVE_STORE_DIR%\
+			MOVE %ARCHIVE_DIR%\%EXTRACT_YYYY%\*.7z.??? %ARCHIVE_STORE_DIR%\
 			RMDIR %ARCHIVE_DIR%\%EXTRACT_YYYY%
 		)
 	)
