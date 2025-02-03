@@ -32,5 +32,9 @@ FOR %%i IN (*.cmd) DO (
 	ECHO %%~ni
 )
 
+FOR %%i IN (A B C) DO (
+	ECHO %%i
+)
+
 PAUSE
 

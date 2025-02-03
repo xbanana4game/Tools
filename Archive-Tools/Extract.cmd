@@ -16,7 +16,7 @@ REM SET EXTRACT_EXT=*
 REM SET IGNORE_FILE=CloudDL-Store@*
 REM SET IGNORE_FILE_2=.ts
 REM SET MOVE_STORE_FLG=1
-REM SET ARCHIVE_STORE_DIR=%STORE_DIR%\%yyyy%%mm%
+REM SET ARCHIVE_STORE_DIR=%STORE_DIR%\DL_%yyyy%%mm%
 
 
 REM ======================================================================
@@ -27,7 +27,7 @@ REM ======================================================================
 IF NOT DEFINED MOVE_STORE_FLG (SET MOVE_STORE_FLG=0)
 IF NOT DEFINED DOWNLOADS_PASSWORD (SET /P DOWNLOADS_PASSWORD="SET DOWNLOADS_PASSWORD(%ARCHIVE_PASSWORD%)=")
 IF NOT DEFINED DOWNLOADS_PASSWORD (SET DOWNLOADS_PASSWORD=%ARCHIVE_PASSWORD%)
-IF NOT DEFINED ARCHIVE_STORE_DIR SET ARCHIVE_STORE_DIR=%STORE_DIR%\%yyyy%%mm%
+IF NOT DEFINED ARCHIVE_STORE_DIR SET ARCHIVE_STORE_DIR=%STORE_DIR%\DL_%yyyy%%mm%
 
 IF NOT "%1"=="" (
 	FOR %%i in (%*) DO (CALL :Extract7z %%i)
@@ -70,7 +70,6 @@ REM ======================================================================
 	IF "%EXTRACT_TARGET_DIR%"=="" SET EXTRACT_TARGET_DIR=%DESKTOP_DIR%
 	IF DEFINED IGNORE_FILE SET IGNORE_OPT=-xr!%IGNORE_FILE%
 	IF DEFINED IGNORE_FILE_2 SET IGNORE_OPT=%IGNORE_OPT% -xr!%IGNORE_FILE_2%
-	%ARCHIVE_STORE_DIR%
 	IF %MOVE_STORE_FLG%==1 MD %ARCHIVE_STORE_DIR%
 	
 	REM auto rename existing file (for example, name.txt will be renamed to name_1.txt).
