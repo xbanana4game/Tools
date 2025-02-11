@@ -180,7 +180,7 @@ REM ======================================================================
 		EXIT /B
 	)
 	ECHO Start Copy %DOWNLOADS_DIR%\%DIR_NAME%
-	CALL :IS_EXIST_MP4
+	CALL :IS_EXIST_MP4 %DOWNLOADS_DIR%\%DIR_NAME%
 	IF %ERRORLEVEL% EQU 0 (
 		Mp3tag.exe /fp:"%DOWNLOADS_DIR%\%DIR_NAME%"
 	)

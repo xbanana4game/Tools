@@ -136,7 +136,6 @@ IF ERRORLEVEL 1 (
 	GOTO :DL_START_INPUT
 )
 
-
 :SET_INPUT_MODE
 FOR %%i in (%YTDLP_DL_LIST_FILE_EXP%) DO (
 	SET YTDLP_DL_LIST_FILE=%%i
@@ -177,8 +176,15 @@ IF "%FILE_EXT%"=="csv" (
 )
 
 GOTO :DL_START_%MODE%
+EXIT /B
 
 
+
+REM ======================================================================
+REM
+REM                                Function
+REM
+REM ======================================================================
 :DL_START_INPUT
 SET DOWNLOAD_URL=
 SET /P DOWNLOAD_URL="URL: "
@@ -199,9 +205,14 @@ IF %SKIP_FLG%==1 (
 )
 CD /D %VIDEOS_DIR%
 yt-dlp.exe %YTDLP_CONF_OPT% %YTDLP_RESOLUTION_OPT% "%DOWNLOAD_URL%"
+IF %ERRORLEVEL% EQU 0 (
+	TIMEOUT /T 3
+) ELSE (
+	PAUSE
+)
 DEL %YTDLP_CONFIG_FILE%
-PAUSE
 GOTO :DL_END
+EXIT /B
 
 
 :DL_START_PLAYLIST
@@ -213,6 +224,7 @@ CD /D %VIDEOS_DIR%
 yt-dlp.exe %YTDLP_CONF_OPT% %YTDLP_RESOLUTION_OPT% %YTDLP_OPT% "%DOWNLOAD_URL%"
 DEL %YTDLP_CONFIG_FILE%
 GOTO :DL_END
+EXIT /B
 
 
 :DL_START_FILE
@@ -269,12 +281,6 @@ IF %ERRORLEVEL% EQU 0 (
 EXIT /B
 
 
-
-REM ======================================================================
-REM
-REM                                Function
-REM
-REM ======================================================================
 :MAKE_BATCH_FILE
 SET BATCH_FILE=%YTDLP_CONF_DIR%\yt-dlp-batch_%yyyy%%mm%%dd%.cmd
 IF NOT EXIST %BATCH_FILE% (
