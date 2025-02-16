@@ -124,7 +124,7 @@ REM ======================================================================
 	ECHO Playlist file name is %VIDEOS_STORE_DIR%\%TARGET_DIR%\%PLAYLIST_FILENAME%.m3u8
 	IF EXIST %VIDEOS_STORE_DIR%\%TARGET_DIR% Mp3tag.exe /fp:"%VIDEOS_STORE_DIR%\%TARGET_DIR%"
 	IF EXIST %VIDEOS_STORE_DIR%\%TARGET_DIR%\%PLAYLIST_FILENAME%.m3u8 (
-		ECHO Execute macro m3u2wpl.ppa
+		ECHO Execute macro m3u2wpl.ppa(alt+q)
 		%SAKURA% %VIDEOS_STORE_DIR%\%TARGET_DIR%\%PLAYLIST_FILENAME%.m3u8
 		MD %VIDEOS_STORE_DIR%\%TARGET_DIR%\__playlist
 	)
