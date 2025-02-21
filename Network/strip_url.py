@@ -21,7 +21,8 @@ def add_txt(input_urls, output_txt='url.txt'):
         url = input_url.rstrip()
         vid = input_url.rstrip()
         if config_skip_flg == '1' and db.is_downloaded(url, quality=config_skip_quality) is True:
-            logger.info('SKP {url}'.format(url=db.trim_url(url)))
+            data = db.get_vid_info(url)
+            logger.info('SKP {url}: {title}'.format(url=url, title=data['title']))
             continue
         logger.info('ADD {url}'.format(url=db.trim_url(url)))
         if re.search(r'youtube.com', input_url) is not None:
@@ -66,7 +67,7 @@ def get_quality(text):
     QUALITY_STR = dict()
     QUALITY_STR['low'] = 'mp4-low'
     QUALITY_STR['high'] = 'mp4-high'
-    QUALITY_STR['preview'] = 'mp4-high'
+    QUALITY_STR['audio'] = '0'
     QUALITY_STR['preview'] = '0'
     quality = re.match(r'(.*)_(.*)_(.*)', text)
     if quality is not None:
@@ -81,6 +82,7 @@ today = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
 logger = logging.getLogger(__name__)
 FORMAT = '%(asctime)s %(message)s'
 log_directory = os.environ.get('USERPROFILE') + '\\Desktop\\' + 'log'
+# log_directory = 'log'
 os.makedirs(log_directory, exist_ok=True)
 logging.basicConfig(filename=log_directory + '\\strip_url.log'.format(today=today), format=FORMAT, level=logging.INFO)
 
