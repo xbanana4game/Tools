@@ -190,10 +190,17 @@ REM ======================================================================
 :DL_START_INPUT
 SET DOWNLOAD_URL=
 SET /P DOWNLOAD_URL="URL: "
-%TOOLS_DIR%\Network\strip_url.py %DOWNLOAD_URL%
-FOR /F "tokens=1,2 delims=," %%i IN (url.txt) DO (SET DOWNLOAD_URL=%%i)
-ECHO URL:%DOWNLOAD_URL%
-DEL url.txt
+strip_url.py %DOWNLOAD_URL%
+IF ERRORLEVEL 1 (
+	DEL url.txt
+	DEL %YTDLP_CONFIG_FILE%
+	PAUSE
+	EXIT
+) ElSE (
+	FOR /F "tokens=1,2 delims=," %%i IN (url.txt) DO (SET DOWNLOAD_URL=%%i)
+	ECHO URL:%DOWNLOAD_URL%
+	DEL url.txt
+)
 IF %SKIP_FLG%==1 (
 	FINDSTR /C:"%DOWNLOAD_URL%" %DLURL_HISTORY_FILES%
 	IF ERRORLEVEL 1 (
@@ -243,7 +250,15 @@ IF "%FILE_EXT_LAST%"=="%END_FILE_EXT%" (
 IF %SKIP_FLG%==0 ECHO #SKIP_MODE_OFF>>%YTDLP_CONFIG_FILE%
 IF %SKIP_FLG%==1 (
 	strip_url.py %DLURL_LIST%
-	MOVE url.txt %DLURL_LIST_OUTPUT%
+	IF ERRORLEVEL 1 (
+		DEL url.txt
+		DEL %YTDLP_CONFIG_FILE%
+		DEL %DLURL_LIST%
+		PAUSE
+		EXIT
+	) ElSE (
+		MOVE url.txt %DLURL_LIST_OUTPUT%
+	)
 	type nul>%DLURL_LIST_OUTPUT%.tmp
 	FOR /F "tokens=1,2 delims=," %%i IN (%DLURL_LIST_OUTPUT%) DO (
 		FINDSTR /C:"%%j" %DLURL_HISTORY_FILES% %YTDLP_CONF_DIR%\*.%END_FILE_EXT% >nul 2>&1
@@ -337,7 +352,15 @@ IF EXIST %DESKTOP_DIR%\%YTDLP_CONFIG_FILE_NAME%*.err EXIT /B
 ECHO;>%BATCH_LOCK_FILE%
 IF %SKIP_FLG%==1 (
 	strip_url.py %DLURL_LIST%
-	MOVE url.txt %DLURL_LIST%
+	IF ERRORLEVEL 1 (
+		DEL url.txt
+		DEL %YTDLP_CONFIG_FILE%
+		DEL %DLURL_LIST%
+		PAUSE
+		EXIT
+	) ElSE (
+		MOVE url.txt %DLURL_LIST_OUTPUT%
+	)
 	type nul>%DLURL_LIST%.tmp
 	FOR /F "tokens=1,2 delims=," %%i IN (%DLURL_LIST%) DO (
 		FINDSTR /C:"%%j" %DLURL_HISTORY_FILES% >nul 2>&1
