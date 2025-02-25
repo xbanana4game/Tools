@@ -252,8 +252,6 @@ IF %SKIP_FLG%==1 (
 	strip_url.py %DLURL_LIST%
 	IF ERRORLEVEL 1 (
 		DEL url.txt
-		DEL %YTDLP_CONFIG_FILE%
-		DEL %DLURL_LIST%
 		PAUSE
 		EXIT
 	) ElSE (
@@ -354,8 +352,6 @@ IF %SKIP_FLG%==1 (
 	strip_url.py %DLURL_LIST%
 	IF ERRORLEVEL 1 (
 		DEL url.txt
-		DEL %YTDLP_CONFIG_FILE%
-		DEL %DLURL_LIST%
 		PAUSE
 		EXIT
 	) ElSE (
