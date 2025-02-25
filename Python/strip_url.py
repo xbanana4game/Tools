@@ -11,7 +11,6 @@ import pyperclip
 
 from videodb import videoDB
 
-history_vid = []
 
 def add_txt(input_urls, output_txt='url.txt'):
     global db
@@ -21,8 +20,8 @@ def add_txt(input_urls, output_txt='url.txt'):
         url = input_url.rstrip()
         vid = input_url.rstrip()
         if config_skip_flg == '1' and db.is_downloaded(url, quality=config_skip_quality) is True:
-            data = db.get_vid_info(url)
-            logger.info('SKP {url}: {title}'.format(url=url, title=data['title']))
+            data = db.get_vtb(url)
+            logger.info('SKP {url}: {title}'.format(url=url, title=data.title))
             continue
         logger.info('ADD {url}'.format(url=db.trim_url(url)))
         if re.search(r'youtube.com', input_url) is not None:
@@ -78,13 +77,15 @@ def get_quality(text):
 
     return None
 
-today = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+
 logger = logging.getLogger(__name__)
+today = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
 FORMAT = '%(asctime)s %(message)s'
-log_directory = os.environ.get('USERPROFILE') + '\\Desktop\\' + 'log'
+log_directory = os.environ.get('USERPROFILE') + '\\Downloads\\' + 'yt-dlp-log'
 # log_directory = 'log'
 os.makedirs(log_directory, exist_ok=True)
-logging.basicConfig(filename=log_directory + '\\strip_url.log'.format(today=today), format=FORMAT, level=logging.INFO)
+logging.basicConfig(filename=log_directory + '\\strip_url_{today}.log'.format(today=today), format=FORMAT, level=logging.INFO)
+# logging.basicConfig(stream=sys.stdout, format=FORMAT, level=logging.DEBUG)
 
 if __name__ == '__main__':
     db = videoDB()
@@ -96,6 +97,7 @@ if __name__ == '__main__':
     logger.info('config_skip_quality={config_skip_quality}'.format(config_skip_quality=config_skip_quality))
     if len(sys.argv) > 1:
         input_url = sys.argv[1]
+        logger.info('input_url={input_url}'.format(input_url=input_url))
         urls = []
         if re.match('.*.csv.txt', input_url) is not None:
             input_csv = sys.argv[1]

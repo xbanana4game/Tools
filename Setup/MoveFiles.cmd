@@ -196,3 +196,10 @@ REM ======================================================================
 :IS_EXIST_MP4
 	FOR /R %1 %%i IN (*.mp4 *.webm *.m4a *.mp3) DO EXIT /B 0
 	EXIT /B 1
+	
+:UPDATE_VIDEO_DB
+	REM SET PATH=%PATH%;%USERPROFILE%\PycharmProjects\mp3tag-tool
+	SET TARGET_DIR=%1
+	update_video_db.py %DOWNLOADS_DIR%\%TARGET_DIR%
+	EXIT /B
+

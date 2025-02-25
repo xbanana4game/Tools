@@ -45,6 +45,7 @@ SET PATH=%PATH%;C:\Program Files (x86)\foobar2000
 SET NOTEPAD="C:\Program Files\Notepad++\notepad++.exe"
 REM SET NOTEPAD=NOTEPAD
 SET SAKURA="C:\Program Files (x86)\sakura\sakura.exe"
+SET PATH=%PATH%;%USERPROFILE%\PycharmProjects\mp3tag-tool
 
 REM ----------------------------------------------------------------------
 REM SettingsOptions

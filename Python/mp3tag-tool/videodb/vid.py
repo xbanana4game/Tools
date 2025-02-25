@@ -40,7 +40,7 @@ class videoDB:
         self.conn.commit()
         return True
 
-    def add_vid(self, url, title, date=None, encoder_settings='', wid=''):
+    def add_vid(self, url, title, date=None, encoder_settings='', wid='', resolution='', comment=''):
         if date is None:
             today = datetime.datetime.now()
             date = today.strftime("%Y-%m-%d")
@@ -51,28 +51,22 @@ class videoDB:
         title = str(title).replace("'", "''")
         encoder_settings_sql = str(encoder_settings).replace("'", "''")
         url_fix = self.trim_url(url)
-        sql_cmd = self.INSERT_VID.format(title=title, date=date, domain=domain, url=url_fix, encoder_settings=encoder_settings_sql, wid=wid)
-        self.logger.debug(sql_cmd.strip())
+        sql_cmd = self.INSERT_VID.format(title=title, date=date, domain=domain, url=url_fix, encoder_settings=encoder_settings_sql, wid=wid, resolution=resolution, comment=comment)
+        self.logger.debug("add_vid():sql_cmd='{sql_cmd}'".format(sql_cmd=sql_cmd.strip()))
         try:
             self.cur.execute(sql_cmd)
         except IntegrityError as e:
-            self.logger.info(e)
-            self.logger.info('add_vid():SKIP INSERT url={url}'.format(url=url_fix))
+            self.logger.info('add_vid():SKIP INSERT url={url} encoder_settings={encoder_settings} {error}'.format(url=url_fix, error=e, encoder_settings=encoder_settings))
             self.update_vid(url_fix, encoder_settings=encoder_settings)
         except OperationalError as e:
-            print(e, file=sys.stderr)
+            self.logger.error('add_vid():SKIP INSERT url={url} {error}'.format(url=url_fix, error=e))
             self.logger.error(sql_cmd)
-            self.logger.error(e)
         self.conn.commit()
         return sql_cmd
 
     def __init__(self, dbname=VIDEOS_DBNAME):
         self.logger = logging.getLogger(__name__)
-        # log_directory = os.environ.get('USERPROFILE') + '\\Desktop\\' + 'log'
-        # log_directory = 'log'
-        # FORMAT = '%(asctime)s %(message)s'
-        # os.makedirs(log_directory, exist_ok=True)
-        # logging.basicConfig(filename=log_directory + '\\vid.log', format=FORMAT, level=logging.DEBUG)
+        self.logger.debug("videoDB.__init__():dbname={dbname}".format(dbname=dbname))
         self.dbname = dbname
         self.conn = sqlite3.connect(self.dbname)
         self.cur = self.conn.cursor()
@@ -100,6 +94,15 @@ class videoDB:
             # encoder_settings = self.conv_encoder_settings(encoder_settings)
         except:
             encoder_settings = ''
+        try:
+            resolution_raw: MP4FreeForm = mp4.tags['----:com.apple.iTunes:resolution'][0]
+            resolution = resolution_raw.decode()
+        except:
+            resolution = ''
+        try:
+            comment = mp4.tags["\xa9com"][0]
+        except:
+            comment = ''
         # wid = mp4.tags["tven"][0]
         wid = mp4.tags["\xa9cmt"][0]
         # if len(wid) != 11:
@@ -113,7 +116,7 @@ class videoDB:
             return
         self.logger.debug('title={title}:wid={wid}'.format(wid=wid, title=title))
         # print(url)
-        self.add_vid(url, title=title, date=date, encoder_settings=encoder_settings, wid=wid)
+        self.add_vid(url, title=title, date=date, encoder_settings=encoder_settings, wid=wid, resolution=resolution, comment=comment)
         return
 
     def check_version(self):
@@ -129,11 +132,13 @@ class videoDB:
         if encoder_settings is not None:
             old = self.get_vid(vid)
             format = videodb.EncorderFormat(encoder_settings)
-            encoder_settings = format.compare_encoder_settings(old.get('encoder_settings'))
-            encoder_settings = str(encoder_settings).replace("'", "''")
+            encoder_settings_new = format.compare_encoder_settings(old.get('encoder_settings'))
+            if encoder_settings_new != old.get('encoder_settings'):
+                encoder_settings_new_sql = str(encoder_settings_new).replace("'", "''")
+                self.logger.info("update_vid(): UPDATE encoder_settings before='{before}', after='{after}'".format(before=old.get('encoder_settings'), after=encoder_settings_new))
+                sql_cmd = "UPDATE vid SET encoder_settings='{encoder_settings}' WHERE id={id}".format(id=vid, encoder_settings=encoder_settings_new_sql)
+                self.conn.execute(sql_cmd)
 
-        sql_cmd = "UPDATE vid SET encoder_settings='{encoder_settings}' WHERE id={id}".format(id=vid, encoder_settings=encoder_settings)
-        self.conn.execute(sql_cmd)
         self.conn.commit()
 
     def get_vid(self, vid):
@@ -176,35 +181,48 @@ class videoDB:
     def is_downloaded(self, url, quality=None):
         vid = self.get_id(url)
         if vid == -1:
+            self.logger.info("is_downloaded():return False:url is not exist in db.")
             return False
         data = self.get_vid(vid)
         encoder_settings = videodb.EncorderFormat(data['encoder_settings'])
         if quality is not None:
             target_resolution = videodb.conv_encoder_settings_digit(quality)
+            if target_resolution > encoder_settings.formats_max:
+                target_resolution = encoder_settings.formats_max
             self.logger.debug("is_downloaded():target_resolution={target_resolution}, downloaded_resolution={downloaded_resolution}"
                               .format(target_resolution=target_resolution, downloaded_resolution=encoder_settings.height))
             if target_resolution > encoder_settings.height:
+                self.logger.info("is_downloaded():return False:url is exist in db. but format is not good. download better quality.")
                 return False
             else:
+                self.logger.info("is_downloaded():return True:url is exist in db. but format is better. need not download.")
                 return True
         else:
+            self.logger.info("is_downloaded():return True:url is already exist in db.")
             return True
 
-    def get_vid_info(self, url):
+    def get_vtb(self, url):
         url_fix = self.trim_url(url)
         sql_cmd = 'SELECT id, wid, title, date, domain, url, encoder_settings FROM vid WHERE  url=\'{url}\''.format(url=url_fix)
         self.logger.debug('get_vid():sql_cmd={sql_cmd}'.format(sql_cmd=sql_cmd))
         self.cur.execute(sql_cmd)
         data = self.cur.fetchone()
-        result = dict()
-        result['id'] = data[0]
-        result['wid'] = data[1]
-        result['title'] = data[2]
-        result['date'] = data[3]
-        result['domain'] = data[4]
-        result['url'] = data[5]
-        result['encoder_settings'] = data[6]
+        result = videodb.Vtb()
+        result.id = data[0]
+        result.wid = data[1]
+        result.title = data[2]
+        result.date = data[3]
+        result.domain = data[4]
+        result.url = data[5]
+        result.encoder_settings = data[6]
         return result
+
+    def delete(self, url):
+        sql_cmd = "DELETE FROM vid WHERE url='{url}'".format(url=url)
+        self.logger.debug('delete():sql_cmd={sql_cmd}'.format(sql_cmd=sql_cmd))
+        self.conn.execute(sql_cmd)
+        self.conn.commit()
+        return
 
 
 

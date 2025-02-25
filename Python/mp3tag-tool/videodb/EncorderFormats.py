@@ -15,6 +15,7 @@ def getNearestValue(list, num):
 
 
 def xvformats_digit(text):
+    logger.debug("xvformats_digit():text='{text}'".format(text=text))
     pattern = re.match(r'(.*) \[(.*)\]', text)
     if pattern is not None:
         target_format = pattern.group(1)
@@ -25,8 +26,12 @@ def xvformats_digit(text):
             pattern = re.match(r'hls-(.*)p', i)
             if pattern is not None:
                 formats_dict[i] = int(pattern.group(1))
-        formats_dict['mp4-low'] = min(formats_dict.values())
-        formats_max = max(formats_dict.values())
+        if len(formats_dict) == 0:
+            formats_dict['mp4-low'] = 120
+            formats_max = 240
+        else:
+            formats_dict['mp4-low'] = min(formats_dict.values())
+            formats_max = max(formats_dict.values())
         if formats_max > 480:
             formats_dict['mp4-high'] = getNearestValue(formats_dict.values(), 480)
         else:
@@ -86,13 +91,13 @@ def conv_simple_encoder_settings(text):
 
 class EncorderFormat:
     formats_dict = dict()
-    formats_max = None
+    formats_max = 0
     def __init__(self, text):
         self.logger = logging.getLogger(__name__)
         self.formats = text
         self.simple_formats = conv_simple_encoder_settings(text)
         self.height = conv_encoder_settings_digit(text)
-        self.logger.info("EncorderFormat():text={text}, height={height}".format(text=text, height=self.height))
+        self.logger.debug("EncorderFormat.__init__():text={text}, height={height}".format(text=text, height=self.height))
         self.max_quality_xv()
 
     def max_quality_xv(self):
@@ -106,9 +111,15 @@ class EncorderFormat:
                 pattern = re.match(r'hls-(.*)p', i)
                 if pattern is not None:
                     self.formats_dict[i] = int(pattern.group(1))
-            self.formats_dict['mp4-low'] = min(self.formats_dict.values())
-            self.formats_max = max(self.formats_dict.values())
-            self.formats_min = min(self.formats_dict.values())
+
+            if len(self.formats_dict) == 0:
+                self.formats_dict['mp4-low'] = 250
+                self.formats_max = 240
+                self.formats_min = 120
+            else:
+                self.formats_dict['mp4-low'] = min(self.formats_dict.values())
+                self.formats_max = max(self.formats_dict.values())
+                self.formats_min = min(self.formats_dict.values())
             if self.formats_max > 480:
                 self.formats_dict['mp4-high'] = getNearestValue(self.formats_dict.values(), 480)
             else:

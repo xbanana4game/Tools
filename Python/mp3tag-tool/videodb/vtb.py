@@ -10,7 +10,9 @@ class Vtb():
     	"date" TEXT NULL,
     	"domain" TEXT NULL,
     	"url" TEXT NULL,
-    	"encoder_settings" TEXT NULL
+    	"encoder_settings" TEXT NULL,
+    	"resolution" TEXT NULL,
+    	"comment" TEXT NULL
     )
     '''
 
@@ -22,6 +24,9 @@ class Vtb():
         self.domain = domain
         self.url = url
         self.encoder_settings = encoder_settings
+        self.resolution = ''
+        self.rating = 0
+        self.comment = ''
         return
 
     def set_date(self, date=None):

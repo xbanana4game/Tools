@@ -108,6 +108,7 @@ REM ======================================================================
 	COPY /Y Setup\Settings.cmd %TOOLS_INSTALL_DIR%\Settings.cmd
 	SET TOOLS_DIR=%~dp0
 	SET TOOLS_DIR=%TOOLS_DIR:~0,-1%
+	SET SETTING_OPTIONS_DIR=%CONFIG_DIR%
 	ECHO SET TOOLS_DIR=%TOOLS_DIR%>>%TOOLS_INSTALL_DIR%\Settings.cmd
 	ECHO SET PATH=%~dp0Games;%%PATH%%>>%TOOLS_INSTALL_DIR%\Settings.cmd
 	ECHO SET PATH=%~dp0Archive-Tools;%%PATH%%>>%TOOLS_INSTALL_DIR%\Settings.cmd
@@ -116,17 +117,19 @@ REM ======================================================================
 	
 	ECHO SET PATH=%TOOLS_INSTALL_DIR%\bin;%%PATH%%>>%TOOLS_INSTALL_DIR%\Settings.cmd
 	
-	IF EXIST "SettingsOptions.cmd" (
-		NOTEPAD SettingsOptions.cmd
-		COPY /Y SettingsOptions.cmd %TOOLS_INSTALL_DIR%\SettingsOptions.cmd
+	IF EXIST "%SETTING_OPTIONS_DIR%\SettingsOptions.cmd" (
+		NOTEPAD %SETTING_OPTIONS_DIR%\SettingsOptions.cmd
+		COPY /Y %SETTING_OPTIONS_DIR%\SettingsOptions.cmd %TOOLS_INSTALL_DIR%\SettingsOptions.cmd
+	) ELSE (
+		ECHO REM SettingsOptions.cmd >%SETTING_OPTIONS_DIR%\SettingsOptions.cmd
 	)
 	
 	COPY /Y Setup\MoveFiles.cmd %TOOLS_INSTALL_DIR%\MoveFiles.cmd
-	IF EXIST "MoveFiles-user.cmd" (
-		NOTEPAD MoveFiles-user.cmd
-		COPY /Y MoveFiles-user.cmd %TOOLS_INSTALL_DIR%\MoveFiles-user.cmd
+	IF EXIST "%SETTING_OPTIONS_DIR%\MoveFiles-user.cmd" (
+		NOTEPAD %SETTING_OPTIONS_DIR%\MoveFiles-user.cmd
+		COPY /Y %SETTING_OPTIONS_DIR%\MoveFiles-user.cmd %TOOLS_INSTALL_DIR%\MoveFiles-user.cmd
 	) ELSE (
-		ECHO REM MoveFiles-user.cmd >MoveFiles-user.cmd
+		ECHO REM MoveFiles-user.cmd >%SETTING_OPTIONS_DIR%\MoveFiles-user.cmd
 	)
 	
 	MD %TOOLS_INSTALL_DIR%\bin
