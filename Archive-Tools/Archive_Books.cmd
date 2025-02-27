@@ -25,6 +25,7 @@ FOR %%i in (%*) DO (
 		7z a -tzip -sdel "%BOOKS_ZIP_DIR%\%%~nxi.zip" ""%%i\*"" -xr!*.db -xr!*.dat -xr!*.url -xr!.DS_Store -mx=0 -mtc=off
 		7z l "%BOOKS_ZIP_DIR%\%%~nxi.zip">"%%~nxi.zip.txt"
 	)
+	books_rename.py "%BOOKS_ZIP_DIR%\%%~nxi.zip"
 	RMDIR %%i
 )
 EXIT

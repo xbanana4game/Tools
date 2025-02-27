@@ -156,6 +156,7 @@
 
 # TRACK(Number)
 #--parse-metadata 'track:%(meta_track)s'
+#--parse-metadata '%(playlist_index)s/%(playlist_count)s:%(meta_track)s'
 
 # ALBUMARTIST
 #--parse-metadata 'album_artist:%(meta_album_artist)s'
