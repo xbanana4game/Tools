@@ -10,6 +10,7 @@ SET DRIVE_LETTER_FILE=%CD:~0,2%
 SET DRIVE_LETTER_CMD=%~d0
 
 REM ---------- nas_local-COPY.cmd(SettingsOptions.cmd) ----------
+REM SET ROBOCOPY_LOG=
 REM SET ROBOCOPY_LOG=%DESKTOP_DIR%\robocopy-%yyyy%%mm%%dd%%hh%%mn%%ss%.log
 REM SET ROBOCOPY_LOG_OPTIONS=/log+:"%ROBOCOPY_LOG%" /v /fp /tee
 REM SET COPY_FROM=%VIDEOS_DIR%
@@ -32,8 +33,7 @@ REM                                Main
 REM
 REM ======================================================================
 :SETTINGS
-IF NOT DEFINED ROBOCOPY_LOG SET ROBOCOPY_LOG=%DESKTOP_DIR%\robocopy-%yyyy%%mm%%dd%%hh%%mn%%ss%.log
-IF NOT DEFINED ROBOCOPY_LOG_OPTIONS SET ROBOCOPY_LOG_OPTIONS=/log+:"%ROBOCOPY_LOG%" /v /fp /tee
+IF DEFINED ROBOCOPY_LOG SET ROBOCOPY_LOG_OPTIONS=/log+:"%ROBOCOPY_LOG%" /v /fp /tee
 IF NOT DEFINED COPY_FROM (SET /P COPY_FROM="SET COPY_FROM=")
 IF NOT DEFINED COPY_FROM (EXIT)
 IF NOT DEFINED COPY_TO (SET /P COPY_TO="SET COPY_TO=")

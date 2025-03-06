@@ -22,11 +22,13 @@ IF NOT EXIST %BOOKS_ZIP_DIR% MD %BOOKS_ZIP_DIR%
 FOR %%i in (%*) DO (
 	ECHO %%i
 	IF NOT EXIST "%BOOKS_ZIP_DIR%\%%~nxi.zip" (
-		7z a -tzip -sdel "%BOOKS_ZIP_DIR%\%%~nxi.zip" ""%%i\*"" -xr!*.db -xr!*.dat -xr!*.url -xr!.DS_Store -mx=0 -mtc=off
+		7z a -tzip -sdel "%BOOKS_ZIP_DIR%\%%~nxi.zip" "%%~i\*" -xr!*.db -xr!*.dat -xr!*.url -xr!.DS_Store -mx=0 -mtc=off
 		7z l "%BOOKS_ZIP_DIR%\%%~nxi.zip">"%%~nxi.zip.txt"
+		books_rename.py "%%~i.zip.txt"
+		books_rename.py "%%~i.zip"
+		RMDIR %%i
+		IF EXIST "%%i" MOVE "%%i" %BOOKS_ZIP_DIR%
 	)
-	books_rename.py ""%%i.zip""
-	RMDIR %%i
 )
 EXIT
 
