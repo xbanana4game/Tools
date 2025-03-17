@@ -34,6 +34,6 @@ FOR %%i in (%*) DO (
 		)
 	)
 )
-TIMEOUT /T 2
+TIMEOUT /T 1
 EXIT
 
