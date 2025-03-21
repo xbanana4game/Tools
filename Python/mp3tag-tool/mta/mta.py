@@ -34,8 +34,12 @@ CAPTURES_FILENAME = ('$if($grtr($strstr(%_folderpath%,\\\\$getenv(NASDOMAIN)),0)
 XXX_FILENAME = (DIRECTORY_BASE +
                 'xxx\\$if($grtr(%rating%,3),xxx-high-star,xxx-low-star)\\'
                 '$repeat(★,$if2(%rating%,0))$repeat(☆,$sub(5,$if2(%rating%,0)))\\'
-                '%genre%\\%album%\\'
+                '%album%\\'
                 '$if2(%comment%,%_FILENAME%)')
+
+XXX_SIMPLE_FILENAME = (DIRECTORY_BASE +
+                       'xxx\\%genre%\\'
+                       '$if2(%comment%,%_FILENAME%)$if(%tags%,\'[\'%tags%\']\',)')
 
 ANIME_FILENAME = (DIRECTORY_BASE +
                   'Anime\\%genre%\\'

@@ -9,6 +9,7 @@ import time
 import yt_dlp
 import pyperclip
 
+import videodb
 from videodb import videoDB
 
 
@@ -16,35 +17,36 @@ def add_txt(input_urls, output_txt='url.txt'):
     global db
     global config_skip_quality
     global config_skip_flg
-    for input_url in input_urls:
-        url = input_url.rstrip()
-        vid = input_url.rstrip()
-        if config_skip_flg == '1' and db.is_downloaded(url, quality=config_skip_quality) is True:
-            data = db.get_vtb(url)
-            logger.info('SKP {url}: {title}'.format(url=url, title=data.title))
-            continue
-        logger.info('ADD {url}'.format(url=db.trim_url(url)))
-        if re.search(r'youtube.com', input_url) is not None:
-            # print(output_txt)
-            # result = re.search('(.*)&pp=.*', filename)
-            url = re.sub('&pp=.*', '', url)
-            url = re.sub('&t=.*s', '', url)
-            # print(url)
-            result = re.search('v=(.{11})', url)
-            if result is not None:
-                vid = result.group(1)
-            result = re.search('shorts/(.{11})', url)
-            if result is not None:
-                vid = result.group(1)
-            # print(vid)
+    with open(output_txt, 'a') as f_txt:
+        for input_url in input_urls:
+            url = input_url.rstrip()
+            vid = input_url.rstrip()
+            if config_skip_flg == '1' and db.is_downloaded(url, quality=config_skip_quality) is True:
+                data = db.get_vtb(url)
+                logger.info('SKP {url}: {title}: {format}'.format(url=url, title=data.title, format=data.encoder_settings))
+                print('SKP {url}: {title}'.format(url=url, title=data.title, format=data.encoder_settings))
+                continue
+            logger.info('ADD {url}'.format(url=videodb.trim_url(url)))
+            print('ADD {url}'.format(url=videodb.trim_url(url)))
+            if re.search(r'youtube.com', input_url) is not None:
+                # print(output_txt)
+                # result = re.search('(.*)&pp=.*', filename)
+                url = re.sub('&pp=.*', '', url)
+                url = re.sub('&t=.*s', '', url)
+                # print(url)
+                result = re.search('v=(.{11})', url)
+                if result is not None:
+                    vid = result.group(1)
+                result = re.search('shorts/(.{11})', url)
+                if result is not None:
+                    vid = result.group(1)
+                # print(vid)
 
-            # if check_dup_vid(vid) is False:
-            #     print('skip: '+vid)
-            #     continue
-        elif re.search(r'twitch.com', input_url) is not None:
-            pass
-
-        with open(output_txt, 'a') as f_txt:
+                # if check_dup_vid(vid) is False:
+                #     print('skip: '+vid)
+                #     continue
+            elif re.search(r'twitch.com', input_url) is not None:
+                pass
             f_txt.write(url + ',' + vid + '\n')
             # print(url + ' vid:' + vid)
     return
@@ -79,8 +81,8 @@ def get_quality(text):
 
 
 logger = logging.getLogger(__name__)
-today = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
-FORMAT = '%(asctime)s %(message)s'
+today = datetime.datetime.now().strftime("%Y%m%d")
+FORMAT = '%(levelname)-9s  %(asctime)s  [%(name)s] %(message)s'
 log_directory = os.environ.get('USERPROFILE') + '\\Downloads\\' + 'yt-dlp-log'
 # log_directory = 'log'
 os.makedirs(log_directory, exist_ok=True)
@@ -88,6 +90,7 @@ logging.basicConfig(filename=log_directory + '\\strip_url_{today}.log'.format(to
 # logging.basicConfig(stream=sys.stdout, format=FORMAT, level=logging.DEBUG)
 
 if __name__ == '__main__':
+    logger.info("=================================== START ===================================")
     db = videoDB()
     config_skip_flg = os.environ.get('SKIP_FLG')
     config_skip_quality = os.environ.get('SKIP_QUALITY')
@@ -109,6 +112,10 @@ if __name__ == '__main__':
             add_txt(urls)
         elif re.match('.*.txt', input_url) is not None:
             input_txt = sys.argv[1]
+            if os.path.exists(input_txt) == False:
+                logger.error('%s not found.' % input_txt)
+                print('%s not found.' % input_txt)
+                exit(1)
             with open(input_txt, 'r') as f:
                 for url in f.readlines():
                     urls.append(url.rstrip())

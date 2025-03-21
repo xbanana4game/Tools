@@ -3,6 +3,11 @@ import re
 
 logger = logging.getLogger(__name__)
 
+FORMATS_PATTERN_XV_1 = r'(.*) \[(.*)\]'
+FORMATS_PATTERN_YT_1 = r'(.*) - (.*) \((.*)\)\+(.*) - (.*) \((.*)\)'
+FORMATS_PATTERN_1 = r'(.*) - (.*p)'
+FORMATS_PATTERN_2 = r'(.*p) - (.*)'
+
 
 def getNearestValue(list, num):
     # print("getNearestValue():{num}, {list}".format(num=num, list=sorted(list)))
@@ -43,9 +48,8 @@ def xvformats_digit(text):
 def conv_encoder_settings_digit(encoder_settings):
     encoder_settings_simple = conv_simple_encoder_settings(encoder_settings)
     result = encoder_settings_simple
-    logger.debug('conv_encoder_settings_digit():encoder_settings={encoder_settings}'.format(encoder_settings=encoder_settings, result=result))
     for i in range(1):
-        pattern = re.match(r'(.*) \[.*\]', encoder_settings)
+        pattern = re.match(FORMATS_PATTERN_XV_1, encoder_settings)
         if pattern is not None:
             result = xvformats_digit(encoder_settings)
             break
@@ -59,7 +63,7 @@ def conv_encoder_settings_digit(encoder_settings):
             break
     if str(result).isdigit() is False:
         result = 0
-    logger.debug('conv_encoder_settings_digit():return {result}: {encoder_settings}'.format(encoder_settings=encoder_settings, result=result))
+    logger.debug('conv_encoder_settings_digit({encoder_settings}):return {result}'.format(encoder_settings=encoder_settings, result=result))
     return int(result)
 
 
@@ -89,19 +93,41 @@ def conv_simple_encoder_settings(text):
     return result
 
 
+def get_encoder_settings_only(text):
+    result = text
+    for i in range(1):
+        pattern = re.match(FORMATS_PATTERN_XV_1, text)
+        if pattern is not None:
+            result = pattern.group(1)
+        pattern = re.match(FORMATS_PATTERN_YT_1, text)
+        if pattern is not None:
+            result = pattern.group(3)
+            break
+        pattern = re.match(FORMATS_PATTERN_1, text)
+        if pattern is not None:
+            result = pattern.group(2)
+            break
+        pattern = re.match(FORMATS_PATTERN_2, text)
+        if pattern is not None:
+            result = pattern.group(1)
+            break
+    return result
+
+
 class EncorderFormat:
     formats_dict = dict()
     formats_max = 0
+
     def __init__(self, text):
         self.logger = logging.getLogger(__name__)
         self.formats = text
         self.simple_formats = conv_simple_encoder_settings(text)
         self.height = conv_encoder_settings_digit(text)
-        self.logger.debug("EncorderFormat.__init__():text={text}, height={height}".format(text=text, height=self.height))
+        self.logger.debug("__init__():text='{text}', height={height}".format(text=text, height=self.height))
         self.max_quality_xv()
 
     def max_quality_xv(self):
-        pattern = re.match(r'(.*) \[(.*)\]', self.formats)
+        pattern = re.match(FORMATS_PATTERN_XV_1, self.formats)
         if pattern is not None:
             target_format = pattern.group(1)
             formats = pattern.group(2)
@@ -128,7 +154,7 @@ class EncorderFormat:
             return self.formats_dict.get(target_format)
 
     def compare(self, text):
-        return self.compare_encoder_settings(self.formats, text)
+        return self.compare_encoder_settings(text)
 
     def isBetterQuality(self, text):
         quality = conv_encoder_settings_digit(text)
@@ -139,10 +165,20 @@ class EncorderFormat:
 
     def compare_encoder_settings(self, target):
         target_quality = conv_encoder_settings_digit(target)
-        self.logger.debug("compare_encoder_settings():target={target}, height={height}, target_quality={target_quality}".format(target=target, height=self.height, target_quality=target_quality))
+        self.logger.debug("compare_encoder_settings():target={target}".format(target=target))
+        if self.height >= target_quality:
+            self.logger.debug("compare_encoder_settings():return {target}".format(target=self.formats))
+            return self.formats
+        self.logger.debug("compare_encoder_settings():return {target}".format(target=target))
+        return target
+
+    def get_best_encoder_settings(self, target):
+        target_quality = conv_encoder_settings_digit(target)
+        self.logger.debug(
+            "compare_encoder_settings():target={target}, height={height}, target_quality={target_quality}".format(target=target, height=self.height, target_quality=target_quality))
         if self.height >= target_quality:
             return self.formats
-        if self.formats_max is not None:
+        if self.formats_max != 0:
             if target_quality > self.formats_max:
                 return "hls-{res}p".format(res=self.formats_max)
         return target
