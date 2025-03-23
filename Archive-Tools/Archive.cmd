@@ -123,8 +123,9 @@ REM ======================================================================
 
 :COPY_FILE
 	ROBOCOPY %DL_DIR%\ %XCOPY_ARCHIVE_DIRECTORY%\%DL_NAME%\ %DOWNLOAD_FILENAME%.* /e /r:3 /w:10 /log:robocopy.log /v /fp /tee
-	IF %ERRORLEVEL% EQU 8 (
+	IF ERRORLEVEL 8 (
 		NOTEPAD robocopy.log
+		EXIT /B
 	) ELSE (
 		EXPLORER %XCOPY_ARCHIVE_DIRECTORY%\%DL_NAME%\
 		DEL robocopy.log

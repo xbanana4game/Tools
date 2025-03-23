@@ -136,6 +136,7 @@ REM ======================================================================
 	COPY /Y Archive-Tools\Archive-Tool.cmd %TOOLS_INSTALL_DIR%\bin
 	COPY /Y Keepass-Tools\Archive-kdbx.cmd %TOOLS_INSTALL_DIR%\bin
 	COPY /Y Archive-Tools\Archive-Extension.cmd %TOOLS_INSTALL_DIR%\bin
+	COPY /Y Archive-Tools\Archive_Books.cmd %USERPROFILE%\AppData\Roaming\Microsoft\Windows\SendTo
 	
 	REM COPY /Y Archive-Tools\Archive.cmd %USERPROFILE%\Desktop\Archive.cmd
 	REM IF EXIST %USERPROFILE%\Desktop\Archive.cmd DEL %USERPROFILE%\Desktop\Archive.cmd
