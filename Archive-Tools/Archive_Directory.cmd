@@ -11,7 +11,7 @@ SET DRIVE_LETTER_FILE=%CD:~0,2%
 SET DRIVE_LETTER_CMD=%~d0
 REM ---------- Archive Directory(SettingsOptions.cmd) ----------
 REM SET SDEL_FLG=0
-REM SET ARCHIVE_OUTPUT_DIR=
+REM SET ARCHIVE_OUTPUT_DIR=%DOWNLOADS_DIR%
 REM SET Z_PASSWORD=NONE
 REM SET Z_PASSWORD=%DOWNLOADS_PASSWORD%
 REM x=[0 | 1 | 3 | 5 | 7 | 9 ] 
@@ -52,6 +52,6 @@ FOR %%i in (%*) DO (
 	IF EXIST "%ARCHIVE_OUTPUT_DIR%\%%~nxi@%yyyy%%mm%%dd%%hh%%mn%%ss%.7z" 7z l %ARCHIVE_OPT_PW% "%ARCHIVE_OUTPUT_DIR%\%%~nxi@%yyyy%%mm%%dd%%hh%%mn%%ss%.7z" >"%DOWNLOADS_DIR%\%%~nxi@%yyyy%%mm%%dd%%hh%%mn%%ss%.7z.txt"
 	TYPE "%DOWNLOADS_DIR%\%%~nxi@%yyyy%%mm%%dd%%hh%%mn%%ss%.7z.txt"
 )
-PAUSE
+TIMEOUT 3
 EXIT
 
