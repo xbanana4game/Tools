@@ -43,6 +43,7 @@ IF %ERRORLEVEL% EQU 1 (
 	SET MOVE_STORE_FLG=0
 )
 
+ECHO ================== LIST ==================
 DIR /B %ARCHIVE_DIR%
 SET /P EXTRACT_YYYY="Enter Extract YYYY* or YYYYMM. (Default:DL_%yyyy%%mm%) -> "
 IF "%EXTRACT_YYYY%"=="" SET EXTRACT_YYYY=DL_%yyyy%%mm%

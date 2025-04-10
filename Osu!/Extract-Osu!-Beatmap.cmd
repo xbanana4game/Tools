@@ -17,9 +17,7 @@ IF NOT DEFINED BEATMAP_SRC_DIR SET /P BEATMAP_SRC_DIR="SET BEATMAP_SRC_DIR=(defa
 IF "%BEATMAP_SRC_DIR%"=="" SET BEATMAP_SRC_DIR=%DOWNLOADS_DIR%\Games\Osu!\Beatmap_Pack
 
 FOR %%i in (%*) DO (
-	7z e %%i -o%OSU_SONGS_DIR% -aoa
-	ECHO %yyyy%/%mm%/%dd%:%%~nxi>>%LOGNAME%
-	7z l "%%i">>%OSU_SONGS_DIR%\.log\%%~nxi.txt
+	SET BEATMAP_SRC_DIR=%%i
 )
 
 CALL :CheckDirectory "%BEATMAP_SRC_DIR%"
@@ -39,7 +37,8 @@ REM                                Function
 REM
 REM ======================================================================
 :IMPORT_FROM_BEATMAPS_DIRECTORY
-	FOR %%i in ("%BEATMAP_SRC_DIR%\*Beatmap Pack*.7z")  DO (
+	ECHO FIND *Beatmap Pack*.7z IN %BEATMAP_SRC_DIR%
+	FOR /R "%BEATMAP_SRC_DIR%" %%i in ("*Beatmap Pack*.7z")  DO (
 		IF EXIST %OSU_SONGS_DIR%\.log\%%~nxi.txt (
 			ECHO %%~nxi is already imported.
 		) ELSE (
@@ -48,7 +47,8 @@ REM ======================================================================
 			7z l "%%i">>%OSU_SONGS_DIR%\.log\%%~nxi.txt
 		)
 	)
-	FOR %%i in ("%BEATMAP_SRC_DIR%\*Beatmap Pack*.zip")  DO (
+	ECHO FIND *Beatmap Pack*.zip IN %BEATMAP_SRC_DIR%
+	FOR /R "%BEATMAP_SRC_DIR%" %%i in ("*Beatmap Pack*.zip")  DO (
 		IF EXIST %OSU_SONGS_DIR%\.log\%%~nxi.txt (
 			ECHO %%~nxi is already imported.
 		) ELSE (
