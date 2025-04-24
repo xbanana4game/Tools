@@ -30,6 +30,8 @@
 #--socket-timeout 600
 #--max-filesize 500M
 #--limit-rate 50K
+# Get cookies.txt LOCALLY export netscape
+#--cookies C:\Users\{USER}\Downloads\{domain}_cookies.txt
 
 
 ##########################################################################
