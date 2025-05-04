@@ -8,6 +8,7 @@ IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
 REM --------------- Remove-Empty-Dir.cmd(SettingsOptions) --------------------
 REM SET ROOT_DIR=%USERPROFILE%\Downloads
+REM SET ROOT_DIR=%BOOKS_ZIP_DIR%
 REM ----------------------------------------------------------------------
 
 
