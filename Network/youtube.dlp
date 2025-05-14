@@ -16,7 +16,7 @@
 #--playlist-start NUMBER          -I NUMBER:
 #--playlist-end NUMBER            -I :NUMBER
 #--playlist-reverse               -I ::-1
-
+#--cookies %USERPROFILE%\Downloads\www.youtube.com_cookies.txt
 
 ##########################################################################
 # INPUT
@@ -102,8 +102,8 @@
 # Thumbnail
 ##########################################################################
 --embed-thumbnail  
---write-thumbnail
---convert-thumbnails jpg
+#--convert-thumbnails jpg
+#--write-thumbnail
 #--output "thumbnail:%USERPROFILE%\Pictures\youtube-thumbnails\%(id)s.%(ext)s"
 
 
