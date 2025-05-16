@@ -43,4 +43,5 @@ class Vtb:
         self.date = date
 
     def __str__(self):
-        return "{id}:{title}:{url}".format(id=self.id, title=self.title, url=self.url)
+        return ("{id}:{title}:{url}:{encoder_settings}:{status}:{comment}"
+                .format(id=self.id, title=self.title, url=self.url, encoder_settings=self.encoder_settings, status=self.status, comment=self.comment))

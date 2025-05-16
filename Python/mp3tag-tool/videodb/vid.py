@@ -20,7 +20,8 @@ def trim_url(url):
 
 
 class videoDB:
-    VIDEOS_DBNAME = os.getenv('CONFIG_DIR') + os.sep + 'videos.sqlite3'
+    YEAR = datetime.datetime.now().strftime("%Y")
+    VIDEOS_DBNAME = os.getenv('CONFIG_DIR') + os.sep + 'videos.sqlite3'.format(year=YEAR)
     DB_VERSION = 2
 
     def __init__(self, dbname=VIDEOS_DBNAME):
@@ -59,12 +60,13 @@ class videoDB:
         sql_cmd = (videodb.INSERT_VID
                    .format(title=title_sql, date=date, domain=domain, url=url_fix, encoder_settings=encoder_settings_sql, wid=wid,
                            resolution=resolution, comment=comment, status=status))
-        self.logger.debug("add_vid():sql_cmd='{sql_cmd}'".format(sql_cmd=sql_cmd.strip()))
         try:
             self.cur.execute(sql_cmd)
-            self.logger.info('add_vid():INSERT sql_cmd={sql_cmd}'.format(sql_cmd=sql_cmd.strip()))
+            self.logger.debug('sql_cmd={sql_cmd}'.format(sql_cmd=sql_cmd.strip()))
+            self.logger.info("INSERT {url}".format(url=url_fix))
             print("INSERT {url}".format(url=url_fix))
         except IntegrityError as e:
+            self.logger.info('Already Exist. Update encoder_settings and status, if need. url={url} {error}'.format(url=url_fix, error=e))
             old = self.get_vtb(url_fix)
             self.logger.debug('add_vid(): old={old} status({status})'.format(old=old, status=old.status))
             video_format = videodb.EncorderFormat(old.encoder_settings)
@@ -74,13 +76,16 @@ class videoDB:
                                  .format(before=old.encoder_settings, after=encoder_settings_new))
                 self.update_vid(url_fix, encoder_settings=encoder_settings, comment=comment, status=status)
                 print("UPDATE encoder_settings {url}".format(url=url_fix))
+            if status == -1:
+                print("status is -1. Not update. {url}".format(url=url_fix))
+                self.logger.info("status is -1. Not update. id={id}".format(url=url_fix, id=old.id))
             if old.status != status:
-                print("UPDATE status {url}".format(url=url_fix))
-                self.logger.info("add_vid(): UPDATE status {url}".format(url=url_fix))
+                print("UPDATE status {old}->{new} {url}".format(url=url_fix, old=old.status, new=status))
+                self.logger.info("UPDATE status {old}->{new} {url}".format(url=url_fix, old=old.status, new=status))
                 self.update_vid(url_fix, status=status)
         except OperationalError as e:
             print("SKIP {url}".format(url=url_fix))
-            self.logger.error('add_vid():SKIP INSERT url={url} {error}'.format(url=url_fix, error=e))
+            self.logger.error('SKIP INSERT url={url} {error}'.format(url=url_fix, error=e))
             self.logger.error(sql_cmd)
         self.conn.commit()
         return sql_cmd
@@ -146,17 +151,31 @@ class videoDB:
     def exist_url(self, url):
         url_fix = trim_url(url)
         sql_cmd = "SELECT id, encoder_settings FROM vid WHERE url='{url}'".format(url=url_fix)
-        print(sql_cmd)
+        self.logger.debug(sql_cmd)
         self.cur.execute(sql_cmd)
         row = self.cur.fetchone()
         if row is not None:
             return True
         return False
 
+    def exist_wid(self, wid):
+        sql_cmd = "SELECT id, encoder_settings FROM vid WHERE wid='{wid}'".format(wid=wid)
+        self.logger.debug(sql_cmd)
+        self.cur.execute(sql_cmd)
+        row = self.cur.fetchone()
+        if row is not None:
+            return row[0]
+        return -1
+
     def is_downloaded(self, url, quality=None):
-        vid = self.get_id(url)
+        url_parser = videodb.UrlParser()
+        wid = url_parser.get_wid(url)
+        if wid is not None:
+            vid = self.exist_wid(wid)
+        else:
+            vid = self.get_id(url)
         if vid == -1:
-            self.logger.info("is_downloaded():return False:url is not exist in db.")
+            self.logger.debug("return False:url is not exist in db.")
             return False
         data = self.get_vid(vid)
         encoder_settings = videodb.EncorderFormat(data['encoder_settings'])
@@ -173,13 +192,20 @@ class videoDB:
                 self.logger.info("is_downloaded():return True:url is exist in db. but format is better. need not download.")
                 return True
         else:
-            self.logger.info("is_downloaded():return True:url is already exist in db.")
+            self.logger.debug("is_downloaded():return True:url is already exist in db.")
             return True
 
-    def get_vtb(self, url):
+    def get_vtb(self, url, check_wid=False):
         url_fix = trim_url(url)
-        sql_cmd = 'SELECT id, wid, title, date, domain, url, encoder_settings, comment, status FROM vid WHERE  url=\'{url}\''.format(url=url_fix)
-        self.logger.debug('get_vtb():sql_cmd={sql_cmd}'.format(sql_cmd=sql_cmd))
+        url_parser = videodb.UrlParser()
+        wid = None
+        if check_wid:
+            wid = url_parser.get_wid(url_fix)
+        if wid is not None:
+            sql_cmd = 'SELECT id, wid, title, date, domain, url, encoder_settings, comment, status FROM vid WHERE  wid=\'{wid}\''.format(wid=wid)
+        else:
+            sql_cmd = 'SELECT id, wid, title, date, domain, url, encoder_settings, comment, status FROM vid WHERE  url=\'{url}\''.format(url=url_fix)
+        self.logger.debug('sql_cmd={sql_cmd}'.format(sql_cmd=sql_cmd))
         self.cur.execute(sql_cmd)
         data = self.cur.fetchone()
         if data is not None:

@@ -20,7 +20,7 @@ YOUTUBE_FILENAME = ('$if($grtr($strstr(%_folderpath%,\\\\$getenv(NASDOMAIN)),0),
 TWITCH_FILENAME = ('$if($grtr($strstr(%_folderpath%,\\\\$getenv(NASDOMAIN)),0),\\\\$getenv(NASDOMAIN)\\Multimedia\\Videos\\,'
                    '$if($strcmp($left(%_folderpath%,3),C:\\),C:\\Users\\$getenv(USERNAME)\\Downloads\\,'
                    '$left(%_folderpath%,3)Videos\\))'
-                   'twitch.tv$if($strcmp(%genre%,twitch.tv clip),-clip,)\\'
+                   '$replace(%genre%, ,-)\\'
                    '$validate(%artist%,_)\\'
                    '%year% $if2(%TVEPISODEID%,%title%)')
 
@@ -32,7 +32,7 @@ CAPTURES_FILENAME = ('$if($grtr($strstr(%_folderpath%,\\\\$getenv(NASDOMAIN)),0)
                      '%title%$if(%tags%,\'[\'%tags%\']\',)')
 
 XXX_FILENAME = (DIRECTORY_BASE +
-                'xxx\\$if($grtr(%rating%,3),xxx-high-star,xxx-low-star)\\'
+                'xxx\\%genre%\\$if($grtr(%rating%,3),xxx-high-star,xxx-low-star)\\'
                 '$repeat(★,$if2(%rating%,0))$repeat(☆,$sub(5,$if2(%rating%,0)))\\'
                 '%album%\\'
                 '$if2(%comment%,%_FILENAME%)')
