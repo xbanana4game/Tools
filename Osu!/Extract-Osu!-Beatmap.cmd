@@ -25,7 +25,9 @@ IF %ERRORLEVEL% EQU 1 (
 	ECHO Directory not Exist. %BEATMAP_SRC_DIR%
 ) ELSE (
 	CALL :IMPORT_FROM_BEATMAPS_DIRECTORY
+	CALL :EXEC_UPDATE_OSU_DB
 )
+
 
 TIMEOUT /T 3
 EXIT
@@ -67,3 +69,10 @@ REM ======================================================================
 		EXIT /B 1
 	)
 	EXIT /B 0
+
+:EXEC_UPDATE_OSU_DB
+	WHERE update_osu_db.py
+	IF %ERRORLEVEL% EQU 0 (
+		IF EXIST %BEATMAP_SRC_DIR% update_osu_db.py %BEATMAP_SRC_DIR%
+	)
+	EXIT /B
