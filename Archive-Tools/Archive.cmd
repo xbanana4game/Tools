@@ -135,7 +135,7 @@ REM ======================================================================
 	MD %ARCHIVE_STORE_DIR%
 	MOVE %DL_DIR%\*.7z %ARCHIVE_STORE_DIR%\
 	MOVE %DL_DIR%\*.7z.??? %ARCHIVE_STORE_DIR%\
-	RMDIR %ARCHIVE_STORE_DIR%
+	RMDIR %ARCHIVE_STORE_DIR%\%DL_NAME%
 	EXIT /B
 	
 	
