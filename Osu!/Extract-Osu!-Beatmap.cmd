@@ -24,11 +24,11 @@ CALL :CheckDirectory "%BEATMAP_SRC_DIR%"
 IF %ERRORLEVEL% EQU 1 (
 	ECHO Directory not Exist. %BEATMAP_SRC_DIR%
 ) ELSE (
-	CALL :IMPORT_FROM_BEATMAPS_DIRECTORY
+	CALL :IMPORT_FROM_BEATMAPS_DIRECTORY 7z
+	CALL :IMPORT_FROM_BEATMAPS_DIRECTORY zip
+	CALL :IMPORT_FROM_BEATMAPS_DIRECTORY rar
 	CALL :EXEC_UPDATE_OSU_DB
 )
-
-
 TIMEOUT /T 3
 EXIT
 
@@ -39,18 +39,9 @@ REM                                Function
 REM
 REM ======================================================================
 :IMPORT_FROM_BEATMAPS_DIRECTORY
-	ECHO FIND *Beatmap Pack*.7z IN %BEATMAP_SRC_DIR%
-	FOR /R "%BEATMAP_SRC_DIR%" %%i in ("*Beatmap Pack*.7z")  DO (
-		IF EXIST %OSU_SONGS_DIR%\.log\%%~nxi.txt (
-			ECHO %%~nxi is already imported.
-		) ELSE (
-	 		7z e "%%i" -o%OSU_SONGS_DIR% -aoa
-	 		ECHO %yyyy%/%mm%/%dd%:%%~nxi>>%LOGNAME%
-			7z l "%%i">>%OSU_SONGS_DIR%\.log\%%~nxi.txt
-		)
-	)
-	ECHO FIND *Beatmap Pack*.zip IN %BEATMAP_SRC_DIR%
-	FOR /R "%BEATMAP_SRC_DIR%" %%i in ("*Beatmap Pack*.zip")  DO (
+	SET BEATMAP_EXT=%1
+	ECHO FIND *.%BEATMAP_EXT% IN %BEATMAP_SRC_DIR%
+	FOR /R "%BEATMAP_SRC_DIR%" %%i in ("*.%BEATMAP_EXT%")  DO (
 		IF EXIST %OSU_SONGS_DIR%\.log\%%~nxi.txt (
 			ECHO %%~nxi is already imported.
 		) ELSE (

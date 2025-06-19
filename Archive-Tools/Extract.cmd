@@ -86,19 +86,19 @@ REM ======================================================================
 	FOR /D %%i IN ("%ARCHIVE_DIR%\%EXTRACT_YYYY%") DO (
 		FOR %%j IN ("%ARCHIVE_DIR%\%%~ni\DL_*.7z") DO (
 			IF NOT EXIST %EXTRACT_TARGET_DIR%\%%~ni\%%~nj.txt (
-				7z x -p%DOWNLOADS_PASSWORD% %%j -o%EXTRACT_TARGET_DIR%\%%~ni -aot %EXTRACT_EXT% -r %IGNORE_OPT%
+				7z x -p%DOWNLOADS_PASSWORD% %%j -o%EXTRACT_TARGET_DIR%\%%~ni -aot "%EXTRACT_EXT%" -r %IGNORE_OPT%
 				7z l -p%DOWNLOADS_PASSWORD% %%j>%EXTRACT_TARGET_DIR%\%%~ni\%%~nj.txt
 			)
 		)
 		FOR %%j IN ("%ARCHIVE_DIR%\%%~ni\DL_*.7z.001") DO (
 			IF NOT EXIST %EXTRACT_TARGET_DIR%\%%~ni\%%~nj.txt (
-				7z x -p%DOWNLOADS_PASSWORD% %%j -o%EXTRACT_TARGET_DIR%\%%~ni -aot %EXTRACT_EXT% -r %IGNORE_OPT%
+				7z x -p%DOWNLOADS_PASSWORD% %%j -o%EXTRACT_TARGET_DIR%\%%~ni -aot "%EXTRACT_EXT%" -r %IGNORE_OPT%
 				7z l -p%DOWNLOADS_PASSWORD% %%j>%EXTRACT_TARGET_DIR%\%%~ni\%%~nj.txt
 			)
 		)
 		FOR %%j IN ("%ARCHIVE_DIR%\%%~ni\VD_*.7z.001") DO (
 			IF NOT EXIST %EXTRACT_TARGET_DIR%\%%~nj.txt (
-				7z x -p%DOWNLOADS_PASSWORD% %%j -o%EXTRACT_TARGET_DIR%\%%~ni -aot %EXTRACT_EXT% -r %IGNORE_OPT%
+				7z x -p%DOWNLOADS_PASSWORD% %%j -o%EXTRACT_TARGET_DIR%\%%~ni -aot "%EXTRACT_EXT%" -r %IGNORE_OPT%
 				7z l -p%DOWNLOADS_PASSWORD% %%j>%EXTRACT_TARGET_DIR%\%%~nj.txt
 			)
 		)
