@@ -32,7 +32,7 @@ REM ======================================================================
 	CALL :F_FORFILES_INIT %OSU_DIR%\Logs\ArchiveOsu!Files@%yyyy%%mm%%dd%%hh%%mn%.list
 	CALL :F_FORDIR_ARCHIVE
 	FOR %%i IN (osb) DO CALL :F_FORFILES_EXT_ARCHIVE %%i
-	FOR %%i IN (avi wmv flv mp4 mpge mpg wav) DO CALL :F_FORFILES_EXT_ARCHIVE %%i
+	FOR %%i IN (avi wmv flv mp4 mpeg mpg wav) DO CALL :F_FORFILES_EXT_ARCHIVE %%i
 	CALL :F_FORFILES_EXT_SIZE_ARCHIVE ogg 500000
 	CALL :F_FORFILES_ARCHIVE_EXECUTE
 	EXIT /B
