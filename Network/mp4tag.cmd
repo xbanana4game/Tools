@@ -17,6 +17,7 @@ REM
 REM ======================================================================
 IF NOT DEFINED VIDEO_OUTPUT_DIR SET VIDEO_OUTPUT_DIR=%USERPROFILE%\Videos\yt-dlp
 
+ECHO Mp3tag Filter: title PRESENT
 REM CALL :EXEC_MP3TAG_DIRS %DESKTOP_DIR%
 CALL :EXEC_MP3TAG_DIRS %VIDEO_OUTPUT_DIR%
 CALL :EXEC_MP3TAG_DIR %JD2_DL%\Videos

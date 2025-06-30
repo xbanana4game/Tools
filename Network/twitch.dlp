@@ -33,7 +33,7 @@
 #-P "%VIDEO_OUTPUT_DIR%\twitch.tv-clip"
 #-o "[%(creator|Unknown)s]%(title)s[%(id)s](%(resolution)s).%(ext)s"
 
---write-info-json
+#--write-info-json
 
 
 ##########################################################################
