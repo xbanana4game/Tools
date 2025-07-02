@@ -25,7 +25,7 @@ SET OUTPUT_CMD=%DESKTOP_DIR%\%MERGED_BATCH_NAME%.cmd
 
 ECHO REM TIMEOUT /T 1 >%OUTPUT_CMD%
 ECHO SET MERGED_BATCH_NAME=%MERGED_BATCH_NAME%>>%OUTPUT_CMD%
-FOR /R %YTDLP_CONF_DIR% %%i IN (__ytdlp_*.cmd) DO (
+FOR %%i IN (%YTDLP_CONF_DIR%\__ytdlp_*.cmd) DO (
 	ECHO REM ============================= %%~ni =============================>>%OUTPUT_CMD%
 	TITLE %MERGED_BATCH_NAME% - %%~ni>>%OUTPUT_CMD%
 	TYPE %%i >>%OUTPUT_CMD%
