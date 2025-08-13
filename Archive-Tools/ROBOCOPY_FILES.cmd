@@ -35,7 +35,7 @@ CALL :Msg "Check copy-list.txt Execute. Press Enter..."
 FOR /F "skip=1 tokens=1,2,3* delims=," %%i in (COPY_LIST.txt) DO CALL :EXEC_ROBOCOPY %%i "%%j" "%%k\%%i"
 
 CALL :ArchiveLogFiles
-CALL :Msg Finished
+REM CALL :Msg Finished
 EXIT
 
 
@@ -78,3 +78,5 @@ EXIT
 	PAUSE
 	7z a -tzip -sdel log_%yyyy%%mm%%dd%%hh%%mn%%ss%_%USERDOMAIN%.zip copy-list*.txt *%yyyy%%mm%%dd%%hh%%mn%%ss%*
 	EXIT /B
+
+
