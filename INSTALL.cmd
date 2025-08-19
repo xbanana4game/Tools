@@ -112,7 +112,7 @@ REM ======================================================================
 	ECHO SET TOOLS_DIR=%TOOLS_DIR%>>%TOOLS_INSTALL_DIR%\Settings.cmd
 	ECHO SET PATH=%~dp0Games;%%PATH%%>>%TOOLS_INSTALL_DIR%\Settings.cmd
 	ECHO SET PATH=%~dp0Archive-Tools;%%PATH%%>>%TOOLS_INSTALL_DIR%\Settings.cmd
-	ECHO SET PATH=%~dp0Network;%%PATH%%>>%TOOLS_INSTALL_DIR%\Settings.cmd
+	ECHO SET PATH=%~dp0Network\yt-dlp;%%PATH%%>>%TOOLS_INSTALL_DIR%\Settings.cmd
 	ECHO SET PATH=%~dp0File-Tools;%%PATH%%>>%TOOLS_INSTALL_DIR%\Settings.cmd
 	
 	ECHO SET PATH=%TOOLS_INSTALL_DIR%\bin;%%PATH%%>>%TOOLS_INSTALL_DIR%\Settings.cmd
