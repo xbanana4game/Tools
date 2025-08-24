@@ -24,7 +24,7 @@ IF NOT DEFINED YTDLP_CONF_DIR SET YTDLP_CONF_DIR=%CONFIG_DIR%\yt-dlp
 SET OUTPUT_CMD=%DESKTOP_DIR%\%MERGED_BATCH_NAME%.cmd
 
 ECHO REM TIMEOUT /T 1 >%OUTPUT_CMD%
-IF NOT EXIST %DESKTOP_DIR%\*.lock yt-dlp.exe -vU
+IF NOT EXIST %DESKTOP_DIR%\*.lock yt-dlp.exe -U
 ECHO SET MERGED_BATCH_NAME=%MERGED_BATCH_NAME%>>%OUTPUT_CMD%
 FOR %%i IN (%YTDLP_CONF_DIR%\__ytdlp_*.cmd) DO (
 	ECHO REM ============================= %%~ni =============================>>%OUTPUT_CMD%

@@ -18,6 +18,9 @@
 #--playlist-end NUMBER            -I :NUMBER
 #--playlist-reverse               -I ::-1
 #--cookies %USERPROFILE%\Downloads\www.youtube.com_cookies.txt
+#--cookies %CONFIG_DIR%\\yt-dlp\\www.youtube.com_cookies.txt
+#--cookies www.youtube.com_cookies.txt
+
 
 
 ##########################################################################

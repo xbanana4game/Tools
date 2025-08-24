@@ -104,6 +104,7 @@ IF %ERRORLEVEL% EQU 1 (
 	GOTO :CHECK_FORMAT
 ) ELSE IF %ERRORLEVEL% EQU 6 (
 	yt-dlp.exe -vU
+	REM yt-dlp.exe --update-to master
 	GOTO :SET_INPUT_MODE
 )
 :SET_INPUT_MODE_END
