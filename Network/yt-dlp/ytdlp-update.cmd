@@ -14,7 +14,8 @@ REM                                Main
 REM
 REM ======================================================================
 where yt-dlp.exe
-yt-dlp.exe -U
+yt-dlp.exe -vU
+REM yt-dlp.exe --update-to master
 PAUSE
 
 EXIT

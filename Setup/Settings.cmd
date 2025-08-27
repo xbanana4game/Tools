@@ -61,4 +61,8 @@ IF EXIST %USERPROFILE%\Desktop\SettingsOptions.cmd (
 )
 
 REM SET TOOLS_DIR=
+REM SETX NASDOMAIN sample-nas
+REM SETX JD2_DL D:\JDownloader
+REM SETX CONFIG_DIR %USERPROFILE%\Documents\config
+REM SETX BOOKS_ZIP_DIR %USERPROFILE%\Downloads\Books-zip
 
