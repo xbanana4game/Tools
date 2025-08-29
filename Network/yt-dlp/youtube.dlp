@@ -4,6 +4,7 @@
 ##########################################################################
 # Download Options
 ##########################################################################
+#--test
 #--console-title
 #--concurrent-fragments 3
 --retries infinite
@@ -28,12 +29,18 @@
 ##########################################################################
 #-f "bv+ba"
 #-f "bv[format_note!*=THROTTLED]+ba[format_note!*=THROTTLED]"
--f "bv[format_note!*=THROTTLED]+ba[format_note!*=THROTTLED][language=ja]/bv+ba/b"
+#-f "bv[format_note!*=THROTTLED]+ba[format_note!*=THROTTLED][language=ja]/bv+ba/b"
+
 #res:%RESOLUTION%
 -S "ext:mp4,+vbr,ext:m4a,lang,abr~128,+br"
 #abr~128,abr~64,abr~32
 #-S "res:720,ext:mp4,+vbr,ext:m4a,abr~128,+br"
 #-S "abr~128,+br"
+
+# multiple audio streams
+--audio-multistreams 
+-f "bv[format_note!*=THROTTLED]+ba[format_note!*=THROTTLED][language=ja][format_note!*=original]+ba[format_note!*=THROTTLED]/bv+ba/b"
+# -f "bv+ba[language=ja]+ba/bv+ba/b"
 
 # MP4
 #-S "res:144,ext:mp4,+vbr,+br,+size"

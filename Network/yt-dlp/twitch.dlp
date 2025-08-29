@@ -15,6 +15,7 @@
 # INPUT
 ##########################################################################
 #--download-sections "*10:15-inf"
+#--download-sections "*0:00:00-1:00:00"
 #res:%RESOLUTION%
 -S "ext:mp4"
 
@@ -32,6 +33,10 @@
 # for Twitch Clip
 #-P "%VIDEO_OUTPUT_DIR%\twitch.tv-clip"
 #-o "[%(creator|Unknown)s]%(title)s[%(id)s](%(resolution)s).%(ext)s"
+
+# for Twitch Part
+#-P "%USERPROFILE%\Desktop\twitch.tv-part"
+#-P "%VIDEO_OUTPUT_DIR%\twitch.tv-part"
 
 #--write-info-json
 
