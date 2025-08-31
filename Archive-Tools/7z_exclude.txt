@@ -1,0 +1,7 @@
+desktop.ini 
+*.part 
+*.mega 
+*.crdownload 
+*.downloading 
+youtube.com
+twitch.tv
