@@ -16,6 +16,9 @@ REM ======================================================================
 where yt-dlp.exe
 yt-dlp.exe -vU
 REM yt-dlp.exe --update-to master
+IF ERRORLEVEL 1 (
+	ECHO Update Failed.
+)
 PAUSE
 
 EXIT
