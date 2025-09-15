@@ -31,7 +31,7 @@
 #-f "bv[format_note!*=THROTTLED]+ba[format_note!*=THROTTLED]"
 #-f "bv[format_note!*=THROTTLED]+ba[format_note!*=THROTTLED][language=ja]/bv+ba/b"
 
-#res:%RESOLUTION%
+#res:RESOLUTION
 -S "ext:mp4,+vbr,ext:m4a,lang,abr~128,+br"
 #abr~128,abr~64,abr~32
 #-S "res:720,ext:mp4,+vbr,ext:m4a,abr~128,+br"

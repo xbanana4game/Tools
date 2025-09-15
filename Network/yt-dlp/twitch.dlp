@@ -16,7 +16,7 @@
 ##########################################################################
 #--download-sections "*10:15-inf"
 #--download-sections "*0:00:00-1:00:00"
-#res:%RESOLUTION%
+#res:RESOLUTION
 -S "ext:mp4"
 
 
