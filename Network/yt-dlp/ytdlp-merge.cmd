@@ -11,6 +11,7 @@ SET DRIVE_LETTER_FILE=%CD:~0,2%
 SET DRIVE_LETTER_CMD=%~d0
 
 REM ---------- _yt-dlp_merge.cmd(SettingsOptions.cmd) ----------
+REM SET YTDLP_CONF_DIR=%CONFIG_DIR%\yt-dlp
 
 
 REM ======================================================================
@@ -39,7 +40,8 @@ IF NOT DEFINED DOMAIN (
 )
 
 ECHO SET MERGED_BATCH_NAME=%MERGED_BATCH_NAME%_%DOMAIN%>>%OUTPUT_CMD%
-ECHO REM SET YTDLP_BATCH_OPT=--verbose>>%OUTPUT_CMD%
+ECHO REM SET YTDLP_BATCH_OPT=--verbose --downloader aria2c --downloader-args "-x10">>%OUTPUT_CMD%
+ECHO REM SET YTDLP_BATCH_OPT=--limit-rate 50K --max-filesize 500M>>%OUTPUT_CMD%
 ECHO;>>%OUTPUT_CMD%
 DIR /B %YTDLP_CONF_DIR%\%SEARCH_BATCH_FILE_EXP%
 FOR %%i IN (%YTDLP_CONF_DIR%\%SEARCH_BATCH_FILE_EXP%) DO (
