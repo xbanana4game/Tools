@@ -145,6 +145,7 @@ REM ======================================================================
 	SET MP3TAG_M3U8_FILE=%VIDEOS_ARCHIVE_DIR%\%VIDEO_STORE_NAME%_%yyyy%-%mm%-%dd%.m3u8
 	IF EXIST %VIDEOS_ARCHIVE_DIR% Mp3tag.exe /fp:"%VIDEOS_ARCHIVE_DIR%"
 	IF EXIST %MP3TAG_M3U8_FILE% (
+		%SAKURA% %MP3TAG_M3U8_FILE%
 		TYPE %MP3TAG_M3U8_FILE%>>%CONFIG_DIR%\yt-dlp-history\VD_%yyyy%%mm%.m3u8
 		MOVE %MP3TAG_M3U8_FILE% %VIDEOS_ARCHIVE_DIR%\%VIDEO_STORE_NAME%.m3u8
 	)
