@@ -251,7 +251,7 @@ IF EXIST %YTDLP_ERR_FILE% (
 		IF NOT EXIST %YT_DLP_LOG_DIR% MD %YT_DLP_LOG_DIR%
 		COPY %DESKTOP_DIR%\%DLURL_LIST_NAME%.err %YT_DLP_LOG_DIR%\
 		REM MOVE %YTDLP_ERR_FILE% %YT_DLP_LOG_DIR%\
-		7z a -sdel %VIDEOS_DIR%\ytdlp-log_%yyyy%%mm%%dd%.zip %YTDLP_ERR_FILE% 
+		7z a -sdel %VIDEOS_DIR%\ytdlp-log_%yyyy%%mm%%dd%_%USERDOMAIN%.zip %YTDLP_ERR_FILE% 
 		EXIT /B 1
 	)
 )
