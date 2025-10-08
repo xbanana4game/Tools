@@ -8,7 +8,8 @@
 --fragment-retries infinite
 #--socket-timeout 600
 --concurrent-fragments 3
-#--sponsorblock-mark all 
+#--sponsorblock-mark all
+#--retry-streams 5
 
 
 ##########################################################################

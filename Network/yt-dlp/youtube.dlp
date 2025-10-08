@@ -5,13 +5,15 @@
 # Download Options
 ##########################################################################
 #--test
+#--verbose
 #--console-title
 #--concurrent-fragments 3
---retries infinite
---fragment-retries infinite
+#--retries infinite
+#--fragment-retries infinite
 #--socket-timeout 600
 #--max-filesize 500M
 #--limit-rate 50K
+#--downloader aria2c
 
 #--yes-playlist
 #--playlist-items 1:3,7,-5::2
@@ -21,6 +23,8 @@
 #--cookies %USERPROFILE%\Downloads\www.youtube.com_cookies.txt
 #--cookies %CONFIG_DIR%\\yt-dlp\\www.youtube.com_cookies.txt
 #--cookies www.youtube.com_cookies.txt
+#ERROR: unable to download video data: HTTP Error 403: Forbidden
+#--extractor-args "youtube:player-client=default,-tv_simply"
 
 
 
@@ -39,7 +43,12 @@
 
 # multiple audio streams
 --audio-multistreams 
--f "bv[format_note!*=THROTTLED]+ba[format_note!*=THROTTLED][language=ja][format_note!*=original]+ba[format_note!*=THROTTLED]/bv+ba/b"
+#-f "bv[format_note!*=THROTTLED]+ba[format_note!*=THROTTLED][language=ja][format_note!*=original]+ba[language!=ja][format_note!*=THROTTLED]/bv+ba/b"
+#ba[language=ja][format_note*=original]							Japanese Audio original
+#ba[language=ja][format_note!*=original]						Japanese Audio translated
+#ba[language!=ja]												English Audio
+#-f "bv[format_note!*=THROTTLED]+ba[format_note!*=THROTTLED][language=ja][format_note!*=original]+ba[language!=ja][format_note!*=THROTTLED]/bv+ba/b"
+-f "bv+ba[language=ja][format_note*=original]/bv+ba[language=ja][format_note!*=original]+ba[language!=ja]/bv+ba/b"
 # -f "bv+ba[language=ja]+ba/bv+ba/b"
 
 # MP4
