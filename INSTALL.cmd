@@ -14,6 +14,7 @@ CALL :INSTALL_7Z
 CALL :INSTALL_FFMPEG
 CALL :INSTALL_YTDLP
 CALL :INSTALL_NKF
+CALL :INSTALL_SED
 CALL :INSTALL_SETTINGS
 CALL :INSTALL_SAKURA_MACRO
 CALL :BACKUP_SETTINGS
@@ -102,6 +103,12 @@ REM ======================================================================
 	)
 	EXIT /B
 
+:INSTALL_SED
+	IF EXIST "C:\Program Files (x86)\GnuWin32\bin\sed.exe" EXIT /B
+	ECHO Please Install sed
+	PAUSE
+	EXIT /B
+	
 :INSTALL_SETTINGS
 	MD %TOOLS_INSTALL_DIR%
 	

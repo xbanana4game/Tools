@@ -18,7 +18,7 @@ REM
 REM                                Main
 REM
 REM ======================================================================
-PATH=%%PATH;C:\Program Files (x86)\GnuWin32\bin
+SET PATH=%PATH%;C:\Program Files (x86)\GnuWin32\bin
 SET RESOLUTIONS=144 240 360 480 720 1080
 SET INPUT_FILE=youtube_RESOLUTION_low.dlp
 SET OUTPUT_DIR=dlp

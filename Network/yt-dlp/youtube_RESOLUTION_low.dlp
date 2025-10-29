@@ -13,7 +13,7 @@
 # INPUT
 ##########################################################################
 --audio-multistreams
--f "bv+ba[language=ja][format_note*=original]/bv+ba[language=ja][format_note!*=original]+ba[language!=ja]/bv+ba/b"
+-f "bv+ba[language=ja][format_note*=default]/bv+ba[language=ja][format_note!*=default]+ba[language!=ja]/bv+ba/b"
 -S "res:RESOLUTION,+vbr,ext:m4a,lang,abr~64,+br"
 
 ##########################################################################
