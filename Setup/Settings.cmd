@@ -50,6 +50,7 @@ REM SET NOTEPAD=NOTEPAD
 SET SAKURA="C:\Program Files (x86)\sakura\sakura.exe"
 SET PATH=%PATH%;%USERPROFILE%\PycharmProjects\mp3tag-tool
 SET PATH=%PATH%;%USERPROFILE%\PycharmProjects\webscraping
+SET PATH=%PATH%;%USERPROFILE%\PycharmProjects\webscraping\yt-dlp
 
 
 REM ----------------------------------------------------------------------
