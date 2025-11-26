@@ -10,7 +10,7 @@ SETLOCAL ENABLEDELAYEDEXPANSION
 SET DRIVE_LETTER_FILE=%CD:~0,2%
 SET DRIVE_LETTER_CMD=%~d0
 
-REM ---------- Template.cmd(SettingsOptions.cmd) ----------
+REM ---------- Template.cmd ----------
 
 
 REM ======================================================================
