@@ -52,6 +52,12 @@ FOR %%i IN ("%CAPTURES_DIR%\*.png") DO (
 	RENAME "%%i" "%GAME_NAME% - %%~nxi"
 	MOVE "%CAPTURES_DIR%\%GAME_NAME% - %%~nxi" "%PICTURES_DIR%\Captures\%GAME_DIR%\screenshots\"
 )
+FOR %%i IN ("%CAPTURES_DIR%\*.jpg") DO (
+	MD "%PICTURES_DIR%\Captures\%GAME_DIR%\screenshots"
+	ECHO RENAME "%%i" "%GAME_NAME% - %%~nxi"
+	RENAME "%%i" "%GAME_NAME% - %%~nxi"
+	MOVE "%CAPTURES_DIR%\%GAME_NAME% - %%~nxi" "%PICTURES_DIR%\Captures\%GAME_DIR%\screenshots\"
+)
 
 SET MP4_FILES_DIR=%CAPTURES_DIR%
 SET IMG_OUTPUT_DIR=%PICTURES_DIR%\mp4img

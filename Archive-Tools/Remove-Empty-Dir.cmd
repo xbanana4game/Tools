@@ -6,9 +6,12 @@ REM
 REM ======================================================================
 IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
+SET DRIVE_LETTER_FILE=%CD:~0,2%
+SET DRIVE_LETTER_CMD=%~d0
 REM --------------- Remove-Empty-Dir.cmd(SettingsOptions) --------------------
 REM SET ROOT_DIR=%USERPROFILE%\Downloads
 REM SET ROOT_DIR=%BOOKS_ZIP_DIR%
+REM SET ROOT_DIR=%DRIVE_LETTER_CMD%\Videos
 REM ----------------------------------------------------------------------
 
 
