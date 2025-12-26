@@ -139,6 +139,7 @@ REM ======================================================================
 	)
 	
 	MD %TOOLS_INSTALL_DIR%\bin
+	COPY /Y cmd_function\*.cmd %TOOLS_INSTALL_DIR%\bin
 	COPY /Y Archive-Tools\Archive-Tool.cmd %TOOLS_INSTALL_DIR%\bin
 	COPY /Y Keepass-Tools\Archive-kdbx.cmd %TOOLS_INSTALL_DIR%\bin
 	COPY /Y Archive-Tools\Archive-Extension.cmd %TOOLS_INSTALL_DIR%\bin
