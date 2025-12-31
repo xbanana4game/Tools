@@ -60,11 +60,14 @@ REM ======================================================================
 	SET EXT_LIST_FILE=%1
 	CD %TARGET_DIR%
 	SET OUTPUT_DIR=%OUTPUT_DIR_NAME%
-	FOR /F "skip=1 tokens=1,2 delims=;" %%C IN (%EXT_LIST_FILE%) DO (
-		IF NOT EXIST %OUTPUT_DIR% MD %OUTPUT_DIR%
-		7z a -tzip %SDEL_OPT% %OUTPUT_DIR%\%%C %%D -r -xr!Archive-Extension.cmd -x!%OUTPUT_DIR_NAME% -xr!%%C -xr!%%C.txt -xr!.ts -mx=0
-		7z l %OUTPUT_DIR%\%%C >%OUTPUT_DIR%\%%C.txt
-		TYPE %OUTPUT_DIR%\%%C.txt
+	FOR /F "skip=1 tokens=1,2,3 delims=;" %%C IN (%EXT_LIST_FILE%) DO (
+		ECHO %%C %%D %%E
+		IF %%C==1 (
+			IF NOT EXIST %OUTPUT_DIR% MD %OUTPUT_DIR%
+			7z a -tzip %SDEL_OPT% %OUTPUT_DIR%\%%D %%E -r -xr!Archive-Extension.cmd -x!%OUTPUT_DIR_NAME% -xr!%%D -xr!%%D.txt -xr!.ts -mx=0
+			7z l %OUTPUT_DIR%\%%D >%OUTPUT_DIR%\%%D.txt
+			TYPE %OUTPUT_DIR%\%%D.txt
+		)
 	)
 	EXIT /B
 

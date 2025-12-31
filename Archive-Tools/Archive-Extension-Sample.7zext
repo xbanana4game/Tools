@@ -1,2 +1,2 @@
-ARCHIVE_FILENAME;TARGET
-keepass-files.zip;*.kdbx
+ENABLE,ARCHIVE_FILENAME;TARGET
+0;keepass-files.zip;*.kdbx
