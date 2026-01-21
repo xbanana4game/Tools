@@ -25,7 +25,7 @@ IF NOT DEFINED ROBOCOPY_COPY_OPTIONS (SET ROBOCOPY_COPY_OPTIONS=/e /r:3 /w:10)
 REM IF NOT DEFINED ROBOCOPY_LOG SET ROBOCOPY_LOG=%DESKTOP_DIR%\robocopy-%yyyy%%mm%%dd%%hh%%mn%%ss%.log
 IF NOT DEFINED ROBOCOPY_LOG SET ROBOCOPY_LOG=ROBOCOPY_%COPY_PROFILE%@%yyyy%%mm%%dd%%hh%%mn%%ss%.log
 REM IF NOT DEFINED ROBOCOPY_LOG_OPTIONS SET ROBOCOPY_LOG_OPTIONS=/log+:"%ROBOCOPY_LOG%" /v /fp /tee
-IF NOT DEFINED ROBOCOPY_LOG_OPTIONS SET ROBOCOPY_LOG_OPTIONS=/log:ROBOCOPY_%COPY_PROFILE%@%yyyy%%mm%%dd%%hh%%mn%%ss%.log /v /fp /np /tee
+IF NOT DEFINED ROBOCOPY_LOG_OPTIONS SET ROBOCOPY_LOG_OPTIONS=/log+:ROBOCOPY_%COPY_PROFILE%@%yyyy%%mm%%dd%%hh%%mn%%ss%.log /v /fp /np /tee
 
 NOTEPAD COPY_LIST.txt
 COPY COPY_LIST.txt COPY_LIST@%yyyy%%mm%%dd%%hh%%mn%%ss%.txt
@@ -36,6 +36,7 @@ FOR /F "skip=1 tokens=1,2,3* delims=," %%i in (COPY_LIST.txt) DO CALL :EXEC_ROBO
 
 CALL :ArchiveLogFiles
 REM CALL :Msg Finished
+PAUSE
 EXIT
 
 
@@ -62,9 +63,10 @@ EXIT
 	ROBOCOPY %COPY_FROM% %COPY_TO% %ROBOCOPY_COPY_OPTIONS% %ROBOCOPY_LOG_OPTIONS%
 	IF ERRORLEVEL 8 (
 		ECHO ROBOCOPY %COPY_FROM% %COPY_TO% %ROBOCOPY_COPY_OPTIONS% %ROBOCOPY_LOG_OPTIONS% is Failed.
+		START NOTEPAD %ROBOCOPY_LOG%
 		PAUSE
 	)
-	START NOTEPAD %ROBOCOPY_LOG%
+	REM START NOTEPAD %ROBOCOPY_LOG%
 	REM EXPLORER %COPY_TO%
 	EXIT /B
 
@@ -74,9 +76,10 @@ EXIT
 	EXIT /B
 
 :ArchiveLogFiles
-	ECHO Make logfile log_%yyyy%%mm%%dd%%hh%%mn%%ss%_%USERDOMAIN%.zip Press Enter...
-	PAUSE
+	ECHO Make logfile log_%yyyy%%mm%%dd%%hh%%mn%%ss%_%USERDOMAIN%.zip
 	7z a -tzip -sdel log_%yyyy%%mm%%dd%%hh%%mn%%ss%_%USERDOMAIN%.zip copy-list*.txt *%yyyy%%mm%%dd%%hh%%mn%%ss%*
+	MD log 2>nul
+	MOVE log_%yyyy%%mm%%dd%%hh%%mn%%ss%_%USERDOMAIN%.zip log
 	EXIT /B
 
 
