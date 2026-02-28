@@ -151,7 +151,8 @@ REM ======================================================================
 	DEL %ARCHIVE_PROFILE%.txt.tmp
 	
 	COPY %ARCHIVE_PROFILE%.txt %ARCHIVE_PROFILE%@%yyyy%%mm%%dd%.txt
-	7z a -tzip -sdel %ARCHIVE_ROOT_DIR_NAME%\Settings@%ARCHIVE_PROFILE%.zip  %ARCHIVE_PATH%\ArchiveOptions.cmd  %ARCHIVE_PROFILE_FILE% %ARCHIVE_PROFILE%@%yyyy%%mm%%dd%.txt
+	7z a -tzip %ARCHIVE_ROOT_DIR_NAME%\Settings@%ARCHIVE_PROFILE%.zip  %ARCHIVE_PATH%\ArchiveOptions.cmd  %ARCHIVE_PROFILE_FILE% %ARCHIVE_PROFILE%@%yyyy%%mm%%dd%.txt
+	DEL %ARCHIVE_PROFILE%@%yyyy%%mm%%dd%.txt
 	EXIT /B
 
 :MAKE_7Z_FILE
