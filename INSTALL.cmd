@@ -16,6 +16,7 @@ CALL :INSTALL_YTDLP
 CALL :INSTALL_NKF
 CALL :INSTALL_SED
 CALL :INSTALL_SETTINGS
+CALL :INSTALL_CMD_FNCTION
 CALL :INSTALL_SAKURA_MACRO
 CALL :BACKUP_SETTINGS
 REM PAUSE
@@ -120,7 +121,6 @@ REM ======================================================================
 	ECHO SET PATH=%~dp0Games;%%PATH%%>>%TOOLS_INSTALL_DIR%\Settings.cmd
 	ECHO SET PATH=%~dp0Archive-Tools;%%PATH%%>>%TOOLS_INSTALL_DIR%\Settings.cmd
 	ECHO SET PATH=%~dp0File-Tools;%%PATH%%>>%TOOLS_INSTALL_DIR%\Settings.cmd
-	
 	ECHO SET PATH=%TOOLS_INSTALL_DIR%\bin;%%PATH%%>>%TOOLS_INSTALL_DIR%\Settings.cmd
 	
 	IF EXIST "%SETTING_OPTIONS_DIR%\SettingsOptions.cmd" (
@@ -138,17 +138,17 @@ REM ======================================================================
 		ECHO REM MoveFiles-user.cmd >%SETTING_OPTIONS_DIR%\MoveFiles-user.cmd
 	)
 	
-	MD %TOOLS_INSTALL_DIR%\bin
-	COPY /Y cmd_function\*.cmd %TOOLS_INSTALL_DIR%\bin
+	MD %TOOLS_INSTALL_DIR%\bin 2>nul
 	COPY /Y Archive-Tools\Archive-Tool.cmd %TOOLS_INSTALL_DIR%\bin
 	COPY /Y Keepass-Tools\Archive-kdbx.cmd %TOOLS_INSTALL_DIR%\bin
 	COPY /Y Archive-Tools\Archive-Extension.cmd %TOOLS_INSTALL_DIR%\bin
 	EXPLORER %USERPROFILE%\AppData\Roaming\Microsoft\Windows\SendTo
+	EXIT /B
 	
-	REM COPY /Y Archive-Tools\Archive.cmd %USERPROFILE%\Desktop\Archive.cmd
-	REM IF EXIST %USERPROFILE%\Desktop\Archive.cmd DEL %USERPROFILE%\Desktop\Archive.cmd
-	REM MKLINK /H %USERPROFILE%\Desktop\Archive.cmd Archive-Tools\Archive.cmd
-	REM COPY /Y File-Tools\Archive_Directory.cmd %USERPROFILE%\Desktop
+:INSTALL_CMD_FNCTION
+	IF NOT EXIST %TOOLS_INSTALL_DIR%\bin MD %TOOLS_INSTALL_DIR%\bin 2>nul
+	ECHO SET SCRIPTDIR=%TOOLS_INSTALL_DIR%\bin>>%TOOLS_INSTALL_DIR%\Settings.cmd
+	COPY /Y cmd_function\*.cmd %TOOLS_INSTALL_DIR%\bin
 	EXIT /B
 	
 :INSTALL_SAKURA_MACRO
