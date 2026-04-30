@@ -13,7 +13,7 @@ REM ---------- Re_Archive.cmd ----------
 REM SET TARGET_DIR=%DOWNLOADS_DIR%
 REM SET TARGET_FILE=_log
 SET TARGET_FILE=%1
-
+REM CALL Re_Archive.cmd added
 
 
 REM ======================================================================
@@ -59,7 +59,7 @@ RMDIR %RA_WORKING_DIR%\%TARGET_FILE% 2>nul
 RMDIR %RA_WORKING_DIR% 2>nul
 
 PAUSE
-EXIT
+EXIT /B
 
 
 REM ======================================================================
