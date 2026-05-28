@@ -39,18 +39,20 @@ SET MUSIC_DIR=%USERPROFILE%\Music
 SET ARCHIVE_DIR=%USERPROFILE%\Archives
 SET UPLOADS_DIR=%ARCHIVE_DIR%\Uploads
 SET STORE_DIR=%USERPROFILE%\Store
-SET PATH=%PATH%;C:\Program Files\7-Zip
-SET PATH=%PATH%;C:\Program Files\WinRAR
-SET PATH=%PATH%;C:\Program Files\Mp3tag
-SET PATH=%PATH%;C:\App\renamer-7.3
-SET PATH=%PATH%;C:\Program Files (x86)\foobar2000
-SET PATH=%PATH%;C:\Program Files (x86)\GnuWin32\bin
+
 SET NOTEPAD="C:\Program Files\Notepad++\notepad++.exe"
 REM SET NOTEPAD=NOTEPAD
 SET SAKURA="C:\Program Files (x86)\sakura\sakura.exe"
-SET PATH=%PATH%;%USERPROFILE%\PycharmProjects\mp3tag-tool
-SET PATH=%PATH%;%USERPROFILE%\PycharmProjects\webscraping
-SET PATH=%PATH%;%USERPROFILE%\PycharmProjects\webscraping\yt-dlp
+
+SET PATH=%PATH%;C:\Program Files\7-Zip
+SET PATH=%PATH%;C:\Program Files\WinRAR
+SET PATH=%PATH%;C:\Program Files\Mp3tag
+REM SET PATH=%PATH%;C:\App\renamer-7.3
+REM SET PATH=%PATH%;C:\Program Files (x86)\foobar2000
+REM SET PATH=%PATH%;C:\Program Files (x86)\GnuWin32\bin
+REM SET PATH=%PATH%;%USERPROFILE%\PycharmProjects\mp3tag-tool
+REM SET PATH=%PATH%;%USERPROFILE%\PycharmProjects\webscraping
+REM SET PATH=%PATH%;%USERPROFILE%\PycharmProjects\webscraping\yt-dlp
 
 
 REM ----------------------------------------------------------------------
