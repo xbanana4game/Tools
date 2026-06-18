@@ -50,6 +50,9 @@ ECHO =======================================================================
 ECHO INPUT DIR  : %CD%
 ECHO TARGET FILE: %TARGET_EXT%
 ECHO OUTPUT_DIR : %DISK_OUTPUT_DIR%\%DISK_PROFILE%-Disc-%F_NUMBER%
+FOR /R %%i in (%TARGET_EXT%) DO (
+	ECHO %%~nxi
+)
 ECHO Press Enter...
 PAUSE
 REM FOR %%i IN (%*) DO (

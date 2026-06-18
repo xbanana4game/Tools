@@ -49,7 +49,7 @@ FOR %%i IN (mp4) DO (
 	REM Twonky
 	REM "cmd /c IF NOT EXIST @fname.jpg ffmpeg -y -i @path -ss %FFMPGE_OPT_SS% -vframes 1 -f image2 -vf scale=640:-1 @fname.jpg"
 )
-ECHO mp3tag Action Import Cover %MP4_IMG_DIR%\%%_filename_ext%%.jpg
+ECHO mp3tag Action Import Cover %IMG_OUTPUT_DIR%\%%_filename_ext%%.jpg
 
 IF DEFINED END_FLG EXIT /B
 SET /P FFMPGE_OPT_SS="SET FFMPGE_OPT_SS[sec]="
