@@ -1,2 +1,3 @@
 ENABLE,ARCHIVE_FILENAME;TARGET
 0;keepass-files.zip;*.kdbx
+1;sample.zip;sample_*
