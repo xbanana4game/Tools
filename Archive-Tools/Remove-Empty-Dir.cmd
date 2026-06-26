@@ -30,7 +30,7 @@ IF NOT DEFINED ROOT_DIR SET /P ROOT_DIR="ROOT_DIR:"
 IF NOT EXIST %ROOT_DIR% EXIT
 ECHO START REMOVE EMPTY DIR %ROOT_DIR%
 CALL :REMOVE_EMPTY_DIR %ROOT_DIR%
-RMDIR %ROOT_DIR%
+RMDIR %ROOT_DIR% 2>nul
 IF EXIST %ROOT_DIR% EXPLORER %ROOT_DIR%
 EXIT
 
@@ -53,9 +53,9 @@ REM ======================================================================
 :REMOVE_EMPTY_DIR
 	SET TARGET_DIR=%1
 	CALL :CHANGE_DIRECTORY %TARGET_DIR%
-	FOR /F "delims=" %%I IN ('DIR /A:D/B/S ^| SORT /R') DO ( 
-		ECHO RMDIR "%%I" 
-		RMDIR "%%I" 
+	FOR /F "delims=" %%I IN ('DIR /A:D/B/S ^| SORT /R') DO (
+		ECHO RMDIR "%%I"
+		RMDIR "%%I"
 	)
 	EXIT /B
 	
