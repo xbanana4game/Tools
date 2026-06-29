@@ -50,9 +50,6 @@ SET PATH=%PATH%;C:\Program Files\Mp3tag
 REM SET PATH=%PATH%;C:\App\renamer-7.3
 REM SET PATH=%PATH%;C:\Program Files (x86)\foobar2000
 REM SET PATH=%PATH%;C:\Program Files (x86)\GnuWin32\bin
-REM SET PATH=%PATH%;%USERPROFILE%\PycharmProjects\mp3tag-tool
-REM SET PATH=%PATH%;%USERPROFILE%\PycharmProjects\webscraping
-REM SET PATH=%PATH%;%USERPROFILE%\PycharmProjects\webscraping\yt-dlp
 
 
 REM ----------------------------------------------------------------------

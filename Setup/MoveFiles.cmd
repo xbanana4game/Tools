@@ -231,7 +231,7 @@ REM ======================================================================
 	EXIT /B 1
 	
 :UPDATE_VIDEO_DB
-	REM SET PATH=%PATH%;%USERPROFILE%\PycharmProjects\mp3tag-tool
+	REM SET PATH=%PATH%;%USERPROFILE%\PycharmProjects\webscraping
 	SET TARGET_DIR=%1
 	IF NOT EXIST %TARGET_DIR% EXIT /B 1
 	REM SET VIDEO_DB_FILE=
