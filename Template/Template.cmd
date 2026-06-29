@@ -21,6 +21,10 @@ CALL :ERROR
 IF %ERRORLEVEL% EQU 1 (
 	ECHO ERROR
 )
+CALL :ERROR_2
+IF ERRORLEVEL 2 (
+	ECHO ERROR
+)
 CALL CMD_F_TEMPLATE.cmd PARAM_TEST P1 P2 P3
 PAUSE
 TIMEOUT /T 5
@@ -38,4 +42,5 @@ REM ======================================================================
 :ERROR
 	EXIT /B 1
 
-
+:ERROR_2
+	EXIT /B 2
