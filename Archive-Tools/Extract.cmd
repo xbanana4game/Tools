@@ -28,9 +28,7 @@ REM ======================================================================
 IF NOT DEFINED MOVE_STORE_FLG (SET MOVE_STORE_FLG=0)
 IF NOT DEFINED DOWNLOADS_PASSWORD (SET /P DOWNLOADS_PASSWORD="SET DOWNLOADS_PASSWORD(%ARCHIVE_PASSWORD%)=")
 IF NOT DEFINED DOWNLOADS_PASSWORD (SET DOWNLOADS_PASSWORD=%ARCHIVE_PASSWORD%)
-IF NOT DEFINED ARCHIVE_STORE_DIR SET ARCHIVE_STORE_DIR=%STORE_DIR%\DL_%yyyy%%mm%
-
-IF DEFINED ARCHIVE_STORE_DIR MD %ARCHIVE_STORE_DIR% 2>nul
+REM IF NOT DEFINED ARCHIVE_STORE_DIR SET ARCHIVE_STORE_DIR=%STORE_DIR%\DL_%yyyy%%mm%
 					
 IF NOT "%1"=="" (
 	FOR %%i in (%*) DO (CALL :Extract7z %%i)
@@ -50,10 +48,14 @@ ECHO ================== LIST ==================
 DIR /B %ARCHIVE_DIR%
 SET /P EXTRACT_YYYY="Enter Extract YYYY* or YYYYMM. (Default:DL_%yyyy%%mm%) -> "
 IF "%EXTRACT_YYYY%"=="" SET EXTRACT_YYYY=DL_%yyyy%%mm%
+IF NOT DEFINED SET ARCHIVE_STORE_DIR=%STORE_DIR%\%EXTRACT_YYYY%
+IF DEFINED ARCHIVE_STORE_DIR MD %ARCHIVE_STORE_DIR% 2>nul
 CALL :MAKE_LIST_FILE
 CALL :EXTRACT_YYYYMM
 TIMEOUT /T 2
+REM PAUSE
 EXIT
+
 
 
 REM ======================================================================
@@ -87,68 +89,34 @@ REM ======================================================================
 	
 	REM auto rename existing file (for example, name.txt will be renamed to name_1.txt).
 	FOR /D %%i IN ("%ARCHIVE_DIR%\%EXTRACT_YYYY%") DO (
-		:EXTRACT_EXP "%ARCHIVE_DIR%\%%~ni\DL_*.7z"
-		REM FOR %%j IN ("%ARCHIVE_DIR%\%%~ni\DL_*.7z") DO (
-				REM ECHO 7z x -p%DOWNLOADS_PASSWORD% %%j -o%EXTRACT_TARGET_DIR%\%%~ni -aot "%EXTRACT_EXT%" -r %IGNORE_OPT%
-				REM 7z x -p%DOWNLOADS_PASSWORD% %%j -o%EXTRACT_TARGET_DIR%\%%~ni -aot "%EXTRACT_EXT%" -r %IGNORE_OPT%
-				REM IF ERRORLEVEL 1 (
-					REM ECHO 7z.exe failed.
-					REM PAUSE
-					REM EXIT /B 1
-				REM )
-				REM 7z l -p%DOWNLOADS_PASSWORD% %%j>%EXTRACT_TARGET_DIR%\%%~ni\%%~nj.txt
-		REM )
-		:EXTRACT_EXP "%ARCHIVE_DIR%\%%~ni\DL_*.7z.001"
-		REM FOR %%j IN ("%ARCHIVE_DIR%\%%~ni\DL_*.7z.001") DO (
-			REM IF NOT EXIST %EXTRACT_TARGET_DIR%\%%~ni\%%~nj.txt (
-				REM ECHO 7z x -p%DOWNLOADS_PASSWORD% %%j -o%EXTRACT_TARGET_DIR%\%%~ni -aot "%EXTRACT_EXT%" -r %IGNORE_OPT%
-				REM 7z x -p%DOWNLOADS_PASSWORD% %%j -o%EXTRACT_TARGET_DIR%\%%~ni -aot "%EXTRACT_EXT%" -r %IGNORE_OPT%
-				REM IF ERRORLEVEL 1 (
-					REM ECHO 7z.exe failed.
-					REM PAUSE
-					REM EXIT /B 1
-				REM )
-				REM 7z l -p%DOWNLOADS_PASSWORD% %%j>%EXTRACT_TARGET_DIR%\%%~ni\%%~nj.txt
-			REM )
-		REM )
-		:EXTRACT_EXP "%ARCHIVE_DIR%\%%~ni\VD_*.7z.001"
-		REM FOR %%j IN ("%ARCHIVE_DIR%\%%~ni\VD_*.7z.001") DO (
-				REM ECHO 7z x -p%DOWNLOADS_PASSWORD% %%j -o%EXTRACT_TARGET_DIR%\%%~ni -aot "%EXTRACT_EXT%" -r %IGNORE_OPT%
-				REM 7z x -p%DOWNLOADS_PASSWORD% %%j -o%EXTRACT_TARGET_DIR%\%%~ni -aot "%EXTRACT_EXT%" -r %IGNORE_OPT%
-				REM IF ERRORLEVEL 1 (
-					REM ECHO 7z.exe failed.
-					REM PAUSE
-					REM EXIT /B 1
-				REM )
-				REM 7z l -p%DOWNLOADS_PASSWORD% %%j>%EXTRACT_TARGET_DIR%\%%~ni\%%~nj.txt
-		REM )
-		REM IF %MOVE_STORE_FLG%==1 (
-			REM IF NOT EXIST %ARCHIVE_STORE_DIR% MD %ARCHIVE_STORE_DIR%
-			REM MOVE %ARCHIVE_DIR%\%EXTRACT_YYYY%\*.7z %ARCHIVE_STORE_DIR%\
-			REM MOVE %ARCHIVE_DIR%\%EXTRACT_YYYY%\*.7z.??? %ARCHIVE_STORE_DIR%\
-			REM RMDIR %ARCHIVE_DIR%\%EXTRACT_YYYY%
-		REM )
+		ECHO %%i
+		CALL :EXTRACT_EXP "%ARCHIVE_DIR%\%%~ni\DL_*.7z"
+		CALL :EXTRACT_EXP "%ARCHIVE_DIR%\%%~ni\DL_*.7z.001"
+		CALL :EXTRACT_EXP "%ARCHIVE_DIR%\%%~ni\VD_*.7z.001"
 	)
 	EXIT /B
 	
 :EXTRACT_EXP
-		SET TARGET_DIR_EXP=%~1
-		FOR %%j IN ("%TARGET_DIR_EXP%") DO (
-				ECHO 7z x -p%DOWNLOADS_PASSWORD% %%j -o%EXTRACT_TARGET_DIR%\%%~ni -aot "%EXTRACT_EXT%" -r %IGNORE_OPT%
-				7z x -p%DOWNLOADS_PASSWORD% %%j -o%EXTRACT_TARGET_DIR%\%%~ni -aot "%EXTRACT_EXT%" -r %IGNORE_OPT%
-				IF ERRORLEVEL 1 (
-					ECHO 7z.exe failed.
-					PAUSE
-					EXIT
-				)
-				7z l -p%DOWNLOADS_PASSWORD% %%j>%EXTRACT_TARGET_DIR%\%%~ni\%%~nj.txt
-				IF %MOVE_STORE_FLG%==1 (
-					MOVE %%j %ARCHIVE_STORE_DIR%\
-					RMDIR %ARCHIVE_DIR%\%EXTRACT_YYYY% 2>nul
-				)
-		)
-		EXIT /B
-		
+	SET TARGET_DIR_EXP=%~1
+	ECHO CALL :EXTRACT_EXP %TARGET_DIR_EXP%
+	FOR %%j IN ("%TARGET_DIR_EXP%") DO (
+			ECHO 7z x -p%DOWNLOADS_PASSWORD% %%j -o%EXTRACT_TARGET_DIR%\%%~ni -aot "%EXTRACT_EXT%" -r %IGNORE_OPT%
+			7z x -p%DOWNLOADS_PASSWORD% %%j -o%EXTRACT_TARGET_DIR%\%%~ni -aot "%EXTRACT_EXT%" -r %IGNORE_OPT%
+			IF ERRORLEVEL 1 (
+				ECHO 7z.exe failed.
+				PAUSE
+				EXIT
+			)
+			7z l -p%DOWNLOADS_PASSWORD% %%j>%EXTRACT_TARGET_DIR%\%%~ni\%%~nj.txt
+			IF %MOVE_STORE_FLG%==1 (
+				ECHO MOVE "%%j" %ARCHIVE_STORE_DIR%\
+				MOVE "%%j" %ARCHIVE_STORE_DIR%\
+				ECHO MOVE "%%~dpnj.???" %ARCHIVE_STORE_DIR%\
+				MOVE "%%~dpnj.???" %ARCHIVE_STORE_DIR%\
+				RMDIR %ARCHIVE_DIR%\%EXTRACT_YYYY% 2>nul
+			)
+	)
+	EXIT /B
 :Extract7z
 	SET EXTRACT_FILE=%1
 	SET EXTRACT_EXT=*
