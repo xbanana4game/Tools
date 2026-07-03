@@ -18,6 +18,8 @@ SET FUNCTION=%~0%
 IF "%FUNCTION%" EQU "" (
 	SET /P FUNCTION="CALL FUNCTION:"
 	CALL :!FUNCTION!
+	ECHO RETURN:!ERRORLEVEL!
+	PAUSE
 ) ELSE (
 	GOTO :%FUNCTION%
 )
@@ -36,8 +38,11 @@ REM ======================================================================
 	ECHO PARAM1:%1
 	ECHO PARAM2:%2
 	ECHO PARAM3:%3
-	PAUSE
 	ENDLOCAL
 	EXIT /B 0
 
-
+:SUCCESS
+	EXIT /B
+	
+:ERROR
+	EXIT /B 1
