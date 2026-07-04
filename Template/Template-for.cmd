@@ -36,5 +36,16 @@ FOR %%i IN (A B C) DO (
 	ECHO %%i
 )
 
+ECHO SEARCH SUB DIRECTORY
+FOR /R %DESKTOP_DIR% %%i IN (*.txt *.csv) DO (
+	ECHO %%~i
+)
+ECHO;
+
+ECHO NOT SEARCH SUB DIRECTORY 
+FOR %%i IN (%DESKTOP_DIR%/*.txt %DESKTOP_DIR%/*.csv) DO (
+	ECHO %%~i
+)
+ECHO;
 PAUSE
 
