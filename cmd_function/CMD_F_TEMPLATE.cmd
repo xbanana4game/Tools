@@ -4,8 +4,7 @@ REM
 REM                                Settings
 REM
 REM ======================================================================
-SETLOCAL ENABLEDELAYEDEXPANSION
-
+REM DO NOT SET. SETLOCAL ENABLEDELAYEDEXPANSION
 
 
 REM ======================================================================
@@ -16,6 +15,8 @@ REM ======================================================================
 SHIFT
 SET FUNCTION=%~0%
 IF "%FUNCTION%" EQU "" (
+	REM FOR DEBUG
+	SETLOCAL ENABLEDELAYEDEXPANSION
 	SET /P FUNCTION="CALL FUNCTION:"
 	CALL :!FUNCTION!
 	ECHO RETURN:!ERRORLEVEL!

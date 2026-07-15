@@ -6,9 +6,11 @@ REM
 REM ======================================================================
 IF NOT EXIST %USERPROFILE%\.Tools\Settings.cmd (EXIT)
 CALL %USERPROFILE%\.Tools\Settings.cmd
+SETLOCAL
 SET DRIVE_LETTER_FILE=%CD:~0,2%
 SET DRIVE_LETTER_CMD=%~d0
-
+SET SCRIPTDIR=%TOOLS_DIR%\cmd_function
+SET FUNCTION_NETWORK=%SCRIPTDIR%\CMD_F_NETWORK.cmd
 REM ---------- local-copy.cmd ----------
 REM SET ROBOCOPY_LOG=
 REM SET ROBOCOPY_LOG=%DESKTOP_DIR%\robocopy-%yyyy%%mm%%dd%%hh%%mn%%ss%.log
@@ -25,6 +27,8 @@ REM SET ROBOCOPY_EXTRA_OPTIONS=/L
 REM SET ROBOCOPY_EXTRA_OPTIONS=/A+:R
 REM SET ROBOCOPY_EXTRA_OPTIONS=/MAXAGE:1
 REM SET ROBOCOPY_EXTRA_OPTIONS=/XD $RECYCLE.BIN "System Volume Information"
+REM SET PATH=%PATH%;%TOOLS_DIR%\Network
+REM CALL local-copy.cmd
 
 
 REM ======================================================================
@@ -32,6 +36,12 @@ REM
 REM                                Main
 REM
 REM ======================================================================
+REM CALL %FUNCTION_NETWORK% SETTINGS
+REM CALL %FUNCTION_NETWORK% TEST_ROBOCOPY
+REM CALL %FUNCTION_NETWORK% START_ROBOCOPY
+REM CALL %FUNCTION_NETWORK% REMOVE_LOG
+REM CALL %FUNCTION_NETWORK% END
+
 :SETTINGS
 IF DEFINED ROBOCOPY_LOG SET ROBOCOPY_LOG_OPTIONS=/log+:"%ROBOCOPY_LOG%" /v /fp /tee
 IF NOT DEFINED COPY_FROM (SET /P COPY_FROM="SET COPY_FROM=")
@@ -69,4 +79,6 @@ IF %ERRORLEVEL% EQU 1 DEL %ROBOCOPY_LOG%
 :END
 EXPLORER %COPY_TO%
 
-EXIT
+ENDLOCAL
+
+EXIT /B
