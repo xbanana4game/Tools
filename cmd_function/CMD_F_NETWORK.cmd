@@ -33,7 +33,7 @@ REM                                Function
 REM
 REM ======================================================================
 :SETTINGS
-	SETLOCAL 
+	REM SETLOCAL 
 	IF DEFINED ROBOCOPY_LOG SET ROBOCOPY_LOG_OPTIONS=/log+:"%ROBOCOPY_LOG%" /v /fp /tee
 	IF NOT DEFINED COPY_FROM (SET /P COPY_FROM="SET COPY_FROM=")
 	IF NOT DEFINED COPY_FROM (EXIT)
@@ -42,18 +42,24 @@ REM ======================================================================
 	IF NOT DEFINED TARGET_FILES (SET TARGET_FILES=*.*)
 	IF NOT DEFINED ROBOCOPY_COPY_OPTIONS (SET ROBOCOPY_COPY_OPTIONS=/e /r:3 /w:10)
 	IF NOT EXIST %COPY_FROM% EXIT
-	ENDLOCAL
+	SET ROBOCOPY_CMD=ROBOCOPY "%COPY_FROM%" "%COPY_TO%" %TARGET_FILES% %ROBOCOPY_EXTRA_OPTIONS% %ROBOCOPY_COPY_OPTIONS%
+	ECHO ==================================================================================
+	CD
+	ECHO COPY_FROM   : %COPY_FROM%
+	ECHO COPY_TO     : %COPY_TO%
+	ECHO OPTIONS     : %ROBOCOPY_COPY_OPTIONS%
+	ECHO EXTRA       : %ROBOCOPY_EXTRA_OPTIONS%
+	ECHO ROBOCOPY_CMD: %ROBOCOPY_CMD%
+	ECHO ==================================================================================
+	ECHO;
+	REM ENDLOCAL
 	EXIT /B
 	
 :TEST_ROBOCOPY
 	SETLOCAL 
-	ECHO ==================================================================================
-	ROBOCOPY "%COPY_FROM%" "%COPY_TO%" %TARGET_FILES% /L %ROBOCOPY_EXTRA_OPTIONS% %ROBOCOPY_COPY_OPTIONS%
-	ECHO ==================================================================================
-	ECHO COPY_FROM: %COPY_FROM%
-	ECHO COPY_TO  : %COPY_TO%
-	ECHO OPTIONS  : %ROBOCOPY_COPY_OPTIONS%
-	ECHO EXTRA    : %ROBOCOPY_EXTRA_OPTIONS%
+	IF NOT DEFINED ROBOCOPY_CMD EXIT /B
+	ECHO %ROBOCOPY_CMD% /L
+	%ROBOCOPY_CMD% /L
 	ECHO Press Enter...
 	PAUSE
 	ENDLOCAL
@@ -61,7 +67,8 @@ REM ======================================================================
 
 :START_ROBOCOPY
 	SETLOCAL 
-	ROBOCOPY "%COPY_FROM%" "%COPY_TO%" %TARGET_FILES% %ROBOCOPY_EXTRA_OPTIONS% %ROBOCOPY_COPY_OPTIONS% %ROBOCOPY_LOG_OPTIONS%
+	IF NOT DEFINED ROBOCOPY_CMD EXIT /B
+	%ROBOCOPY_CMD%
 	IF ERRORLEVEL 8 (
 		ECHO ROBOCPY FAILED.
 		IF DEFINED ROBOCOPY_LOG NOTEPAD %ROBOCOPY_LOG%
@@ -80,7 +87,7 @@ REM ======================================================================
 
 :END
 	SETLOCAL 
-	EXPLORER %COPY_TO%
+	EXPLORER "%COPY_TO%"
 	ENDLOCAL
 	EXIT /B
 
