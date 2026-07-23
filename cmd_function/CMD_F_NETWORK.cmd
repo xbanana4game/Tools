@@ -60,7 +60,7 @@ REM ======================================================================
 	IF NOT DEFINED ROBOCOPY_CMD EXIT /B
 	ECHO %ROBOCOPY_CMD% /L
 	%ROBOCOPY_CMD% /L
-	ECHO Press Enter...
+	ECHO Test end. Start copy. Press Enter...
 	PAUSE
 	ENDLOCAL
 	EXIT /B
@@ -79,8 +79,8 @@ REM ======================================================================
 
 :REMOVE_LOG
 	SETLOCAL 
-	IF NOT DEFINED ROBOCOPY_LOG GOTO :END
-	CHOICE /C YN /T 3 /D Y /M "Remove %ROBOCOPY_LOG%?"
+	IF NOT DEFINED ROBOCOPY_LOG EXIT /B
+	CHOICE /C YN /T 10 /D Y /M "Remove %ROBOCOPY_LOG%?"
 	IF %ERRORLEVEL% EQU 1 DEL %ROBOCOPY_LOG%
 	ENDLOCAL
 	EXIT /B
