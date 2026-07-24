@@ -37,7 +37,7 @@ REM ======================================================================
 	IF EXIST %1 (
 		CD /D %1
 	) ELSE (
-		SET /P ERR=Directory %1 is not Exist.
+		ECHO Directory %1 is not Exist. Fail Change Directory.
 		TIMEOUT /T 3
 		EXIT /B 1
 	)
@@ -46,7 +46,7 @@ REM ======================================================================
 :REMOVE_EMPTY_DIR
 	SET TARGET_DIR=%~1
 	CALL :CHANGE_DIRECTORY "%TARGET_DIR%"
-	FOR /R "%TARGET_DIR%" /F "delims=" %%I IN ('DIR /A:D/B/S ^| SORT /R') DO ( 
+	FOR /F "delims=" %%I IN ('DIR /A:D/B/S ^| SORT /R') DO ( 
 		ECHO RMDIR "%%~I" 
 		RMDIR "%%~I" 2>nul
 	)
