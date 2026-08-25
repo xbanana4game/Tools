@@ -245,5 +245,6 @@ REM ======================================================================
 	IF %ERRORLEVEL% EQU 1 EXIT /B 1
 	ECHO update_video_db.py %UPDATE_VIDEO_DB_OPT% "%TARGET_DIR%"
 	update_video_db.py %UPDATE_VIDEO_DB_OPT% "%TARGET_DIR%"
+	update_video_db.py --videos-db "%CONFIG_DIR%\videos.sqlite3" "%TARGET_DIR%"
 	ENDLOCAL
 	EXIT /B
