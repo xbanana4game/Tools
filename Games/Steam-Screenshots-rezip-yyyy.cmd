@@ -34,21 +34,21 @@ ECHO SS_BASE_DIR:%SS_BASE_DIR%
 ECHO SS_WORK_DIR:%SS_WORK_DIR%
 ECHO SS_OUTPUT_DIR:%SS_OUTPUT_DIR%
 DIR /B %SS_BASE_DIR%\*-Screenshots-%yyyy%*.zip
-EXPLORER %SS_BASE_DIR%
+REM EXPLORER %SS_BASE_DIR%
 PAUSE
 
 FOR /F "tokens=1,2* delims=," %%i IN (%TOOLS_DIR%\Games\steam_screenshots.txt) DO (
-	ECHO SEARCH %SS_BASE_DIR%\%%i-Screenshots-%yyyy%*.zip
+	ECHO SEARCH %SS_BASE_DIR%\%%~i-Screenshots-%yyyy%*.zip
 	MD %SS_WORK_DIR%\%%i 2>nul
 	IF DEFINED SS_STORE_DIR MD %SS_STORE_DIR% 2>nul
-	FOR /R %%j IN ("%%i-Screenshots-%yyyy%*.zip") DO (
+	FOR /R %%j IN ("%%~i-Screenshots-%yyyy%*.zip") DO (
 		7z x %%j -o"%SS_WORK_DIR%\%%i" -xr!thumbnails
 		IF DEFINED SS_STORE_DIR MOVE %%j %SS_STORE_DIR%
 	)
-	RMDIR %SS_WORK_DIR%\%%i
+	RMDIR "%SS_WORK_DIR%\%%~i"
 	IF EXIST %SS_WORK_DIR%\%%i (
 		MD %SS_OUTPUT_DIR%\%%i\screenshots 2>nul
-		7z -tzip -sdel a "%SS_OUTPUT_DIR%\%%i\screenshots\%%i-Screenshots-%yyyy%.zip" %SS_WORK_DIR%\%%i\* -mx=0
+		7z -tzip -sdel a "%SS_OUTPUT_DIR%\%%i\screenshots\%%~i-Screenshots-%yyyy%.zip" %SS_WORK_DIR%\%%i\* -mx=0
 	)
 	RMDIR %SS_WORK_DIR%\%%i
 )
