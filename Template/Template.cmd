@@ -19,6 +19,7 @@ REM
 REM                                Main
 REM
 REM ======================================================================
+SET DRIVE_
 CALL :ERROR
 IF %ERRORLEVEL% EQU 1 (
 	ECHO ERROR
