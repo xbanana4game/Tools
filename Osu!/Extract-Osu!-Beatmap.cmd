@@ -13,6 +13,7 @@ REM
 REM ======================================================================
 SET LOGNAME=%OSU_SONGS_DIR%\.log\ExtractBeatmap.log
 IF NOT EXIST %OSU_SONGS_DIR%\.log MD %OSU_SONGS_DIR%\.log
+IF NOT "%1"=="" SET BEATMAP_SRC_DIR=%1
 IF NOT DEFINED BEATMAP_SRC_DIR SET /P BEATMAP_SRC_DIR="SET BEATMAP_SRC_DIR=(default:%DOWNLOADS_DIR%\Games\Osu!\Beatmap_Pack) ->"
 IF "%BEATMAP_SRC_DIR%"=="" SET BEATMAP_SRC_DIR=%DOWNLOADS_DIR%\Games\Osu!\Beatmap_Pack
 

@@ -19,6 +19,8 @@ REM
 REM                                Main
 REM
 REM ======================================================================
+IF NOT "%1"=="" SET PARAM1=%1
+ECHO PARAM1: %PARAM1%
 SET DRIVE_
 CALL :ERROR
 IF %ERRORLEVEL% EQU 1 (
