@@ -123,7 +123,7 @@ REM ======================================================================
 	ECHO SET PATH=%TOOLS_INSTALL_DIR%\bin;%%PATH%%>>%TOOLS_INSTALL_DIR%\Settings.cmd
 	
 	IF EXIST "%SETTING_OPTIONS_DIR%\SettingsOptions.cmd" (
-		NOTEPAD %SETTING_OPTIONS_DIR%\SettingsOptions.cmd
+		REM NOTEPAD %SETTING_OPTIONS_DIR%\SettingsOptions.cmd
 		COPY /Y %SETTING_OPTIONS_DIR%\SettingsOptions.cmd %TOOLS_INSTALL_DIR%\SettingsOptions.cmd
 	) ELSE (
 		ECHO REM SettingsOptions.cmd >%SETTING_OPTIONS_DIR%\SettingsOptions.cmd
@@ -131,7 +131,7 @@ REM ======================================================================
 	
 	COPY /Y Setup\MoveFiles.cmd %TOOLS_INSTALL_DIR%\MoveFiles.cmd
 	IF EXIST "%SETTING_OPTIONS_DIR%\MoveFiles-user.cmd" (
-		NOTEPAD %SETTING_OPTIONS_DIR%\MoveFiles-user.cmd
+		REM NOTEPAD %SETTING_OPTIONS_DIR%\MoveFiles-user.cmd
 		COPY /Y %SETTING_OPTIONS_DIR%\MoveFiles-user.cmd %TOOLS_INSTALL_DIR%\MoveFiles-user.cmd
 	) ELSE (
 		ECHO REM MoveFiles-user.cmd >%SETTING_OPTIONS_DIR%\MoveFiles-user.cmd
@@ -141,7 +141,7 @@ REM ======================================================================
 	COPY /Y Archive-Tools\Archive-Tool.cmd %TOOLS_INSTALL_DIR%\bin
 	COPY /Y Keepass-Tools\Archive-kdbx.cmd %TOOLS_INSTALL_DIR%\bin
 	COPY /Y Archive-Tools\Archive-Extension.cmd %TOOLS_INSTALL_DIR%\bin
-	EXPLORER %USERPROFILE%\AppData\Roaming\Microsoft\Windows\SendTo
+	REM EXPLORER %USERPROFILE%\AppData\Roaming\Microsoft\Windows\SendTo
 	EXIT /B
 	
 :INSTALL_CMD_FNCTION
